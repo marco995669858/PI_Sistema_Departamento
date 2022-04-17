@@ -11,7 +11,7 @@ public class EncryptPasswordImpl implements EncryptPassword{
 	@Override
 	public String Encriptar(String Password) {
 	
-		
+		String p ="";
 		return encoder.encode(Password);
 	}
 
