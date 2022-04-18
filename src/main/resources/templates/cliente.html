@@ -240,59 +240,59 @@
 					<div class="formulario">
 						<h1 style="text-align: center;">Registro de información de Clientes</h1>
 
-						<form action="submeter-formulario.php" method="post">
+						<form action="" method="post">
 
 							<input class="registro1" type="hidden" value="0" name="introducir_email" id="email"
 								required="obligatorio" placeholder="Escribe tu Email">
 
 							<p>
-								<label for="email" class="colocar_email">Nombres
+								<label for="email" class="colocar_nombres">Nombres
 									<span class="obligatorio">*</span>
 								</label>
-								<input class="registro1" type="url" name="introducir_website" id="website"
+								<input class="registro1" type="text" name="colocar_nombres" id="nombres"
 									placeholder="Escribe tus Nombres">
 							</p>
 
 							<p>
-								<label for="telefone" class="colocar_telefono">Apellidos
+								<label for="apellidos" class="colocar_apellidos">Apellidos
 								</label>
-								<input class="registro1" type="url" name="introducir_website" id="website"
+								<input class="registro1" type="text" name="colocar_apellidos" id="apellidos"
 									placeholder="Escribe tus Apellidos">
 
 							</p>
 							<p>
-								<label for="telefone" class="colocar_telefono">Contraseña
+								<label for="clave" class="colocar_clave">Contraseña
 								</label>
-								<input class="registro1" type="url" name="introducir_website" id="website"
-									placeholder="Escribe tus Apellidos">
+								<input class="registro1" type="password" name="colocar_clave" id="clave"
+									placeholder="Escribe tu contraseña">
 
 							</p>
 							<p>
-								<label for="website" class="colocar_website">DNI
+								<label for="dni" class="colocar_dni">DNI
 								</label>
-								<input class="registro1" type="url" name="introducir_website" id="website"
+								<input class="registro1" type="number" name="colocar_dni" id="dni"
 									placeholder="Escribe tu DNI">
 							</p>
 
 							<p>
-								<label for="asunto" class="colocar_asunto">Celular
+								<label for="celular" class="colocar_celular">Celular
 									<span class="obligatorio">*</span>
 								</label>
-								<input class="registro1" type="text" name="introducir_celular" id="assunto"
+								<input class="registro1" type="text" name="colocar_celular" id="celular"
 									required="obligatorio" placeholder="Escribe un Celular">
 							</p>
 							<p>
-								<label for="asunto" class="colocar_asunto">Correo
+								<label for="correo" class="colocar_correo">Correo
 
 								</label>
-								<input class="registro1" type="email" name="introducir_email" id="email"
+								<input class="registro1" type="email" name="colocar_correo" id="correo"
 									required="obligatorio" placeholder="Escribe tu Email">
 
 							</p>
 							<p>
-								<label for="email" class="colocar_email">Tipo de Mascota
+								<label for="mascotas" class="colocar_mascotas">Tipo de Mascota
 								</label>
-								<select class="registro1" class="form-control">
+								<select class="form-control registro1">
 									<option value=""></option>
 									<option value="">Gato</option>
 									<option value="">Perro</option>
@@ -300,7 +300,7 @@
 							</p>
 
 
-							<button class="botones1" type="submit" name="enviar_formulario" id="enviar">
+							<button class="botones1" type="submit" name="enviar_formulario" id="registrar">
 								<p>Registrar</p>
 							</button>
 
@@ -320,10 +320,10 @@
 			<br>
 			<div class="limiter">
 				<div style="text-align: center;">
-					<button class="botonEditar" type="submit" name="enviar_formulario" id="enviar">
+					<button class="botonEditar" type="submit" name="editar" id="editar">
 						<p>Editar</p>
 					</button>
-					<button class="botonEliminar" type="submit" name="enviar_formulario" id="enviar">
+					<button class="botonEliminar" type="submit" name="eliminar" id="eliminar">
 						<p>Eliminar</p>
 					</button>
 				</div>

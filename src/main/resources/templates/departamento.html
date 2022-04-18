@@ -240,72 +240,66 @@
 					<div class="formulario">
 						<h1 style="text-align: center;">Registro de información de departamento</h1>
 
-						<form action="submeter-formulario.php" method="post">
+						<form action="" method="post">
 
 
 							<p>
-								<label for="email" class="colocar_email">Número de habitaciones
+								<label for="habitaciones">Número de habitaciones
 									<span class="obligatorio">*</span>
 								</label>
-								<input class="registro1" type="email" name="introducir_email" id="email"
-									required="obligatorio" placeholder="Escribe tu Email">
+								<input class="registro1" type="email" name="colocar_numhab" id="habitaciones"
+									required="obligatorio" placeholder="Escribe el número de habitaciones">
 							</p>
 
 							<p>
-								<label for="telefone" class="colocar_telefono">Número de cocinas con comedor
+								<label for="cocicome">Número de cocinas con comedor
 								</label>
 							<div class="col-md-12">
-								<select class="registro1" class="form-control">
+								<select class="form-control registro1" >
 									<option value=""></option>
-									<option value="">1</option>
-									<option value="">2</option>
-									<option value="">3</option>
+									<option value="">Una cocina</option>
+									<optionvalue="">Dos cocinas</option>
 								</select>
 							</div>
 							</p>
 							<p>
-								<label for="website" class="colocar_website">Lavanderia
+								<label for="lavanderia">Lavanderia
 								</label>
-								<select class="registro1" class="form-control">
+								<select class="form-control registro1">
 									<option value=""></option>
-									<option value="">1</option>
-									<option value="">2</option>
-									<option value="">3</option>
-									<option value="">4</option>
+									<option value="">Una lavandería</option>
+									<option value="">Dos lavanderías</option>
 								</select>
 							</p>
 
 							<p>
-								<label for="asunto" class="colocar_asunto">Sala
+								<label for="sala">Sala
 									<span class="obligatorio">*</span>
 								</label>
-								<select class="registro1" class="form-control">
+								<select class=" form-control registro1">
 									<option value=""></option>
-									<option value="">1</option>
-									<option value="">2</option>
-									<option value="">3</option>
-									<option value="">4</option>
+									<option value="">Una sala</option>
+									<option value="">Dos salas</option>
+									
 								</select>
 							</p>
 							<p>
-								<label for="asunto" class="colocar_asunto">Baño
+								<label for="banio" class="colocar_banio">Baño
 
 								</label>
 							<div class="col-md-12">
-								<select class="registro1" class="form-control">
+								<select class="form-control registro1">
 									<option value=""></option>
-									<option value="">1</option>
-									<option value="">2</option>
-									<option value="">3</option>
-									<option value="">4</option>
+									<option value="">Un baño</option>
+									<option value="">Dos baños</option>
 								</select>
 							</div>
 							</p>
 							<p>
-								<label for="asunto" class="colocar_asunto"> Tamaño de Departamento
+								<label for="tamdepa"> Tamaño de Departamento
 									<span class="obligatorio">*</span>
 								</label>
-								<input class="registro1" type="text" name="introducir_asunto" id="assunto"
+								<input class="registro1" type="text" name="colocar_tamdepa" id="tamdepa"
 									required="obligatorio" placeholder="Escribe el tamaño">
 							</p>
 
@@ -331,10 +325,10 @@
 			<br>
 			<div class="limiter">
 				<div style="text-align: center;">
-					<button class="botonEditar" type="submit" name="enviar_formulario" id="enviar">
+					<button class="botonEditar" type="submit" name="editar" id="editar">
 						<p>Editar</p>
 					</button>
-					<button class="botonEliminar" type="submit" name="enviar_formulario" id="enviar">
+					<button class="botonEliminar" type="submit" name="eliminar" id="eliminar">
 						<p>Eliminar</p>
 					</button>
 
