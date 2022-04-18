@@ -6,5 +6,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/registro/caracteristica_Departamento")
 public class CaracteristicasDepartamentoController {
-
+//probando codigo
 }
