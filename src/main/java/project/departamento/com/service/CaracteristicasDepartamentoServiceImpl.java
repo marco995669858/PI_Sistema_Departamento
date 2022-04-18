@@ -28,4 +28,11 @@ public class CaracteristicasDepartamentoServiceImpl implements CaracteristicasDe
 		repository.eliminarCaracteristicasDepartamento(bean.getIdCarateristicadepartamento(), bean.getEliminado());
 	}
 
+	@Override
+	public CaracteristicasDepartamento registraryactualizarCaracteristicaDepartamento(
+			CaracteristicasDepartamento bean) {
+		// TODO Auto-generated method stub
+		return repository.save(bean);
+	}
+
 }
