@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Departamento</title>
+<title>Visita</title>
 <link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrardepartamento.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrarformulario.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/resources/css/tablas.css}">
@@ -214,75 +214,48 @@
     </div>
   </section>
   <section class="grid">
-    <article>
-       <div class="contact_form">
+      <article>
+      <div class="contact_form">
   
         <div class="formulario">      
-          <h1 style="text-align: center;">Registro de información de departamento</h1>
+          <h1 style="text-align: center;">Registro de información de Visitas</h1>
   
               <form action="submeter-formulario.php" method="post">       
     
                   
-                    <p>
-                      <label for="email" class="colocar_email">Número de habitaciones
-                        <span class="obligatorio">*</span>
-                      </label>
-                        <input class="registro1" type="email" name="introducir_email" id="email" required="obligatorio" placeholder="Escribe tu Email">
-                    </p>
+                    
+                  <input class="registro1" type="hidden" value="0" name="introducir_email" id="email" required="obligatorio" placeholder="Escribe tu Email">
+                    
                 
                     <p>
-                      <label for="telefone" class="colocar_telefono">Número de cocinas con comedor
+                      <label for="telefone" class="colocar_telefono">ID Departamento
                       </label>
-                      <div class="col-md-12">
-                        <select class="registro1" class="form-control"> <option value=""></option>
-                            <option value="">1</option>
-                            <option value="">2</option>
-                            <option value="">3</option>
-                            </select>
-                        </div>
+                      <input class="registro1" type="text" name="introducir_email" id="email" required="obligatorio" placeholder="Escribe tu Email">
+
                     </p>    
                     <p>
-                      <label for="website" class="colocar_website">Lavanderia
+                      <label for="website" class="colocar_website">ID Usuario
                       </label>
-                      <select class="registro1" class="form-control"> <option value=""></option>
-                        <option value="">1</option>
-                        <option value="">2</option>
-                        <option value="">3</option>
-                        <option value="">4</option></select>                    </p>    
+                      <input class="registro1" type="text" name="introducir_email" id="email" required="obligatorio" placeholder="Escribe tu Email">
+                    </p>    
                   
                     <p>
-                      <label for="asunto" class="colocar_asunto">Sala
+                      <label for="asunto" class="colocar_asunto">Fecha de Entrada
                         <span class="obligatorio">*</span>
                       </label>
-                      <select class="registro1" class="form-control"> <option value=""></option>
-                        <option value="">1</option>
-                        <option value="">2</option>
-                        <option value="">3</option>
-                        <option value="">4</option></select>     
+                        <input class="registro1" type="date" name="introducir_asunto" id="assunto" required="obligatorio" placeholder="Escribe un asunto">
                     </p>  
                     <p>
-                      <label for="asunto" class="colocar_asunto">Baño
+                      <label for="asunto" class="colocar_asunto">Fecha de Salida
                        
                       </label>
-                      <div class="col-md-12">
-                      <select class="registro1" class="form-control"> <option value=""></option>
-                          <option value="">1</option>
-                          <option value="">2</option>
-                          <option value="">3</option>
-                          <option value="">4</option></select>
-                      </div>
+                      <input class="registro1" type="date" name="introducir_asunto" id="assunto" required="obligatorio" placeholder="Escribe un asunto">
+
                     </p> 
-                          <p>
-                              <label for="asunto" class="colocar_asunto"> Tamaño de Departamento
-                                  <span class="obligatorio">*</span>
-                              </label>
-                              <input class="registro1" type="text" name="introducir_asunto" id="assunto" required="obligatorio" placeholder="Escribe el tamaño">
-                          </p>
-                         
+                          
                   
                     <button class="botones1" type="submit" name="enviar_formulario" id="enviar"><p>Registrar</p></button>
     
-                    
                     <p class="aviso">
                       <span class="obligatorio"> * </span>los campos son obligatorios.
                     </p>          
