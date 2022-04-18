@@ -37,8 +37,14 @@ public class CaracteristicasDepartamentoController {
 
 				service.registraryactualizarCaracteristicaDepartamento(bean);
 				redirect.addFlashAttribute("MENSAJE",
-						"Se registrp el registro del departamento correctamente, con el codigo: "
+						"Se registro el departamento correctamente, con el codigo: "
 								+ bean.getIdCarateristicadepartamento());
+			}
+			else {
+				bean.setIdCarateristicadepartamento(codigo);
+				service.registraryactualizarCaracteristicaDepartamento(bean);
+				redirect.addFlashAttribute("MENSAJE", "Se actualizo el departamento correctamente, con el codigo: "
+						+ bean.getIdCarateristicadepartamento());
 			}
 
 		} catch (Exception e) {
