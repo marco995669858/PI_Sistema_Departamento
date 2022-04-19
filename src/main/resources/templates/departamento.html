@@ -238,16 +238,17 @@
 				<div class="contact_form">
 
 					<div class="formulario">
-						<h1 style="text-align: center;">Registro de información de las caracteristicas del departamento</h1>
+						<h1 style="text-align: center;">Registro de información de las caracteristicas del departamento
+						</h1>
 
-						<form action="" method="post">
+						<form th:action="@{/registro/caracteristica_Departamento/registrar/}" method="post">
 							<input type="hidden" value="0" name="codigo" id="idcodigo">
 
 							<p>
 								<label for="habitaciones">Número de habitaciones
 									<span class="obligatorio">*</span>
 								</label>
-								<input class="registro1" type="email" name="colocar_numhab" id="habitaciones"
+								<input class="registro1" type="text" name="habitaciones" id="idhabitaciones"
 									required="obligatorio" placeholder="Escribe el número de habitaciones">
 							</p>
 
@@ -255,20 +256,24 @@
 								<label for="cocicome">Número de cocinas con comedor
 								</label>
 							<div class="col-md-12">
-								<select class="form-control registro1">
-									<option value=""></option>
-									<option value="">Una cocina</option>
-									<optionvalue="">Dos cocinas</option>
+								<select class="form-control registro1" name="cocina">
+									<option value=" ">[Seleccione Cantidad de Cocína]</option>
+									<option value="1">Una cocina</option>
+									<option value="2">Dos cocinas</option>
+									<option value="3">Tres cocinas</option>
+									<option value="4">Cuatro cocinas</option>
 								</select>
 							</div>
 							</p>
 							<p>
 								<label for="lavanderia">Lavanderia
 								</label>
-								<select class="form-control registro1">
-									<option value=""></option>
-									<option value="">Una lavandería</option>
-									<option value="">Dos lavanderías</option>
+								<select class="form-control registro1" name="lavanderia">
+									<option value=" ">[Seleccione Cantidad de Lavandería]</option>
+									<option value="1">Una lavandería</option>
+									<option value="2">Dos lavanderías</option>
+									<option value="3">Tres lavanderías</option>
+									<option value="4">Cuatro lavanderías</option>
 								</select>
 							</p>
 
@@ -276,10 +281,12 @@
 								<label for="sala">Sala
 									<span class="obligatorio">*</span>
 								</label>
-								<select class=" form-control registro1">
-									<option value=""></option>
-									<option value="">Una sala</option>
-									<option value="">Dos salas</option>
+								<select class=" form-control registro1" name="sala">
+									<option value=" ">[Seleccione Cantidad de Sala]</option>
+									<option value="1">Una sala</option>
+									<option value="2">Dos salas</option>
+									<option value="3">Tres salas</option>
+									<option value="4">Cuatro salas</option>
 
 								</select>
 							</p>
@@ -288,10 +295,12 @@
 
 								</label>
 							<div class="col-md-12">
-								<select class="form-control registro1">
-									<option value=""></option>
-									<option value="">Un baño</option>
-									<option value="">Dos baños</option>
+								<select class="form-control registro1" name="banio">
+								<option value=" ">[Seleccione Cantidad de Baño]</option>
+									<option value="1">Un baño</option>
+									<option value="2">Dos baños</option>
+									<option value="3">Tres baños</option>
+									<option value="4">Cuatro baños</option>
 								</select>
 							</div>
 							</p>
@@ -299,12 +308,12 @@
 								<label for="tamdepa"> Tamaño de Departamento
 									<span class="obligatorio">*</span>
 								</label>
-								<input class="registro1" type="text" name="colocar_tamdepa" id="tamdepa"
-									required="obligatorio" placeholder="Escribe el tamaño">
+								<input class="registro1" type="text" name="tamanio" id="idtamanio"
+									required="obligatorio" placeholder="Escribe el tamaño m²">
 							</p>
 
 
-							<button class="botones1" type="submit" name="enviar_formulario" id="enviar">
+							<button class="botones1" type="submit" name="enviar_formulario" id="registrar">
 								<p>Registrar</p>
 							</button>
 
@@ -348,12 +357,6 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td class="column1">2017-09-29 01:22</td>
-										<td class="column2">200398</td>
-										<td class="column3">iPhone X 64Gb Grey</td>
-										<td class="column4">$999.00</td>
-										<td class="column5">1</td>
-										<td class="column6">$999.00</td>
 									</tr>
 
 
