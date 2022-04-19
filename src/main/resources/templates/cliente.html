@@ -240,7 +240,8 @@
 					<div class="formulario">
 						<h1 style="text-align: center;">Registro de información de Clientes</h1>
 
-						<form th:action="@{/registro/usuario/registrar}" method="post" >
+						<form th:action="@{/registro/usuario/registrar}" method="post"
+							onsubmit="return validarCliente();">
 
 							<input class="registro1" type="hidden" value="0" name="codigo" id="idcodigo">
 
@@ -277,7 +278,7 @@
 								<label for="correo" class="colocar_correo">Correo
 
 								</label>
-								<input class="registro1" type="email" name="correo" id="correo"
+								<input class="registro1" type="email" name="correo" id="idcorreo"
 									placeholder="Escribe tu Email">
 
 							</p>
@@ -287,7 +288,7 @@
 									<span class="obligatorio">*</span>
 								</label>
 								<input class="registro1" type="password" name="password" id="idpassword"
-									 placeholder="Escribe tu contraseña">
+									placeholder="Escribe tu contraseña">
 							</p>
 
 							<p>
@@ -319,43 +320,40 @@
 					</div>
 				</div>
 			</article>
-			<!--  <article>
-     
-   </article>
-    <article></article> -->
-			<h1 style="text-align: center;">Lista de Departamentos</h1>
-			<br>
+
+
 			<div class="limiter">
-				<div style="text-align: center;">
-					<button class="botonEditar" type="submit" name="editar" id="editar">
-						<p>Editar</p>
-					</button>
-					<button class="botonEliminar" type="submit" name="eliminar" id="eliminar">
-						<p>Eliminar</p>
-					</button>
-				</div>
 				<div class="container-table100">
+					<h1 style="text-align: center;">Lista de Departamentos</h1>
+
 					<div class="wrap-table100">
 						<div class="table100">
 							<table>
 								<thead>
 									<tr class="table100-head">
-										<th class="column1">Fecha</th>
-										<th class="column2">ID Pedido</th>
-										<th class="column3">Nombre</th>
-										<th class="column4">Precio</th>
-										<th class="column5">Cantidad</th>
-										<th class="column6">Total</th>
+										<th class="column1">Codigo</th>
+										<th class="column2">Nombre</th>
+										<th class="column3">Apellido</th>
+										<th class="column4">Dni</th>
+										<th class="column5">Celular</th>
+										<th class="column6">Correo</th>
+										<th class="column7">Raza</th>
+										<th class="column8">Descripción mascota</th>
+										<th class="column9">Funciones</th>
+										
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
-										<td class="column1">2017-09-29 01:22</td>
-										<td class="column2">200398</td>
-										<td class="column3">iPhone X 64Gb Grey</td>
-										<td class="column4">$999.00</td>
-										<td class="column5">1</td>
-										<td class="column6">$999.00</td>
+										<td class="column1"></td>
+										<td class="column2"></td>
+										<td class="column3"></td>
+										<td class="column4"></td>
+										<td class="column5"></td>
+										<td class="column6"></td>
+										<td class="column7"></td>
+										<td class="column8"></td>	
+										<td class="column9"></td>										
 									</tr>
 
 
@@ -374,8 +372,31 @@
 		</footer>
 	</section>
 	<!-- partial -->
-	<script th:href="@{/resources/js/adminjs.js}"></script>
-	<script th:href="@{/resources/js/main.js}"></script>
+	<script th:src="@{/resources/js/adminjs.js}"></script>
+	<script th:src="@{/resources/js/main.js}"></script>
+	<script th:src="@{/resources/js/validarCliente.js}"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script th:inline="javascript" th:if="${MENSAJE!=null}">
+		//obtener atributo MENSAJE
+		var mensaje =/*[[${MENSAJE}]]*/ null;
+		const Toast = Swal.mixin({
+			toast: true,
+			position: 'top-end',
+			showConfirmButton: false,
+			timer: 3000,
+			timerProgressBar: true,
+			didOpen: (toast) => {
+				toast.addEventListener('mouseenter', Swal.stopTimer)
+				toast.addEventListener('mouseleave', Swal.resumeTimer)
+			}
+		})
+
+		Toast.fire({
+			icon: 'success',
+			title: mensaje
+		})
+
+	</script>
 
 </body>
 

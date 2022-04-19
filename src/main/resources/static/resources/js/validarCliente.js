@@ -41,7 +41,7 @@ function validarCliente() {
 	} else if (password.length < 8 || password.length >= 20) {
 		alert('El password solo acepta como minimo 8 y maximo 20.');
 		return false;
-	}else if(isNaN(descripcionRaza)){
+	}else if(!regexnombre.test(descripcionRaza)){
 		alert("Ingrese solo letras en la descripción de mascota.");
 		return false;
 	}
