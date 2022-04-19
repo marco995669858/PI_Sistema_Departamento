@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Cliente</title>
+	<title>Departamento</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrardepartamento.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrarformulario.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/tablas.css}">
@@ -238,78 +238,68 @@
 				<div class="contact_form">
 
 					<div class="formulario">
-						<h1 style="text-align: center;">Registro de información de Clientes</h1>
+						<h1 style="text-align: center;">Registro de información de departamento</h1>
 
-						<form th:action="@{/registro/usuario/registrar}" method="post">
-
-							<input class="registro1" type="hidden" value="0" name="codigo" id="idcodigo">
+						<form action="" method="post">
+							<input type="hidden" value="0" name="codigo" id="idcodigo">
 
 							<p>
-								<label for="email" class="colocar_nombres">Nombres Completos
+								<label for="cocicome">Número de cocinas con comedor
+								</label>
+							<div class="col-md-12">
+								<select class="form-control registro1">
+									<option value=""></option>
+									<option value="">Una cocina</option>
+									<optionvalue="">Dos cocinas</option>
+								</select>
+							</div>
+							</p>
+							<p>
+								<label for="lavanderia">Lavanderia
+								</label>
+								<select class="form-control registro1">
+									<option value=""></option>
+									<option value="">Una lavandería</option>
+									<option value="">Dos lavanderías</option>
+								</select>
+							</p>
+
+							<p>
+								<label for="sala">Sala
 									<span class="obligatorio">*</span>
 								</label>
-								<input class="registro1" type="text" name="nombre" id="idnombres"
-									placeholder="Escribe tu Nombre">
-							</p>
+								<select class=" form-control registro1">
+									<option value=""></option>
+									<option value="">Una sala</option>
+									<option value="">Dos salas</option>
 
-							<p>
-								<label for="apellidos" class="colocar_apellidos">Apellidos Completos
-								</label>
-								<input class="registro1" type="text" name="apellido" id="idapellidos"
-									placeholder="Escribe tus Apellidos">
-
-							</p>
-							<p>
-								<label for="dni" class="colocar_clave">Dni
-								</label>
-								<input class="registro1" type="number" name="dni" id="idDni"
-									placeholder="Escribe tu Dni">
-
-							</p>
-							<p>
-								<label for="celular" class="colocar_dni">Celular
-								</label>
-								<input class="registro1" type="number" name="celular" id="idcelular"
-									placeholder="Escribe tu celular">
-							</p>
-
-							<p>
-								<label for="correo" class="colocar_correo">Correo
-
-								</label>
-								<input class="registro1" type="email" name="correo" id="correo" required="obligatorio"
-									placeholder="Escribe tu Email">
-
-							</p>
-
-							<p>
-								<label for="contrasenia" class="colocar_celular">Contraseña
-									<span class="obligatorio">*</span>
-								</label>
-								<input class="registro1" type="password" name="password" id="idpassword"
-									required="obligatorio" placeholder="Escribe tu contraseña">
-							</p>
-
-							<p>
-								<label for="mascotas" class="colocar_mascotas">Tipo de Mascota
-								</label>
-								<select class="form-control registro1" name="raza">
-									<option value=" ">[Seleccione un tipo de mascota]</option>
-									<option value="Gato">Gato</option>
-									<option value="Perro">Perro</option>
-									<option value="Loro">Loro</option>
 								</select>
 							</p>
 							<p>
-								<label for="descripcion" class="colocar_celular">Descripción de la mascota
+								<label for="banio" class="colocar_banio">Baño
+
+								</label>
+							<div class="col-md-12">
+								<select class="form-control registro1">
+									<option value=""></option>
+									<option value="">Un baño</option>
+									<option value="">Dos baños</option>
+								</select>
+							</div>
+							</p>
+							<p>
+								<label for="tamdepa"> Tamaño de Departamento
 									<span class="obligatorio">*</span>
 								</label>
-								<textarea class="descripcion1" name="descripcionRaza" id="iddescripcion"></textarea>
+								<input class="registro1" type="text" name="colocar_tamdepa" id="tamdepa"
+									required="obligatorio" placeholder="Escribe el tamaño">
 							</p>
 
-							<button class="botones1" type="submit" name="enviar_formulario" id="registrar">
+
+							<button class="botones1" type="submit" name="enviar_formulario" id="enviar">
 								<p>Registrar</p>
 							</button>
+
 
 							<p class="aviso">
 								<span class="obligatorio"> * </span>los campos son obligatorios.
@@ -375,7 +365,6 @@
 	</section>
 	<!-- partial -->
 	<script th:href="@{/resources/js/adminjs.js}"></script>
-	<script th:href="@{/resources/js/main.js}"></script>
 
 </body>
 
