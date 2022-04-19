@@ -241,10 +241,9 @@
 						<h1 style="text-align: center;">Registro de información de las caracteristicas del departamento
 						</h1>
 
-						<form th:action="@{/registro/caracteristica_Departamento/registrar/}" method="post">
+						<form th:action="@{/registro/caracteristica_Departamento/registrar/}" method="post" onsubmit="return validarDepa();">
 							<input type="hidden" value="0" name="codigo" id="idcodigo">
 
-							<p>
 								<label for="habitaciones">Número de habitaciones
 									<span class="obligatorio">*</span>
 								</label>
