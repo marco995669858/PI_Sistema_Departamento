@@ -25,5 +25,6 @@ public class UsuarioHasRol {
 	@ManyToOne
 	@JoinColumn(name = "idRol", nullable = false, insertable = false, updatable = false)
 	private Rol rol;
-
+	
+	
 }
