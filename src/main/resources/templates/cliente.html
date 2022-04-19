@@ -240,66 +240,73 @@
 					<div class="formulario">
 						<h1 style="text-align: center;">Registro de información de Clientes</h1>
 
-						<form action="" method="post">
+						<form th:action="@{/registro/usuario/registrar}" method="post">
 
-							<input class="registro1" type="hidden" value="0" name="introducir_email" id="email"
-								required="obligatorio" placeholder="Escribe tu Email">
+							<input class="registro1" type="hidden" value="0" name="codigo" id="idcodigo">
 
 							<p>
-								<label for="email" class="colocar_nombres">Nombres
+								<label for="email" class="colocar_nombres">Nombres Completos
 									<span class="obligatorio">*</span>
 								</label>
-								<input class="registro1" type="text" name="colocar_nombres" id="nombres"
-									placeholder="Escribe tus Nombres">
+								<input class="registro1" type="text" name="nombre" id="idnombres"
+									placeholder="Escribe tu Nombre">
 							</p>
 
 							<p>
-								<label for="apellidos" class="colocar_apellidos">Apellidos
+								<label for="apellidos" class="colocar_apellidos">Apellidos Completos
 								</label>
-								<input class="registro1" type="text" name="colocar_apellidos" id="apellidos"
+								<input class="registro1" type="text" name="apellido" id="idapellidos"
 									placeholder="Escribe tus Apellidos">
 
 							</p>
 							<p>
-								<label for="clave" class="colocar_clave">Contraseña
+								<label for="dni" class="colocar_clave">Dni
 								</label>
-								<input class="registro1" type="password" name="colocar_clave" id="clave"
-									placeholder="Escribe tu contraseña">
+								<input class="registro1" type="number" name="dni" id="idDni"
+									placeholder="Escribe tu Dni">
 
 							</p>
 							<p>
-								<label for="dni" class="colocar_dni">DNI
+								<label for="celular" class="colocar_dni">Celular
 								</label>
-								<input class="registro1" type="number" name="colocar_dni" id="dni"
-									placeholder="Escribe tu DNI">
+								<input class="registro1" type="number" name="celular" id="idcelular"
+									placeholder="Escribe tu celular">
 							</p>
 
-							<p>
-								<label for="celular" class="colocar_celular">Celular
-									<span class="obligatorio">*</span>
-								</label>
-								<input class="registro1" type="text" name="colocar_celular" id="celular"
-									required="obligatorio" placeholder="Escribe un Celular">
-							</p>
 							<p>
 								<label for="correo" class="colocar_correo">Correo
 
 								</label>
-								<input class="registro1" type="email" name="colocar_correo" id="correo"
+								<input class="registro1" type="email" name="correo" id="correo"
 									required="obligatorio" placeholder="Escribe tu Email">
 
 							</p>
+
+							<p>
+								<label for="contrasenia" class="colocar_celular">Contraseña
+									<span class="obligatorio">*</span>
+								</label>
+								<input class="registro1" type="password" name="password" id="idpassword"
+									required="obligatorio" placeholder="Escribe tu contraseña">
+							</p>
+
 							<p>
 								<label for="mascotas" class="colocar_mascotas">Tipo de Mascota
 								</label>
-								<select class="form-control registro1">
-									<option value=""></option>
-									<option value="">Gato</option>
-									<option value="">Perro</option>
+								<select class="form-control registro1" name="raza">
+									<option value=" ">[Seleccione un tipo de mascota]</option>
+									<option value="Gato">Gato</option>
+									<option value="Perro">Perro</option>
+									<option value="Loro">Loro</option>
 								</select>
 							</p>
-
-
+							<p>
+								<label for="descripcion" class="colocar_celular">Descripción de la mascota
+									<span class="obligatorio">*</span>
+								</label>
+								<textarea class="descripcion1" name="descripcionRaza" id="iddescripcion"></textarea>
+							</p>
+							
 							<button class="botones1" type="submit" name="enviar_formulario" id="registrar">
 								<p>Registrar</p>
 							</button>
