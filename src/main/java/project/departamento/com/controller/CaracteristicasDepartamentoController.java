@@ -17,6 +17,11 @@ public class CaracteristicasDepartamentoController {
 
 	@Autowired
 	private CaracteristicasDepartamentoService service;
+	
+	@RequestMapping("/")
+	public String Index() {
+		return "departamento";
+	}
 
 	@RequestMapping(value = "/registrar/")
 	public String registrarCaracteristicasDepartamento(@RequestParam("codigo") int codigo,
@@ -52,7 +57,7 @@ public class CaracteristicasDepartamentoController {
 			e.printStackTrace();
 		}
 
-		return "redirect:/Registro/Departamento";
+		return "redirect:/registro/caracteristica_Departamento/";
 	}
 
 	@GetMapping("/eliminar/{idCarateristicadepartamento}")
@@ -72,7 +77,7 @@ public class CaracteristicasDepartamentoController {
 			e.printStackTrace();
 		}
 
-		return "redirect:/Registro/departamento";
+		return "redirect:/registro/caracteristica_Departamento/";
 	}
 
 }
