@@ -46,5 +46,5 @@ function validarCliente() {
 		return false;
 	}
 
-	return true;
+	   return true;
 }
