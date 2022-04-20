@@ -32,11 +32,11 @@ public class Departamento {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idAdministrador")
 	private Rol administrador;
-	
+		
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idEdificio")
-	private Edificio edificio;
+	@JoinColumn(name = "idUsuario")
+	private Usuario usuario;
 	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)

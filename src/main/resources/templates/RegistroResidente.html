@@ -3,14 +3,10 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Cliente</title>
+	<title>Departamento</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrardepartamento.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrarformulario.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/tablas.css}">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-		integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-		crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
 </head>
@@ -242,79 +238,57 @@
 				<div class="contact_form">
 
 					<div class="formulario">
-								
-						<h1 style="text-align: center;">Registro de información de Clientes</h1>
+						<h1 style="text-align: center;">Registro de información de departamento.</h1>
 
-      <form th:action="@{/registro/usuario/registrar}" method="post"
-							onsubmit="return validarCliente();">
-
-							<input class="registro1" type="hidden" value="0" name="codigo" id="idcodigo">
+						<form action="" method="post">
+							<input type="hidden" value="0" name="codigo" id="idcodigo">
 
 							<p>
-								<label for="email" class="colocar_nombres">Nombres Completos
+								<label for="lavanderia">Administrador
+								</label>
+								<select class="form-control registro1">
+									<option value=""></option>
+									<option value="">Una lavandería</option>
+									<option value="">Dos lavanderías</option>
+								</select>
+							</p>
+
+							<p>
+								<label for="sala">Sala
 									<span class="obligatorio">*</span>
 								</label>
-								<input class="registro1" type="text" name="nombre" id="idnombres"
-									placeholder="Escribe tu Nombre">
-							</p>
+								<select class=" form-control registro1">
+									<option value=""></option>
+									<option value="">Una sala</option>
+									<option value="">Dos salas</option>
 
-							<p>
-								<label for="apellidos" class="colocar_apellidos">Apellidos Completos
-								</label>
-								<input class="registro1" type="text" name="apellido" id="idapellidos"
-									placeholder="Escribe tus Apellidos">
-
-							</p>
-							<p>
-								<label for="dni" class="colocar_clave">Dni
-								</label>
-								<input class="registro1" type="number" name="dni" id="idDni"
-									placeholder="Escribe tu Dni">
-
-							</p>
-							<p>
-								<label for="celular" class="colocar_dni">Celular
-								</label>
-								<input class="registro1" type="number" name="celular" id="idcelular"
-									placeholder="Escribe tu celular">
-							</p>
-
-							<p>
-								<label for="correo" class="colocar_correo">Correo
-
-								</label>
-								<input class="registro1" type="email" name="correo" id="idcorreo">
-
-							</p>
-
-							<p>
-								<label for="contrasenia" class="colocar_celular">Contraseña
-									<span class="obligatorio">*</span>
-								</label>
-								<input class="registro1" type="password" name="password" id="idpassword"
-									 placeholder="Escribe tu contraseña">
-							</p>
-
-							<p>
-								<label for="mascotas" class="colocar_mascotas">Tipo de Mascota
-								</label>
-								<select class="form-control registro1" name="raza">
-									<option value=" ">[Seleccione un tipo de mascota]</option>
-									<option value="Gato">Gato</option>
-									<option value="Perro">Perro</option>
-									<option value="Loro">Loro</option>
 								</select>
 							</p>
 							<p>
-								<label for="descripcion" class="colocar_celular">Descripción de la mascota
+								<label for="banio" class="colocar_banio">Baño
+
+								</label>
+							<div class="col-md-12">
+								<select class="form-control registro1">
+									<option value=""></option>
+									<option value="">Un baño</option>
+									<option value="">Dos baños</option>
+								</select>
+							</div>
+							</p>
+							<p>
+								<label for="tamdepa"> Tamaño de Departamento
 									<span class="obligatorio">*</span>
 								</label>
-								<textarea class="descripcion1" name="descripcionRaza" id="iddescripcion"></textarea>
+								<input class="registro1" type="text" name="colocar_tamdepa" id="tamdepa"
+									required="obligatorio" placeholder="Escribe el tamaño">
 							</p>
 
-							<button class="botones1" type="submit" name="enviar_formulario" id="registrar">
+
+							<button class="botones1" type="submit" name="enviar_formulario" id="enviar">
 								<p>Registrar</p>
 							</button>
+
 
 							<p class="aviso">
 								<span class="obligatorio"> * </span>los campos son obligatorios.
@@ -324,44 +298,43 @@
 					</div>
 				</div>
 			</article>
-
-
+			<!--  <article>
+     
+   </article>
+    <article></article> -->
+			<h1 style="text-align: center;">Lista de Departamentos</h1>
+			<br>
 			<div class="limiter">
+				<div style="text-align: center;">
+					<button class="botonEditar" type="submit" name="editar" id="editar">
+						<p>Editar</p>
+					</button>
+					<button class="botonEliminar" type="submit" name="eliminar" id="eliminar">
+						<p>Eliminar</p>
+					</button>
+				</div>
 				<div class="container-table100">
-					<h1 style="text-align: center;">Lista de Departamentos</h1>
-
 					<div class="wrap-table100">
 						<div class="table100">
 							<table>
 								<thead>
 									<tr class="table100-head">
-										<th class="column1">Codigo</th>
-										<th class="column2">Nombre</th>
-										<th class="column3">Apellido</th>
-										<th class="column4">Dni</th>
-										<th class="column5">Celular</th>
-										<th class="column6">Correo</th>
-										<th class="column7">Raza</th>
-										<th class="column8">Descripción mascota</th>
-										<th class="column9">Funciones</th>
-
+										<th class="column1">Fecha</th>
+										<th class="column2">ID Pedido</th>
+										<th class="column3">Nombre</th>
+										<th class="column4">Precio</th>
+										<th class="column5">Cantidad</th>
+										<th class="column6">Total</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr th:each="bean:${user}">
-										<td class="column1" th:text="${bean.idUsuario}"></td>
-										<td class="column2" th:text="${bean.nombreCompleto}"></td>
-										<td class="column3" th:text="${bean.apellidoCompleto}"></td>
-										<td class="column4" th:text="${bean.dni}"></td>
-										<td class="column5" th:text="${bean.celular}"></td>
-										<td class="column6" th:text="${bean.correo}"></td>
-										<td class="column7" th:text="${bean.raza}"></td>
-										<td class="column8" th:text="${bean.descripcionRaza}"></td>
-										<td class="column9">
-											<a type="button" id="idEditar"><i class="fas fa-undo-alt"></i></a>
-											<a th:href="@{/eliminar/} + ${bean.idUsuario}" class=" "><i
-													class="fas fa-eraser"></i></a>
-										</td>
+									<tr>
+										<td class="column1">2017-09-29 01:22</td>
+										<td class="column2">200398</td>
+										<td class="column3">iPhone X 64Gb Grey</td>
+										<td class="column4">$999.00</td>
+										<td class="column5">1</td>
+										<td class="column6">$999.00</td>
 									</tr>
 
 
@@ -380,34 +353,8 @@
 		</footer>
 	</section>
 	<!-- partial -->
-	<script th:src="@{/resources/js/adminjs.js}"></script>
-	<script th:src="@{/resources/js/main.js}"></script>
-	<script th:src="@{/resources/js/validarCliente.js}"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
-		integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ=="
-		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<script th:inline="javascript" th:if="${MENSAJE!=null}">
-		//obtener atributo MENSAJE
-		var mensaje =/*[[${MENSAJE}]]*/ null;
-		const Toast = Swal.mixin({
-			toast: true,
-			position: 'top-end',
-			showConfirmButton: false,
-			timer: 3000,
-			timerProgressBar: true,
-			didOpen: (toast) => {
-				toast.addEventListener('mouseenter', Swal.stopTimer)
-				toast.addEventListener('mouseleave', Swal.resumeTimer)
-			}
-		})
+	<script th:href="@{/resources/js/adminjs.js}"></script>
 
-		Toast.fire({
-			icon: 'success',
-			title: mensaje
-		})
-
-	</script>
 </body>
 
 </html>
