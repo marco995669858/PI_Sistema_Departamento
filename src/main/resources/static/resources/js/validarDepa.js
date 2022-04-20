@@ -6,7 +6,7 @@ function validarDepa() {
 	var sala = document.getElementById("idsala").value;
 	var baño = document.getElementById("idbaño").value;
 	let tamaño = document.getElementById("idtamaño").value;
-	
+	    
 
 	var regextamaño = /^[0-9]{1,6} \m²$/i;
 
