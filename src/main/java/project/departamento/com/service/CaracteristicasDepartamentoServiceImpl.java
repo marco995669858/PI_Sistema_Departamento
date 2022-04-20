@@ -31,7 +31,6 @@ public class CaracteristicasDepartamentoServiceImpl implements CaracteristicasDe
 	@Override
 	public CaracteristicasDepartamento registraryactualizarCaracteristicaDepartamento(
 			CaracteristicasDepartamento bean) {
-		// TODO Auto-generated method stub
 		return repository.save(bean);
 	}
 
