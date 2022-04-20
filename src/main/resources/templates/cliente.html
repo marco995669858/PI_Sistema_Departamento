@@ -242,9 +242,10 @@
 				<div class="contact_form">
 
 					<div class="formulario">
+								
 						<h1 style="text-align: center;">Registro de información de Clientes</h1>
 
-						<form th:action="@{/registro/usuario/registrar}" method="post"
+      <form th:action="@{/registro/usuario/registrar}" method="post"
 							onsubmit="return validarCliente();">
 
 							<input class="registro1" type="hidden" value="0" name="codigo" id="idcodigo">
@@ -282,8 +283,7 @@
 								<label for="correo" class="colocar_correo">Correo
 
 								</label>
-								<input class="registro1" type="email" name="correo" id="idcorreo"
-									placeholder="Escribe tu Email">
+								<input class="registro1" type="email" name="correo" id="idcorreo">
 
 							</p>
 
@@ -292,7 +292,7 @@
 									<span class="obligatorio">*</span>
 								</label>
 								<input class="registro1" type="password" name="password" id="idpassword"
-									placeholder="Escribe tu contraseña">
+									 placeholder="Escribe tu contraseña">
 							</p>
 
 							<p>
@@ -408,7 +408,6 @@
 		})
 
 	</script>
-
 </body>
 
 </html>
