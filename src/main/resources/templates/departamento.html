@@ -248,7 +248,7 @@
 									<span class="obligatorio">*</span>
 								</label>
 								<input class="registro1" type="text" name="habitaciones" id="idhabitaciones"
-									required="obligatorio" placeholder="Escribe el número de habitaciones">
+									 placeholder="Escribe el número de habitaciones">
 							</p>
 
 							<p>
@@ -294,7 +294,7 @@
 
 								</label>
 							<div class="col-md-12">
-								<select class="form-control registro1" name="banio" id="idsala">
+								<select class="form-control registro1" name="banio" id="idbaño">
 								<option value=" ">[Seleccione Cantidad de Baño]</option>
 									<option value="1">Un baño</option>
 									<option value="2">Dos baños</option>
@@ -308,7 +308,7 @@
 									<span class="obligatorio">*</span>
 								</label>
 								<input class="registro1" type="text" name="tamanio" id="idtamaño"
-									required="obligatorio" placeholder="Escribe el tamaño m²">
+									 placeholder="Escribe el tamaño m²">
 							</p>
 
 
@@ -375,6 +375,29 @@
 	</section>
 	<!-- partial -->
 	<script th:href="@{/resources/js/adminjs.js}"></script>
+	<script th:src="@{/resources/js/validarDepa.js}"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script th:inline="javascript" th:if="${MENSAJE!=null}">
+		//obtener atributo MENSAJE
+		var mensaje =/*[[${MENSAJE}]]*/ null;
+		const Toast = Swal.mixin({
+			toast: true,
+			position: 'top-end',
+			showConfirmButton: false,
+			timer: 3000,
+			timerProgressBar: true,
+			didOpen: (toast) => {
+				toast.addEventListener('mouseenter', Swal.stopTimer)
+				toast.addEventListener('mouseleave', Swal.resumeTimer)
+			}
+		})
+
+		Toast.fire({
+			icon: 'success',
+			title: mensaje
+		})
+
+	</script>
 
 </body>
 
