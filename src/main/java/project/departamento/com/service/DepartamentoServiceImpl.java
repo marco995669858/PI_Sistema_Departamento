@@ -11,12 +11,6 @@ import project.departamento.com.repository.UsuarioRepository;
 @Service
 public class DepartamentoServiceImpl implements DepartamentoService{
 	
-	@Autowired
-	private UsuarioRepository repository;
 	
-	@Override
-	public List<Usuario> listaAdministradorNombre() {
-		return repository.listaAdministradorNombre();
-	}
 
 }
