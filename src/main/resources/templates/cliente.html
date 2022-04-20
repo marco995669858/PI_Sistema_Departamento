@@ -7,6 +7,10 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrardepartamento.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrarformulario.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/tablas.css}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+		integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
 </head>
@@ -340,20 +344,24 @@
 										<th class="column7">Raza</th>
 										<th class="column8">Descripción mascota</th>
 										<th class="column9">Funciones</th>
-										
+
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td class="column1"></td>
-										<td class="column2"></td>
-										<td class="column3"></td>
-										<td class="column4"></td>
-										<td class="column5"></td>
-										<td class="column6"></td>
-										<td class="column7"></td>
-										<td class="column8"></td>	
-										<td class="column9"></td>										
+									<tr th:each="bean:${user}">
+										<td class="column1" th:text="${bean.idUsuario}"></td>
+										<td class="column2" th:text="${bean.nombreCompleto}"></td>
+										<td class="column3" th:text="${bean.apellidoCompleto}"></td>
+										<td class="column4" th:text="${bean.dni}"></td>
+										<td class="column5" th:text="${bean.celular}"></td>
+										<td class="column6" th:text="${bean.correo}"></td>
+										<td class="column7" th:text="${bean.raza}"></td>
+										<td class="column8" th:text="${bean.descripcionRaza}"></td>
+										<td class="column9">
+											<a type="button" id="idEditar"><i class="fas fa-undo-alt"></i></a>
+											<a th:href="@{/eliminar/} + ${bean.idUsuario}" class=" "><i
+													class="fas fa-eraser"></i></a>
+										</td>
 									</tr>
 
 
@@ -375,6 +383,9 @@
 	<script th:src="@{/resources/js/adminjs.js}"></script>
 	<script th:src="@{/resources/js/main.js}"></script>
 	<script th:src="@{/resources/js/validarCliente.js}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
+		integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script th:inline="javascript" th:if="${MENSAJE!=null}">
 		//obtener atributo MENSAJE

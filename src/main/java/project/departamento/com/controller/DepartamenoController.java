@@ -16,7 +16,6 @@ public class DepartamenoController {
 	
 	@RequestMapping("/")
 	private String index(Model model) {
-		model.addAttribute("administrador", service.listaAdministradorNombre());
 		return "RegistroDepartamento";
 	}
 }

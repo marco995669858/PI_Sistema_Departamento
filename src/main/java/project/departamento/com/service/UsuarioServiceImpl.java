@@ -1,5 +1,7 @@
 package project.departamento.com.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,11 @@ public class UsuarioServiceImpl implements UsuarioService{
 	@Override
 	public void registrarUsuario(Usuario bean) {
 		repository.save(bean);
+	}
+	
+	@Override
+	public List<Usuario> listarUsuarios() {
+		return repository.findAll();
 	}
 
 }
