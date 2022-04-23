@@ -14,8 +14,8 @@ public interface LoginRepository  extends JpaRepository<CaracteristicasDepartame
 	 * 
 	 * 
 	 * */
-	@Query("select u from Usuario u where u.correo = Correo")
-	public abstract Usuario BuscarUsuario(@Param("Correo") String correo);
+	@Query("select u from Usuario u where u.correo = ?1")
+	public abstract Usuario BuscarUsuario(String correo);
 	
 	
 	

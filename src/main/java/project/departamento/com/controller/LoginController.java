@@ -6,15 +6,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import project.departamento.com.entity.Usuario;
 import project.departamento.com.service.LoginService;
 import project.departamento.com.util.EncryptPassword;
-
-import org.springframework.ui.Model;
 @Controller
 @RequestMapping("/login")
 public class LoginController {
@@ -40,7 +37,7 @@ public class LoginController {
 			if(passCheck == true) {
 				session.setAttribute("objUsuario", usuario);
 				
-				return  "departamento";
+				return  "cliente";
 			}else {
 				request.setAttribute("mensaje", "Contraseña Incorrecta");
 				System.out.println("Contraseña Incorrecta");

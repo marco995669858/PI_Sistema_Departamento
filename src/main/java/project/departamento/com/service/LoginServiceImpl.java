@@ -13,7 +13,6 @@ public class LoginServiceImpl implements LoginService{
 
 	@Override
 	public Usuario buscarUsuario(String gmail) {
-		// TODO Auto-generated method stub
 		return loginRepository.BuscarUsuario(gmail);
 	}
 

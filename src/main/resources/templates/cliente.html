@@ -227,8 +227,8 @@
 					</svg>
 				</button>
 			</form>
-			<div class="admin-profile">
-				<span class="greeting">Pedro Castillo</span>
+			<div class="admin-profile" th:each="bean : ${session.objUsuario}">
+				<span class="greeting" th:text="${bean.nombreCompleto + ' ' + bean.apellidoCompleto}"></span>
 				<div class="notifications">
 					<span class="badge">99</span>
 					<svg>
@@ -242,10 +242,10 @@
 				<div class="contact_form">
 
 					<div class="formulario">
-								
+
 						<h1 style="text-align: center;">Registro de información de Clientes</h1>
 
-      <form th:action="@{/registro/usuario/registrar}" method="post"
+						<form th:action="@{/registro/usuario/registrar}" method="post"
 							onsubmit="return validarCliente();">
 
 							<input class="registro1" type="hidden" value="0" name="codigo" id="idcodigo">
@@ -292,7 +292,7 @@
 									<span class="obligatorio">*</span>
 								</label>
 								<input class="registro1" type="password" name="password" id="idpassword"
-									 placeholder="Escribe tu contraseña">
+									placeholder="Escribe tu contraseña">
 							</p>
 
 							<p>
