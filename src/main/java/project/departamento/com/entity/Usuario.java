@@ -17,32 +17,33 @@ import lombok.Setter;
 @Table(name = "tblUsuario")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class Usuario {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idUsuario;
-	
+
 	private String nombreCompleto;
-	
+
 	private String apellidoCompleto;
-	
+
 	private String dni;
-	
+
 	private String celular;
-	
+
 	private String correo;
-	
+
 	private String passwords;
-	
+
 	private Date fechaRegistro;
-	
+
 	private String raza;
-	
+
 	private String descripcionRaza;
-	
+
 	private String eliminado;
-	
+
+
 }

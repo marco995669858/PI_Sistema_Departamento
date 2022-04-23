@@ -245,35 +245,37 @@
 
 							<p>
 								<label for="cocicome">Administrador
+									<span class="obligatorio">*</span>
 								</label>
-							<div class="col-md-12">
-								<input type="text" class="registro1"  readonly="true">
+							<div class="col-md-12" th:each="bean:${admin}">
+								<input type="text" class="registro1" th:name="${bean.idUsuario}" name="administrador"
+									th:value="${bean.nombreCompleto + ' ' + bean.apellidoCompleto}" readonly="true">
 							</div>
 							</p>
 							<p>
-								<label for="lavanderia">Lavanderia
+								<label for="lavanderia">Número del departamento
+									<span class="obligatorio">*</span>
 								</label>
-								<select class="form-control registro1">
-									<option value=""></option>
-									<option value="">Una lavandería</option>
-									<option value="">Dos lavanderías</option>
-								</select>
+								<input type="text" class="registro1" name="nroDepartamento" id="idnroDepartamento">
 							</p>
 
 							<p>
-								<label for="sala">Sala
+								<label for="sala">Nombre del Edificio
 									<span class="obligatorio">*</span>
 								</label>
-								<select class=" form-control registro1">
-									<option value=""></option>
-									<option value="">Una sala</option>
-									<option value="">Dos salas</option>
-
-								</select>
+							<div class="col-md-12" th:each="bean:${edificio}">
+								<input type="text" class="registro1"  th:name="${bean.idEdificio}" th:value="${bean.nombre}" readonly="true">
+							</div>
 							</p>
 							<p>
 								<label for="banio" class="colocar_banio">Baño
-
+									<div class="col-md-12">
+										<select class="form-control registro1">
+											<option value=""></option>
+											<option value="">Un baño</option>
+											<option value="">Dos baños</option>
+										</select>
+									</div>
 								</label>
 							<div class="col-md-12">
 								<select class="form-control registro1">
@@ -327,21 +329,13 @@
 								<thead>
 									<tr class="table100-head">
 										<th class="column1">Fecha</th>
-										<th class="column2">ID Pedido</th>
-										<th class="column3">Nombre</th>
-										<th class="column4">Precio</th>
-										<th class="column5">Cantidad</th>
-										<th class="column6">Total</th>
+
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
-										<td class="column1">2017-09-29 01:22</td>
-										<td class="column2">200398</td>
-										<td class="column3">iPhone X 64Gb Grey</td>
-										<td class="column4">$999.00</td>
-										<td class="column5">1</td>
-										<td class="column6">$999.00</td>
+										<td class="column1"></td>
+
 									</tr>
 
 

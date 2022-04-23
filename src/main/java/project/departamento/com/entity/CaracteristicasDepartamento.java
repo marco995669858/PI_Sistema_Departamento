@@ -21,6 +21,8 @@ public class CaracteristicasDepartamento {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idCarateristicadepartamento;
+	
+	private int nroDepartamento;
 
 	private int habitaciones;
 

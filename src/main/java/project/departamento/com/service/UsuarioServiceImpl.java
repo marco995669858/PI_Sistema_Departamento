@@ -24,4 +24,9 @@ public class UsuarioServiceImpl implements UsuarioService{
 		return repository.findAll();
 	}
 
+	@Override
+	public List<Usuario> obtieneAdministrador() {
+		return repository.obtieneAdministrador();
+	}
+
 }
