@@ -1,10 +1,14 @@
 package project.departamento.com.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import project.departamento.com.entity.Usuario;
+import org.springframework.data.jpa.repository.Query;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{	
-//	@Query(value = "{select concat(u.nombreCompleto, ' ', u.apellidoCompleto ) from Usuario u inner join UsuarioHasRolPK ur on u.idUsuario = ur.idUsuario where u.idUsuario = 1000}", nativeQuery = true)
-//	public abstract List<Usuario> listaAdministradorNombre();
+	
+	@Query("select u.usuario, u.rol from UsuarioHasRol u where u.rol.idRol= 1000")
+	public abstract List<Usuario> obtieneAdministrador();
 }

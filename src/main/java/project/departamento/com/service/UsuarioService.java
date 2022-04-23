@@ -11,4 +11,6 @@ public interface UsuarioService {
 	
 	/*para registrar un usuario*/
 	public abstract void registrarUsuario(Usuario bean);
+	
+	public abstract List<Usuario> obtieneAdministrador();
 }
