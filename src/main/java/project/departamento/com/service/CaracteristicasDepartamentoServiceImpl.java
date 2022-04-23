@@ -34,4 +34,9 @@ public class CaracteristicasDepartamentoServiceImpl implements CaracteristicasDe
 		return repository.save(bean);
 	}
 
+	@Override
+	public List<CaracteristicasDepartamento> BuscarNroDepartamento(int nroDepartamento) {
+		return repository.findByNroDepartamento(nroDepartamento);
+	}
+
 }

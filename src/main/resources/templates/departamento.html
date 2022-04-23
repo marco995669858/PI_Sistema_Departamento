@@ -244,26 +244,36 @@
 						<h1 style="text-align: center;">Registro de información de las caracteristicas del departamento
 						</h1>
 
-						<form th:action="@{/registrar/}" method="post"
-							onsubmit="return validarDepa();">
+						<form th:action="@{/registrar/}" method="post" onsubmit="return validarDepa();">
 							<input type="hidden" value="0" name="codigo" id="idcodigo">
-
-							<label for="habitaciones">Número de habitaciones
-								<span class="obligatorio">*</span>
-							</label>
-							<input class="registro1" type="text" name="habitaciones" id="idhabitaciones"
-								placeholder="Escribe el número de habitaciones">
+							<p>
+								<label for="habitaciones">Número de departamento
+									<span class="obligatorio">*</span>
+								</label>
+								<input class="registro1" type="number" name="nroDepartamento" id="idDepartamento"
+									placeholder="example: 14003">
+							</p>
+							<p>
+								<label for="habitaciones">Número de habitaciones
+									<span class="obligatorio">*</span>
+								</label>
+								<select class="form-control registro1" name="habitaciones" id="idhabitaciones">
+									<option value="-1">[Seleccione algo..]</option>
+									<option value="1">1 habitación</option>
+									<option value="2">2 habitaciones</option>
+									<option value="3">3 habitaciones</option>
+									<option value="4">4 habitaciones</option>
+								</select>
 							</p>
 
 							<p>
-								<label for="cocicome">Número de cocinas con comedor
+								<label for="cocicome">Cocinas y/o comedor
 								</label>
 							<div class="col-md-12">
 								<select class="form-control registro1" name="cocina" id="idcocina">
-									<option value=" ">[Seleccione Cantidad de Cocína]</option>
-									<option value="1">Una cocina</option>
-									<option value="2">Dos cocinas</option>
-									<option value="3">Tres cocinas</option>
+									<option value="-1">[Seleccione algo..]</option>
+									<option value="Separado">Cocina o comedor separado.</option>
+									<option value="Junto">Cocina o comedor Junto.</option>
 
 								</select>
 							</div>
@@ -272,11 +282,9 @@
 								<label for="lavanderia">Lavanderia
 								</label>
 								<select class="form-control registro1" name="lavanderia" id="idlavanderia">
-									<option value=" ">[Seleccione Cantidad de Lavandería]</option>
-									<option value="1">Una lavandería</option>
-									<option value="2">Dos lavanderías</option>
-									<option value="3">Tres lavanderías</option>
-									<option value="4">Cuatro lavanderías</option>
+									<option value="-1">[Seleccione algo...]</option>
+									<option value="Compartida">Lavanderia Compartida.</option>
+									<option value="Personal">Lavanderia Personal.</option>
 								</select>
 							</p>
 
@@ -285,11 +293,10 @@
 									<span class="obligatorio">*</span>
 								</label>
 								<select class=" form-control registro1" name="sala" id="idsala">
-									<option value=" ">[Seleccione Cantidad de Sala]</option>
+									<option value="-1">[Seleccione Cantidad de Sala]</option>
 									<option value="1">Una sala</option>
 									<option value="2">Dos salas</option>
 									<option value="3">Tres salas</option>
-									<option value="4">Cuatro salas</option>
 
 								</select>
 							</p>
@@ -298,12 +305,11 @@
 
 								</label>
 							<div class="col-md-12">
-								<select class="form-control registro1" name="banio" id="idbaño">
+								<select class="form-control registro1" name="banio" id="idbanio">
 									<option value=" ">[Seleccione Cantidad de Baño]</option>
 									<option value="1">Un baño</option>
 									<option value="2">Dos baños</option>
 									<option value="3">Tres baños</option>
-									<option value="4">Cuatro baños</option>
 								</select>
 							</div>
 							</p>
@@ -311,7 +317,7 @@
 								<label for="tamdepa"> Tamaño de Departamento
 									<span class="obligatorio">*</span>
 								</label>
-								<input class="registro1" type="text" name="tamanio" id="idtamaño"
+								<input class="registro1" type="text" name="tamanio" id="idtamanio"
 									placeholder="Escribe el tamaño m²">
 							</p>
 
@@ -361,8 +367,9 @@
 
 										<td class="column9">
 											<a type="button" id="idEditar"><i class="far fa-edit"></i></a>
-											<a th:href="@{/elimi/} + ${bean.idCarateristicadepartamento}"><i class="far fa-trash-alt"></i></a>
-											
+											<a th:href="@{/elimi/} + ${bean.idCarateristicadepartamento}"><i
+													class="far fa-trash-alt"></i></a>
+
 										</td>
 									</tr>
 
@@ -403,6 +410,28 @@
 
 		Toast.fire({
 			icon: 'success',
+			title: mensaje
+		})
+
+	</script>
+
+	<script th:inline="javascript" th:if="${existente!=null}">
+		//obtener atributo MENSAJE
+		var mensaje =/*[[${existente}]]*/ null;
+		const Toast = Swal.mixin({
+			toast: true,
+			position: 'top-end',
+			showConfirmButton: false,
+			timer: 3000,
+			timerProgressBar: true,
+			didOpen: (toast) => {
+				toast.addEventListener('mouseenter', Swal.stopTimer)
+				toast.addEventListener('mouseleave', Swal.resumeTimer)
+			}
+		})
+
+		Toast.fire({
+			icon: 'warning',
 			title: mensaje
 		})
 

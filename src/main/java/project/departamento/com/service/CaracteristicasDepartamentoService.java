@@ -6,10 +6,11 @@ import project.departamento.com.entity.CaracteristicasDepartamento;
 
 public interface CaracteristicasDepartamentoService {
 
-	
-	public abstract CaracteristicasDepartamento registraryactualizarCaracteristicaDepartamento(CaracteristicasDepartamento bean);
+	public abstract List<CaracteristicasDepartamento> BuscarNroDepartamento(int nroDepartamento);
 
-   public abstract List<CaracteristicasDepartamento> listarCaracteristicaDepartamento();
+	public abstract List<CaracteristicasDepartamento> listarCaracteristicaDepartamento();
+
+	public abstract CaracteristicasDepartamento registraryactualizarCaracteristicaDepartamento(CaracteristicasDepartamento bean);
 	
 	public abstract void actualizarCaracteristicasDepartamento(CaracteristicasDepartamento bean);
 }
