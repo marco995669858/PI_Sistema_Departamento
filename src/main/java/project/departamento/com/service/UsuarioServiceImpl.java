@@ -33,4 +33,4 @@ public class UsuarioServiceImpl implements UsuarioService{
 	public List<Usuario> listarUsuariosDistintodelAdministrador() {
 		return repository.listarUsuariosDistintosdelAdministrador();
 	}
-}
+

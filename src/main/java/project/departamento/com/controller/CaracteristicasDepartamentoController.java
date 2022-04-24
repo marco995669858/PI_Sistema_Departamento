@@ -21,7 +21,6 @@ public class CaracteristicasDepartamentoController {
 	@Autowired
 	private CaracteristicasDepartamentoService service;
 
-
 	@RequestMapping("/registro/caracteristica_Departamento")
 	public String Index(Model model) {
 		model.addAttribute("depa", service.listarCaracteristicaDepartamento());

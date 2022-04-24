@@ -36,10 +36,9 @@ public class CaracteristicasDepartamentoServiceImpl implements CaracteristicasDe
 	public List<CaracteristicasDepartamento> BuscarNroDepartamento(int nroDepartamento) {
 		return repository.findByNroDepartamento(nroDepartamento);
 	}
-
+  
 	@Override
 	public List<CaracteristicasDepartamento> listaCaracteristicas() {
 		return repository.listaCaracteristicas();
 	}
-
 }

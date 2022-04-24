@@ -254,15 +254,39 @@
 							</p>
 
 							<p>
+								<label for="lavanderia">Número del departamento
+									<span class="obligatorio">*</span>
+								</label>
+								<input type="text" class="registro1" name="nroDepartamento" id="idnroDepartamento">
+							</p>
+
+
+							<p>
 								<label for="sala">Nombre del Edificio
 									<span class="obligatorio">*</span>
 								</label>
 							<div class="col-md-12" th:each="bean:${edificio}">
+
 								<input type="text" class="registro1" th:name="${bean.idEdificio}"
 									th:value="${bean.nombre}" readonly="true">
 							</div>
 							</p>
 							<p>
+
+								<input type="text" class="registro1"  th:name="${bean.idEdificio}" th:value="${bean.nombre}" readonly="true">
+							</div>
+							</p>
+							<p>
+								<label for="banio" class="colocar_banio">Baño
+									<div class="col-md-12">
+										<select class="form-control registro1">
+											<option value=""></option>
+											<option value="">Un baño</option>
+											<option value="">Dos baños</option>
+										</select>
+									</div>
+								</label>
+
 							<div class="col-md-12">
 								<label for="cocicome"> Numero del Departamento
 									<span class="obligatorio">*</span></label>

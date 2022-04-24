@@ -49,4 +49,5 @@ public class Usuario {
 		this.idUsuario = idUsuario;
 	}
 
+
 }

@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import project.departamento.com.entity.CaracteristicasDepartamento;
 import project.departamento.com.entity.Departamento;
 import project.departamento.com.entity.Edificio;
@@ -21,13 +19,13 @@ import project.departamento.com.service.DepartamentoService;
 import project.departamento.com.service.EdificioService;
 import project.departamento.com.service.UsuarioService;
 
-//@RestController
 @Controller
 @RequestMapping("/registro/departamento")
 public class DepartamenoController {
 
 	@Autowired
 	private DepartamentoService service;
+
 
 	@Autowired
 	private UsuarioService usuarioService;

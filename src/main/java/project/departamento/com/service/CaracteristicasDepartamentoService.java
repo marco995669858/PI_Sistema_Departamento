@@ -14,6 +14,6 @@ public interface CaracteristicasDepartamentoService {
 
 	public abstract CaracteristicasDepartamento registraryactualizarCaracteristicaDepartamento(
 			CaracteristicasDepartamento bean);
-
-	public abstract void actualizarCaracteristicasDepartamento(CaracteristicasDepartamento bean);
+  
+  public abstract void actualizarCaracteristicasDepartamento(CaracteristicasDepartamento bean);
 }

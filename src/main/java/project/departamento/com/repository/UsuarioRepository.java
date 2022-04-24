@@ -11,9 +11,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
 	
 	@Query("select u.usuario, u.rol from UsuarioHasRol u where u.rol.idRol= 1000")
 	public abstract List<Usuario> obtieneAdministrador();
-	
+  
 	@Query("select u from Usuario u where u.idUsuario <> 1000")
 	public abstract List<Usuario> listarUsuariosDistintosdelAdministrador();
 
-	
 }

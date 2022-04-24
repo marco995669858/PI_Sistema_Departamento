@@ -21,6 +21,4 @@ public interface CaracteristicasDepartamentoRepository extends JpaRepository<Car
 	@Query(value = "{call actualizar_eliminado(:codigoIn, :eliminadoIn)}",nativeQuery = true)
 	void eliminarCaracteristicasDepartamento(@Param("codigoIn") int codigoIn, @Param("eliminadoIn") String eliminadoIn);
 	
-	
-	
 }
