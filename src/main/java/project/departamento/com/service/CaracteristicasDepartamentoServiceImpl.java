@@ -14,8 +14,6 @@ public class CaracteristicasDepartamentoServiceImpl implements CaracteristicasDe
 	@Autowired
 	private CaracteristicasDepartamentoRepository repository;
 	
-	
-
 	@Override
 	public List<CaracteristicasDepartamento> listarCaracteristicaDepartamento() {
 		
@@ -37,6 +35,11 @@ public class CaracteristicasDepartamentoServiceImpl implements CaracteristicasDe
 	@Override
 	public List<CaracteristicasDepartamento> BuscarNroDepartamento(int nroDepartamento) {
 		return repository.findByNroDepartamento(nroDepartamento);
+	}
+
+	@Override
+	public List<CaracteristicasDepartamento> listaCaracteristicas() {
+		return repository.listaCaracteristicas();
 	}
 
 }

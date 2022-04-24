@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Departamento</title>
+	<title>Registro Residente</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrardepartamento.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrarformulario.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/tablas.css}">
@@ -238,53 +238,40 @@
 				<div class="contact_form">
 
 					<div class="formulario">
-						<h1 style="text-align: center;">Registro de información de departamento.</h1>
+						<h1 style="text-align: center;">Registro de información del Residente</h1>
 
-						<form action="" method="post">
+						<form th:action="@{/registro/residente/registrarResidente}" method="post">
 							<input type="hidden" value="0" name="codigo" id="idcodigo">
 
 							<p>
-								<label for="lavanderia">Administrador
+								<label for="lavanderia">Departamento
 								</label>
-								<select class="form-control registro1">
-									<option value=""></option>
-									<option value="">Una lavandería</option>
-									<option value="">Dos lavanderías</option>
+								<select class="form-control registro1" name="idDepartamento" id="idDepartamento">
+									<option value="-1">[Seleccione un departamento]</option>
+									<option th:each="bean:${depa}" th:value="${bean.idDepartamento}"
+										th:text="${bean.caracteristicasDepartamento.nroDepartamento}"></option>
 								</select>
 							</p>
 
 							<p>
-								<label for="sala">Sala
+								<label for="sala">Usuario
 									<span class="obligatorio">*</span>
 								</label>
-								<select class=" form-control registro1">
-									<option value=""></option>
-									<option value="">Una sala</option>
-									<option value="">Dos salas</option>
+								<select class=" form-control registro1" name="usuario" id="idUsuario">
+									<option value="-1">[Seleccione un departamento]</option>
+									<option th:each="bean:${user}" th:value="${bean.idUsuario}"
+										th:text="${bean.nombreCompleto + ' ' + bean.apellidoCompleto}"></option>
 
 								</select>
 							</p>
 							<p>
-								<label for="banio" class="colocar_banio">Baño
-
+								<label for="banio" class="colocar_banio">Fecha de salidad
+									<span class="obligatorio">*</span>
 								</label>
 							<div class="col-md-12">
-								<select class="form-control registro1">
-									<option value=""></option>
-									<option value="">Un baño</option>
-									<option value="">Dos baños</option>
-								</select>
+								<input type="date" class="form-control registro1" name="fechaSalida" id="idFechaSalida">
 							</div>
 							</p>
-							<p>
-								<label for="tamdepa"> Tamaño de Departamento
-									<span class="obligatorio">*</span>
-								</label>
-								<input class="registro1" type="text" name="colocar_tamdepa" id="tamdepa"
-									required="obligatorio" placeholder="Escribe el tamaño">
-							</p>
-
-
 							<button class="botones1" type="submit" name="enviar_formulario" id="enviar">
 								<p>Registrar</p>
 							</button>
@@ -353,7 +340,50 @@
 		</footer>
 	</section>
 	<!-- partial -->
-	<script th:href="@{/resources/js/adminjs.js}"></script>
+	<script th:src="@{/resources/js/adminjs.js}"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script th:inline="javascript" th:if="${MENSAJE!=null}">
+		//obtener atributo MENSAJE
+		var mensaje =/*[[${MENSAJE}]]*/ null;
+		const Toast = Swal.mixin({
+			toast: true,
+			position: 'top-end',
+			showConfirmButton: false,
+			timer: 3000,
+			timerProgressBar: true,
+			didOpen: (toast) => {
+				toast.addEventListener('mouseenter', Swal.stopTimer)
+				toast.addEventListener('mouseleave', Swal.resumeTimer)
+			}
+		})
+
+		Toast.fire({
+			icon: 'success',
+			title: mensaje
+		})
+
+	</script>
+	<script th:inline="javascript" th:if="${x!=null}">
+		//obtener atributo MENSAJE
+		var mensaje =/*[[${x}]]*/ null;
+		const Toast = Swal.mixin({
+			toast: true,
+			position: 'top-end',
+			showConfirmButton: false,
+			timer: 3000,
+			timerProgressBar: true,
+			didOpen: (toast) => {
+				toast.addEventListener('mouseenter', Swal.stopTimer)
+				toast.addEventListener('mouseleave', Swal.resumeTimer)
+			}
+		})
+
+		Toast.fire({
+			icon: 'warning',
+			title: mensaje
+		})
+
+	</script>
 
 </body>
 

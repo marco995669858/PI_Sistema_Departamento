@@ -27,4 +27,8 @@ public class Rol {
 	
 	private int estado;
 	
+	public Rol(int idRol) {
+		this.idRol = idRol;
+	}
+	
 }

@@ -44,6 +44,9 @@ public class Usuario {
 	private String descripcionRaza;
 
 	private String eliminado;
-
+	
+	public Usuario(int idUsuario) {
+		this.idUsuario = idUsuario;
+	}
 
 }

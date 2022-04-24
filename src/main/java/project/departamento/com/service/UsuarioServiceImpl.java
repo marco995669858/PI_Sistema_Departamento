@@ -29,4 +29,8 @@ public class UsuarioServiceImpl implements UsuarioService{
 		return repository.obtieneAdministrador();
 	}
 
+	@Override
+	public List<Usuario> listarUsuariosDistintodelAdministrador() {
+		return repository.listarUsuariosDistintosdelAdministrador();
+	}
 }

@@ -36,4 +36,8 @@ public class Edificio {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idRol")
 	private Rol rol;
+	
+	public Edificio(int idEdificio) {
+		this.idEdificio = idEdificio;
+	}
 }
