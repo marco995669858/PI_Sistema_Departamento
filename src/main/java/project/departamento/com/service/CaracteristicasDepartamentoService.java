@@ -10,7 +10,10 @@ public interface CaracteristicasDepartamentoService {
 
 	public abstract List<CaracteristicasDepartamento> listarCaracteristicaDepartamento();
 
-	public abstract CaracteristicasDepartamento registraryactualizarCaracteristicaDepartamento(CaracteristicasDepartamento bean);
-	
-	public abstract void actualizarCaracteristicasDepartamento(CaracteristicasDepartamento bean);
+	public abstract List<CaracteristicasDepartamento> listaCaracteristicas();
+
+	public abstract CaracteristicasDepartamento registraryactualizarCaracteristicaDepartamento(
+			CaracteristicasDepartamento bean);
+  
+  public abstract void actualizarCaracteristicasDepartamento(CaracteristicasDepartamento bean);
 }

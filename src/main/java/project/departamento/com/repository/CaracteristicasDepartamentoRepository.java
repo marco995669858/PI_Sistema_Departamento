@@ -13,10 +13,12 @@ public interface CaracteristicasDepartamentoRepository extends JpaRepository<Car
 	@Query("select c from CaracteristicasDepartamento c where c.eliminado = 'No'")
 	public abstract List<CaracteristicasDepartamento> listarCaracteristicasDepartamento();
 	
+	@Query("select x from CaracteristicasDepartamento x  where x.idCarateristicadepartamento not in(select d.caracteristicasDepartamento.idCarateristicadepartamento from Departamento d)")
+	public abstract List<CaracteristicasDepartamento> listaCaracteristicas();
+	
+	public abstract List<CaracteristicasDepartamento> findByNroDepartamento(int nroDepartamento);
 	
 	@Query(value = "{call actualizar_eliminado(:codigoIn, :eliminadoIn)}",nativeQuery = true)
 	void eliminarCaracteristicasDepartamento(@Param("codigoIn") int codigoIn, @Param("eliminadoIn") String eliminadoIn);
-	
-	public abstract List<CaracteristicasDepartamento> findByNroDepartamento(int nroDepartamento);
 	
 }

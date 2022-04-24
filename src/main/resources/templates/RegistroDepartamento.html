@@ -240,7 +240,7 @@
 					<div class="formulario">
 						<h1 style="text-align: center;">Registro de información de departamento.</h1>
 
-						<form action="" method="post">
+						<form th:action="@{/registro/departamento/registrar}" method="post">
 							<input type="hidden" value="0" name="codigo" id="idcodigo">
 
 							<p>
@@ -252,6 +252,7 @@
 									th:value="${bean.nombreCompleto + ' ' + bean.apellidoCompleto}" readonly="true">
 							</div>
 							</p>
+
 							<p>
 								<label for="lavanderia">Número del departamento
 									<span class="obligatorio">*</span>
@@ -259,11 +260,19 @@
 								<input type="text" class="registro1" name="nroDepartamento" id="idnroDepartamento">
 							</p>
 
+
 							<p>
 								<label for="sala">Nombre del Edificio
 									<span class="obligatorio">*</span>
 								</label>
 							<div class="col-md-12" th:each="bean:${edificio}">
+
+								<input type="text" class="registro1" th:name="${bean.idEdificio}"
+									th:value="${bean.nombre}" readonly="true">
+							</div>
+							</p>
+							<p>
+
 								<input type="text" class="registro1"  th:name="${bean.idEdificio}" th:value="${bean.nombre}" readonly="true">
 							</div>
 							</p>
@@ -277,23 +286,17 @@
 										</select>
 									</div>
 								</label>
+
 							<div class="col-md-12">
-								<select class="form-control registro1">
-									<option value=""></option>
-									<option value="">Un baño</option>
-									<option value="">Dos baños</option>
+								<label for="cocicome"> Numero del Departamento
+									<span class="obligatorio">*</span></label>
+								<select class="form-control registro1" name="nroDepartamento" id="idnroDepartamento">
+									<option value="-1">[Seleccione un número de departamento.] </option>
+									<option th:each="bean:${nro}" th:value="${bean.idCarateristicadepartamento}"
+										th:text="${bean.nroDepartamento}"></option>
 								</select>
 							</div>
 							</p>
-							<p>
-								<label for="tamdepa"> Tamaño de Departamento
-									<span class="obligatorio">*</span>
-								</label>
-								<input class="registro1" type="text" name="colocar_tamdepa" id="tamdepa"
-									required="obligatorio" placeholder="Escribe el tamaño">
-							</p>
-
-
 							<button class="botones1" type="submit" name="enviar_formulario" id="enviar">
 								<p>Registrar</p>
 							</button>
@@ -354,7 +357,29 @@
 		</footer>
 	</section>
 	<!-- partial -->
-	<script th:href="@{/resources/js/adminjs.js}"></script>
+	<script th:src="@{/resources/js/adminjs.js}"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script th:inline="javascript" th:if="${MENSAJE!=null}">
+		//obtener atributo MENSAJE
+		var mensaje =/*[[${MENSAJE}]]*/ null;
+		const Toast = Swal.mixin({
+			toast: true,
+			position: 'top-end',
+			showConfirmButton: false,
+			timer: 3000,
+			timerProgressBar: true,
+			didOpen: (toast) => {
+				toast.addEventListener('mouseenter', Swal.stopTimer)
+				toast.addEventListener('mouseleave', Swal.resumeTimer)
+			}
+		})
+
+		Toast.fire({
+			icon: 'success',
+			title: mensaje
+		})
+
+	</script>
 
 </body>
 

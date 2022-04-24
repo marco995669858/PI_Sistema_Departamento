@@ -1,5 +1,7 @@
 package project.departamento.com.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,9 +17,8 @@ import lombok.Setter;
 @Table(name = "tblCaracteristicasDepartamento")
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class CaracteristicasDepartamento {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idCarateristicadepartamento;
@@ -37,5 +38,27 @@ public class CaracteristicasDepartamento {
 	private String tamanio;
 
 	private String eliminado;
+	
+	public CaracteristicasDepartamento() {
+		super();
+	}
+
+	
+	public CaracteristicasDepartamento(int idCarateristicadepartamento) {
+		this.idCarateristicadepartamento = idCarateristicadepartamento;
+	}
+
+	public CaracteristicasDepartamento(int idCarateristicadepartamento, int nroDepartamento, int habitaciones,
+			String cocinaComedor, String lavanderia, int sala, int banio, String tamanio, String eliminado) {
+		this.idCarateristicadepartamento = idCarateristicadepartamento;
+		this.nroDepartamento = nroDepartamento;
+		this.habitaciones = habitaciones;
+		this.cocinaComedor = cocinaComedor;
+		this.lavanderia = lavanderia;
+		this.sala = sala;
+		this.banio = banio;
+		this.tamanio = tamanio;
+		this.eliminado = eliminado;
+	}
 
 }
