@@ -28,8 +28,6 @@ public class Departamento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idDepartamento;
 	
-	private int nroDepartamento;
-	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idRol")
