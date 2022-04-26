@@ -135,16 +135,23 @@
 					</a>
 				</li>
 				<li>
-					<a href="registrardepartamento.html">
+					<a th:href="@{/registro/caracteristica_Departamento}">
 						<svg>
 							<use xlink:href="#pages"></use>
 						</svg>
-						<span>Registrar Departamento</span>
+						<span>Registrar caracteristicas de Departamento</span>
 					</a>
 				</li>
-
 				<li>
-					<a href="registrarvisita.html">
+					<a th:href="@{/registro/departamento/}">
+						<svg>
+							<use xlink:href="#pages"></use>
+						</svg>
+						<span>Registrar de Departamento</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/visitante/}">
 						<svg>
 							<use xlink:href="#pages"></use>
 						</svg>
@@ -152,7 +159,15 @@
 					</a>
 				</li>
 				<li>
-					<a href="registrarusuario.html">
+					<a th:href="@{/registro/residente/}">
+						<svg>
+							<use xlink:href="#pages"></use>
+						</svg>
+						<span>Registrar Residente</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/usuario/}">
 						<svg>
 							<use xlink:href="#pages"></use>
 						</svg>
@@ -241,26 +256,19 @@
 						<h1 style="text-align: center;">Registro de información de Visitas</h1>
 
 						<form action="" method="post">
-
-
-
 							<input class="registro1" type="hidden" value="0">
-
-
 							<p>
-								<label for="id_departamento" class="colocar_id">ID Departamento
+								<label for="id_departamento" class="colocar_id">Nro de Departamento
 								</label>
 								<input class="registro1" type="text" name="introducir_iddepa" id="id_departamento"
 									required="obligatorio">
-
 							</p>
 							<p>
-								<label for="id_usuario" class="colocar_id">ID Usuario
+								<label for="id_usuario" class="colocar_id">Visitante
 								</label>
 								<input class="registro1" type="text" name="introducir_email" id="email"
 									required="obligatorio">
 							</p>
-
 							<p>
 								<label for="fech_entrega" class="colocar_id">Fecha de Entrada
 									<span class="obligatorio">*</span>
@@ -274,10 +282,7 @@
 								</label>
 								<input class="registro1" type="date" name="introducir_salida" id="fech_salida"
 									required="obligatorio">
-
 							</p>
-
-
 							<button class="botones1" type="submit" name="enviar_formulario" id="enviar">
 								<p>Registrar</p>
 							</button>
@@ -345,7 +350,7 @@
 		</footer>
 	</section>
 	<!-- partial -->
-	<script th:href="@{/resources/js/adminjs.js}"></script>
+	<script th:src="@{/resources/js/adminjs.js}"></script>
 
 </body>
 

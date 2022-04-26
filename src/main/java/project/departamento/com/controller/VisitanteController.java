@@ -6,5 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/registro/visitante")
 public class VisitanteController {
-
+	
+	@RequestMapping("/")
+	public String index() {
+		return "visita";
+	}
 }
