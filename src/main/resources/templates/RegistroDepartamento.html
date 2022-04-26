@@ -135,16 +135,23 @@
 					</a>
 				</li>
 				<li>
-					<a href="registrardepartamento.html">
+					<a th:href="@{/registro/caracteristica_Departamento}">
 						<svg>
 							<use xlink:href="#pages"></use>
 						</svg>
-						<span>Registrar Departamento</span>
+						<span>Registrar caracteristicas de Departamento</span>
 					</a>
 				</li>
-
 				<li>
-					<a href="registrarvisita.html">
+					<a th:href="@{/registro/departamento/}">
+						<svg>
+							<use xlink:href="#pages"></use>
+						</svg>
+						<span>Registrar de Departamento</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/visitante/}">
 						<svg>
 							<use xlink:href="#pages"></use>
 						</svg>
@@ -152,7 +159,15 @@
 					</a>
 				</li>
 				<li>
-					<a href="registrarusuario.html">
+					<a th:href="@{/registro/residente/}">
+						<svg>
+							<use xlink:href="#pages"></use>
+						</svg>
+						<span>Registrar Residente</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/usuario/}">
 						<svg>
 							<use xlink:href="#pages"></use>
 						</svg>
@@ -261,7 +276,7 @@
 									th:value="${bean.nombre}" readonly="true">
 							</div>
 							</p>
-							
+
 							<p>
 							<div class="col-md-12">
 								<label for="cocicome"> Numero del Departamento
