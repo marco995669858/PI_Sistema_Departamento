@@ -17,7 +17,7 @@
 </head>
 
 <body>
-	
+
 	<header class="page-header">
 		<nav>
 			<a href="admin.html" class="logo">
@@ -34,7 +34,7 @@
 				</li>
 				<li>
 					<a href="#0">
-					<i class="fa-solid fa-user"></i>
+						<i class="fa-solid fa-user"></i>
 						<span> Mi Perfil</span>
 					</a>
 				</li>
@@ -88,7 +88,7 @@
 				</li>
 				<li>
 					<a href="#0">
-					<i class="fa-solid fa-wrench"></i>
+						<i class="fa-solid fa-wrench"></i>
 						<span>Opciones</span>
 					</a>
 				</li>
@@ -117,7 +117,7 @@
 	<section class="page-content">
 		<section class="search-and-user">
 			<form>
-				<input type="search" placeholder="">
+				<input type="hidden" placeholder="">
 				<button type="submit" aria-label="submit form">
 					<svg aria-hidden="true">
 						<use xlink:href="#search"></use>
@@ -125,9 +125,12 @@
 				</button>
 			</form>
 			<div class="admin-profile" th:each="bean : ${session.objUsuario}">
+				<i class="fa-solid fa-circle-user"></i>
 				<span class="greeting" th:text="${bean.nombreCompleto + ' ' + bean.apellidoCompleto}"></span>
+
 				<div class="notifications">
-					<span class="badge">99</span>
+
+
 					<svg>
 						<use xlink:href="#users"></use>
 					</svg>
@@ -195,7 +198,7 @@
 							<p>
 								<label for="mascotas" class="colocar_mascotas">Tipo de Mascota
 								</label>
-								<select class="form-control registro1" name="raza">
+								<select class="form-control registro1" name="raza" id="idRaza">
 									<option value=" ">[Seleccione un tipo de mascota]</option>
 									<option value="Gato">Gato</option>
 									<option value="Perro">Perro</option>
@@ -277,6 +280,8 @@
 		</footer>
 	</section>
 	<!-- partial -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 	<script th:src="@{/resources/js/adminjs.js}"></script>
 	<script th:src="@{/resources/js/main.js}"></script>
 	<script th:src="@{/resources/js/validarCliente.js}"></script>
@@ -304,6 +309,22 @@
 			title: mensaje
 		})
 
+	</script>
+	<script>
+		$(document).on("click", "#idEditar", function () {
+			let codigo;
+			codigo = $(this).parents("tr").find("td")[0].innerHTML;
+			$.get("buscar?idUsuario=" + codigo, function (data) {
+				$("#idcodigo").val(data.idUsuario);
+				$("#idnombres").val(data.nombreCompleto);
+				$("#idapellidos").val(data.apellidoCompleto);
+				$("#idDni").val(data.dni);
+				$("#idcelular").val(data.celular);
+				$("#idcorreo").val(data.correo);
+				$("#idRaza").val(data.raza);
+				$("#iddescripcion").val(data.descripcionRaza);
+			});
+		});
 	</script>
 </body>
 

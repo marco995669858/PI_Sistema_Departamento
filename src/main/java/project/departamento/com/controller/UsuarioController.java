@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import project.departamento.com.entity.Usuario;
@@ -28,13 +29,7 @@ public class UsuarioController {
 		model.addAttribute("user", service.listarUsuarios());
 		return "cliente";
 	}
-	
-//	@GetMapping
-//	public List<Usuario> listarUsuarios(){
-//		List<Usuario> listad = service.listarUsuarios();
-//		return listad;
-//	}
-	
+
 	@RequestMapping("/registrar")
 	public String registrarUsuario(@RequestParam("codigo") int codigo, @RequestParam("nombre") String nombre,
 			@RequestParam("apellido") String apellido, @RequestParam("dni") String dni,
@@ -69,5 +64,18 @@ public class UsuarioController {
 		}
 
 		return "redirect:/registro/usuario/";
+	}
+
+	@RequestMapping("/buscar")
+	@ResponseBody
+	public Usuario buscarUsuario(@RequestParam("idUsuario") int codigo) {
+		Usuario bean = null;
+		try {
+			bean = service.buscarUsuario(codigo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return bean;
 	}
 }

@@ -33,4 +33,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public List<Usuario> listarUsuariosDistintodelAdministrador() {
 		return repository.listarUsuariosDistintosdelAdministrador();
 	}
+
+	@Override
+	public Usuario buscarUsuario(int idUsuario) {
+		return repository.findById(idUsuario).orElse(null);
+	}
 }
