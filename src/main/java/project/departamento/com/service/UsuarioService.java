@@ -10,7 +10,10 @@ public interface UsuarioService {
 
 	/* listado de todos los usuarios */
 	public abstract List<Usuario> listarUsuarios();
-
+	
+	/*buscar usuario para cargar en el registro de la actualización*/
+	public Usuario buscarUsuario(int idUsuario);
+	
 	/* para registrar un usuario */
 	public abstract void registrarUsuario(Usuario bean);
 

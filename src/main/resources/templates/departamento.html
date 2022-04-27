@@ -116,21 +116,20 @@
 	<section class="page-content">
 		<section class="search-and-user">
 			<form>
-				<input type="search" placeholder="">
+				<input type="hidden" placeholder="">
 				<button type="submit" aria-label="submit form">
 					<svg aria-hidden="true">
 						<use xlink:href="#search"></use>
 					</svg>
 				</button>
 			</form>
-			<div class="admin-profile">
-				<!--<li class="nav-item active form-inline my-2 my-lg-0" th:each="bean : ${session.menus}">
-					<a class="nav-link mr-sm-2" th:text="${bean.Nombre}" th:href="${bean.ruta}"></a>
-				</li>-->
-				<!--Aqui pon el nombre de la persona que inicia sesion-->
-				<span class="greeting"></span>
+			<div class="admin-profile" th:each="bean : ${session.objUsuario}">
+				<i class="fa-solid fa-circle-user"></i>
+				<span class="greeting" th:text="${bean.nombreCompleto + ' ' + bean.apellidoCompleto}"></span>
+
 				<div class="notifications">
-					<span class="badge">99</span>
+
+
 					<svg>
 						<use xlink:href="#users"></use>
 					</svg>

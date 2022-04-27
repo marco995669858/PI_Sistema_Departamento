@@ -33,7 +33,7 @@
 				</li>
 				<li>
 					<a href="#0">
-					<i class="fa-solid fa-user"></i>
+						<i class="fa-solid fa-user"></i>
 						<span> Mi Perfil</span>
 					</a>
 				</li>
@@ -87,7 +87,7 @@
 				</li>
 				<li>
 					<a href="#0">
-					<i class="fa-solid fa-wrench"></i>
+						<i class="fa-solid fa-wrench"></i>
 						<span>Opciones</span>
 					</a>
 				</li>
@@ -116,17 +116,20 @@
 	<section class="page-content">
 		<section class="search-and-user">
 			<form>
-				<input type="search" placeholder="">
+				<input type="hidden" placeholder="">
 				<button type="submit" aria-label="submit form">
 					<svg aria-hidden="true">
 						<use xlink:href="#search"></use>
 					</svg>
 				</button>
 			</form>
-			<div class="admin-profile">
-				<span class="greeting">Pedro Castillo</span>
+			<div class="admin-profile" th:each="bean : ${session.objUsuario}">
+				<i class="fa-solid fa-circle-user"></i>
+				<span class="greeting" th:text="${bean.nombreCompleto + ' ' + bean.apellidoCompleto}"></span>
+
 				<div class="notifications">
-					<span class="badge">99</span>
+
+
 					<svg>
 						<use xlink:href="#users"></use>
 					</svg>
