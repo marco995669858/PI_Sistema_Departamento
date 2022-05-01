@@ -22,23 +22,31 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "departamento")
+@Table(name = "tblLibroReclamaciones")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PagoBoletaxServicio {
+public class Reclamaciones {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idPagoBoletaxServicio;
+	private int codigoQuejas;
+
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idDepartamento")
+	private Departamento departamento;
 	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idBoleta")
-	private BoletaxServicio boletaxServicio;
+	@JoinColumn(name = "idResidente")
+	private Residente residente;
+	
+	private String descripcionQueja;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
-	private Date fechaDePago;
-	
+	private Date fechaRegistroQueja;
 }
+

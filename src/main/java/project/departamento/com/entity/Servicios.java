@@ -1,7 +1,5 @@
 package project.departamento.com.entity;
 
-import java.sql.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -10,10 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -22,30 +17,29 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "detalleincidente")
+@Table(name = "tblServicios")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class DetalleIncidente {
-
+public class Servicios {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idDetalleIncidente;
+	private int idServicios;
 	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idIncidentes")
-	private Incidente incidente;
+	@JoinColumn(name = "idDepartamento")
+	private Departamento departamento;
 	
+	private String mes;
 	
-	private String descripcion;
+	private double montoDepartamento;
 	
-	private String propuestaSolucion;
+	private double luz;
 	
-	@Temporal(TemporalType.TIMESTAMP)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
-	private Date fecha;
+	private double agua;
+	
+	private double mantenimiento;
 }
-
-

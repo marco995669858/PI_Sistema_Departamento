@@ -17,26 +17,25 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "mascotas")
+@Table(name = "tblSubMenu")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Mascotas {
+public class SubMenu {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idMascota;
-	
+	private int idSubMenu;
+
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idDepartamento")
-	private Departamento departamento;
+	@JoinColumn(name = "idMenu")
+	private SubMenu subMenu;
 	
 	private String nombre;
 	
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idDepartamento")
-	private EspecieMascota especieMascota;
+	private String ruta;
+	
+	private int estado;
 }
