@@ -10,7 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "tblUsuarioHasRol")
+@Table(name = "rol_enlace")
 @Getter
 @Setter
 public class Rol_Enlace {
