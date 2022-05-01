@@ -28,7 +28,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BoletaxServicio {
-	
+	/*Hola*/
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idBoleta;
