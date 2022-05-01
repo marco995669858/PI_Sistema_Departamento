@@ -1,6 +1,6 @@
 package project.departamento.com.entity;
 
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,31 +22,41 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "tblLibroReclamaciones")
+@Table(name = "boletaxservicio")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Reclamaciones {
-	
+public class BoletaxServicio {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int codigoQuejas;
-
+	private int idBoleta;
+	
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idTipoServicio")
+	private TipoServicio tipoServicio;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
+	private Date fechaEmision;
+	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idDepartamento")
 	private Departamento departamento;
 	
+	
+	private double importe;
+	
+	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idResidente")
-	private Residente residente;
+	@JoinColumn(name = "idEstadoBoleta")
+	private EstadoBoleta estadoBoleta;
 	
-	private String descripcionQueja;
+	public BoletaxServicio(int idBoleta) {
+		this.idBoleta = idBoleta;
+	}
 	
-	@Temporal(TemporalType.TIMESTAMP)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
-	private Date fechaRegistroQueja;
 }
-

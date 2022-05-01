@@ -22,39 +22,45 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "tblBoletaPago")
+@Table(name = "incidentes")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Boleta {
+public class Incidente {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idBoleta;
+	private int idIncidentes;
 	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idResidente")
-	private Residente residente;
+	@JoinColumn(name = "idDepartamento")
+	private Departamento departamento;
 	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idServicios")
-	private Servicios servicios;
+	@JoinColumn(name = "idUsuario")
+	private Usuario usuario;
 	
-	@Temporal(TemporalType.DATE)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-	private Date fechaInicio;
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idTipoIncidente")
+	private TipoIncidente tipoIncidente;
 	
-	@Temporal(TemporalType.DATE)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-	private Date fechaPlazo;
+	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
+	private Date fecha;
 	
-	@Temporal(TemporalType.DATE)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-	private Date fechaPago;
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idEstadoIncidente")
+	private EstadoIncidente estadoIncidente;
 	
-	private double totalPagado;
+	public Incidente(int idIncidentes) {
+		this.idIncidentes = idIncidentes;
+	}
+	
+	
+	
 }
-
