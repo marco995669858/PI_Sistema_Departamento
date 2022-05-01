@@ -1,15 +1,16 @@
 package project.departamento.com.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,35 +18,29 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "usuario")
+@Table(name = "ocupantes")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Usuario {
-
+public class Ocupantes {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idUsuario;
+	private int idOcupante;
 
 	private String nombres;
 
 	private String apePaterno;
-	
+
 	private String apeMaterno;
 
-	private String user;
+	private String dni;
 
-	private String password;
+	private String sexo;
 
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idRol")
-	private Rol rol;
+	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
+	private Date fechaRegistro;
 	
-	public Usuario(int idUsuario) {
-		this.idUsuario = idUsuario;
-	}
-
-
 }

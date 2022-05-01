@@ -9,22 +9,20 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
 @Entity
 @Table(name = "tblUsuarioHasRol")
-public class UsuarioHasRol {
-	
+@Getter
+@Setter
+public class Rol_Enlace {
+
 	@EmbeddedId
-	private UsuarioHasRolPK usuarioHasRolPk;
-	
-	@ManyToOne
-	@JoinColumn(name = "idUsuario", nullable = false, insertable = false, updatable = false)
-	private Usuario usuario;
+	private Rol_EnlacePK rol_EnlacePK;
 
 	@ManyToOne
 	@JoinColumn(name = "idRol", nullable = false, insertable = false, updatable = false)
 	private Rol rol;
-	
-	
+
+	@ManyToOne
+	@JoinColumn(name = "idEnlace", nullable = false, insertable = false, updatable = false)
+	private Enlace enlace;
 }

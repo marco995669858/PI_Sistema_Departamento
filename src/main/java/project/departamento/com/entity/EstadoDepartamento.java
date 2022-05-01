@@ -12,21 +12,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "rol")
+@Table(name = "estadodepartamento")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Rol {
+public class EstadoDepartamento {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idRol;
+	private int idEstado;
 	
-	private String descripcionRol;
-	
-	public Rol(int idRol) {
-		this.idRol = idRol;
-	}
-	
+	private String descripcion;
+
 }

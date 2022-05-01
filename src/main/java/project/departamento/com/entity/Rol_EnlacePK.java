@@ -14,10 +14,10 @@ import lombok.Setter;
 @EqualsAndHashCode
 @Embeddable
 @AllArgsConstructor
-public class UsuarioHasRolPK implements Serializable{
+public class Rol_EnlacePK implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
-	private int idUsuario;
 	private int idRol;
+	private int idEnlace;
 }

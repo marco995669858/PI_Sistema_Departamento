@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "tblDepartamento")
+@Table(name = "departamento")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -30,18 +30,33 @@ public class Departamento {
 	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idRol")
-	private Rol administrador;
-		
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idEdificio")
 	private Edificio edificio;
 	
+	private int piso;
+	
+	private int nroDepartamento;
+	
+	private double areaM2;
+	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idCarateristicadepartamento")
-	private CaracteristicasDepartamento caracteristicasDepartamento;
+	@JoinColumn(name = "idTipo")
+	private TipoDepartamento tipoDepartamento;
+	
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idEstado")
+	private EstadoDepartamento estadoDepartamento;
+	
+	private String telefono;
+	
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idPropietario")
+	private Propietariodep propietariodep;
+	
+	
 	
 	public Departamento(int idDepartamento) {
 		this.idDepartamento = idDepartamento;
