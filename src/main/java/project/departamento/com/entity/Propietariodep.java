@@ -18,24 +18,28 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "visitante")
+@Table(name = "propietariodep")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Visitante {
+public class Propietariodep {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idVisitante;
+	private int idPropietario;
 
 	private String nombres;
 
 	private String apePaterno;
 
 	private String apeMaterno;
-
+	
 	private String dni;
+
+	private String celular;
+	
+	private String correo;
 
 	private String sexo;
 
