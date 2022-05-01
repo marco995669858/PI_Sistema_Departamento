@@ -22,23 +22,38 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "tblPagoCompletado")
+@Table(name = "controlvisita")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PagoCompletado {
-	
+public class ControlVisita {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idPago;
+	private int idVisita;
+	
 	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idBoleta")
-	private Boleta boleta;
+	@JoinColumn(name = "idVisitante")
+	private Visitante visitante;
 	
-	@Temporal(TemporalType.DATE)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-	private Date fechaPagada;
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idDepartamento")
+	private Departamento departamento;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
+	private Date ingreso;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
+	private Date salida;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
+	private Date fechaRegistro;
+	 
+	
 }

@@ -1,6 +1,6 @@
 package project.departamento.com.entity;
 
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,8 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -23,34 +22,30 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "tblResidente")
+@Table(name = "detalleincidente")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Residente {
-	
+public class DetalleIncidente {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idResidente;
+	private int idDetalleIncidente;
 	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idDepartamento")
-	private Departamento departamento;
+	@JoinColumn(name = "idIncidentes")
+	private Incidente incidente;
 	
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idUsuario")
-	private Usuario usuario;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Temporal(TemporalType.DATE)
-	private Date fechaIngreso;
+	private String descripcion;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Temporal(TemporalType.DATE)
-	private Date fechasalidad;
+	private String propuestaSolucion;
 	
-
+	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
+	private Date fecha;
 }
+
+

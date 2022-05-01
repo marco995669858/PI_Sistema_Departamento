@@ -29,7 +29,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Incidente {
 	
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idIncidentes;
@@ -57,7 +56,7 @@ public class Incidente {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idEstadoIncidente")
 	private EstadoIncidente estadoIncidente;
- 
+	
 	public Incidente(int idIncidentes) {
 		this.idIncidentes = idIncidentes;
 	}

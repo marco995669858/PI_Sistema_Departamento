@@ -21,7 +21,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @Entity
 @Table(name = "boletaxservicio")
 @Getter
@@ -59,5 +58,4 @@ public class BoletaxServicio {
 	public BoletaxServicio(int idBoleta) {
 		this.idBoleta = idBoleta;
 	}
-	
 }
