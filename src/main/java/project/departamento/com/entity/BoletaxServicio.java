@@ -28,6 +28,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BoletaxServicio {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idBoleta;
