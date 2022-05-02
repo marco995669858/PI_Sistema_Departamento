@@ -1,5 +1,5 @@
 package project.departamento.com.service;
 
-public interface ReclamacionesService {
+public interface PagoBoletaxServicioService {
 
 }

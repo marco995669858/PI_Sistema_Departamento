@@ -4,16 +4,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import project.departamento.com.entity.CaracteristicasDepartamento;
+ 
 import project.departamento.com.entity.Usuario;
 
-public interface LoginRepository  extends JpaRepository<CaracteristicasDepartamento, Integer> {
-	/*select * from tblusuario where correo = 'fenixxd23@gmail.com';
-	 * 
-	 * @Query("Select x from Usuario x where x.login = :#{#usu.login} and x.password = :#{#usu.password}")
-	 * 
-	 * 
-	 * */
+public interface LoginRepository  extends JpaRepository<Usuario, Integer> {
+ 
 	@Query("select u from Usuario u where u.correo = ?1")
 	public abstract Usuario BuscarUsuario(String correo);
 	
