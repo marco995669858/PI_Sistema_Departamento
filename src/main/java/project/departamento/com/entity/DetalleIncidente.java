@@ -1,6 +1,6 @@
 package project.departamento.com.entity;
 
-import java.sql.Date;
+import java.util.*;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
