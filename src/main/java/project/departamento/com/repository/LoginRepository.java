@@ -9,8 +9,6 @@ public interface LoginRepository  extends JpaRepository<Usuario, Integer> {
  
 	@Query("select u from Usuario u where u.user = ?1")
 	public abstract Usuario BuscarUsuario(String user);
-	
-	
-	
-	
+ 
+  
 }
