@@ -24,4 +24,8 @@ public class TipoDepartamento {
 	private int idTipo;
 	
 	private String descripcion;
+	
+	public TipoDepartamento(int idTipo) {
+		this.idTipo = idTipo;
+	}
 }

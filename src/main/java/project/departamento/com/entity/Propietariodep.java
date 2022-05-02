@@ -48,4 +48,8 @@ public class Propietariodep {
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
 	private Date fechaRegistro;
+	
+	public Propietariodep(int idPropietario) {
+		this.idPropietario = idPropietario;
+	}
 }
