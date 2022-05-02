@@ -6,5 +6,5 @@ import project.departamento.com.entity.Edificio;
 
 public interface EdificioService {
 	
-	public abstract List<Edificio> listarEdificio();
+ 
 }

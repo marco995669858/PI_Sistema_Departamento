@@ -33,7 +33,7 @@ public class LoginController {
 			System.out.println("El Usuario no existe");
 			return "login";
 		}else {
-			boolean passCheck = encryptPassword.VerificarPassword(password, usuario.getPasswords());
+			boolean passCheck = encryptPassword.VerificarPassword(password, usuario.getPassword());
 			if(passCheck == true) {
 				session.setAttribute("objUsuario", usuario);
 				
