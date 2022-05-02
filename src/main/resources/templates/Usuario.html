@@ -7,6 +7,9 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrardepartamento.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrarformulario.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/tablas.css}">
+	<!-- <link rel="stylesheet" href="../static/resources/css/registrarformulario.css">
+	<link rel="stylesheet" href="../static/resources/css/registrardepartamento.css">
+	<link rel="stylesheet" href="../static/resources/css/tablas.css"> -->
 	<script src="https://kit.fontawesome.com/7df5974cca.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
@@ -143,10 +146,10 @@
 
 					<div class="formulario">
 
-						<h1 style="text-align: center;">Registro de información de Clientes</h1>
+						<h1 style="text-align: center;">Registro de información de Usuario</h1>
 
 						<form th:action="@{/registro/usuario/registrar}" method="post"
-							onsubmit="return validarCliente();">
+							onsubmit="">
 
 							<input class="registro1" type="hidden" value="0" name="codigo" id="idcodigo">
 
@@ -159,13 +162,20 @@
 							</p>
 
 							<p>
-								<label for="apellidos" class="colocar_apellidos">Apellidos Completos
+								<label for="apellidos" class="colocar_apellidos">Apellido Paterno
 								</label>
 								<input class="registro1" type="text" name="apellido" id="idapellidos"
-									placeholder="Escribe tus Apellidos">
+									placeholder="Escribe tu apellido paterno">
 
 							</p>
 							<p>
+								<label for="apellidos" class="colocar_apellidos">Apellido Materno
+								</label>
+								<input class="registro1" type="text" name="apellido" id="idapellidos"
+									placeholder="Escribe tu apellido Materno">
+
+							</p>
+							<!-- <p>
 								<label for="dni" class="colocar_clave">Dni
 								</label>
 								<input class="registro1" type="number" name="dni" id="idDni"
@@ -177,13 +187,13 @@
 								</label>
 								<input class="registro1" type="number" name="celular" id="idcelular"
 									placeholder="Escribe tu celular">
-							</p>
+							</p> -->
 
 							<p>
 								<label for="correo" class="colocar_correo">Correo
 
 								</label>
-								<input class="registro1" type="email" name="correo" id="idcorreo">
+								<input class="registro1" type="email" name="correo" id="idcorreo" placeholder="Escribe tu correo">
 
 							</p>
 
@@ -195,7 +205,16 @@
 									placeholder="Escribe tu contraseña">
 							</p>
 
-							<p>
+
+							<div id="idcampo">
+								<label for="rol"> Definir rol <span class="obligatorio">*</span></label>
+							
+								<select name="rol" class="registro1">
+									<option value="-1">Seleccione un rol</option>
+
+								</select>
+							</div>
+							<!-- <p>
 								<label for="mascotas" class="colocar_mascotas">Tipo de Mascota
 								</label>
 								<select class="form-control registro1" name="raza" id="idRaza">
@@ -210,7 +229,7 @@
 									<span class="obligatorio">*</span>
 								</label>
 								<textarea class="descripcion1" name="descripcionRaza" id="iddescripcion"></textarea>
-							</p>
+							</p> -->
 
 							<button class="botones1" type="submit" name="enviar_formulario" id="registrar">
 								<p>Registrar</p>
@@ -237,18 +256,48 @@
 									<tr class="table100-head">
 										<th class="column1">Codigo</th>
 										<th class="column2">Nombre</th>
-										<th class="column3">Apellido</th>
-										<th class="column4">Dni</th>
-										<th class="column5">Celular</th>
-										<th class="column6">Correo</th>
-										<th class="column7">Raza</th>
-										<th class="column8">Descripción mascota</th>
-										<th class="column9">Funciones</th>
+										<th class="column3">Apellido Paterno</th>
+										<th class="column4">Apellido Materno</th>
+										<th class="column5">Correo</th>
+										<th class="column6">Funciones</th>
 
 									</tr>
 								</thead>
 								<tbody>
-									<tr th:each="bean:${user}">
+									<tr class="">
+										<th class="column1">Codigo</th>
+										<th class="column2">Nombre</th>
+										<th class="column3">Apellido Paterno</th>
+										<th class="column4">Apellido Materno</th>
+										<th class="column5">Correo</th>
+										<th class="column6">Funciones</th>
+									</tr>
+									<tr class="">
+										<th class="column1">Codigo</th>
+										<th class="column2">Nombre</th>
+										<th class="column3">Apellido Paterno</th>
+										<th class="column4">Apellido Materno</th>
+										<th class="column5">Correo</th>
+										<th class="column6">Funciones</th>
+									</tr>
+									<tr class="">
+										<th class="column1">Codigo</th>
+										<th class="column2">Nombre</th>
+										<th class="column3">Apellido Paterno</th>
+										<th class="column4">Apellido Materno</th>
+										<th class="column5">Correo</th>
+										<th class="column6">Funciones</th>
+									</tr>
+									<tr class="">
+										<th class="column1">Codigo</th>
+										<th class="column2">Nombre</th>
+										<th class="column3">Apellido Paterno</th>
+										<th class="column4">Apellido Materno</th>
+										<th class="column5">Correo</th>
+										<th class="column6">Funciones</th>
+									</tr>
+									
+									<!-- <tr th:each="bean:${user}">
 										<td class="column1" th:text="${bean.idUsuario}"></td>
 										<td class="column2" th:text="${bean.nombreCompleto}"></td>
 										<td class="column3" th:text="${bean.apellidoCompleto}"></td>
@@ -262,7 +311,7 @@
 											<a th:href="@{/eliminar/} + ${bean.idUsuario}" class=" "><i
 													class="fas fa-eraser"></i></a>
 										</td>
-									</tr>
+									</tr> -->
 
 
 								</tbody>

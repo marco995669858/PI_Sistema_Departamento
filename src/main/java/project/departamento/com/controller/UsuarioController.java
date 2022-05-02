@@ -20,7 +20,7 @@ import project.departamento.com.util.EncryptPassword;
 @Controller
 @RequestMapping("/registro/usuario")
 public class UsuarioController {
-
+  
 	@Autowired
 	private UsuarioService service;
 
@@ -75,5 +75,5 @@ public class UsuarioController {
 		}
 		return "redirect:/registro/usuario/";
 	}
-
+  
 }
