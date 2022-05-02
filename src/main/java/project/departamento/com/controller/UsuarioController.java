@@ -28,7 +28,7 @@ public class UsuarioController {
 	public String index(Model model) {
 		model.addAttribute("rol", service.listarRoles());
 		model.addAttribute("listaUsuario", listarUsuario());
-		return "cliente";
+		return "Usuario";
 	}
 
 	@GetMapping
