@@ -61,6 +61,8 @@ public class Departamento {
 	@JoinColumn(name = "idPropietario")
 	private Propietariodep propietariodep;
 	
+	private int propietarioEsOcupante;
+	
  
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")

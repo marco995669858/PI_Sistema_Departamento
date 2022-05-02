@@ -15,7 +15,7 @@ public interface DepartamentoService {
 	
 	/*para buscar si existe el numero del departamento*/
 	
-	public List<Departamento> buscarDepartamento(int nroDepartamento);
+	public List<Departamento> buscarDepartamento(int nroDepartamento, String telefono);
 	
 	/*para registrar el departamento o actualizarlo*/
 	public void registra_actualiza_departamento(Departamento departamento);

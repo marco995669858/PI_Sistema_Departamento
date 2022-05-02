@@ -24,5 +24,9 @@ public class EstadoDepartamento {
 	private int idEstado;
 	
 	private String descripcion;
+	
+	public EstadoDepartamento(int idEstado) {
+		this.idEstado = idEstado;
+	}
 
 }
