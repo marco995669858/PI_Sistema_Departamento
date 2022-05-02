@@ -33,6 +33,8 @@ public class Edificio {
 	
 	private int nroDePisos;
 	
+	private int nroDeDepartamentos;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
 	private Date fechaRegistro;
