@@ -311,6 +311,7 @@ body {
   background: var(--page-content-blockColor);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
+  width: 90%
 }
 
 .page-content .grid > article:first-child,
@@ -318,8 +319,8 @@ body {
   grid-column: 1 / -1;
 }
 .page-content .grid > article:first-child{
-    height: 1000px;
-   
+    height: 100%;
+ 
 }
 
 /* MQ RULES

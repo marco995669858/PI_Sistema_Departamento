@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/registro/usuario")
 public class UsuarioController {
-
+	@RequestMapping("/")
+	public String index() {
+		return "Usuario";
+	}
  
 }
