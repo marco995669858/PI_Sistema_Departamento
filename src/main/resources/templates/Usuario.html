@@ -148,7 +148,7 @@
 
 						<h1 style="text-align: center;">Registro de información de Usuario</h1>
 
-						<form th:action="@{/registro/usuario/registrar}" method="post"
+						<form th:action="@{/registro/usuario/registra_actualiza}" method="post"
 							onsubmit="">
 
 							<input class="registro1" type="hidden" value="0" name="codigo" id="idcodigo">
@@ -157,21 +157,21 @@
 								<label for="email" class="colocar_nombres">Nombres Completos
 									<span class="obligatorio">*</span>
 								</label>
-								<input class="registro1" type="text" name="nombre" id="idnombres"
+								<input class="registro1" type="text" name="nombres" id="idnombres"
 									placeholder="Escribe tu Nombre"> 
 							</p>
 
 							<p>
 								<label for="apellidos" class="colocar_apellidos">Apellido Paterno
 								</label>
-								<input class="registro1" type="text" name="apellido" id="idapellidos"
+								<input class="registro1" type="text" name="apePaterno" id="idapePaterno"
 									placeholder="Escribe tu apellido paterno">
 
 							</p>
 							<p>
 								<label for="apellidos" class="colocar_apellidos">Apellido Materno
 								</label>
-								<input class="registro1" type="text" name="apellido" id="idapellidos"
+								<input class="registro1" type="text" name="apeMaterno" id="idapeMaterno"
 									placeholder="Escribe tu apellido Materno">
 
 							</p>
@@ -193,7 +193,7 @@
 								<label for="correo" class="colocar_correo">Correo
 
 								</label>
-								<input class="registro1" type="email" name="correo" id="idcorreo" placeholder="Escribe tu correo">
+								<input class="registro1" type="email" name="user" id="idcorreo" placeholder="Escribe tu correo">
 
 							</p>
 
@@ -208,10 +208,9 @@
 
 							<div id="idcampo">
 								<label for="rol">Definir rol <span class="obligatorio">*</span></label>
-							
 								<select name="rol" class="registro1">
 									<option value="-1">Seleccione un rol</option>
-
+									<option th:each="bean:${rol}" th:value="${bean.idRol}" th:utext="${bean.descripcionRol}"></option>
 								</select>
 							</div>
 							<!-- <p>
@@ -355,6 +354,27 @@
 
 		Toast.fire({
 			icon: 'success',
+			title: mensaje
+		})
+
+	</script>
+		<script th:inline="javascript" th:if="${MENSAJE!=null}">
+		//obtener atributo MENSAJE
+		var mensaje =/*[[${MENSAJE}]]*/ null;
+		const toast = Swal.mixin({
+			toast: true,
+			position: 'top-end',
+			showConfirmButton: false,
+			timer: 3000,
+			timerProgressBar: true,
+			didOpen: (toast) => {
+				toast.addEventListener('mouseenter', Swal.stopTimer)
+				toast.addEventListener('mouseleave', Swal.resumeTimer)
+			}
+		})
+
+		Toast.fire({
+			icon: 'warning',
 			title: mensaje
 		})
 

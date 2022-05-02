@@ -23,7 +23,11 @@ public class UsuarioController {
   
 	@Autowired
 	private UsuarioService service;
-
+	
+	/* para encriptar la contraseña */
+	@Autowired
+	private EncryptPassword encryptPassword;
+	
 	@RequestMapping("/")
 	public String index(Model model) {
 		model.addAttribute("rol", service.listarRoles());
@@ -38,8 +42,7 @@ public class UsuarioController {
 		return listaUsuario;
 	}
 
-	/* para encriptar la contraseña */
-	private EncryptPassword encryptPassword;
+	
 
 	@RequestMapping("/registra_actualiza")
 	public String registrar_actualizar_usuario(@RequestParam("codigo") int codigo,

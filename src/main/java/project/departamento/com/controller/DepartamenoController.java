@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,8 +26,9 @@ public class DepartamenoController {
 	private DepartamentoService service;
 
 	@RequestMapping("/")
-	public String index() {
-		return "";
+	public String index(Model model) {
+		model.addAttribute("edificio", service.listarEdificio());
+		return "departamento";
 	}
 
 	@RequestMapping

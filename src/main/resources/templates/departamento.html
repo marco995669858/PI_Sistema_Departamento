@@ -19,7 +19,7 @@
 </head>
 
 <body>
-	
+
 	<header class="page-header">
 		<nav>
 			<a href="admin.html" class="logo">
@@ -36,7 +36,7 @@
 				</li>
 				<li>
 					<a href="#0">
-					<i class="fa-solid fa-user"></i>
+						<i class="fa-solid fa-user"></i>
 						<span> Mi Perfil</span>
 					</a>
 				</li>
@@ -90,7 +90,7 @@
 				</li>
 				<li>
 					<a href="#0">
-					<i class="fa-solid fa-wrench"></i>
+						<i class="fa-solid fa-wrench"></i>
 						<span>Opciones</span>
 					</a>
 				</li>
@@ -153,13 +153,16 @@
 								<label for="edificio">Edificio
 									<span class="obligatorio">*</span>
 								</label>
-								<input class="registro1" type="text" name="" id="" >
+								<select class="registro1" name="edificioFK" id="idedificio" style="color: rgb(0, 0, 0);">
+									<option th:each="bean:${edificio}" th:value="${bean.idEdificio}"
+										th:utext="${bean.denominacion}"></option>
+								</select>
 							</p>
 							<p>
 								<label for="Piso">Número de Piso
 									<span class="obligatorio">*</span>
 								</label>
-								 <input type="number" class="registro1" placeholder="">
+								<input type="number" class="registro1" placeholder="">
 							</p>
 
 							<p>
@@ -170,7 +173,7 @@
 							<p>
 								<label for="area">Área del departamento
 								</label>
-								<input type="number" class="registro1" id="area"><span>  m²</span>
+								<input type="number" class="registro1" id="area"><span> m²</span>
 							</p>
 
 							<p>
@@ -189,9 +192,9 @@
 								<label for="banio" class="">Teléfono
 
 								</label>
-								<input type="number" class="registro1" id="area"> 
+								<input type="number" class="registro1" id="area">
 							</p>
-				 
+
 
 							<button class="botones1" type="submit" name="enviar_formulario" id="registrar">
 								<p>Registrar</p>
@@ -243,7 +246,8 @@
 										<th class="column5">Área</th>
 										<th class="column6">Tipo de departamento</th>
 										<th class="column7">Telefono</th>
-									</tr>	<tr class="">
+									</tr>
+									<tr class="">
 										<th class="column1">Codigo</th>
 										<th class="column2">Edificio</th>
 										<th class="column3">Número de Piso</th>
@@ -283,6 +287,7 @@
 		</footer>
 	</section>
 	<!-- partial -->
+	<script src="https://releases.jquery.com/git/jquery-git.js"></script>
 	<script th:src="@{/resources/js/adminjs.js}"></script>
 	<script th:src="@{/resources/js/main.js}"></script>
 	<script th:src="@{/resources/js/validarDepa.js}"></script>
@@ -332,6 +337,9 @@
 			title: mensaje
 		})
 
+	</script>
+	<script>
+		$("#idedificio").prop('disabled', 'disabled');
 	</script>
 
 </body>
