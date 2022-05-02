@@ -39,4 +39,6 @@ public class Mascotas {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idEspecie")
 	private EspecieMascota especieMascota;
+	
+	private int eliminado;
 }

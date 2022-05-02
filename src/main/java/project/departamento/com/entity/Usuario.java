@@ -37,6 +37,8 @@ public class Usuario {
 	private String user;
 
 	private String password;
+	
+	private int eliminado;
 
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)

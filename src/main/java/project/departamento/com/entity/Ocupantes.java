@@ -59,4 +59,6 @@ public class Ocupantes {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
 	private Date fechaRegistro;
 	
+	private int eliminado;
+	
 }

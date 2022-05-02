@@ -42,6 +42,8 @@ public class Propietariodep {
 	private String correo;
 
 	private String sexo;
+	
+	private int eliminado;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
