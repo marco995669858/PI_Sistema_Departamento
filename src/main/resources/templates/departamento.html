@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 	<meta charset="UTF-8">
@@ -7,6 +7,9 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrardepartamento.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrarformulario.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/tablas.css}">
+	<!-- <link rel="stylesheet" href="../static/resources/css/registrarformulario.css">
+	<link rel="stylesheet" href="../static/resources/css/registrardepartamento.css">
+	<link rel="stylesheet" href="../static/resources/css/tablas.css"> -->
 	<script src="https://kit.fontawesome.com/7df5974cca.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
@@ -141,59 +144,41 @@
 				<div class="contact_form">
 
 					<div class="formulario">
-						<h1 style="text-align: center;">Registro de información de las caracteristicas del departamento
+						<h1 style="text-align: center;">Registro del departamento
 						</h1>
 
-						<form th:action="@{/registrar/}" method="post" onsubmit="return validarDepa();">
+						<form th:action="@{/registrar/}" method="post" onsubmit="">
 							<input type="hidden" value="0" name="codigo" id="idcodigo">
 							<p>
-								<label for="habitaciones">Número de departamento
+								<label for="edificio">Edificio
 									<span class="obligatorio">*</span>
 								</label>
-								<input class="registro1" type="number" name="nroDepartamento" id="idDepartamento"
-									placeholder="example: 14003">
+								<input class="registro1" type="text" name="" id="" >
 							</p>
 							<p>
-								<label for="habitaciones">Número de habitaciones
+								<label for="Piso">Número de Piso
 									<span class="obligatorio">*</span>
 								</label>
-								<select class="form-control registro1" name="habitaciones" id="idhabitaciones">
-									<option value="-1">[Seleccione algo..]</option>
-									<option value="1">1 habitación</option>
-									<option value="2">2 habitaciones</option>
-									<option value="3">3 habitaciones</option>
-									<option value="4">4 habitaciones</option>
-								</select>
+								 <input type="number" class="registro1" placeholder="">
 							</p>
 
 							<p>
-								<label for="cocicome">Cocinas y/o comedor
+								<label for="nroDepartamento">Número de departamento
 								</label>
-							<div class="col-md-12">
-								<select class="form-control registro1" name="cocina" id="idcocina">
-									<option value="-1">[Seleccione algo..]</option>
-									<option value="Separado">Cocina o comedor separado.</option>
-									<option value="Junto">Cocina o comedor Junto.</option>
-
-								</select>
-							</div>
+								<input type="number" class="registro1" placeholder="">
 							</p>
 							<p>
-								<label for="lavanderia">Lavanderia
+								<label for="area">Área del departamento
 								</label>
-								<select class="form-control registro1" name="lavanderia" id="idlavanderia">
-									<option value="-1">[Seleccione algo...]</option>
-									<option value="Compartida">Lavanderia Compartida.</option>
-									<option value="Personal">Lavanderia Personal.</option>
-								</select>
+								<input type="number" class="registro1" id="area"><span>  m²</span>
 							</p>
 
 							<p>
-								<label for="sala">Sala
+								<label for="tipo">Tipo de departamento
 									<span class="obligatorio">*</span>
 								</label>
 								<select class=" form-control registro1" name="sala" id="idsala">
-									<option value="-1">[Seleccione Cantidad de Sala]</option>
+									<option value="-1">[Seleccione el Tipo de Departamento]</option>
 									<option value="1">Una sala</option>
 									<option value="2">Dos salas</option>
 									<option value="3">Tres salas</option>
@@ -201,26 +186,12 @@
 								</select>
 							</p>
 							<p>
-								<label for="banio" class="colocar_banio">Baño
+								<label for="banio" class="">Teléfono
 
 								</label>
-							<div class="col-md-12">
-								<select class="form-control registro1" name="banio" id="idbanio">
-									<option value=" ">[Seleccione Cantidad de Baño]</option>
-									<option value="1">Un baño</option>
-									<option value="2">Dos baños</option>
-									<option value="3">Tres baños</option>
-								</select>
-							</div>
+								<input type="number" class="registro1" id="area"> 
 							</p>
-							<p>
-								<label for="tamdepa"> Tamaño de Departamento
-									<span class="obligatorio">*</span>
-								</label>
-								<input class="registro1" type="text" name="tamanio" id="idtamanio"
-									placeholder="Escribe el tamaño m²">
-							</p>
-
+				 
 
 							<button class="botones1" type="submit" name="enviar_formulario" id="registrar">
 								<p>Registrar</p>
@@ -246,17 +217,42 @@
 								<thead>
 									<tr class="table100-head">
 										<th class="column1">Codigo</th>
-										<th class="column2">Habitaciones</th>
-										<th class="column3">Cocina Comedor</th>
-										<th class="column4">Lavanderia</th>
-										<th class="column5">Sala</th>
-										<th class="column6">Baños</th>
-										<th class="column7">Tamaño</th>
-										<th class="column8">Funciones</th>
+										<th class="column2">Edificio</th>
+										<th class="column3">Número de Piso</th>
+										<th class="column4">Número de departamento</th>
+										<th class="column5">Área</th>
+										<th class="column6">Tipo de departamento</th>
+										<th class="column7">Telefono</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr th:each="bean:${depa}">
+									<tr class="">
+										<th class="column1">Codigo</th>
+										<th class="column2">Edificio</th>
+										<th class="column3">Número de Piso</th>
+										<th class="column4">Número de departamento</th>
+										<th class="column5">Área</th>
+										<th class="column6">Tipo de departamento</th>
+										<th class="column7">Telefono</th>
+									</tr>
+									<tr class="">
+										<th class="column1">Codigo</th>
+										<th class="column2">Edificio</th>
+										<th class="column3">Número de Piso</th>
+										<th class="column4">Número de departamento</th>
+										<th class="column5">Área</th>
+										<th class="column6">Tipo de departamento</th>
+										<th class="column7">Telefono</th>
+									</tr>	<tr class="">
+										<th class="column1">Codigo</th>
+										<th class="column2">Edificio</th>
+										<th class="column3">Número de Piso</th>
+										<th class="column4">Número de departamento</th>
+										<th class="column5">Área</th>
+										<th class="column6">Tipo de departamento</th>
+										<th class="column7">Telefono</th>
+									</tr>
+									<!-- <tr th:each="bean:${depa}">
 										<td class="column1" th:text="${bean.idCarateristicadepartamento}"></td>
 										<td class="column2" th:text="${bean.habitaciones}"></td>
 										<td class="column3" th:text="${bean.cocinaComedor}"></td>
@@ -271,7 +267,7 @@
 													class="far fa-trash-alt"></i></a>
 
 										</td>
-									</tr>
+									</tr> -->
 
 
 								</tbody>
@@ -297,7 +293,7 @@
 	<script th:inline="javascript" th:if="${MENSAJE!=null}">
 		//obtener atributo MENSAJE
 		var mensaje =/*[[${MENSAJE}]]*/ null;
-		const Toast = Swal.mixin({
+		const toast = Swal.mixin({
 			toast: true,
 			position: 'top-end',
 			showConfirmButton: false,

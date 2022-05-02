@@ -307,11 +307,11 @@ body {
 
 .page-content .grid > article {
   display: flex;
-  height: 300px;
+ 
   background: var(--page-content-blockColor);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
-  width: 90%
+  max-width: 80%;
 }
 
 .page-content .grid > article:first-child,

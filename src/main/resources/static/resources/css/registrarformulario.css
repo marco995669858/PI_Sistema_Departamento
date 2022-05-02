@@ -12,13 +12,20 @@
   padding-left: 30px; 
 }
 .contact_form input{
-  width: 80%;
+  max-width: 70%;
 }
-
+.contact_form input[type="text"], input[type="email"], input[type="password"]{
+  width: 70%;
+}
+.contact_form input[type="number"]{
+  width: 30%;
+}
+  
 
 .registro1{
   background-color: #fbfbfb; 
   
+  width: 40%;
   height: 40px; 
   border-radius: 5px;  
   border-style: solid; 
