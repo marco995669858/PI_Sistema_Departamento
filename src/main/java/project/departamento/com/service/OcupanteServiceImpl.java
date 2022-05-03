@@ -1,6 +1,7 @@
 package project.departamento.com.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,6 +46,22 @@ public class OcupanteServiceImpl implements OcupanteService {
 	@Override
 	public List<RelacionconPropietario> listarRelacionconPropietario() {
 			return relacionRepository.findAll();
+	}
+
+	@Override
+	public Optional<Ocupantes> buscardni(String dni) {
+		return repository.findByDni(dni);
+	}
+
+	@Override
+	public Optional<Ocupantes> buscarcelular(String celular) {
+		return repository.findByCelular(celular);
+
+	}
+	@Override
+	public Optional<Ocupantes> buscarsexo(String sexo) {
+		return repository.findByCelular(sexo);
+
 	}
 
 }
