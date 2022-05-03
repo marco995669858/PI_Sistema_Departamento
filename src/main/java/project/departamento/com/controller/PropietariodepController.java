@@ -2,6 +2,7 @@ package project.departamento.com.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +23,7 @@ public class PropietariodepController {
 
 	@RequestMapping("/")
 	public String index() {
-		return "";
+		return "Propietario";
 	}
 
 	@RequestMapping("/registra_actualiza")
@@ -34,12 +35,16 @@ public class PropietariodepController {
 
 		try {
 
-			List<Propietariodep> buscardni = service.buscardni(dni);
-			List<Propietariodep> buscarcelular = service.buscarcelular(celular);
-			List<Propietariodep> buscarcorreo = service.buscarcorreo(correo);
-			if (CollectionUtils.isEmpty(buscardni) && CollectionUtils.isEmpty(buscarcelular)
-					&& CollectionUtils.isEmpty(buscarcorreo)) {
-
+			Optional<Propietariodep> buscardni = service.buscardni(dni);
+			Optional<Propietariodep> buscarcelular = service.buscarcelular(celular);
+			Optional<Propietariodep> buscarcorreo = service.buscarcorreo(correo);
+			if (buscardni.isPresent()) {
+				redirect.addFlashAttribute("existente", "El dni ya exite ingrese otro: " + dni);
+			} else if (buscarcelular.isPresent()) {
+				redirect.addFlashAttribute("existente", "El telefono ya exite ingrese otro: " + celular);
+			} else if (buscarcorreo.isPresent()) {
+				redirect.addFlashAttribute("existente", "El correo ya existe: " + correo);
+			} else {
 				Propietariodep bean = new Propietariodep();
 				bean.setNombres(nombres);
 				bean.setApePaterno(apePaterno);
@@ -57,12 +62,9 @@ public class PropietariodepController {
 					redirect.addFlashAttribute("MENSAJE", "Se actualizo el propietario correctamente: " + nombres);
 				} else {
 					service.registra_actualiza_propietario(bean);
-					redirect.addFlashAttribute("MENSAJE", "Se actualizo el propietario correctamente: " + nombres);
+					redirect.addFlashAttribute("MENSAJE", "Se registro el propietario correctamente: " + nombres);
 				}
 
-			} else {
-				redirect.addFlashAttribute("MENSAJE", "El dni ya exite ingrese otro: " + dni
-						+ " o el telefono ya exite ingrese otro:" + celular + " o el correo ya existe: " + correo);
 			}
 
 		} catch (Exception e) {

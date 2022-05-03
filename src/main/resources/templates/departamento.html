@@ -128,7 +128,7 @@
 			</form>
 			<div class="admin-profile" th:each="bean : ${session.objUsuario}">
 				<i class="fa-solid fa-circle-user"></i>
-				<span class="greeting" th:text="${bean.nombreCompleto + ' ' + bean.apellidoCompleto}"></span>
+				<span class="greeting" th:text="${bean.nombres + ' ' + bean.apePaterno + ' '  + bean.apeMaterno}"></span>
 
 				<div class="notifications">
 
@@ -147,13 +147,13 @@
 						<h1 style="text-align: center;">Registro del departamento
 						</h1>
 
-						<form th:action="@{/registrar/}" method="post" onsubmit="">
+						<form th:action="@{/registro/departamento/registra_actualiza}" method="post" onsubmit="">
 							<input type="hidden" value="0" name="codigo" id="idcodigo">
 							<p>
 								<label for="edificio">Edificio
 									<span class="obligatorio">*</span>
 								</label>
-								<select class="registro1" name="edificioFK" id="idedificio" style="color: rgb(0, 0, 0);">
+								<select class="registro1" name="edificioFK" id="idedificio" style="color: black;">
 									<option th:each="bean:${edificio}" th:value="${bean.idEdificio}"
 										th:utext="${bean.denominacion}"></option>
 								</select>
@@ -162,37 +162,35 @@
 								<label for="Piso">Número de Piso
 									<span class="obligatorio">*</span>
 								</label>
-								<input type="number" class="registro1" placeholder="">
+								<input type="number" class="registro1" name="piso" placeholder="">
 							</p>
 
 							<p>
 								<label for="nroDepartamento">Número de departamento
 								</label>
-								<input type="number" class="registro1" placeholder="">
+								<input type="number" class="registro1" name="nroDepartamento" placeholder="">
 							</p>
 							<p>
 								<label for="area">Área del departamento
 								</label>
-								<input type="number" class="registro1" id="area"><span> m²</span>
+								<input type="number" class="registro1" name="areaM2" id="area"><span> m²</span>
 							</p>
 
 							<p>
 								<label for="tipo">Tipo de departamento
 									<span class="obligatorio">*</span>
 								</label>
-								<select class=" form-control registro1" name="sala" id="idsala">
+								<select class=" form-control registro1" name="tipoDepartamentoFK" id="idsala">
 									<option value="-1">[Seleccione el Tipo de Departamento]</option>
-									<option value="1">Una sala</option>
-									<option value="2">Dos salas</option>
-									<option value="3">Tres salas</option>
-
+									<option th:each="tipo:${tipodepartamento}" th:value="${tipo.idTipo}"
+										th:utext="${tipo.descripcion}"></option>
 								</select>
 							</p>
 							<p>
 								<label for="banio" class="">Teléfono
 
 								</label>
-								<input type="number" class="registro1" id="area">
+								<input type="number" class="registro1" name="telefono" id="area">
 							</p>
 
 
@@ -295,10 +293,11 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
 		integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ=="
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		
 	<script th:inline="javascript" th:if="${MENSAJE!=null}">
 		//obtener atributo MENSAJE
 		var mensaje =/*[[${MENSAJE}]]*/ null;
-		const toast = Swal.mixin({
+		const Toast = Swal.mixin({
 			toast: true,
 			position: 'top-end',
 			showConfirmButton: false,
@@ -337,9 +336,6 @@
 			title: mensaje
 		})
 
-	</script>
-	<script>
-		$("#idedificio").prop('disabled', 'disabled');
 	</script>
 
 </body>

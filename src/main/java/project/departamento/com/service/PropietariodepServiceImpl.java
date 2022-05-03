@@ -1,6 +1,7 @@
 package project.departamento.com.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,17 +21,17 @@ public class PropietariodepServiceImpl implements PropietariodepService{
 	}
 
 	@Override
-	public List<Propietariodep> buscardni(String dni) {
+	public Optional<Propietariodep> buscardni(String dni) {
 		return repository.findByDni(dni);
 	}
 
 	@Override
-	public List<Propietariodep> buscarcelular(String celular) {
+	public Optional<Propietariodep> buscarcelular(String celular) {
 		return repository.findByCelular(celular);
 	}
 
 	@Override
-	public List<Propietariodep> buscarcorreo(String correo) {
+	public Optional<Propietariodep> buscarcorreo(String correo) {
 		return repository.findByCorreo(correo);
 	}
 
