@@ -30,15 +30,15 @@ public class Mascotas {
 	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idDepartamento")
-	private Departamento departamento;
+	@JoinColumn(name = "departamentoFK")
+	private Departamento departamentoFK;
 	
 	private String nombre;
 	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idEspecie")
-	private EspecieMascota especieMascota;
+	@JoinColumn(name = "especieFK")
+	private EspecieMascota especieFK;
 	
 	private int eliminado;
 }
