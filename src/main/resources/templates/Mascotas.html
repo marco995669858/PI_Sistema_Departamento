@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Registro Propietario</title>
+	<title>Mascotas</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrardepartamento.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrarformulario.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/tablas.css}">
@@ -68,14 +68,12 @@
 						<span>Registrar Usuario</span>
 					</a>
 				</li>
-				<!-- <li>
-        <a href="#0">
-          <svg>
-            <use xlink:href="#comments"></use>
-          </svg>
-          <span>Otros</span>
-        </a>
-      </li> -->
+				<li>
+					<a th:href="@{/registro/mascotas/}">
+						<i class="fa-solid fa-shield-dog"></i>
+						<span>Registrar Mascotas</span>
+					</a>
+				</li>
 
 				<li class="menu-heading">
 					<h3>Perfil</h3>
@@ -143,12 +141,20 @@
 
 					<div class="formulario">
 
-						<h1 style="text-align: center;">Registrar propietario</h1>
+						<h1 style="text-align: center;">Registrar Mascotas</h1>
 
 						<form th:action="@{/registro/propietariodep/registra_actualiza}" method="post" onsubmit="">
 
 							<input class="registro1" type="hidden" value="0" name="codigo" id="idcodigo">
-
+							<div class="col-md-12">
+								<label for="cocicome"> Numero del Departamento
+									<span class="obligatorio">*</span></label>
+								<select class="form-control registro1" name="nroDepartamento" id="idnroDepartamento">
+									<option value="-1">[Seleccione un número de departamento.] </option>
+									<option th:each="bean:${nro}" th:value="${bean.idCarateristicadepartamento}"
+										th:text="${bean.nroDepartamento}"></option>
+								</select>
+							</div>
 							<p>
 								<label for="email" class="colocar_nombres">Nombres Completos
 									<span class="obligatorio">*</span>
@@ -156,58 +162,15 @@
 								<input class="registro1" type="text" name="nombres" id="idnombres"
 									placeholder="Escribe tu Nombre">
 							</p>
-
-							<p>
-								<label for="apellidos" class="colocar_apellidos">Apellido Paterno
-								</label>
-								<input class="registro1" type="text" name="apePaterno" id="idapellidos"
-									placeholder="Escribe tu apellido paterno">
-
-							</p>
-							<p>
-								<label for="apellidos" class="colocar_apellidos">Apellido Materno
-								</label>
-								<input class="registro1" type="text" name="apeMaterno" id="idapellidos"
-									placeholder="Escribe tu apellido Materno">
-
-							</p>
-							<p id="idcampo">
-								<label for="DNI" class="colocar_celular">DNI
-									<span class="obligatorio">*</span>
-								</label>
-								<input class="registro1" type="number" name="dni" id=" " placeholder="DNI">
-							</p>
-							<p id="idcampo">
-								<label for="celular" class="colocar_celular">Celular
-									<span class="obligatorio">*</span>
-								</label>
-								<input class="registro1" type="number" name="celular" id=" " placeholder="Celular">
-							</p>
-							<p>
-								<label for="correo" class="colocar_correo">Correo
-
-								</label>
-								<input class="registro1" type="email" name="correo" id="idcorreo"
-									placeholder="Escribe tu correo">
-
-							</p>
-							<div id="idcampo">
-								<label for="rol">Seleccione su sexo <span class="obligatorio">*</span></label>
-
-								<select name="sexo" class="registro1">
-									<option value="-1">Seleccione</option>
-									<option value="Masculino">Masculino</option>
-									<option value="Femenino">Femenino</option>
-									<option value="Otros">Otros</option>
+							<div class="col-md-12">
+								<label for="cocicome"> Especie
+									<span class="obligatorio">*</span></label>
+								<select class="form-control registro1" name="nroDepartamento" id="idnroDepartamento">
+									<option value="-1">[Seleccione Especie.] </option>
+									<option th:each="bean:${nro}" th:value="${bean.idCarateristicadepartamento}"
+										th:text="${bean.nroDepartamento}"></option>
 								</select>
 							</div>
-							<button class="botones1" type="submit" name="enviar_formulario" id="registrar">
-								<p>Registrar</p>
-							</button>
-
-							<p class="aviso">
-								<span class="obligatorio"> * </span>los campos son obligatorios.
-							</p>
 
 						</form>
 					</div>
@@ -217,7 +180,7 @@
 
 			<div class="limiter">
 				<div class="container-table100">
-					<h1 style="text-align: center;">Lista de usuarios</h1>
+					<h1 style="text-align: center;">Lista de Mascotas</h1>
 
 					<div class="wrap-table100">
 						<div class="table100">
@@ -225,47 +188,31 @@
 								<thead>
 									<tr class="table100-head">
 										<th class="column1">Codigo</th>
-										<th class="column2">Nombre</th>
-										<th class="column3">Apellido Paterno</th>
-										<th class="column4">Apellido Materno</th>
-										<th class="column5">Correo</th>
-										<th class="column6">Funciones</th>
-
+										<th class="column2">Departamento</th>
+										<th class="column3">Nombre de la Mascota</th>
+										<th class="column4">Especie de la Mascota</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr class="">
 										<th class="column1">Codigo</th>
-										<th class="column2">Nombre</th>
-										<th class="column3">Apellido Paterno</th>
-										<th class="column4">Apellido Materno</th>
-										<th class="column5">Correo</th>
-										<th class="column6">Funciones</th>
+										<th class="column2">Departamento</th>
+										<th class="column3">Nombre de la Mascota</th>
+										<th class="column4">Especie de la Mascota</th>
 									</tr>
 									<tr class="">
 										<th class="column1">Codigo</th>
-										<th class="column2">Nombre</th>
-										<th class="column3">Apellido Paterno</th>
-										<th class="column4">Apellido Materno</th>
-										<th class="column5">Correo</th>
-										<th class="column6">Funciones</th>
+										<th class="column2">Departamento</th>
+										<th class="column3">Nombre de la Mascota</th>
+										<th class="column4">Especie de la Mascota</th>
 									</tr>
 									<tr class="">
 										<th class="column1">Codigo</th>
-										<th class="column2">Nombre</th>
-										<th class="column3">Apellido Paterno</th>
-										<th class="column4">Apellido Materno</th>
-										<th class="column5">Correo</th>
-										<th class="column6">Funciones</th>
+										<th class="column2">Departamento</th>
+										<th class="column3">Nombre de la Mascota</th>
+										<th class="column4">Especie de la Mascota</th>
 									</tr>
-									<tr class="">
-										<th class="column1">Codigo</th>
-										<th class="column2">Nombre</th>
-										<th class="column3">Apellido Paterno</th>
-										<th class="column4">Apellido Materno</th>
-										<th class="column5">Correo</th>
-										<th class="column6">Funciones</th>
-									</tr>
+								
 								</tbody>
 							</table>
 						</div>
