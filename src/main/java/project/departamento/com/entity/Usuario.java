@@ -42,7 +42,7 @@ public class Usuario {
 
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idRol")
+	@JoinColumn(name = "idRolFK")
 	private Rol rol;
 	
 	public Usuario(int idUsuario) {

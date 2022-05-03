@@ -171,7 +171,15 @@
 										th:text="${bean.nroDepartamento}"></option>
 								</select>
 							</div>
-
+							<div class="col-md-12">
+								<label for="cocicome"> Sexo
+									<span class="obligatorio">*</span></label>
+								<select class="form-control registro1" name="nroDepartamento" id="idnroDepartamento">
+									<option value="-1">[Seleccione Sexo.] </option>
+									<option th:each="bean:${nro}" th:value="${bean.idCarateristicadepartamento}"
+										th:text="${bean.nroDepartamento}"></option>
+								</select>
+							</div>
 						</form>
 					</div>
 				</div>
@@ -189,11 +197,30 @@
 									<tr class="table100-head">
 										<th class="column1">Codigo</th>
 										<th class="column2">Departamento</th>
-										<th class="column3">Nombre de la Mascota</th>
-										<th class="column4">Especie de la Mascota</th>
+										<th class="column3">Nombre</th>
+										<th class="column4">Especie</th>
+										<th class="column5">Sexo</th>
+										<th class="column6">Usuario</th>
+										<th class="column7">Fecha de Registro</th>
+										<th class="column8">Acciones</th>
 									</tr>
 								</thead>
 								<tbody>
+								<!-- <tr th:each="bean:${user}">
+										<td class="column1" th:text="${bean.idUsuario}"></td>
+										<td class="column2" th:text="${bean.nombreCompleto}"></td>
+										<td class="column3" th:text="${bean.apellidoCompleto}"></td>
+										<td class="column4" th:text="${bean.dni}"></td>
+										<td class="column5" th:text="${bean.celular}"></td>
+										<td class="column6" th:text="${bean.correo}"></td>
+										<td class="column7" th:text="${bean.raza}"></td>
+										<td class="column8" th:text="${bean.descripcionRaza}"></td>
+										<td class="column9">
+											<a type="button" id="idEditar"><i class="fas fa-undo-alt"></i></a>
+											<a th:href="@{/eliminar/} + ${bean.idUsuario}" class=" "><i
+													class="fas fa-eraser"></i></a>
+										</td>
+									</tr> -->
 									<tr class="">
 										<th class="column1">Codigo</th>
 										<th class="column2">Departamento</th>
