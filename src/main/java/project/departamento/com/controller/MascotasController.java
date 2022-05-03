@@ -17,6 +17,6 @@ public class MascotasController {
 	@RequestMapping("/")
 	public String index(Model model) {
 	
-		return "departamento";
+		return "Mascotas";
 }
 }
