@@ -35,8 +35,8 @@ public class Departamento {
 	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idEdificio")
-	private Edificio edificio;
+	@JoinColumn(name = "edificioFK")
+	private Edificio edificioFK;
 	
 	private int piso;
 	
@@ -46,26 +46,26 @@ public class Departamento {
 	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idTipo")
-	private TipoDepartamento tipoDepartamento;
+	@JoinColumn(name = "tipoDepartamentoFK")
+	private TipoDepartamento tipoDepartamentoFK;
 	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idEstado")
-	private EstadoDepartamento estadoDepartamento;
+	@JoinColumn(name = "estadoFK")
+	private EstadoDepartamento estadoFK;
 	
 	private String telefono;
 	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idPropietario")
-	private Propietariodep propietariodep;
+	@JoinColumn(name = "propietarioFK")
+	private Propietariodep propietarioFK;
 	
 	private int propietarioEsOcupante;
 	
  
-	@Temporal(TemporalType.TIMESTAMP)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
+	@Temporal(TemporalType.DATE)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date fechaRegistro;
  
 	

@@ -3,13 +3,10 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Cliente</title>
+	<title>Registro Propietario</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrardepartamento.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrarformulario.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/tablas.css}">
-	<link rel="stylesheet" href="../static/resources/css/registrarformulario.css">
-	<link rel="stylesheet" href="../static/resources/css/registrardepartamento.css">
-	<link rel="stylesheet" href="../static/resources/css/tablas.css">
 	<script src="https://kit.fontawesome.com/7df5974cca.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
@@ -129,7 +126,7 @@
 			</form>
 			<div class="admin-profile" th:each="bean : ${session.objUsuario}">
 				<i class="fa-solid fa-circle-user"></i>
-				<span class="greeting" th:text="${bean.nombreCompleto + ' ' + bean.apellidoCompleto}"></span>
+				<span class="greeting" th:text="${bean.nombres + ' ' + bean.apePaterno + ' '  + bean.apeMaterno}"></span>
 
 				<div class="notifications">
 
@@ -148,8 +145,7 @@
 
 						<h1 style="text-align: center;">Registrar propietario</h1>
 
-						<form th:action="@{/registro/usuario/registrar}" method="post"
-							onsubmit="">
+						<form th:action="@{/registro/propietariodep/registra_actualiza}" method="post" onsubmit="">
 
 							<input class="registro1" type="hidden" value="0" name="codigo" id="idcodigo">
 
@@ -157,88 +153,54 @@
 								<label for="email" class="colocar_nombres">Nombres Completos
 									<span class="obligatorio">*</span>
 								</label>
-								<input class="registro1" type="text" name="nombre" id="idnombres"
-									placeholder="Escribe tu Nombre"> 
+								<input class="registro1" type="text" name="nombres" id="idnombres"
+									placeholder="Escribe tu Nombre">
 							</p>
 
 							<p>
 								<label for="apellidos" class="colocar_apellidos">Apellido Paterno
 								</label>
-								<input class="registro1" type="text" name="apellido" id="idapellidos"
+								<input class="registro1" type="text" name="apePaterno" id="idapellidos"
 									placeholder="Escribe tu apellido paterno">
 
 							</p>
 							<p>
 								<label for="apellidos" class="colocar_apellidos">Apellido Materno
 								</label>
-								<input class="registro1" type="text" name="apellido" id="idapellidos"
+								<input class="registro1" type="text" name="apeMaterno" id="idapellidos"
 									placeholder="Escribe tu apellido Materno">
 
 							</p>
-							<!-- <p>
-								<label for="dni" class="colocar_clave">Dni
-								</label>
-								<input class="registro1" type="number" name="dni" id="idDni"
-									placeholder="Escribe tu Dni">
-
-							</p>
-							<p>
-								<label for="celular" class="colocar_dni">Celular
-								</label>
-								<input class="registro1" type="number" name="celular" id="idcelular"
-									placeholder="Escribe tu celular">
-							</p> -->
-
-							<p>
-								<label for="correo" class="colocar_correo">Correo
-
-								</label>
-								<input class="registro1" type="email" name="correo" id="idcorreo" placeholder="Escribe tu correo">
-
-							</p>
-
 							<p id="idcampo">
 								<label for="DNI" class="colocar_celular">DNI
 									<span class="obligatorio">*</span>
 								</label>
-								<input class="registro1" type="number" name=" " id=" "
-									placeholder="DNI">
+								<input class="registro1" type="number" name="dni" id=" " placeholder="DNI">
 							</p>
-                            <p id="idcampo">
-								<label for="DNI" class="colocar_celular">Celular
+							<p id="idcampo">
+								<label for="celular" class="colocar_celular">Celular
 									<span class="obligatorio">*</span>
 								</label>
-								<input class="registro1" type="number" name=" " id=" "
-									placeholder="Celular">
-							</p>
-
-							<div id="idcampo">
-								<label for="rol">Seleccione su sexo <span class="obligatorio">*</span></label>
-							
-								<select name="rol" class="registro1">
-									<option value="-1">Seleccione</option>
-                                    <option value="Maculino">Masculino</option>
-                                    <option value="Femenino">Femenino</option>
-                                    <option value="Otros">Otros</option>
-								</select>
-							</div>
-							<!-- <p>
-								<label for="mascotas" class="colocar_mascotas">Tipo de Mascota
-								</label>
-								<select class="form-control registro1" name="raza" id="idRaza">
-									<option value=" ">[Seleccione un tipo de mascota]</option>
-									<option value="Gato">Gato</option>
-									<option value="Perro">Perro</option>
-									<option value="Loro">Loro</option>
-								</select>
+								<input class="registro1" type="number" name="celular" id=" " placeholder="Celular">
 							</p>
 							<p>
-								<label for="descripcion" class="colocar_celular">Descripción de la mascota
-									<span class="obligatorio">*</span>
-								</label>
-								<textarea class="descripcion1" name="descripcionRaza" id="iddescripcion"></textarea>
-							</p> -->
+								<label for="correo" class="colocar_correo">Correo
 
+								</label>
+								<input class="registro1" type="email" name="correo" id="idcorreo"
+									placeholder="Escribe tu correo">
+
+							</p>
+							<div id="idcampo">
+								<label for="rol">Seleccione su sexo <span class="obligatorio">*</span></label>
+
+								<select name="sexo" class="registro1">
+									<option value="-1">Seleccione</option>
+									<option value="Masculino">Masculino</option>
+									<option value="Femenino">Femenino</option>
+									<option value="Otros">Otros</option>
+								</select>
+							</div>
 							<button class="botones1" type="submit" name="enviar_formulario" id="registrar">
 								<p>Registrar</p>
 							</button>
@@ -304,24 +266,6 @@
 										<th class="column5">Correo</th>
 										<th class="column6">Funciones</th>
 									</tr>
-									
-									<!-- <tr th:each="bean:${user}">
-										<td class="column1" th:text="${bean.idUsuario}"></td>
-										<td class="column2" th:text="${bean.nombreCompleto}"></td>
-										<td class="column3" th:text="${bean.apellidoCompleto}"></td>
-										<td class="column4" th:text="${bean.dni}"></td>
-										<td class="column5" th:text="${bean.celular}"></td>
-										<td class="column6" th:text="${bean.correo}"></td>
-										<td class="column7" th:text="${bean.raza}"></td>
-										<td class="column8" th:text="${bean.descripcionRaza}"></td>
-										<td class="column9">
-											<a type="button" id="idEditar"><i class="fas fa-undo-alt"></i></a>
-											<a th:href="@{/eliminar/} + ${bean.idUsuario}" class=" "><i
-													class="fas fa-eraser"></i></a>
-										</td>
-									</tr> -->
-
-
 								</tbody>
 							</table>
 						</div>
@@ -363,6 +307,27 @@
 
 		Toast.fire({
 			icon: 'success',
+			title: mensaje
+		})
+
+	</script>
+	<script th:inline="javascript" th:if="${existente!=null}">
+		//obtener atributo MENSAJE
+		var mensaje =/*[[${existente}]]*/ null;
+		const Toast = Swal.mixin({
+			toast: true,
+			position: 'top-end',
+			showConfirmButton: false,
+			timer: 3000,
+			timerProgressBar: true,
+			didOpen: (toast) => {
+				toast.addEventListener('mouseenter', Swal.stopTimer)
+				toast.addEventListener('mouseleave', Swal.resumeTimer)
+			}
+		})
+
+		Toast.fire({
+			icon: 'warning',
 			title: mensaje
 		})
 

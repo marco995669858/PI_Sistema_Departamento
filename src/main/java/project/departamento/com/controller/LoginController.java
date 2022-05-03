@@ -37,7 +37,7 @@ public class LoginController {
 			if(passCheck == true) {
 				session.setAttribute("objUsuario", usuario);
 				
-				return  "cliente";
+				return  "Usuario";
 			}else {
 				request.setAttribute("mensaje", "Contraseña Incorrecta");
 				System.out.println("Contraseña Incorrecta");

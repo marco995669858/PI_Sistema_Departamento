@@ -20,14 +20,14 @@ import project.departamento.com.util.EncryptPassword;
 @Controller
 @RequestMapping("/registro/usuario")
 public class UsuarioController {
-  
+
 	@Autowired
 	private UsuarioService service;
-	
+
 	/* para encriptar la contraseña */
 	@Autowired
 	private EncryptPassword encryptPassword;
-	
+
 	@RequestMapping("/")
 	public String index(Model model) {
 		model.addAttribute("rol", service.listarRoles());
@@ -42,8 +42,6 @@ public class UsuarioController {
 		return listaUsuario;
 	}
 
-	
-
 	@RequestMapping("/registra_actualiza")
 	public String registrar_actualizar_usuario(@RequestParam("codigo") int codigo,
 			@RequestParam("nombres") String nombres, @RequestParam("apePaterno") String apePaterno,
@@ -51,16 +49,16 @@ public class UsuarioController {
 			@RequestParam("password") String password, @RequestParam("rol") int rol, RedirectAttributes redirect) {
 
 		try {
-
-			Usuario bean = new Usuario();
-			bean.setNombres(nombres);
-			bean.setApePaterno(apePaterno);
-			bean.setApeMaterno(apeMaterno);
-			bean.setUser(user);
-			bean.setPassword(encryptPassword.Encriptar(password));
-			bean.setRol(new Rol(rol));
 			List<Usuario> buscar = service.buscarUser(user);
 			if (CollectionUtils.isEmpty(buscar)) {
+				Usuario bean = new Usuario();
+				bean.setNombres(nombres);
+				bean.setApePaterno(apePaterno);
+				bean.setApeMaterno(apeMaterno);
+				bean.setUser(user);
+				bean.setPassword(encryptPassword.Encriptar(password));
+				bean.setRol(new Rol(rol));
+				
 				if (codigo != 0) {
 					bean.setIdUsuario(codigo);
 					service.registra_actualiza_usuario(bean);
@@ -78,5 +76,5 @@ public class UsuarioController {
 		}
 		return "redirect:/registro/usuario/";
 	}
-  
+
 }

@@ -2,6 +2,7 @@ package project.departamento.com.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,32 +29,38 @@ public class DepartamenoController {
 	@RequestMapping("/")
 	public String index(Model model) {
 		model.addAttribute("edificio", service.listarEdificio());
+		model.addAttribute("tipodepartamento", service.listarTipoDepartamento());
 		return "departamento";
 	}
 
-	@RequestMapping
+	@RequestMapping("/registra_actualiza")
 	public String registra_actualiza_departamento(@RequestParam("codigo") int codigo,
 			@RequestParam("edificioFK") int edificioFK, @RequestParam("piso") int piso,
 			@RequestParam("nroDepartamento") int nroDepartamento, @RequestParam("areaM2") double areaM2,
-			@RequestParam("tipoDepartamentoFK") int tipoDepartamentoFK, @RequestParam("estadoFK") int estadoFK,
-			@RequestParam("telefono") String telefono, RedirectAttributes redirect) {
+			@RequestParam("tipoDepartamentoFK") int tipoDepartamentoFK, @RequestParam("telefono") String telefono,
+			RedirectAttributes redirect) {
 		try {
 
-			List<Departamento> buscar = service.buscarDepartamento(nroDepartamento, telefono);
+			Optional<Departamento> buscarnroDepartamento = service.buscarnroDepartamento(nroDepartamento);
+			Optional<Departamento> buscartelefono = service.buscarTelefono(telefono);
 
-			Departamento bean = new Departamento();
-			bean.setEdificio(new Edificio(edificioFK));
-			bean.setPiso(piso);
-			bean.setNroDepartamento(nroDepartamento);
-			bean.setAreaM2(areaM2);
-			bean.setTipoDepartamento(new TipoDepartamento(tipoDepartamentoFK));
-			bean.setEstadoDepartamento(new EstadoDepartamento(estadoFK));
-			bean.setTelefono(telefono);
-			bean.setPropietariodep(new Propietariodep(Integer.parseInt(null)));
-			bean.setPropietarioEsOcupante(0);
-			bean.setFechaRegistro(new Date());
+			if (buscarnroDepartamento.isPresent()) {
+				redirect.addFlashAttribute("existente", "El numero del departamento ya existe: " + nroDepartamento);
+			} else if(buscartelefono.isPresent()) {
+				redirect.addFlashAttribute("existente", "El telefono ya existe: " + telefono);
+			} else {
+				Departamento bean = new Departamento();
+				bean.setEdificioFK(new Edificio(edificioFK));
+				bean.setPiso(piso);
+				bean.setNroDepartamento(nroDepartamento);
+				bean.setAreaM2(areaM2);
+				bean.setTipoDepartamentoFK(new TipoDepartamento(tipoDepartamentoFK));
+				bean.setEstadoFK(new EstadoDepartamento(2));
+				bean.setTelefono(telefono);
+				bean.setPropietarioFK(null);
+				bean.setPropietarioEsOcupante(0);
+				bean.setFechaRegistro(new Date());
 
-			if (CollectionUtils.isEmpty(buscar)) {
 				if (codigo != 0) {
 					bean.setIdDepartamento(codigo);
 					service.registra_actualiza_departamento(bean);
@@ -64,9 +71,7 @@ public class DepartamenoController {
 					redirect.addFlashAttribute("MENSAJE",
 							"Se registro correctamente el numero del departamento: " + nroDepartamento);
 				}
-			} else {
-				redirect.addFlashAttribute("MENSAJE",
-						"El numero del departamento ya existe: " + nroDepartamento + " o el telefono ya existe: " + telefono);
+
 			}
 
 		} catch (Exception e) {
