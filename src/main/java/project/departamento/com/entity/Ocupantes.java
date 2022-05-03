@@ -35,8 +35,8 @@ public class Ocupantes {
 	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idDepartamento")
-	private Departamento departamento;
+	@JoinColumn(name = "departamentoFK")
+	private Departamento departamentoFK;
 	
 	private String nombres;
 
@@ -52,8 +52,8 @@ public class Ocupantes {
 	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idRelacion")
-	private RelacionconPropietario relacionconPropietario;
+	@JoinColumn(name = "relacionFK")
+	private RelacionconPropietario relacionFK;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
