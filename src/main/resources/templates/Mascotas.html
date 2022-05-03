@@ -3,13 +3,10 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Cliente</title>
+	<title>Registro Propietario</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrardepartamento.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrarformulario.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/tablas.css}">
-	<!-- <link rel="stylesheet" href="../static/resources/css/registrarformulario.css">
-	<link rel="stylesheet" href="../static/resources/css/registrardepartamento.css">
-	<link rel="stylesheet" href="../static/resources/css/tablas.css"> -->
 	<script src="https://kit.fontawesome.com/7df5974cca.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
@@ -71,13 +68,14 @@
 						<span>Registrar Usuario</span>
 					</a>
 				</li>
-				<li>
-					<a th:href="@{/registro/mascotas/}">
-						<i class="fa-solid fa-shield-dog"></i>
-						<span>Registrar Mascotas</span>
-					</a>
-				</li>
-	
+				<!-- <li>
+        <a href="#0">
+          <svg>
+            <use xlink:href="#comments"></use>
+          </svg>
+          <span>Otros</span>
+        </a>
+      </li> -->
 
 				<li class="menu-heading">
 					<h3>Perfil</h3>
@@ -145,10 +143,9 @@
 
 					<div class="formulario">
 
-						<h1 style="text-align: center;">Registro de información de Usuario</h1>
+						<h1 style="text-align: center;">Registrar propietario</h1>
 
-						<form th:action="@{/registro/usuario/registra_actualiza}" method="post"
-							onsubmit="">
+						<form th:action="@{/registro/propietariodep/registra_actualiza}" method="post" onsubmit="">
 
 							<input class="registro1" type="hidden" value="0" name="codigo" id="idcodigo">
 
@@ -157,78 +154,53 @@
 									<span class="obligatorio">*</span>
 								</label>
 								<input class="registro1" type="text" name="nombres" id="idnombres"
-									placeholder="Escribe tu Nombre"> 
+									placeholder="Escribe tu Nombre">
 							</p>
 
 							<p>
 								<label for="apellidos" class="colocar_apellidos">Apellido Paterno
 								</label>
-								<input class="registro1" type="text" name="apePaterno" id="idapePaterno"
+								<input class="registro1" type="text" name="apePaterno" id="idapellidos"
 									placeholder="Escribe tu apellido paterno">
 
 							</p>
 							<p>
 								<label for="apellidos" class="colocar_apellidos">Apellido Materno
 								</label>
-								<input class="registro1" type="text" name="apeMaterno" id="idapeMaterno"
+								<input class="registro1" type="text" name="apeMaterno" id="idapellidos"
 									placeholder="Escribe tu apellido Materno">
 
 							</p>
-							<!-- <p>
-								<label for="dni" class="colocar_clave">Dni
+							<p id="idcampo">
+								<label for="DNI" class="colocar_celular">DNI
+									<span class="obligatorio">*</span>
 								</label>
-								<input class="registro1" type="number" name="dni" id="idDni"
-									placeholder="Escribe tu Dni">
-
+								<input class="registro1" type="number" name="dni" id=" " placeholder="DNI">
 							</p>
-							<p>
-								<label for="celular" class="colocar_dni">Celular
+							<p id="idcampo">
+								<label for="celular" class="colocar_celular">Celular
+									<span class="obligatorio">*</span>
 								</label>
-								<input class="registro1" type="number" name="celular" id="idcelular"
-									placeholder="Escribe tu celular">
-							</p> -->
-
+								<input class="registro1" type="number" name="celular" id=" " placeholder="Celular">
+							</p>
 							<p>
 								<label for="correo" class="colocar_correo">Correo
 
 								</label>
-								<input class="registro1" type="email" name="user" id="idcorreo" placeholder="Escribe tu correo">
+								<input class="registro1" type="email" name="correo" id="idcorreo"
+									placeholder="Escribe tu correo">
 
 							</p>
-
-							<p id="idcampo">
-								<label for="contrasenia" class="colocar_celular">Contraseña
-									<span class="obligatorio">*</span>
-								</label>
-								<input class="registro1" type="password" name="password" id="idpassword"
-									placeholder="Escribe tu contraseña">
-							</p>
-
-
 							<div id="idcampo">
-								<label for="rol">Definir rol <span class="obligatorio">*</span></label>
-								<select name="rol" class="registro1">
-									<option value="-1">Seleccione un rol</option>
-									<option th:each="bean:${rol}" th:value="${bean.idRol}" th:utext="${bean.descripcionRol}"></option>
+								<label for="rol">Seleccione su sexo <span class="obligatorio">*</span></label>
+
+								<select name="sexo" class="registro1">
+									<option value="-1">Seleccione</option>
+									<option value="Masculino">Masculino</option>
+									<option value="Femenino">Femenino</option>
+									<option value="Otros">Otros</option>
 								</select>
 							</div>
-							<!-- <p>
-								<label for="mascotas" class="colocar_mascotas">Tipo de Mascota
-								</label>
-								<select class="form-control registro1" name="raza" id="idRaza">
-									<option value=" ">[Seleccione un tipo de mascota]</option>
-									<option value="Gato">Gato</option>
-									<option value="Perro">Perro</option>
-									<option value="Loro">Loro</option>
-								</select>
-							</p>
-							<p>
-								<label for="descripcion" class="colocar_celular">Descripción de la mascota
-									<span class="obligatorio">*</span>
-								</label>
-								<textarea class="descripcion1" name="descripcionRaza" id="iddescripcion"></textarea>
-							</p> -->
-
 							<button class="botones1" type="submit" name="enviar_formulario" id="registrar">
 								<p>Registrar</p>
 							</button>
@@ -294,24 +266,6 @@
 										<th class="column5">Correo</th>
 										<th class="column6">Funciones</th>
 									</tr>
-									
-									<!-- <tr th:each="bean:${user}">
-										<td class="column1" th:text="${bean.idUsuario}"></td>
-										<td class="column2" th:text="${bean.nombreCompleto}"></td>
-										<td class="column3" th:text="${bean.apellidoCompleto}"></td>
-										<td class="column4" th:text="${bean.dni}"></td>
-										<td class="column5" th:text="${bean.celular}"></td>
-										<td class="column6" th:text="${bean.correo}"></td>
-										<td class="column7" th:text="${bean.raza}"></td>
-										<td class="column8" th:text="${bean.descripcionRaza}"></td>
-										<td class="column9">
-											<a type="button" id="idEditar"><i class="fas fa-undo-alt"></i></a>
-											<a th:href="@{/eliminar/} + ${bean.idUsuario}" class=" "><i
-													class="fas fa-eraser"></i></a>
-										</td>
-									</tr> -->
-
-
 								</tbody>
 							</table>
 						</div>
@@ -357,10 +311,10 @@
 		})
 
 	</script>
-		<script th:inline="javascript" th:if="${MENSAJE!=null}">
+	<script th:inline="javascript" th:if="${existente!=null}">
 		//obtener atributo MENSAJE
-		var mensaje =/*[[${MENSAJE}]]*/ null;
-		const toast = Swal.mixin({
+		var mensaje =/*[[${existente}]]*/ null;
+		const Toast = Swal.mixin({
 			toast: true,
 			position: 'top-end',
 			showConfirmButton: false,
