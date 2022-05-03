@@ -1,6 +1,7 @@
 package project.departamento.com.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import project.departamento.com.entity.Departamento;
 import project.departamento.com.entity.Ocupantes;
@@ -20,5 +21,12 @@ public interface OcupanteService {
 	
 	/*para registrar llos departamentos*/
 	public void registra_actualiza_ocupante(Ocupantes ocupante);
+	
+	/* para buscar si existe el dni, celular y el correo */
+	public Optional<Ocupantes> buscardni(String dni);
+
+	public Optional<Ocupantes> buscarcelular(String celular);
+
+	public Optional<Ocupantes> buscarsexo(String sexo);
 	
 }

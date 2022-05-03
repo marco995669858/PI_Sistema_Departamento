@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Cliente</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrardepartamento.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrarformulario.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/tablas.css}">
+	<!-- <link rel="stylesheet" href="../static/resources/css/registrarformulario.css">
+	<link rel="stylesheet" href="../static/resources/css/registrardepartamento.css">
+	<link rel="stylesheet" href="../static/resources/css/tablas.css"> -->
+	<script src="https://kit.fontawesome.com/7df5974cca.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+		integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+</head>
+
+<body>
+
+	<header class="page-header">
+		<nav>
+			<a href="admin.html" class="logo">
+				<img src="https://csn-spa.cl/wp-content/uploads/2019/10/csn-spa-logo.png" height="70" alt="">
+			</a>
+			<button class="toggle-mob-menu" aria-expanded="false" aria-label="open menu">
+				<svg width="20" height="20" aria-hidden="true">
+					<use xlink:href="#down"></use>
+				</svg>
+			</button>
+			<ul class="admin-menu">
+				<li class="menu-heading">
+					<h3>Admin</h3>
+				</li>
+				<li>
+					<a href="#0">
+						<i class="fa-solid fa-user"></i>
+						<span> Mi Perfil</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/caracteristica_Departamento}">
+						<i class="fa-solid fa-arrow-right-to-city"></i>
+						<span>Registrar caracteristicas de Departamento</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/departamento/}">
+						<i class="fa-solid fa-building-circle-check"></i>
+						<span>Registrar de Departamento</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/visitante/}">
+						<i class="fa-solid fa-users"></i>
+						<span>Registrar Visita</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/residente/}">
+						<i class="fa-solid fa-building-user"></i>
+						<span>Registrar Residente</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/usuario/}">
+						<i class="fa-solid fa-address-card"></i>
+						<span>Registrar Usuario</span>
+					</a>
+				</li>
+				<!-- <li>
+        <a href="#0">
+          <svg>
+            <use xlink:href="#comments"></use>
+          </svg>
+          <span>Otros</span>
+        </a>
+      </li> -->
+
+				<li class="menu-heading">
+					<h3>Perfil</h3>
+				</li>
+				<li>
+					<a href="#0">
+						<i class="fa-solid fa-gear"></i>
+						<span>Ajustes</span>
+					</a>
+				</li>
+				<li>
+					<a href="#0">
+						<i class="fa-solid fa-wrench"></i>
+						<span>Opciones</span>
+					</a>
+				</li>
+				<li>
+					<a href="#0">
+						<i class="fa-solid fa-money-bill-trend-up"></i>
+						<span>Estadísticas</span>
+					</a>
+				</li>
+				<li>
+					<div class="switch">
+						<input type="checkbox" id="mode" checked>
+						<label for="mode">
+							<span></span>
+							<span>Oscuro</span>
+						</label>
+					</div>
+					<button class="collapse-btn" aria-expanded="true" aria-label="collapse menu">
+						<i class="fa-solid fa-angle-left"></i>
+						<span>Contraer</span>
+					</button>
+				</li>
+			</ul>
+		</nav>
+	</header>
+	<section class="page-content">
+		<section class="search-and-user">
+			<form>
+				<input type="hidden" placeholder="">
+				<button type="submit" aria-label="submit form">
+					<svg aria-hidden="true">
+						<use xlink:href="#search"></use>
+					</svg>
+				</button>
+			</form>
+			<div class="admin-profile" th:each="bean : ${session.objUsuario}">
+				<i class="fa-solid fa-circle-user"></i>
+				<span class="greeting" th:text="${bean.nombreCompleto + ' ' + bean.apellidoCompleto}"></span>
+
+				<div class="notifications">
+
+
+					<svg>
+						<use xlink:href="#users"></use>
+					</svg>
+				</div>
+			</div>
+		</section>
+		<section class="grid">
+			<article>
+				<div class="contact_form">
+
+					<div class="formulario">
+
+						<h1 style="text-align: center;">Registro de información de Ocupante</h1>
+
+						<form th:action="@{/registro/usuario/registra_actualiza}" method="post"
+							onsubmit="">
+
+							<input class="registro1" type="hidden" value="0" name="codigo" id="idcodigo">
+							
+							
+							<div id="idcampo">
+								<label for="rol">Id departamento<span class="obligatorio">*</span></label>
+								<select name="rol" class="registro1">
+									<option value="-1">Seleccione un ID</option>
+									<option th:each="bean:${rol}" th:value="${bean.idRol}" th:utext="${bean.descripcionRol}"></option>
+								</select>
+							</div>
+							<p>
+								<label for="email" class="colocar_nombres">Nombres Completos
+									<span class="obligatorio">*</span>
+								</label>
+								<input class="registro1" type="text" name="nombres" id="idnombres"
+									placeholder="Escribe tu Nombre"> 
+							</p>
+
+							<p>
+								<label for="apellidos" class="colocar_apellidos">Apellido Paterno
+								</label>
+								<input class="registro1" type="text" name="apePaterno" id="idapePaterno"
+									placeholder="Escribe tu apellido paterno">
+
+							</p>
+							<p>
+								<label for="apellidos" class="colocar_apellidos">Apellido Materno
+								</label>
+								<input class="registro1" type="text" name="apeMaterno" id="idapeMaterno"
+									placeholder="Escribe tu apellido Materno">
+
+							</p>
+							<p>
+								<label for="dni" class="colocar_clave">Dni
+								</label>
+								<input class="registro1" type="number" name="dni" id="idDni"
+									placeholder="Escribe tu Dni">
+							</p>
+							<p>
+								<label for="celular" class="colocar_dni">Celular
+								</label>
+								<input class="registro1" type="number" name="celular" id="idcelular"
+									placeholder="Escribe tu celular">
+							</p> 
+							<p>
+								<label for="sexo" class="colocar_sexo">Sexo
+								</label>
+								<input class="registro1" type="textr" name="sexo" id="idsexo"
+									placeholder="Escribe tu sexo">
+							</p>
+							
+							<button class="botones1" type="submit" name="enviar_formulario" id="registrar">
+								<p>Registrar</p>
+							</button>
+
+							<p class="aviso">
+								<span class="obligatorio"> * </span>los campos son obligatorios.
+							</p>
+
+						</form>
+					</div>
+				</div>
+			</article>
+
+
+			<div class="limiter">
+				<div class="container-table100">
+					<h1 style="text-align: center;">Lista de usuarios</h1>
+
+					<div class="wrap-table100">
+						<div class="table100">
+							<table>
+								<thead>
+									<tr class="table100-head">
+										<th class="column1">Codigo</th>
+										<th class="column2">Nombre</th>
+										<th class="column3">Apellido Paterno</th>
+										<th class="column4">Apellido Materno</th>
+										<th class="column5">Correo</th>
+										<th class="column6">Funciones</th>
+
+									</tr>
+								</thead>
+								<tbody>
+									
+										
+									<!-- <tr th:each="bean:${user}">
+										<td class="column1" th:text="${bean.idOcupante}"></td>
+										<td class="column2" th:text="${bean.nombreCompleto}"></td>
+										<td class="column3" th:text="${bean.apellidoPaterno}"></td>
+										<td class="column4" th:text="${bean.apellidoMaterno}"></td>
+										<td class="column5" th:text="${bean.dni}"></td>
+										<td class="column6" th:text="${bean.celular}"></td>
+										<td class="column7" th:text="${bean.sexo}"></td>
+										<td class="column8">
+											<a type="button" id="idEditar"><i class="fas fa-undo-alt"></i></a>
+											<a th:href="@{/eliminar/} + ${bean.idOcupante}" class=" "><i
+													class="fas fa-eraser"></i></a>
+										</td>
+									</tr> -->
+
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+		</section>
+		<footer class="page-footer">
+
+		</footer>
+	</section>
+	<!-- partial -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script th:src="@{/resources/js/adminjs.js}"></script>
+	<script th:src="@{/resources/js/main.js}"></script>
+	<script th:src="@{/resources/js/validarCliente.js}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
+		integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script th:inline="javascript" th:if="${MENSAJE!=null}">
+		//obtener atributo MENSAJE
+		var mensaje =/*[[${MENSAJE}]]*/ null;
+		const Toast = Swal.mixin({
+			toast: true,
+			position: 'top-end',
+			showConfirmButton: false,
+			timer: 3000,
+			timerProgressBar: true,
+			didOpen: (toast) => {
+				toast.addEventListener('mouseenter', Swal.stopTimer)
+				toast.addEventListener('mouseleave', Swal.resumeTimer)
+			}
+		})
+
+		Toast.fire({
+			icon: 'success',
+			title: mensaje
+		})
+
+	</script>
+		<script th:inline="javascript" th:if="${MENSAJE!=null}">
+		//obtener atributo MENSAJE
+		var mensaje =/*[[${MENSAJE}]]*/ null;
+		const toast = Swal.mixin({
+			toast: true,
+			position: 'top-end',
+			showConfirmButton: false,
+			timer: 3000,
+			timerProgressBar: true,
+			didOpen: (toast) => {
+				toast.addEventListener('mouseenter', Swal.stopTimer)
+				toast.addEventListener('mouseleave', Swal.resumeTimer)
+			}
+		})
+
+		Toast.fire({
+			icon: 'warning',
+			title: mensaje
+		})
+
+	</script>
+	<script>
+		$(document).on("click", "#idEditar", function () {
+			let codigo;
+			codigo = $(this).parents("tr").find("td")[0].innerHTML;
+			$.get("buscar?idUsuario=" + codigo, function (data) {
+				$("#idcodigo").val(data.idUsuario);
+				$("#idnombres").val(data.nombreCompleto);
+				$("#idapellidoPaterno").val(data.apellidoCompleto);
+				$("#idapellidoMaterno").val(data.apellidoCompleto);
+				$("#idDni").val(data.dni);
+				$("#idcelular").val(data.celular);
+				$("#idsexo").val(data.celular);
+				//$("#idcampo").css("display", "none");
+			});
+		});
+	</script>
+</body>
+
+</html>
