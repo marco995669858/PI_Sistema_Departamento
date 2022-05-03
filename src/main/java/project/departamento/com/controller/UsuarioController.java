@@ -68,7 +68,7 @@ public class UsuarioController {
 					redirect.addFlashAttribute("MENSAJE", "Se registro el nuevo usuario: " + nombres);
 				}
 			} else {
-				redirect.addFlashAttribute("MENSAJE", "El correo ya existe ingrese otro: " + user);
+				redirect.addFlashAttribute("existente", "El correo ya existe ingrese otro: " + user);
 			}
 
 		} catch (Exception e) {
