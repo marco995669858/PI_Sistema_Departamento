@@ -20,20 +20,19 @@ function mensaje(msj) {
 
 
 
-function validarCliente() {
+function validarPropietario() {
 
-	let nombre = document.getElementById("idnombres").value;
-	let apellido = document.getElementById("idapellidos").value;
+	let nombre = document.getElementById("nombres").value;
+	let apellido = document.getElementById("apePaterno").value;
 	var dni = document.getElementById("idDni").value;
 	var celular = document.getElementById("idcelular").value;
 	var correo = document.getElementById("idcorreo").value;
-	var password = document.getElementById("idpassword").value;
-	var descripcionRaza = document.getElementById("iddescripcion").value;
+	
 
 	var regexemail = /^\w+@\w+\.+[a-z]{2,3}$/;
 	var regexnombre = /^[A-Za-zƒŠŒŽšœžñŸÀÁÂÃÄÅÆÈÉÊËÌÍÎÏÑÒÓÔÕÖØÙÚÛÜÝàáâãäåæçèé êëìíîïðñòóôõöùúûüýþÿ]*$/;
 
-	if (!nombre || !apellido || !dni || !celular || !correo || !password) {
+	if (!nombre || !apellido || !dni || !celular || !correo) {
 		mensaje("Todos los campos son obligatorios");
 		return false;
 	} else if (nombre.length < 3 || nombre.length >= 30) {
@@ -60,12 +59,9 @@ function validarCliente() {
 	} else if (!regexemail.test(correo)) {
 		mensaje('El correo no es valido, ejemplo : example123@example.com');
 		return false;
-	} else if (password.length < 8 || password.length >= 20) {
-		mensaje('El password solo acepta como minimo 8 y maximo 20.');
-		return false;
-	} else if (!regexnombre.test(descripcionRaza)) {
-		mensaje("Ingrese solo letras en la descripción de mascota.");
-		return false;
+		
+		
+	
 	}
 
 	return true;
