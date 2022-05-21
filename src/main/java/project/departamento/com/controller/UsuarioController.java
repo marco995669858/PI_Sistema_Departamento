@@ -77,4 +77,5 @@ public class UsuarioController {
 		return "redirect:/registro/usuario/";
 	}
 
+
 }

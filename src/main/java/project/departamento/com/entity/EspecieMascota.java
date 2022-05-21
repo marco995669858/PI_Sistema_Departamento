@@ -25,4 +25,8 @@ public class EspecieMascota {
 	private int idEspecie;
 	
 	private String descripcion;
+	
+	public EspecieMascota(int idEspecie ) {
+		this.idEspecie = idEspecie;
+	}
 }
