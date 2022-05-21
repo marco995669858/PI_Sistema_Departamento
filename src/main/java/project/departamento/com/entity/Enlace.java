@@ -19,7 +19,7 @@ public class Enlace {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idEnlace;
 	
-	private String Descripcion;
+	private String descripcion;
 	
-	private String Ruta;
+	private String ruta;
 }

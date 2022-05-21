@@ -19,6 +19,6 @@ public class TipoDepartamento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idTipo;
 	
-	private String Descripcion;
+	private String descripcion;
 
 }

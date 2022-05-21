@@ -41,19 +41,19 @@ public class Visita {
 	@JoinColumn(name = "idVisitante")
 	private Visitante visitante;
 	
-	private String HoraIngreso;
+	private String horaIngreso;
 	
-	private String HoraSalida;
+	private String horaSalida;
 	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idEstado")
 	private Estado estado;
 	
-	private String Comentario;
+	private String comentario;
 	
 	@Temporal(TemporalType.DATE)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd" , timezone = "America/Lima")
-	private Date FechaRegistro;
+	private Date fechaRegistro;
 
 }

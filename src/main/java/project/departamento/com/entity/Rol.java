@@ -26,7 +26,7 @@ public class Rol {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idRol;
 	
-	private String Descripcion;
+	private String descripcion;
 	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)

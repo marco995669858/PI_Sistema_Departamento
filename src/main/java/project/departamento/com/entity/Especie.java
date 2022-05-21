@@ -21,6 +21,6 @@ public class Especie {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idEspecie;
 	
-	private String Animal;
+	private String animal;
 
 }

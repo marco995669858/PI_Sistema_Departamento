@@ -40,20 +40,20 @@ public class Visitante {
 	@JoinColumn(name = "idDepartamento")
 	private Departamento departamento;
 	
-	private String Nombres;
+	private String nombres;
 	
-	private String Apellidos;
+	private String apellidos;
 	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idTipoDocumento")
 	private TipoDocumento tipoDocumento;
 	
-	private String Documento;
+	private String documento;
 	
-	private String Telefono;
+	private String telefono;
 	
-	private String Correo;
+	private String correo;
 	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -62,11 +62,11 @@ public class Visitante {
 	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idCliente")
+	@JoinColumn(name = "idUsuario")
 	private Usuario idUsuario;
 	
 	@Temporal(TemporalType.DATE)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd" , timezone = "America/Lima")
-	private Date FechaRegistro;
+	private Date fechaRegistro;
 
 }

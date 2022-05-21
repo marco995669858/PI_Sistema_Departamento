@@ -18,7 +18,7 @@ public class Estado {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idEstado;
 	
-	private String Nom_estado;
+	private String nomEstado;
 	
 	public Estado(Integer idEstado ) {
 		this.idEstado = idEstado;
