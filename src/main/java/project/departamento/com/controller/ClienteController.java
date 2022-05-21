@@ -28,12 +28,18 @@ public class ClienteController {
 	@Autowired
 	private ClienteService service;
 
+
+	@RequestMapping("/")
+	public String index(Model model) {
+		return "usuario";
+
 	@RequestMapping("/listar")
 	public ResponseEntity<List<Cliente>> listarClientes() {
 
 		List<Cliente> salida = service.listarTodoslosClientes();
 
 		return ResponseEntity.ok(salida);
+
 	}
 
 	@RequestMapping("/registrar")
