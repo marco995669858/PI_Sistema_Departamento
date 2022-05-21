@@ -18,43 +18,42 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "mascotas")
+@Table(name = "tb_mascotas")
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
 public class Mascotas {
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idMascota;
-
+	private Integer idMascotas;
+	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "departamentoFK")
-	private Departamento departamentoFK;
-
-	private String nombre;
-
+	@JoinColumn(name = "idDepartamento")
+	private Departamento departamento;
+	
+	private String Nombres;
+	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "especieFK")
-	private EspecieMascota especieFK;
-
+	@JoinColumn(name = "idEspecie")
+	private Especie especie;
+	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "usuarioFK")
-	private Usuario usuarioFK;
-
-	private String sexo;
+	@JoinColumn(name = "idUsuario")
+	private Usuario usuario;
+	
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idCliente")
+	private Cliente cliente;
 	
 	@Temporal(TemporalType.DATE)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-	private Date fecharegistro;
-	
-	private int eliminado;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd" , timezone = "America/Lima")
+	private Date FechaRegistro;
 }
