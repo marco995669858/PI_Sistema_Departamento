@@ -7,15 +7,11 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrardepartamento.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrarformulario.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/tablas.css}">
-	<!-- <link rel="stylesheet" href="../static/resources/css/registrarformulario.css">
-	<link rel="stylesheet" href="../static/resources/css/registrardepartamento.css">
-	<link rel="stylesheet" href="../static/resources/css/tablas.css"> -->
 	<script src="https://kit.fontawesome.com/7df5974cca.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
 		integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
 		crossorigin="anonymous" referrerpolicy="no-referrer" />
-
 </head>
 
 <body>
@@ -126,7 +122,8 @@
 			</form>
 			<div class="admin-profile" th:each="bean : ${session.objUsuario}">
 				<i class="fa-solid fa-circle-user"></i>
-				<span class="greeting" th:text="${bean.nombres + ' ' + bean.apePaterno + ' '  + bean.apeMaterno}"></span>
+				<span class="greeting"
+					th:text="${bean.nombres + ' ' + bean.apePaterno + ' '  + bean.apeMaterno}"></span>
 
 				<div class="notifications">
 
@@ -142,53 +139,50 @@
 				<div class="contact_form">
 
 					<div class="formulario">
-						<h1 style="text-align: center;">Registro del departamento
+						<h1 style="text-align: center;">Registro Departamento
 						</h1>
 
 						<form th:action="@{/registro/departamento/registra_actualiza}" method="post" onsubmit="">
 							<input type="hidden" value="0" name="codigo" id="idcodigo">
 							<p>
-								<label for="edificio">Edificio
-									<span class="obligatorio">*</span>
+								<label for="tipoDepartamento">Tipo de Departamento
 								</label>
-								<select class="registro1" name="edificioFK" id="idedificio" style="color: black;">
-									<option th:each="bean:${edificio}" th:value="${bean.idEdificio}"
-										th:utext="${bean.denominacion}"></option>
+								<select class="form-control" name="tipoDepartamento" id="idTipodepatamento">
+									<option value="-1">[Seleccione un Tipo de Departamento]</option>
+									<option th:each="bean:${depa}" th:value="${bean.idtipoDocumento}"
+										th:text="${bean.caracteristicasDepartamento.nroDepartamento}"></option>
 								</select>
 							</p>
+
 							<p>
-								<label for="Piso">Número de Piso
+								<label for="piso">Número de Piso
 									<span class="obligatorio">*</span>
 								</label>
-								<input type="number" class="registro1" name="piso" placeholder="">
+								<input type="number" class="registro1" name="piso" placeholder="Numero de Piso">
 							</p>
 
 							<p>
 								<label for="nroDepartamento">Número de departamento
 								</label>
-								<input type="number" class="registro1" name="nroDepartamento" placeholder="">
-							</p>
-							<p>
-								<label for="area">Área del departamento
-								</label>
-								<input type="number" class="registro1" name="areaM2" id="area"><span> m²</span>
+								<input type="number" class="registro1" name="nroDepartamento"
+									placeholder="Numero de Departamento">
 							</p>
 
 							<p>
-								<label for="tipo">Tipo de departamento
-									<span class="obligatorio">*</span>
+								<label for="nroHabitaciones">Número de Habitaciones
 								</label>
-								<select class=" form-control registro1" name="tipoDepartamentoFK" id="idsala">
-									<option value="-1">[Seleccione el Tipo de Departamento]</option>
-									<option th:each="tipo:${tipodepartamento}" th:value="${tipo.idTipo}"
-										th:utext="${tipo.descripcion}"></option>
+								<input type="number" class="registro1" name="nroHabitaciones"
+									placeholder="Numero de Habitaciones" readonly="disableb" style="background-color: darkgray; color: black;;">
+							</p>
+
+							<p>
+								<label for="estado">Estado
+								</label>
+								<select class="form-control" name="estado" id="idEstado">
+									<option value="-1">[Seleccione Estado]</option>
+									<option th:each="bean:${depa}" th:value="${bean.idtipoDocumento}"
+										th:text="${bean.caracteristicasDepartamento.nroDepartamento}"></option>
 								</select>
-							</p>
-							<p>
-								<label for="banio" class="">Teléfono
-
-								</label>
-								<input type="number" class="registro1" name="telefono" id="area">
 							</p>
 
 
@@ -216,59 +210,17 @@
 								<thead>
 									<tr class="table100-head">
 										<th class="column1">Codigo</th>
-										<th class="column2">Edificio</th>
-										<th class="column3">Número de Piso</th>
-										<th class="column4">Número de departamento</th>
-										<th class="column5">Área</th>
-										<th class="column6">Tipo de departamento</th>
-										<th class="column7">Telefono</th>
+										<th class="column2">Tipo Departamento</th>
+										<th class="column3">Piso</th>
+										<th class="column4">Número de Departamento</th>
+										<th class="column5">Número de Habitaciones</th>
+										<th class="column6">UserName</th>
+										<th class="column7">Fecha de Registro</th>
+										<th class="column8">Estado</th>					
 									</tr>
 								</thead>
 								<tbody>
-									<tr class="">
-										<th class="column1">Codigo</th>
-										<th class="column2">Edificio</th>
-										<th class="column3">Número de Piso</th>
-										<th class="column4">Número de departamento</th>
-										<th class="column5">Área</th>
-										<th class="column6">Tipo de departamento</th>
-										<th class="column7">Telefono</th>
-									</tr>
-									<tr class="">
-										<th class="column1">Codigo</th>
-										<th class="column2">Edificio</th>
-										<th class="column3">Número de Piso</th>
-										<th class="column4">Número de departamento</th>
-										<th class="column5">Área</th>
-										<th class="column6">Tipo de departamento</th>
-										<th class="column7">Telefono</th>
-									</tr>
-									<tr class="">
-										<th class="column1">Codigo</th>
-										<th class="column2">Edificio</th>
-										<th class="column3">Número de Piso</th>
-										<th class="column4">Número de departamento</th>
-										<th class="column5">Área</th>
-										<th class="column6">Tipo de departamento</th>
-										<th class="column7">Telefono</th>
-									</tr>
-									<!-- <tr th:each="bean:${depa}">
-										<td class="column1" th:text="${bean.idCarateristicadepartamento}"></td>
-										<td class="column2" th:text="${bean.habitaciones}"></td>
-										<td class="column3" th:text="${bean.cocinaComedor}"></td>
-										<td class="column4" th:text="${bean.lavanderia}"></td>
-										<td class="column5" th:text="${bean.sala}"></td>
-										<td class="column6" th:text="${bean.banio}"></td>
-										<td class="column7" th:text="${bean.tamanio}"></td>
-
-										<td class="column9">
-											<a type="button" id="idEditar"><i class="far fa-edit"></i></a>
-											<a th:href="@{/elimi/} + ${bean.idCarateristicadepartamento}"><i
-													class="far fa-trash-alt"></i></a>
-
-										</td>
-									</tr> -->
-
+									
 
 								</tbody>
 							</table>
@@ -291,7 +243,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
 		integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ=="
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-		
+
 	<script th:inline="javascript" th:if="${MENSAJE!=null}">
 		//obtener atributo MENSAJE
 		var mensaje =/*[[${MENSAJE}]]*/ null;
