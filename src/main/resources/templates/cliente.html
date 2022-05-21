@@ -3,21 +3,15 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Mascotas</title>
+	<title>Registro Residente</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrardepartamento.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrarformulario.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/tablas.css}">
 	<script src="https://kit.fontawesome.com/7df5974cca.js" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-		integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-		crossorigin="anonymous" referrerpolicy="no-referrer" />
-
 
 </head>
 
 <body>
-
 	<header class="page-header">
 		<nav>
 			<a href="admin.html" class="logo">
@@ -34,7 +28,7 @@
 				</li>
 				<li>
 					<a href="#0">
-						<i class="fa-solid fa-user"></i>
+					<i class="fa-solid fa-user"></i>
 						<span> Mi Perfil</span>
 					</a>
 				</li>
@@ -74,6 +68,14 @@
 						<span>Registrar Mascotas</span>
 					</a>
 				</li>
+				<!-- <li>
+        <a href="#0">
+          <svg>
+            <use xlink:href="#comments"></use>
+          </svg>
+          <span>Otros</span>
+        </a>
+      </li> -->
 
 				<li class="menu-heading">
 					<h3>Perfil</h3>
@@ -86,7 +88,7 @@
 				</li>
 				<li>
 					<a href="#0">
-						<i class="fa-solid fa-wrench"></i>
+					<i class="fa-solid fa-wrench"></i>
 						<span>Opciones</span>
 					</a>
 				</li>
@@ -124,8 +126,7 @@
 			</form>
 			<div class="admin-profile" th:each="bean : ${session.objUsuario}">
 				<i class="fa-solid fa-circle-user"></i>
-				<span class="greeting"
-					th:text="${bean.nombres + ' ' + bean.apePaterno + ' '  + bean.apeMaterno}"></span>
+				<!--<span class="greeting" th:text="${bean.nombres + ' ' + bean.apePaterno + ' '  + bean.apeMaterno}"></span>-->
 
 				<div class="notifications">
 
@@ -141,89 +142,92 @@
 				<div class="contact_form">
 
 					<div class="formulario">
+						<h1 style="text-align: center;">Registro de información del Residente</h1>
 
-						<h1 style="text-align: center;">Registrar Mascotas</h1>
+						<form th:action="@{/registro/residente/registrarResidente}" method="post">
+							<input type="hidden" value="0" name="codigo" id="idcodigo">
 
-						<form th:action="@{/registro/mascotas/registra_actualiza_mascotas}" method="post" onsubmit="">
-
-							<input class="registro1" type="hidden" value="0" name="codigo" id="idcodigo">
-							<div class="col-md-12">
-								<label for="cocicome"> Numero del Departamento
-									<span class="obligatorio">*</span></label>
-								<select class="form-control registro1" name="departamentoFK" id="idnroDepartamento">
-									<option value="-1">[Seleccione un número de departamento.] </option>
-									<option th:each="bean:${departamento}" th:value="${bean.idDepartamento}"
-										th:text="${bean.nroDepartamento}"></option>
-								</select>
-							</div>
 							<p>
-								<label for="email" class="colocar_nombres">Nombre de la mascota
-									<span class="obligatorio">*</span>
+								<label for="lavanderia">Departamento
 								</label>
-								<input class="registro1" type="text" name="nombres" id="idnombres"
-									placeholder="Escribe tu Nombre">
+								<select class="form-control registro1" name="idDepartamento" id="idDepartamento">
+									<option value="-1">[Seleccione un departamento]</option>
+									<option th:each="bean:${depa}" th:value="${bean.idDepartamento}"
+										th:text="${bean.caracteristicasDepartamento.nroDepartamento}"></option>
+								</select>
 							</p>
-							<div class="col-md-12" >
-								<label for="cocicome"> Especie
-									<span class="obligatorio">*</span></label>
-								<select class="form-control registro1" name="especieFK" id="idnroDepartamento">
-									<option value="-1">[Seleccione Especie.] </option>
-									<option th:each="bean:${especie}" th:value="${bean.idEspecie}"
-										th:text="${bean.descripcion}"></option>
-								</select>
-							</div>
-							<div class="col-md-12" >
-								<label for="cocicome"> Sexo
-									<span class="obligatorio">*</span></label>
-								<select class="form-control registro1" name="sexo" id="idnroDepartamento">
-									<option value="-1">[Seleccione Sexo] </option>
-									<option value="M">Masculino</option>
-									<option value="F">Femenino</option>
-								</select>
-							</div>
-							<p th:each="bean : ${session.objUsuario}">
-								<label for="email" class="colocar_nombres">Administrador
+
+							<p>
+								<label for="sala">Usuario
 									<span class="obligatorio">*</span>
 								</label>
-								<select class="registro1" name="usuarioFK">
-									<option th:value="${bean.idUsuario}" th:text="${bean.nombres + ' ' + bean.apePaterno + ' '  + bean.apeMaterno}"></option>								
+								<select class=" form-control registro1" name="usuario" id="idUsuario">
+									<option value="-1">[Seleccione un departamento]</option>
+									<option th:each="bean:${user}" th:value="${bean.idUsuario}"
+										th:text="${bean.nombreCompleto + ' ' + bean.apellidoCompleto}"></option>
+
 								</select>
+							</p>
+							<p>
+								<label for="banio" class="colocar_banio">Fecha de salidad
+									<span class="obligatorio">*</span>
+								</label>
+							<div class="col-md-12">
+								<input type="date" class="form-control registro1" name="fechaSalida" id="idFechaSalida">
+							</div>
 							</p>
 							<button class="botones1" type="submit" name="enviar_formulario" id="enviar">
 								<p>Registrar</p>
 							</button>
+
+
+							<p class="aviso">
+								<span class="obligatorio"> * </span>los campos son obligatorios.
+							</p>
+
 						</form>
 					</div>
 				</div>
 			</article>
-
-
+			<!--  <article>
+     
+   </article>
+    <article></article> -->
+			<h1 style="text-align: center;">Lista de Departamentos</h1>
+			<br>
 			<div class="limiter">
+				<div style="text-align: center;">
+					<button class="botonEditar" type="submit" name="editar" id="editar">
+						<p>Editar</p>
+					</button>
+					<button class="botonEliminar" type="submit" name="eliminar" id="eliminar">
+						<p>Eliminar</p>
+					</button>
+				</div>
 				<div class="container-table100">
-					<h1 style="text-align: center;">Lista de Mascotas</h1>
-
 					<div class="wrap-table100">
 						<div class="table100">
 							<table>
 								<thead>
 									<tr class="table100-head">
-										<th class="column1">Codigo</th>
-										<th class="column2">Nro Departamento</th>
-										<th class="column3">Nombre de la Mascota</th>
-										<th class="column4">Especie de la Mascota</th>
-										<th class="column5">Administrador</th>
-										<th class="column6">Sexo</th>
+										<th class="column1">Fecha</th>
+										<th class="column2">ID Pedido</th>
+										<th class="column3">Nombre</th>
+										<th class="column4">Precio</th>
+										<th class="column5">Cantidad</th>
+										<th class="column6">Total</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr class=""th:each="bean:${mascotas}">
-										<td class="column1" th:text="${bean.idMascota}"></td>
-										<td class="column2" th:text="${bean.departamentoFK.nroDepartamento}"></td>
-										<td class="column3" th:text="${bean.nombre}"></td>
-										<td class="column4" th:text="${bean.especieFK.descripcion}"></td>
-										<td class="column5" th:text="${bean.usuarioFK.nombres + ' ' + bean.usuarioFK.apePaterno + ' ' +  bean.usuarioFK.apeMaterno}"></td>
-										<td class="column6" th:text="${bean.sexo}"></td>
+									<tr>
+										<td class="column1">2017-09-29 01:22</td>
+										<td class="column2">200398</td>
+										<td class="column3">iPhone X 64Gb Grey</td>
+										<td class="column4">$999.00</td>
+										<td class="column5">1</td>
+										<td class="column6">$999.00</td>
 									</tr>
+
 
 								</tbody>
 							</table>
@@ -240,14 +244,7 @@
 		</footer>
 	</section>
 	<!-- partial -->
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
-		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 	<script th:src="@{/resources/js/adminjs.js}"></script>
-	<script th:src="@{/resources/js/main.js}"></script>
-	<script th:src="@{/resources/js/validarCliente.js}"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
-		integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ=="
-		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script th:inline="javascript" th:if="${MENSAJE!=null}">
 		//obtener atributo MENSAJE
@@ -270,9 +267,9 @@
 		})
 
 	</script>
-	<script th:inline="javascript" th:if="${existente!=null}">
+	<script th:inline="javascript" th:if="${x!=null}">
 		//obtener atributo MENSAJE
-		var mensaje =/*[[${existente}]]*/ null;
+		var mensaje =/*[[${x}]]*/ null;
 		const Toast = Swal.mixin({
 			toast: true,
 			position: 'top-end',
@@ -291,23 +288,9 @@
 		})
 
 	</script>
-	<script>
-		$(document).on("click", "#idEditar", function () {
-			let codigo;
-			codigo = $(this).parents("tr").find("td")[0].innerHTML;
-			$.get("buscar?idUsuario=" + codigo, function (data) {
-				$("#idcodigo").val(data.idUsuario);
-				$("#idnombres").val(data.nombreCompleto);
-				$("#idapellidos").val(data.apellidoCompleto);
-				$("#idDni").val(data.dni);
-				$("#idcelular").val(data.celular);
-				$("#idcorreo").val(data.correo);
-				//$("#idcampo").css("display", "none");
-				$("#idRaza").val(data.raza);
-				$("#iddescripcion").val(data.descripcionRaza);
-			});
-		});
-	</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
+		integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 
 </html>
