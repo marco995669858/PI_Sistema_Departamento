@@ -147,48 +147,43 @@
 						<form th:action="@{/registro/mascotas/registra_actualiza_mascotas}" method="post" onsubmit="">
 
 							<input class="registro1" type="hidden" value="0" name="codigo" id="idcodigo">
+							
 							<div class="col-md-12">
-								<label for="cocicome"> Numero del Departamento
+								<label for="nroDepartamento"> Numero del Departamento
 									<span class="obligatorio">*</span></label>
-								<select class="form-control registro1" name="departamentoFK" id="idnroDepartamento">
-									<option value="-1">[Seleccione un número de departamento.] </option>
+								<select class="form-control registro1" name="nroDepartamento" id="idnroDepartamento">
+									<option value="-1">[Seleccione un número de Departamento.] </option>
 									<option th:each="bean:${departamento}" th:value="${bean.idDepartamento}"
 										th:text="${bean.nroDepartamento}"></option>
 								</select>
 							</div>
+							
 							<p>
-								<label for="email" class="colocar_nombres">Nombre de la mascota
+								<label for="nombres" class="colocar_nombres">Nombre de la mascota
 									<span class="obligatorio">*</span>
 								</label>
 								<input class="registro1" type="text" name="nombres" id="idnombres"
-									placeholder="Escribe tu Nombre">
+									placeholder="Escriba Nombre de la Mascota">
 							</p>
+							
 							<div class="col-md-12" >
-								<label for="cocicome"> Especie
+								<label for="especie"> Especie
 									<span class="obligatorio">*</span></label>
-								<select class="form-control registro1" name="especieFK" id="idnroDepartamento">
+								<select class="form-control registro1" name="especie" id="idEspecie">
 									<option value="-1">[Seleccione Especie.] </option>
 									<option th:each="bean:${especie}" th:value="${bean.idEspecie}"
 										th:text="${bean.descripcion}"></option>
 								</select>
 							</div>
+							
 							<div class="col-md-12" >
-								<label for="cocicome"> Sexo
+								<label for="cliente"> Dueño
 									<span class="obligatorio">*</span></label>
-								<select class="form-control registro1" name="sexo" id="idnroDepartamento">
-									<option value="-1">[Seleccione Sexo] </option>
-									<option value="M">Masculino</option>
-									<option value="F">Femenino</option>
+								<select class="form-control registro1" name="cliente" id="idCliente">
+									<option value="-1">[Seleccione Dueño] </option>
 								</select>
 							</div>
-							<p th:each="bean : ${session.objUsuario}">
-								<label for="email" class="colocar_nombres">Administrador
-									<span class="obligatorio">*</span>
-								</label>
-								<select class="registro1" name="usuarioFK">
-									<option th:value="${bean.idUsuario}" th:text="${bean.nombres + ' ' + bean.apePaterno + ' '  + bean.apeMaterno}"></option>								
-								</select>
-							</p>
+						
 							<button class="botones1" type="submit" name="enviar_formulario" id="enviar">
 								<p>Registrar</p>
 							</button>
@@ -211,8 +206,9 @@
 										<th class="column2">Nro Departamento</th>
 										<th class="column3">Nombre de la Mascota</th>
 										<th class="column4">Especie de la Mascota</th>
-										<th class="column5">Administrador</th>
-										<th class="column6">Sexo</th>
+										<th class="column4">Username</th>
+										<th class="column5">Dueño</th>
+										<th class="column6">Fecha de Registro</th>
 									</tr>
 								</thead>
 								<tbody>
