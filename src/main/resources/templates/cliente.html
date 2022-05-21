@@ -8,7 +8,6 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrarformulario.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/tablas.css}">
 	<script src="https://kit.fontawesome.com/7df5974cca.js" crossorigin="anonymous"></script>
-
 </head>
 
 <body>
@@ -28,7 +27,7 @@
 				</li>
 				<li>
 					<a href="#0">
-					<i class="fa-solid fa-user"></i>
+						<i class="fa-solid fa-user"></i>
 						<span> Mi Perfil</span>
 					</a>
 				</li>
@@ -88,7 +87,7 @@
 				</li>
 				<li>
 					<a href="#0">
-					<i class="fa-solid fa-wrench"></i>
+						<i class="fa-solid fa-wrench"></i>
 						<span>Opciones</span>
 					</a>
 				</li>
@@ -142,40 +141,104 @@
 				<div class="contact_form">
 
 					<div class="formulario">
-						<h1 style="text-align: center;">Registro de información del Residente</h1>
+						<h1 style="text-align: center;">Registro de Cliente</h1>
 
 						<form th:action="@{/registro/residente/registrarResidente}" method="post">
 							<input type="hidden" value="0" name="codigo" id="idcodigo">
 
 							<p>
-								<label for="lavanderia">Departamento
+								<label for="nombre" class="colocar_nombres">Nombres Completos
+									<span class="obligatorio">*</span>
 								</label>
-								<select class="form-control registro1" name="idDepartamento" id="idDepartamento">
-									<option value="-1">[Seleccione un departamento]</option>
+								<input class="registro1" type="text" name="nombres" id="idnombres"
+									placeholder="Escribe tu Nombres">
+							</p>
+
+							<p>
+								<label for="apellidos" class="colocar_apellidos">Apellido Paterno
+									<span class="obligatorio">*</span>
+								</label>
+								<input class="registro1" type="text" name="apePaterno" id="idapePaterno"
+									placeholder="Escribe tus apellidos">
+							</p>
+
+							<p>
+								<label for="tipoDocumento">Tipo de Documento
+								</label>
+								<select class="form-control" name="tipoDocumento" id="idtipoDocumento">
+									<option value="-1">[Seleccione un Tipo de Documento]</option>
+									<option th:each="bean:${depa}" th:value="${bean.idtipoDocumento}"
+										th:text="${bean.caracteristicasDepartamento.nroDepartamento}"></option>
+								</select>
+							</p>
+
+
+
+							<p>
+								<label for="documento" class="form-control">Documento
+
+									<span class="obligatorio">*</span>
+								</label>
+								<input class="registro1" type="text" name="documento" id="idDocumento"
+									placeholder="Escribe tu Documento">
+							</p>
+
+							<p>
+								<label for="telefono" class="form-control">Telefono
+									<span class="obligatorio">*</span>
+								</label>
+								<input class="registro1" type="number" name="telefono" id="idTelefono"
+									placeholder="Escribe tu Numero Telefonico">
+							</p>
+
+							<p>
+								<label for="estado">Estado
+								</label>
+								<select class="form-control" name="estado" id="idEstado">
+									<option value="-1">[Seleccione Estado]</option>
+									<option th:each="bean:${depa}" th:value="${bean.idtipoDocumento}"
+										th:text="${bean.caracteristicasDepartamento.nroDepartamento}"></option>
+								</select>
+							</p>
+
+							<p>
+								<label for="correo" class="form-control">Correo
+									<span class="obligatorio">*</span>
+								</label>
+								<input class="registro1" type="text" name="correo" id="idCorreo"
+									placeholder="Escribe tu Correo">
+							</p>
+
+							<p>
+								<label for="tipoCliente">Tipo de Cliente
+								</label>
+								<select class="registro1" name="tipoCliente" id="idTipocliente">
+									<option value="-1">[Seleccione Tipo de Cliente]</option>
 									<option th:each="bean:${depa}" th:value="${bean.idDepartamento}"
 										th:text="${bean.caracteristicasDepartamento.nroDepartamento}"></option>
 								</select>
 							</p>
 
 							<p>
-								<label for="sala">Usuario
-									<span class="obligatorio">*</span>
+								<label for="sexo">Sexo
 								</label>
-								<select class=" form-control registro1" name="usuario" id="idUsuario">
-									<option value="-1">[Seleccione un departamento]</option>
-									<option th:each="bean:${user}" th:value="${bean.idUsuario}"
-										th:text="${bean.nombreCompleto + ' ' + bean.apellidoCompleto}"></option>
-
+								<select class="registro1" name="sexo" id="idSexo">
+									<option value="-1">[Seleccione Sexo</option>
+									<option value="Hombre">Hombre</option>
+									<option value="Mujer">Mujer</option>
 								</select>
 							</p>
+
 							<p>
-								<label for="banio" class="colocar_banio">Fecha de salidad
-									<span class="obligatorio">*</span>
+								<label for="departamento">Departamento
 								</label>
-							<div class="col-md-12">
-								<input type="date" class="form-control registro1" name="fechaSalida" id="idFechaSalida">
-							</div>
+								<select class="registro1" name="departamento" id="idDepartamento">
+									<option value="-1">[Seleccione Departamento]</option>
+									<option th:each="bean:${depa}" th:value="${bean.idDepartamento}"
+										th:text="${bean.caracteristicasDepartamento.nroDepartamento}"></option>
+								</select>
 							</p>
+
 							<button class="botones1" type="submit" name="enviar_formulario" id="enviar">
 								<p>Registrar</p>
 							</button>
@@ -193,47 +256,38 @@
      
    </article>
     <article></article> -->
-			<h1 style="text-align: center;">Lista de Departamentos</h1>
+			<h1 style="text-align: center;">Lista de Cliente</h1>
 			<br>
-			<div class="limiter">
-				<div style="text-align: center;">
-					<button class="botonEditar" type="submit" name="editar" id="editar">
-						<p>Editar</p>
-					</button>
-					<button class="botonEliminar" type="submit" name="eliminar" id="eliminar">
-						<p>Eliminar</p>
-					</button>
-				</div>
-				<div class="container-table100">
-					<div class="wrap-table100">
-						<div class="table100">
-							<table>
-								<thead>
-									<tr class="table100-head">
-										<th class="column1">Fecha</th>
-										<th class="column2">ID Pedido</th>
-										<th class="column3">Nombre</th>
-										<th class="column4">Precio</th>
-										<th class="column5">Cantidad</th>
-										<th class="column6">Total</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td class="column1">2017-09-29 01:22</td>
-										<td class="column2">200398</td>
-										<td class="column3">iPhone X 64Gb Grey</td>
-										<td class="column4">$999.00</td>
-										<td class="column5">1</td>
-										<td class="column6">$999.00</td>
-									</tr>
+
+			<div class="container-table100">
+				<div class="wrap-table100">
+					<div class="table100">
+						<table>
+							<thead>
+								<tr class="table100-head">
+									<th class="column1">Codigo</th>
+									<th class="column2">Nombres</th>
+									<th class="column3">Apellidos</th>
+									<th class="column4">Documento</th>
+									<th class="column5">Telefono</th>
+									<th class="column6">Estado</th>
+									<th class="column7">Correo</th>
+									<th class="column8">Tipo de Cliente</th>
+									<th class="column9">Sexo</th>
+									<th class="column10">Departamento</th>
 
 
-								</tbody>
-							</table>
-						</div>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+								</tr>
+
+							</tbody>
+						</table>
 					</div>
 				</div>
+			</div>
 			</div>
 
 
@@ -288,7 +342,7 @@
 		})
 
 	</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
 		integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ=="
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
