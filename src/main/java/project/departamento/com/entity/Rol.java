@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
@@ -20,6 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class Rol {
 	
 	@Id
@@ -32,5 +34,9 @@ public class Rol {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idEstado")
 	private Estado estado;
+	
+	public Rol(Integer idRol) {
+		this.idRol = idRol;
+	}
 
 }

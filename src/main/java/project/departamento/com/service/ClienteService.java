@@ -7,17 +7,20 @@ import project.departamento.com.entity.Cliente;
 
 public interface ClienteService {
 
-	public Optional<Cliente> buscarDocumento(String documento);
+	public abstract Optional<Cliente> buscarDocumento(String documento, Integer IdCliente);
 
-	public Optional<Cliente> buscarCorreo(String correo);
+	public abstract Optional<Cliente> buscarCorreo(String correo, Integer IdCliente);
 
-	public Optional<Cliente> buscarClienteDepartamentoquenoExistan(Integer departamento);
+	public abstract Optional<Cliente> buscarClienteDepartamentoquenoExistan(Integer departamento, Integer idUsuario);
 
-	public Optional<Cliente> buscarTelefono(String telefono);
+	public abstract Optional<Cliente> buscarTelefono(String telefono, Integer IdCliente);
 
 	public abstract List<Cliente> listarTodoslosClientes();
 
+	public abstract List<Cliente> buscarClienteporid(Integer idCliente);
+	
 	public abstract void eliminarCliente(Integer codigo);
 
 	public abstract Cliente registrarActualizarCliente(Cliente bean);
+	
 }

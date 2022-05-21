@@ -7,13 +7,21 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrardepartamento.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrarformulario.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/tablas.css}">
+
+
 	<script src="https://kit.fontawesome.com/7df5974cca.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
 		integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
 		crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+
 </head>
+
+
+</head>
+
+
 <body>
 
 	<header class="page-header">
@@ -123,8 +131,10 @@
 			</form>
 			<div class="admin-profile" th:each="bean : ${session.objUsuario}">
 				<i class="fa-solid fa-circle-user"></i>
+
 				<span class="greeting"
 					th:text="${bean.nombres + ' ' + bean.apePaterno + ' '  + bean.apeMaterno}"></span>
+
 
 				<div class="notifications">
 
@@ -145,9 +155,11 @@
 
 						<form th:action="@{/registro/usuario/registra_actualiza}" method="post" onsubmit="">
 
+
 							<input class="registro1" type="hidden" value="0" name="codigo" id="idcodigo">
 
 							<p>
+
 								<label for="nomUsuario" class="form-control">Username
 									<span class="obligatorio">*</span>
 								</label>
@@ -161,11 +173,14 @@
 								</label>
 								<input class="registro1" type="text" name="nombres" id="idNombres"
 									placeholder="Escribe tus Nombres">
+
 							</p>
 
 							<p>
 								<label for="apellidos" class="colocar_apellidos">Apellido Paterno
+
 									<span class="obligatorio">*</span>
+
 								</label>
 								<input class="registro1" type="text" name="apePaterno" id="idapePaterno"
 									placeholder="Escribe tu apellido paterno">
@@ -174,11 +189,13 @@
 							<p>
 								<label for="apellidos" class="colocar_apellidos">Apellido Materno
 									<span class="obligatorio">*</span>
+
 								</label>
 								<input class="registro1" type="text" name="apeMaterno" id="idapeMaterno"
 									placeholder="Escribe tu apellido Materno">
 
 							</p>
+
 
 							<p>
 								<label for="cuentaUsuario" class="colocar_correo">Cuenta de Usuario
@@ -214,6 +231,7 @@
 								</select>
 							</div>
 
+
 							<button class="botones1" type="submit" name="enviar_formulario" id="registrar">
 								<p>Registrar</p>
 							</button>
@@ -238,6 +256,7 @@
 								<thead>
 									<tr class="table100-head">
 										<th class="column1">Codigo</th>
+
 										<th class="column2">Username</th>
 										<th class="column3">Nombres</th>
 										<th class="column4">Apellido Paterno</th>
@@ -251,6 +270,7 @@
 								</thead>
 								<tbody>
 									
+
 
 								</tbody>
 							</table>
@@ -297,7 +317,9 @@
 		})
 
 	</script>
+
 	<script th:inline="javascript" th:if="${existente!=null}">
+
 		//obtener atributo MENSAJE
 		var mensaje =/*[[${existente}]]*/ null;
 		const Toast = Swal.mixin({

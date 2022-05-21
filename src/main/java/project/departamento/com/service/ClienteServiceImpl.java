@@ -16,28 +16,40 @@ public class ClienteServiceImpl implements ClienteService{
 	private ClienteRepository repository;
 	
 	@Override
-	public Optional<Cliente> buscarDocumento(String documento) {
-		return repository.findByDocumento(documento);
+	public Optional<Cliente> buscarDocumento(String documento, Integer IdCliente) {
+		return repository.buscarDocumento(documento,IdCliente);
 	}
 
 	@Override
-	public Optional<Cliente> buscarCorreo(String correo) {
-		return repository.findByCorreo(correo);
+	public Optional<Cliente> buscarCorreo(String correo, Integer IdCliente) {
+		return repository.buscarCorreo(correo,IdCliente);
 	}
 
 	@Override
-	public Optional<Cliente> buscarClienteDepartamentoquenoExistan(Integer departamento) {
-		return repository.buscarClienteDepartamentoquenoExistan(departamento);
+	public Optional<Cliente> buscarClienteDepartamentoquenoExistan(Integer departamento, Integer idUsuario) {
+		return repository.buscarClienteDepartamentoquenoExistan(departamento, idUsuario);
 	}
 
 	@Override
-	public Optional<Cliente> buscarTelefono(String telefono) {
-		return repository.findByTelefono(telefono);
+	public Optional<Cliente> buscarTelefono(String telefono, Integer IdCliente) {
+		return repository.busacarTelefono(telefono,IdCliente);
 	}
 	
 	@Override
 	public List<Cliente> listarTodoslosClientes() {
 		return repository.findAll();
+	}
+
+
+	@Override
+	public Cliente registrarActualizarCliente(Cliente bean) {
+		return repository.save(bean);
+	}
+
+
+	@Override
+	public List<Cliente> buscarClienteporid(Integer idCliente) {
+		return repository.findByIdCliente(idCliente);
 	}
 
 	@Override
@@ -46,11 +58,7 @@ public class ClienteServiceImpl implements ClienteService{
 		
 	}
 
-	@Override
-	public Cliente registrarActualizarCliente(Cliente bean) {
-		return repository.save(bean);
-	}
-
+	
 	
 
 }
