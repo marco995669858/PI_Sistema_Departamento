@@ -31,19 +31,19 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idUsuario;
 	
-	private String Nom_usuario;
+	private String nomUsuario;
 	
-	private String Nombres;
+	private String nombres;
 	
-	private String Ape_Paterno;
+	private String apePaterno;
 	
-	private String Ape_Materno;
+	private String apeMaterno;
 	
-	private String Cuenta_usuario;
+	private String cuentaUsuario;
 	
-	private String Password_usuario;
+	private String passwordUsuario;
 	
-	private String Telefono;
+	private String telefono;
 	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -52,9 +52,9 @@ public class Usuario {
 	
 	@Temporal(TemporalType.DATE)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd" , timezone = "America/Lima")
-	private Date FechaRegistro;
+	private Date fechaRegistro;
 	
-	private int Eliminado;
+	private int eliminado;
 	
 	public Usuario(Integer idUsuario) {
 		this.idUsuario = idUsuario;

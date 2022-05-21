@@ -36,7 +36,7 @@ public class Mascotas {
 	@JoinColumn(name = "idDepartamento")
 	private Departamento departamento;
 	
-	private String Nombres;
+	private String nombres;
 	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -55,5 +55,5 @@ public class Mascotas {
 	
 	@Temporal(TemporalType.DATE)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd" , timezone = "America/Lima")
-	private Date FechaRegistro;
+	private Date fechaRegistro;
 }

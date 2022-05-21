@@ -21,7 +21,7 @@ public class TipoCliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idTipoCliente;
 	
-	private String Descripcion;
+	private String descripcion;
 	
 	public TipoCliente(Integer idTipoCliente) {
 		this.idTipoCliente = idTipoCliente;

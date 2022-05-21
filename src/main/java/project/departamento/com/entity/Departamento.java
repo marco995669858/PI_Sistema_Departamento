@@ -4,6 +4,9 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -19,7 +22,8 @@ import lombok.Setter;
 @Setter
 public class Departamento {
 	
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idDepartamento;
 	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
@@ -27,25 +31,25 @@ public class Departamento {
 	@JoinColumn(name = "idTipo")
 	private TipoDepartamento tipoDepartamento;
 	
-	private String Piso;
+	private String piso;
 	
-	private String NroDepartamento;
+	private String nroDepartamento;
 	
-	private int NroHabitaciones;
+	private int nroHabitaciones;
 	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idUsuario")
 	private Usuario usuario;
 	
-	private Date Fecharegistro;
+	private Date fecharegistro;
 	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idEstado")
 	private Estado estado;
 	
-	private int Eliminado;
+	private int eliminado;
 	
 	public Departamento(Integer idDepartamento) {
 		this.idDepartamento = idDepartamento;

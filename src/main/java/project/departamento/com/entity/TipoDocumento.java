@@ -20,7 +20,7 @@ public class TipoDocumento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idTipoDocumento;
 	
-	private String Descripcion;
+	private String descripcion;
 	
 	public TipoDocumento(Integer idTipoDocumento){
 		this.idTipoDocumento = idTipoDocumento;
