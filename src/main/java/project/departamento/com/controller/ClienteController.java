@@ -27,7 +27,7 @@ public class ClienteController {
 
 	@RequestMapping("/")
 	public String index(Model model) {
-		return "Usuario";
+		return "usuario";
 	}
 
 	@RequestMapping("/registrar")
