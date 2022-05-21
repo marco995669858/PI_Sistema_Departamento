@@ -75,5 +75,10 @@ public class Cliente {
 	
 	private int eliminado;
 	
+	public Cliente(Integer idCliente, int eliminado){
+		this.idCliente = idCliente;
+		this.eliminado = eliminado;
+	}
+	
 
 }

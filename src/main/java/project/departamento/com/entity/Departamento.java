@@ -13,13 +13,17 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "tb_departamento")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Departamento {
 	
 	@Id
