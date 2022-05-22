@@ -27,7 +27,7 @@ public class UsuarioController {
 		return "usuario";
 	}
 
-	@RequestMapping("/")
+	@RequestMapping("/registrar")
 	public ResponseEntity<Map<String, Object>> registraActualizaUsaurio(@RequestParam("codigo") int codigo,
 			@RequestParam("nombreUsuario") String nombreUsuario, @RequestParam("nombres") String nombres,
 			@RequestParam("apePaterno") String apePaterno, @RequestParam("apeMaterno") String apeMaterno,

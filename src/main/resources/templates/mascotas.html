@@ -147,7 +147,7 @@
 						<form th:action="@{/registro/mascotas/registra_actualiza_mascotas}" method="post" onsubmit="">
 
 							<input class="registro1" type="hidden" value="0" name="codigo" id="idcodigo">
-							
+
 							<div class="col-md-12">
 								<label for="nroDepartamento"> Numero del Departamento
 									<span class="obligatorio">*</span></label>
@@ -157,7 +157,7 @@
 										th:text="${bean.nroDepartamento}"></option>
 								</select>
 							</div>
-							
+
 							<p>
 								<label for="nombres" class="colocar_nombres">Nombre de la mascota
 									<span class="obligatorio">*</span>
@@ -165,8 +165,8 @@
 								<input class="registro1" type="text" name="nombres" id="idnombres"
 									placeholder="Escriba Nombre de la Mascota">
 							</p>
-							
-							<div class="col-md-12" >
+
+							<div class="col-md-12">
 								<label for="especie"> Especie
 									<span class="obligatorio">*</span></label>
 								<select class="form-control registro1" name="especie" id="idEspecie">
@@ -175,15 +175,15 @@
 										th:text="${bean.descripcion}"></option>
 								</select>
 							</div>
-							
-							<div class="col-md-12" >
+
+							<div class="col-md-12">
 								<label for="cliente"> Dueño
 									<span class="obligatorio">*</span></label>
 								<select class="form-control registro1" name="cliente" id="idCliente">
 									<option value="-1">[Seleccione Dueño] </option>
 								</select>
 							</div>
-						
+
 							<button class="botones1" type="submit" name="enviar_formulario" id="enviar">
 								<p>Registrar</p>
 							</button>
@@ -212,12 +212,14 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr class=""th:each="bean:${mascotas}">
+									<tr class="" th:each="bean:${mascotas}">
 										<td class="column1" th:text="${bean.idMascota}"></td>
 										<td class="column2" th:text="${bean.departamentoFK.nroDepartamento}"></td>
 										<td class="column3" th:text="${bean.nombre}"></td>
 										<td class="column4" th:text="${bean.especieFK.descripcion}"></td>
-										<td class="column5" th:text="${bean.usuarioFK.nombres + ' ' + bean.usuarioFK.apePaterno + ' ' +  bean.usuarioFK.apeMaterno}"></td>
+										<td class="column5"
+											th:text="${bean.usuarioFK.nombres + ' ' + bean.usuarioFK.apePaterno + ' ' +  bean.usuarioFK.apeMaterno}">
+										</td>
 										<td class="column6" th:text="${bean.sexo}"></td>
 									</tr>
 
@@ -227,7 +229,6 @@
 					</div>
 				</div>
 			</div>
-
 
 
 		</section>
@@ -267,7 +268,6 @@
 
 	</script>
 	<script th:inline="javascript" th:if="${existente!=null}">
-		//obtener atributo MENSAJE
 		var mensaje =/*[[${existente}]]*/ null;
 		const Toast = Swal.mixin({
 			toast: true,
@@ -298,7 +298,6 @@
 				$("#idDni").val(data.dni);
 				$("#idcelular").val(data.celular);
 				$("#idcorreo").val(data.correo);
-				//$("#idcampo").css("display", "none");
 				$("#idRaza").val(data.raza);
 				$("#iddescripcion").val(data.descripcionRaza);
 			});
