@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Visita</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrardepartamento.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrarformulario.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/tablas.css}">
+	<script src="https://kit.fontawesome.com/7df5974cca.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+		integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+</head>
+
+<body>
+	<header class="page-header">
+		<nav>
+			<a href="admin.html" class="logo">
+				<img src="https://csn-spa.cl/wp-content/uploads/2019/10/csn-spa-logo.png" height="70" alt="">
+			</a>
+			<button class="toggle-mob-menu" aria-expanded="false" aria-label="open menu">
+				<svg width="20" height="20" aria-hidden="true">
+					<use xlink:href="#down"></use>
+				</svg>
+			</button>
+			<ul class="admin-menu">
+				<li class="menu-heading">
+					<h3>Admin</h3>
+				</li>
+				<li>
+					<a href="#0">
+						<i class="fa-solid fa-user"></i>
+						<span> Mi Perfil</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/departamento/}">
+						<i class="fa-solid fa-building-circle-check"></i>
+						<span>Registrar de Departamento</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/visitante/}">
+						<i class="fa-solid fa-users"></i>
+						<span>Registrar Visitante</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/residente/}">
+						<i class="fa-solid fa-building-user"></i>
+						<span>Registrar Residente</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/usuario/}">
+						<i class="fa-solid fa-address-card"></i>
+						<span>Registrar Usuario</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/mascotas/}">
+						<i class="fa-solid fa-shield-dog"></i>
+						<span>Registrar Mascotas</span>
+					</a>
+				</li>
+
+
+				<li class="menu-heading">
+					<h3>Perfil</h3>
+				</li>
+				<li>
+					<a href="#0">
+						<i class="fa-solid fa-gear"></i>
+						<span>Ajustes</span>
+					</a>
+				</li>
+				<li>
+					<a href="#0">
+						<i class="fa-solid fa-wrench"></i>
+						<span>Opciones</span>
+					</a>
+				</li>
+				<li>
+					<a href="#0">
+						<i class="fa-solid fa-money-bill-trend-up"></i>
+						<span>Estadísticas</span>
+					</a>
+				</li>
+				<li>
+					<div class="switch">
+						<input type="checkbox" id="mode" checked>
+						<label for="mode">
+							<span></span>
+							<span>Oscuro</span>
+						</label>
+					</div>
+					<button class="collapse-btn" aria-expanded="true" aria-label="collapse menu">
+						<i class="fa-solid fa-angle-left"></i>
+						<span>Contraer</span>
+					</button>
+				</li>
+			</ul>
+		</nav>
+	</header>
+	<section class="page-content">
+		<section class="search-and-user">
+			<form>
+				<input type="hidden" placeholder="">
+				<button type="submit" aria-label="submit form">
+					<svg aria-hidden="true">
+						<use xlink:href="#search"></use>
+					</svg>
+				</button>
+			</form>
+			<div class="admin-profile" th:each="bean : ${session.objUsuario}">
+				<i class="fa-solid fa-circle-user"></i>
+				<span class="greeting"
+					th:text="${bean.nombres + ' ' + bean.apePaterno + ' '  + bean.apeMaterno}"></span>
+
+				<div class="notifications">
+
+
+					<svg>
+						<use xlink:href="#users"></use>
+					</svg>
+				</div>
+			</div>
+		</section>
+		<section class="grid">
+			<article>
+				<div class="contact_form">
+
+					<div class="formulario">
+						<h1 style="text-align: center;">Registro Visitante</h1>
+
+						<form action="" method="post">
+							<input class="registro1" type="hidden" value="0">
+							
+							<div>
+							<p>
+								<label for="nombre">Nombre de Archivo
+								</label>
+								<input  type="file" name="nombre" id="btnNombre"
+									required="obligatorio">
+							</p>
+							</div>
+						
+							<div class="col-md-12" >
+								<label for="especie"> Departamento
+									<span class="obligatorio">*</span></label>
+								<select class="form-control registro1" name="departamento" id="idDepartamento">
+									<option value="-1">[Seleccione un Departamento.] </option>
+									<option th:each="bean:${departamento}" th:value="${bean.idDepartamento}"
+										th:text="${bean.descripcion}"></option>
+								</select>
+							</div>
+							<p>
+								<label for="Nombres">Nombres
+								</label>
+								<input class="registro1" type="text" name="Nombres" id="idNombres"
+									required="obligatorio" placeholder="Escribe tus Nombres">
+							</p>
+							<p>
+								<label for="Apellidos">Apellidos
+									<span class="obligatorio">*</span>
+								</label>
+								<input class="registro1" type="text" name="Apellidos" id="idApellidos"
+									required="obligatorio" placeholder="Escribe tus Apellidos">
+							</p>
+							<div>
+								<label for="rol">Tipo de Documento <span class="obligatorio">*</span></label>
+								<select name="rol" class="registro1">
+									<option value="-1">Tipo de Documento</option>
+									<option th:each="bean:${rol}" th:value="${bean.idRol}"
+										th:utext="${bean.descripcion}"></option>
+								</select>
+							</div>
+							<p>
+								<label for="Documento">Documento
+								</label>
+								<input class="registro1" type="number" name="Documento" id="idDocumento"
+									required="obligatorio" placeholder="Escribe tu Documento">
+							</p>
+<p>
+								<p>
+								<label for="Telefono">Telefono
+								</label>
+								<input class="registro1" type="number" name="Telefono" id="idTelefono"
+									required="obligatorio" placeholder="Escribe tu Telefono">
+							</p>
+							<p>
+								<label for="Correo">Correo
+								</label>
+								<input class="registro1" type="email" name="Correo" id="idCorreo"
+									required="obligatorio" placeholder="Escribe tu correo">
+							</p>
+							<p>
+								<div class="col-md-12" >
+								<label for="cliente"> Cliente
+									<span class="obligatorio">*</span></label>
+								<select class="form-control registro1" name="	" id="idCliente">
+									<option value="-1">[Seleccione un Cliente.] </option>
+									<option th:each="bean:${cliente}" th:value="${bean.idCliente}"
+										th:text="${bean.descripcion}"></option>
+								</select>
+							</div>
+							</p>
+
+							<button class="botones1" type="submit" name="enviar_formulario" id="enviar">
+								<p>Registrar</p>
+							</button>
+
+							<p class="aviso">
+								<span class="obligatorio"> * </span>los campos son obligatorios.
+							</p>
+
+						</form>
+					</div>
+				</div>
+			</article>
+			<!--  <article>
+     
+   </article>
+    <article></article> -->
+			<h1 style="text-align: center;">Lista de Visitante</h1>
+			<br>
+			<div class="limiter">
+				<div style="text-align: center;">
+					<button class="botonEditar" type="submit" name="editar" id="editar">
+						<p>Editar</p>
+					</button>
+					<button class="botonEliminar" type="submit" name="eliminar" id="eliminar">
+						<p>Eliminar</p>
+					</button>
+				</div>
+				<div class="container-table100">
+					<div class="wrap-table100">
+						<div class="table100">
+							<table>
+								<thead>
+									<tr class="table100-head">
+										<th class="column1">Visitante</th>
+										<th class="column2">Nombre de Archivo</th>
+										<th class="column3">Departamento</th>
+										<th class="column4">Nombres</th>
+										<th class="column5">Apellidos</th>
+										<th class="column6">Tipo Documento</th>
+										<th class="column6">Documento</th>
+										<th class="column6">Telefono</th>
+										<th class="column6">Correo</th>
+										<th class="column6">Cliente</th>
+										<th class="column6">Usuario</th>
+										<th class="column6">Fecha de Registro</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class=""th:each="bean:${visitante}">
+										<td class="column1" th:text="${bean.idVisitante}"></td>
+										<td class="column2" th:text="${bean.nombreArchivo}"></td>
+										<td class="column3" th:text="${bean.nombres}"></td>
+										<td class="column3" th:text="${bean.apellidos}"></td>
+										<td class="column4" th:text="${bean.tipodocumentoFK.descripcion}"></td>
+										<td class="column3" th:text="${bean.documento}"></td>
+										<td class="column3" th:text="${bean.telefono}"></td>
+										<td class="column3" th:text="${bean.correo}"></td>
+										<td class="column4" th:text="${bean.clienteFK.nombres}"></td>
+										<td class="column4" th:text="${bean.usuarioFK.nombres}"></td>
+										<td class="column8" th:text="${bean.fechaRegistro}"></td>
+									</tr>
+
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+		</section>
+		<footer class="page-footer">
+
+		</footer>
+	</section>
+	<!-- partial -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script th:src="@{/resources/js/adminjs.js}"></script>
+	<script th:src="@{/resources/js/main.js}"></script>
+	<script th:src="@{/resources/js/validarCliente.js}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
+		integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script th:src="@{/resources/alertifyjs/alertify.js}"></script>
+	<script th:src="@{/resources/alertifyjs/alertify.min.js}"></script>
+
+	<script th:inline="javascript" th:if="${MENSAJE!=null}">
+		//obtener atributo MENSAJE
+		var mensaje =/*[[${MENSAJE}]]*/ null;
+		const Toast = Swal.mixin({
+			toast: true,
+			position: 'top-end',
+			showConfirmButton: false,
+			timer: 3000,
+			timerProgressBar: true,
+			didOpen: (toast) => {
+				toast.addEventListener('mouseenter', Swal.stopTimer)
+				toast.addEventListener('mouseleave', Swal.resumeTimer)
+			}
+		})
+
+		Toast.fire({
+			icon: 'success',
+			title: mensaje
+		})
+
+	</script>
+
+	<script th:inline="javascript" th:if="${existen!=null}">
+
+		var exist =/*[[${existen}]]*/ null;
+		const Toast = Swal.mixin({
+			toast: true,
+			position: 'top-end',
+			showConfirmButton: false,
+			timer: 3000,
+			timerProgressBar: true,
+			didOpen: (toast) => {
+				toast.addEventListener('mouseenter', Swal.stopTimer)
+				toast.addEventListener('mouseleave', Swal.resumeTimer)
+			}
+		})
+
+		Toast.fire({
+			icon: 'warning',
+			title: exist
+		})
+
+	</script>
+	<script>
+		$(document).on("click", "#idEditar", function () {
+			let codigo;
+			codigo = $(this).parents("tr").find("td")[0].innerHTML;
+			$.get("buscar?idVisitanteo=" + codigo, function (data) {
+				$("#idcodigo").val(data.idUsuario);
+				$("#idnombres").val(data.nombreCompleto);
+				$("#idapellidos").val(data.apellidoCompleto);
+				$("#idDni").val(data.dni);
+				$("#idcelular").val(data.celular);
+				$("#idcorreo").val(data.correo);
+				//$("#idcampo").css("display", "none");
+				$("#idRaza").val(data.raza);
+				$("#iddescripcion").val(data.descripcionRaza);
+			});
+		});
+	</script>
+
+	<script>
+		//btn-eliminar del modal
+		$(document).on("click", ".btn-eliminar", function () {
+			let cod;
+			cod = $(this).parents("tr").find("td")[0].innerHTML;
+			alertify.confirm("SISTEMA GESTION DE EDIFICIO", "¿Esta seguro de eliminar?",
+				function () {//SIIII
+
+				},
+				function () {//NOOOO
+					window.location = "eliminar?idVisitante=" + cod;
+				}).set('labels', {ok: 'Cancelar', cancel: 'Eliminar'});
+		})
+
+	</script>
+</body>
+
+
+</html>
