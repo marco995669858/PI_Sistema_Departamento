@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Cliente</title>
+	<title>Perfil Departamento</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrardepartamento.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrarformulario.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/tablas.css}">
@@ -152,7 +152,7 @@
 
 					<div class="formulario">
 
-						<h1 style="text-align: center;">Registro Usuario</h1>
+						<h1 style="text-align: center;">Perfil de Usuario</h1>
 
 						<form th:action="@{/res/usuario/registrar}" method="post" onsubmit="">
 
@@ -199,7 +199,7 @@
 
 
 							<p>
-								<label for="cuentaUsuario" class="colocar_correo">Cuenta de Usuario
+								<label for="cuentaUsuario" class="colocar_correo">Correo
 									<span class="obligatorio">*</span>
 								</label>
 								<input class="registro1" type="email" name="cuentaUsuario" id="idCuentausuario"
@@ -216,178 +216,27 @@
 							</p>
 
 							<p>
-								<label for="telefono" class="form-control">Telefono
+								<label for="password" class="colocar_celular">Confirmar Contraseña
 									<span class="obligatorio">*</span>
 								</label>
-								<input class="registro1" type="number" name="telefono" id="idTelefono"
-									placeholder="Escribe tu Celular">
+								<input class="registro1" type="password" name="password" id="idPassword"
+									placeholder="Escribe tu contraseña">
 							</p>
 
-							<div>
-								<label for="rol">Rol <span class="obligatorio">*</span></label>
-								<select name="rol" class="registro1">
-									<option value="-1">Seleccione un Rol</option>
-									<option th:each="bean:${rol}" th:value="${bean.idRol}"
-										th:utext="${bean.descripcion}"></option>
-								</select>
-							</div>
+							
 
 
 							<button class="botones1" type="submit" name="enviar_formulario" id="registrar">
-								<p>Registrar</p>
+								<p>Guardar</p>
 							</button>
 
-							<p class="aviso">
-								<span class="obligatorio"> * </span>los campos son obligatorios.
-							</p>
+							
 
 						</form>
 					</div>
 				</div>
 			</article>
-
-
-			<div class="limiter">
-				<div class="container-table100">
-					<h1 style="text-align: center;">Lista de usuarios</h1>
-
-					<div class="wrap-table100">
-						<div class="table100">
-							<table>
-								<thead>
-									<tr class="table100-head">
-										<th class="column1">Codigo</th>
-										<th class="column2">Nombres</th>
-										<th class="column3">Paterno</th>
-										<th class="column4">Materno</th>
-										<th class="column5">Correo</th>
-										<th class="column6">Telefono</th>
-										<th class="column7">Rol</th>
-										<th class="column8">Fecha de Registro</th>
-										<th class="column1"></th>
-										<th class="column1"></th>
-									</tr>
-								</thead>
-								<tbody>
-
-									<tr th:each="bean:${listaUsuario}" class="text-center">
-										<td class="column1" th:text="${bean.idUsuario}"></td>
-										<td class="column2" th:text="${bean.nombres}"></td>
-										<td class="column3" th:text="${bean.apePaterno}"></td>
-										<td class="column4" th:text="${bean.apeMaterno}"></td>
-										<td class="column5" th:text="${bean.cuentaUsuario}"></td>
-										<td class="column6" th:text="${bean.telefono}"></td>
-										<td class="column7" th:text="${bean.rol.descripcion}"></td>
-										<td class="column8" th:text="${bean.fechaRegistro}"></td>
-										<td class="column1"><a><i class="fa-solid fa-pen-to-square"></i></a></td>
-										<td class="column1"><a class="btn-eliminar"><i
-													class="fa-solid fa-trash-can"></i></a></td>
-									</tr>
-
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
-
-
-
-		</section>
-		<footer class="page-footer">
-
-		</footer>
-	</section>
-	<!-- partial -->
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
-		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-	<script th:src="@{/resources/js/adminjs.js}"></script>
-	<script th:src="@{/resources/js/main.js}"></script>
-	<script th:src="@{/resources/js/validarCliente.js}"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
-		integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ=="
-		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<script th:src="@{/resources/alertifyjs/alertify.js}"></script>
-	<script th:src="@{/resources/alertifyjs/alertify.min.js}"></script>
-
-	<script th:inline="javascript" th:if="${MENSAJE!=null}">
-		//obtener atributo MENSAJE
-		var mensaje =/*[[${MENSAJE}]]*/ null;
-		const Toast = Swal.mixin({
-			toast: true,
-			position: 'top-end',
-			showConfirmButton: false,
-			timer: 3000,
-			timerProgressBar: true,
-			didOpen: (toast) => {
-				toast.addEventListener('mouseenter', Swal.stopTimer)
-				toast.addEventListener('mouseleave', Swal.resumeTimer)
-			}
-		})
-
-		Toast.fire({
-			icon: 'success',
-			title: mensaje
-		})
-
-	</script>
-
-	<script th:inline="javascript" th:if="${existen!=null}">
-
-		var exist =/*[[${existen}]]*/ null;
-		const Toast = Swal.mixin({
-			toast: true,
-			position: 'top-end',
-			showConfirmButton: false,
-			timer: 3000,
-			timerProgressBar: true,
-			didOpen: (toast) => {
-				toast.addEventListener('mouseenter', Swal.stopTimer)
-				toast.addEventListener('mouseleave', Swal.resumeTimer)
-			}
-		})
-
-		Toast.fire({
-			icon: 'warning',
-			title: exist
-		})
-
-	</script>
-	<script>
-		$(document).on("click", "#idEditar", function () {
-			let codigo;
-			codigo = $(this).parents("tr").find("td")[0].innerHTML;
-			$.get("buscar?idUsuario=" + codigo, function (data) {
-				$("#idcodigo").val(data.idUsuario);
-				$("#idnombres").val(data.nombreCompleto);
-				$("#idapellidos").val(data.apellidoCompleto);
-				$("#idDni").val(data.dni);
-				$("#idcelular").val(data.celular);
-				$("#idcorreo").val(data.correo);
-				//$("#idcampo").css("display", "none");
-				$("#idRaza").val(data.raza);
-				$("#iddescripcion").val(data.descripcionRaza);
-			});
-		});
-	</script>
-
-	<script>
-		//btn-eliminar del modal
-		$(document).on("click", ".btn-eliminar", function () {
-			let cod;
-			cod = $(this).parents("tr").find("td")[0].innerHTML;
-			alertify.confirm("SISTEMA GESTION DE EDIFICIO", "¿Esta seguro de eliminar?",
-				function () {//SIIII
-
-				},
-				function () {//NOOOO
-					window.location = "eliminar?idVisitante=" + cod;
-				}).set('labels', {ok: 'Cancelar', cancel: 'Eliminar'});
-		})
-
-	</script>
-</body>
-
-
-</html>
+			 </section>
+      </section>
+      </body>
+      </html>
