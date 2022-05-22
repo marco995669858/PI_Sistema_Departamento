@@ -8,7 +8,9 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Controller;
+
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,8 +32,8 @@ public class ClienteController {
 	private ClienteService service;
 
 	@RequestMapping("/")
-	public String cliente(Model model) {
-		return "cliente";
+	public String index(Model model) {
+		return "usuario";
 	}
 
 	@RequestMapping("/listar")

@@ -12,11 +12,14 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
 		integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
 		crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 	<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.css}">
 	<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.min.css}">
 
 
+
 </head>
+
 
 <style>
 	.alertify .ajs-dialog {
@@ -214,6 +217,7 @@
 
 						<form th:action="@{/res/mascotas/registrar}" method="post">
 
+
 							<input class="registro1" type="hidden" value="0" name="codigo" id="idcodigo">
 
 							<div class="col-md-12">
@@ -223,6 +227,7 @@
 									<option value="-1">[Seleccione un número de Departamento.] </option>
 									<option th:each="bean:${departamento}" th:value="${bean.idDepartamento}"
 										th:utext="${bean.nroDepartamento}"></option>
+
 								</select>
 							</div>
 
@@ -243,6 +248,7 @@
 										th:text="${bean.animal}"></option>
 								</select>
 							</div>
+
 
 							<button class="botones1" type="submit" name="enviar_formulario" id="enviar">
 								<p>Registrar</p>
@@ -292,8 +298,6 @@
 				</div>
 			</div>
 
-
-
 		</section>
 		<footer class="page-footer">
 
@@ -311,7 +315,6 @@
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script th:src="@{/resources/alertifyjs/alertify.js}"></script>
 	<script th:src="@{/resources/alertifyjs/alertify.min.js}"></script>
-
 	<script th:inline="javascript" th:if="${MENSAJE!=null}">
 		//obtener atributo MENSAJE
 		var mensaje =/*[[${MENSAJE}]]*/ null;
@@ -334,7 +337,6 @@
 
 	</script>
 	<script th:inline="javascript" th:if="${existente!=null}">
-		//obtener atributo MENSAJE
 		var mensaje =/*[[${existente}]]*/ null;
 		const Toast = Swal.mixin({
 			toast: true,
@@ -355,6 +357,7 @@
 
 	</script>
 	<script>
+
 		$(document).on("click", ".btn-actualizar", function () {
 			let cod;
 			cod = $(this).parents("tr").find("td")[0].innerHTML;
@@ -377,6 +380,7 @@
 				function () {//NOOOO
 					window.location = "eliminar?codigo=" + cod;
 				}).set('labels', {ok: 'Cancelar', cancel: 'Eliminar'});
+
 		});
 	</script>
 </body>
