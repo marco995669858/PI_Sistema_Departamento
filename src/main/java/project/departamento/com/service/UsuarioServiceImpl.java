@@ -6,7 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import project.departamento.com.entity.Rol;
 import project.departamento.com.entity.Usuario;
+import project.departamento.com.repository.RolRepository;
 import project.departamento.com.repository.UsuarioRepository;
 
 @Service
@@ -14,6 +16,9 @@ public class UsuarioServiceImpl implements UsuarioService{
 	
 	@Autowired
 	private UsuarioRepository repository;
+	
+	@Autowired
+	private RolRepository rolRepository;
 	
 
 	@Override
@@ -41,6 +46,21 @@ public class UsuarioServiceImpl implements UsuarioService{
 	@Override
 	public Usuario registrarActualizaUsuario(Usuario bean) {
 		return repository.save(bean);
+	}
+
+	@Override
+	public List<Rol> listarRoles() {
+		return rolRepository.findAll();
+	}
+
+	@Override
+	public Usuario eliminarUsuario(Usuario bean) {
+		return repository.save(bean);
+	}
+
+	@Override
+	public Usuario buscarUsarioPorCodigo(Integer codigo) {
+		return repository.findById(codigo).orElse(null);
 	}
 
 }

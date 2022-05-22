@@ -8,10 +8,11 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import project.departamento.com.entity.Cliente;
 import project.departamento.com.entity.Departamento;
@@ -21,23 +22,21 @@ import project.departamento.com.entity.TipoDocumento;
 import project.departamento.com.entity.Usuario;
 import project.departamento.com.service.ClienteService;
 
-@RestController
+@Controller
 @RequestMapping("/rest/cliente")
 public class ClienteController {
 
 	@Autowired
 	private ClienteService service;
 
-
 	@RequestMapping("/")
-	public String index(Model model) {
-		return "usuario";
+	public String cliente(Model model) {
+		return "cliente";
+	}
 
 	@RequestMapping("/listar")
 	public ResponseEntity<List<Cliente>> listarClientes() {
-
 		List<Cliente> salida = service.listarTodoslosClientes();
-
 		return ResponseEntity.ok(salida);
 
 	}
