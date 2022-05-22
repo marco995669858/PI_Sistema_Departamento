@@ -23,18 +23,18 @@ public class UsuarioServiceImpl implements UsuarioService{
 
 	@Override
 	public Optional<Usuario> buscarCorreo(String correo) {
-		return repository.findByCuentaUsuario(correo);
+		return repository.buscarCuentaUsuario(correo);
 	}
 
 	@Override
 	public Optional<Usuario> buscarTelefono(String telefono) {
-		return repository.findByTelefono(telefono);
+		return repository.buscarTelefono(telefono);
 	}
 
 	
 	@Override
-	public List<Usuario> listarTodosLosUsuario() {
-		return repository.findAll();
+	public List<Usuario> listarTodosLosUsuarioActivos(int eliminado) {
+		return repository.findByEliminado(eliminado);
 	}
 
 	@Override
@@ -62,5 +62,15 @@ public class UsuarioServiceImpl implements UsuarioService{
 	public Usuario buscarUsarioPorCodigo(Integer codigo) {
 		return repository.findById(codigo).orElse(null);
 	}
+//
+//	@Override
+//	public Optional<Usuario> buscarCuentaUsuario(String correo) {
+//		return repository.buscarccCuentaUsuario(correo);
+//	}
+//
+//	@Override
+//	public Optional<Usuario> buscarTelefonovacio(String telefono) {
+//		return repository.buscarTelefonovacio(telefono);
+//	}
 
 }
