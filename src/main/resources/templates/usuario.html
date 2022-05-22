@@ -7,13 +7,14 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrardepartamento.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrarformulario.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/tablas.css}">
-
-
 	<script src="https://kit.fontawesome.com/7df5974cca.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
 		integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
 		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.css}">
+	<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.min.css}">
 
 
 </head>
@@ -153,14 +154,14 @@
 
 						<h1 style="text-align: center;">Registro Usuario</h1>
 
-						<form th:action="@{/registro/usuario/registra_actualiza}" method="post" onsubmit="">
+						<form th:action="@{/res/usuario/registrar}" method="post" onsubmit="">
 
 
 							<input class="registro1" type="hidden" value="0" name="codigo" id="idcodigo">
 
 							<p>
 
-								<label for="nomUsuario" class="form-control">Username
+								<label for="nomUsuario" class="form-control">Nombre de usuario
 									<span class="obligatorio">*</span>
 								</label>
 								<input class="registro1" type="text" name="nomUsuario" id="idNomusuario"
@@ -227,7 +228,7 @@
 								<select name="rol" class="registro1">
 									<option value="-1">Seleccione un Rol</option>
 									<option th:each="bean:${rol}" th:value="${bean.idRol}"
-										th:utext="${bean.descripcionRol}"></option>
+										th:utext="${bean.descripcion}"></option>
 								</select>
 							</div>
 
@@ -256,21 +257,32 @@
 								<thead>
 									<tr class="table100-head">
 										<th class="column1">Codigo</th>
-
-										<th class="column2">Username</th>
-										<th class="column3">Nombres</th>
-										<th class="column4">Apellido Paterno</th>
-										<th class="column5">Apellido Materno</th>
-										<th class="column6">Correo</th>
-										<th class="column7">Telefono</th>
-										<th class="column8">Rol</th>
-										<th class="column9">Fecha de Registro</th>
-				
+										<th class="column2">Nombres</th>
+										<th class="column3">Paterno</th>
+										<th class="column4">Materno</th>
+										<th class="column5">Correo</th>
+										<th class="column6">Telefono</th>
+										<th class="column7">Rol</th>
+										<th class="column8">Fecha de Registro</th>
+										<th class="column1"></th>
+										<th class="column1"></th>
 									</tr>
 								</thead>
 								<tbody>
-									
 
+									<tr th:each="bean:${listaUsuario}" class="text-center">
+										<td class="column1" th:text="${bean.idUsuario}"></td>
+										<td class="column2" th:text="${bean.nombres}"></td>
+										<td class="column3" th:text="${bean.apePaterno}"></td>
+										<td class="column4" th:text="${bean.apeMaterno}"></td>
+										<td class="column5" th:text="${bean.cuentaUsuario}"></td>
+										<td class="column6" th:text="${bean.telefono}"></td>
+										<td class="column7" th:text="${bean.rol.descripcion}"></td>
+										<td class="column8" th:text="${bean.fechaRegistro}"></td>
+										<td class="column1"><a><i class="fa-solid fa-pen-to-square"></i></a></td>
+										<td class="column1"><a class="btn-eliminar"><i
+													class="fa-solid fa-trash-can"></i></a></td>
+									</tr>
 
 								</tbody>
 							</table>
@@ -296,6 +308,9 @@
 		integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ=="
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script th:src="@{/resources/alertifyjs/alertify.js}"></script>
+	<script th:src="@{/resources/alertifyjs/alertify.min.js}"></script>
+
 	<script th:inline="javascript" th:if="${MENSAJE!=null}">
 		//obtener atributo MENSAJE
 		var mensaje =/*[[${MENSAJE}]]*/ null;
@@ -318,10 +333,9 @@
 
 	</script>
 
-	<script th:inline="javascript" th:if="${existente!=null}">
+	<script th:inline="javascript" th:if="${existen!=null}">
 
-		//obtener atributo MENSAJE
-		var mensaje =/*[[${existente}]]*/ null;
+		var exist =/*[[${existen}]]*/ null;
 		const Toast = Swal.mixin({
 			toast: true,
 			position: 'top-end',
@@ -336,7 +350,7 @@
 
 		Toast.fire({
 			icon: 'warning',
-			title: mensaje
+			title: exist
 		})
 
 	</script>
@@ -357,6 +371,23 @@
 			});
 		});
 	</script>
+
+	<script>
+		//btn-eliminar del modal
+		$(document).on("click", ".btn-eliminar", function () {
+			let cod;
+			cod = $(this).parents("tr").find("td")[0].innerHTML;
+			alertify.confirm("SISTEMA GESTION DE EDIFICIO", "¿Esta seguro de eliminar?",
+				function () {//SIIII
+
+				},
+				function () {//NOOOO
+					window.location = "eliminar?idVisitante=" + cod;
+				}).set('labels', {ok: 'Cancelar', cancel: 'Eliminar'});
+		})
+
+	</script>
 </body>
+
 
 </html>
