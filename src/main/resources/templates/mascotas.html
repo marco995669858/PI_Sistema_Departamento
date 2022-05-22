@@ -13,8 +13,79 @@
 		integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
 		crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+	<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.css}">
+	<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.min.css}">
+
+
 
 </head>
+
+
+<style>
+	.alertify .ajs-dialog {
+		top: 50%;
+		transform: translateY(-50%);
+		margin: auto;
+	}
+
+	.ajs-header {
+		background-color: #286090 !important;
+		color: white !important;
+		/*text-align: center;*/
+		font-size: 18px;
+		font-weight: bold;
+	}
+
+	.ajs-ok {
+		color: #fff;
+		background-color: #007bff;
+		border-color: #007bff;
+	}
+
+	.ajs-cancel {
+		color: #fff;
+		background-color: #dc3545;
+		border-color: #dc3545;
+	}
+
+	.btn-primary {
+		background-color: #286090 !important;
+	}
+
+	.dataTables_length,
+	.dataTables_info {
+		display: none;
+	}
+
+	.modal-lg,
+	.modal-xl {
+		max-width: 900px;
+		max-height: 800px;
+	}
+
+	.form-control-feedback2 {
+		margin: 1px;
+		position: absolute;
+		padding: 10px;
+		pointer-events: none;
+		background-color: #e9ecef;
+		border-style: none;
+	}
+
+	.form-control-feedback3 {
+		margin: 1px;
+		position: absolute;
+		margin-left: 225px;
+		padding: 10px;
+		pointer-events: none;
+		background-color: #e9ecef;
+		border-style: none;
+	}
+
+	.form-control {
+		padding-left: 40px !important;
+	}
+</style>
 
 <body>
 
@@ -144,7 +215,8 @@
 
 						<h1 style="text-align: center;">Registrar Mascotas</h1>
 
-						<form th:action="@{/registro/mascotas/registra_actualiza_mascotas}" method="post" onsubmit="">
+						<form th:action="@{/res/mascotas/registrar}" method="post">
+
 
 							<input class="registro1" type="hidden" value="0" name="codigo" id="idcodigo">
 
@@ -154,7 +226,8 @@
 								<select class="form-control registro1" name="nroDepartamento" id="idnroDepartamento">
 									<option value="-1">[Seleccione un número de Departamento.] </option>
 									<option th:each="bean:${departamento}" th:value="${bean.idDepartamento}"
-										th:text="${bean.nroDepartamento}"></option>
+										th:utext="${bean.nroDepartamento}"></option>
+
 								</select>
 							</div>
 
@@ -172,17 +245,10 @@
 								<select class="form-control registro1" name="especie" id="idEspecie">
 									<option value="-1">[Seleccione Especie.] </option>
 									<option th:each="bean:${especie}" th:value="${bean.idEspecie}"
-										th:text="${bean.descripcion}"></option>
+										th:text="${bean.animal}"></option>
 								</select>
 							</div>
 
-							<div class="col-md-12">
-								<label for="cliente"> Dueño
-									<span class="obligatorio">*</span></label>
-								<select class="form-control registro1" name="cliente" id="idCliente">
-									<option value="-1">[Seleccione Dueño] </option>
-								</select>
-							</div>
 
 							<button class="botones1" type="submit" name="enviar_formulario" id="enviar">
 								<p>Registrar</p>
@@ -203,24 +269,26 @@
 								<thead>
 									<tr class="table100-head">
 										<th class="column1">Codigo</th>
-										<th class="column2">Nro Departamento</th>
-										<th class="column3">Nombre de la Mascota</th>
-										<th class="column4">Especie de la Mascota</th>
-										<th class="column4">Username</th>
-										<th class="column5">Dueño</th>
-										<th class="column6">Fecha de Registro</th>
+										<th class="column8">Nro Departamento</th>
+										<th class="column8">Nombre de la Mascota</th>
+										<th class="column8">Especie de la Mascota</th>
+										<th class="column8">Nombre del trabajador</th>
+										<th></th>
+										<th></th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr class="" th:each="bean:${mascotas}">
-										<td class="column1" th:text="${bean.idMascota}"></td>
-										<td class="column2" th:text="${bean.departamentoFK.nroDepartamento}"></td>
-										<td class="column3" th:text="${bean.nombre}"></td>
-										<td class="column4" th:text="${bean.especieFK.descripcion}"></td>
-										<td class="column5"
-											th:text="${bean.usuarioFK.nombres + ' ' + bean.usuarioFK.apePaterno + ' ' +  bean.usuarioFK.apeMaterno}">
-										</td>
-										<td class="column6" th:text="${bean.sexo}"></td>
+										<td class="column1" th:text="${bean.idMascotas}"></td>
+										<td class="column8" th:text="${bean.departamento.nroDepartamento}"></td>
+										<td class="column8" th:text="${bean.nombres}"></td>
+										<td class="column8" th:text="${bean.especie.animal}"></td>
+										<td class="column8" th:text="${bean.usuario.nomUsuario}"></td>
+										<td class="column1"><a class="btn btn-info btn-actualizar"><i
+													class="fa-solid fa-pen-to-square"></i></a></td>
+										<td class="column1"><a class="btn-eliminar"><i
+													class="fa-solid fa-trash-can"></i></a></td>
+
 									</tr>
 
 								</tbody>
@@ -229,7 +297,6 @@
 					</div>
 				</div>
 			</div>
-
 
 		</section>
 		<footer class="page-footer">
@@ -246,6 +313,8 @@
 		integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ=="
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script th:src="@{/resources/alertifyjs/alertify.js}"></script>
+	<script th:src="@{/resources/alertifyjs/alertify.min.js}"></script>
 	<script th:inline="javascript" th:if="${MENSAJE!=null}">
 		//obtener atributo MENSAJE
 		var mensaje =/*[[${MENSAJE}]]*/ null;
@@ -288,19 +357,30 @@
 
 	</script>
 	<script>
-		$(document).on("click", "#idEditar", function () {
-			let codigo;
-			codigo = $(this).parents("tr").find("td")[0].innerHTML;
-			$.get("buscar?idUsuario=" + codigo, function (data) {
-				$("#idcodigo").val(data.idUsuario);
-				$("#idnombres").val(data.nombreCompleto);
-				$("#idapellidos").val(data.apellidoCompleto);
-				$("#idDni").val(data.dni);
-				$("#idcelular").val(data.celular);
-				$("#idcorreo").val(data.correo);
-				$("#idRaza").val(data.raza);
-				$("#iddescripcion").val(data.descripcionRaza);
-			});
+
+		$(document).on("click", ".btn-actualizar", function () {
+			let cod;
+			cod = $(this).parents("tr").find("td")[0].innerHTML;
+			$.get("buscar?codigo=" + cod, function (response) {
+				$("#idcodigo").val(response.idMascotas);
+				$("#idnroDepartamento").val(response.departamento.idDepartamento);
+				$("#idnombres").val(response.nombres);
+				$("#idEspecie").val(response.especie.idEspecie);
+
+			})
+		});
+
+		$(document).on("click", ".btn-eliminar", function () {
+			let cod;
+			cod = $(this).parents("tr").find("td")[0].innerHTML;
+			alertify.confirm("SISTEMA GESTION DE EDIFICIO", "¿Esta seguro de eliminar?",
+				function () {//SIIII
+
+				},
+				function () {//NOOOO
+					window.location = "eliminar?codigo=" + cod;
+				}).set('labels', {ok: 'Cancelar', cancel: 'Eliminar'});
+
 		});
 	</script>
 </body>

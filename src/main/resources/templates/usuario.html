@@ -7,12 +7,8 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrardepartamento.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrarformulario.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/tablas.css}">
-	<script src="https://kit.fontawesome.com/7df5974cca.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-		integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-		crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	
 	<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.css}">
 	<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.min.css}">
 
@@ -23,6 +19,64 @@
 </head>
 
 
+<style>
+
+	
+	.alertify .ajs-dialog {
+	    top: 50%;
+	    transform: translateY(-50%);
+	    margin: auto;
+	}
+	
+	.ajs-header{
+		background-color: #286090 !important;
+		color: white !important;
+		/*text-align: center;*/
+		font-size: 18px;
+		font-weight: bold;
+	}
+	.ajs-ok{
+		color: #fff;
+	    background-color: #007bff;
+	    border-color: #007bff;
+	}
+	.ajs-cancel{
+		color: #fff;
+	    background-color: #dc3545;
+	    border-color: #dc3545;
+	}
+	.btn-primary{
+	background-color: #286090 !important;
+	}
+	.dataTables_length, .dataTables_info{
+		display: none;
+	}
+	.modal-lg, .modal-xl {
+		max-width: 900px;
+		max-height: 800px;
+	}
+	
+	.form-control-feedback2 {
+	  margin:1px;
+	  position: absolute;
+	  padding: 10px;
+	  pointer-events: none;
+	  background-color: #e9ecef;
+	  border-style: none;
+	}
+	.form-control-feedback3 {
+	  margin:1px;
+	  position: absolute;
+	  margin-left:225px;
+	  padding: 10px;
+	  pointer-events: none;
+	  background-color: #e9ecef;
+	  border-style: none;
+	}
+	.form-control {
+	  padding-left: 40px!important;
+	}
+</style> 
 <body>
 
 	<header class="page-header">
@@ -154,7 +208,7 @@
 
 						<h1 style="text-align: center;">Registro Usuario</h1>
 
-						<form th:action="@{/res/usuario/registrar}" method="post" onsubmit="">
+						<form th:action="@{/rest/usuario/registrar}" method="post" onsubmit="">
 
 
 							<input class="registro1" type="hidden" value="0" name="codigo" id="idcodigo">
@@ -265,7 +319,6 @@
 										<th class="column7">Rol</th>
 										<th class="column8">Fecha de Registro</th>
 										<th class="column1"></th>
-										<th class="column1"></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -279,7 +332,6 @@
 										<td class="column6" th:text="${bean.telefono}"></td>
 										<td class="column7" th:text="${bean.rol.descripcion}"></td>
 										<td class="column8" th:text="${bean.fechaRegistro}"></td>
-										<td class="column1"><a><i class="fa-solid fa-pen-to-square"></i></a></td>
 										<td class="column1"><a class="btn-eliminar"><i
 													class="fa-solid fa-trash-can"></i></a></td>
 									</tr>
@@ -354,7 +406,7 @@
 		})
 
 	</script>
-	<script>
+<!--	<script>
 		$(document).on("click", "#idEditar", function () {
 			let codigo;
 			codigo = $(this).parents("tr").find("td")[0].innerHTML;
@@ -370,7 +422,7 @@
 				$("#iddescripcion").val(data.descripcionRaza);
 			});
 		});
-	</script>
+	</script>-->
 
 	<script>
 		//btn-eliminar del modal
@@ -382,7 +434,7 @@
 
 				},
 				function () {//NOOOO
-					window.location = "eliminar?idVisitante=" + cod;
+					window.location = "eliminar?codigo=" + cod;
 				}).set('labels', {ok: 'Cancelar', cancel: 'Eliminar'});
 		})
 
