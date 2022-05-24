@@ -141,7 +141,7 @@
 				<div class="contact_form">
 
 					<div class="formulario">
-						<h1 style="text-align: center;">Registro de Cliente</h1>
+						<h1 style="text-align: center;">Registro de Propietarios</h1>
 
 						<form th:action="@{/registro/residente/registrarResidente}" method="post">
 							<input type="hidden" value="0" name="codigo" id="idcodigo">
@@ -184,11 +184,11 @@
 							</p>
 
 							<p>
-								<label for="telefono" class="form-control">Telefono
+								<label for="telefono" class="form-control">Celular
 									<span class="obligatorio">*</span>
 								</label>
 								<input class="registro1" type="number" name="telefono" id="idTelefono"
-									placeholder="Escribe tu Numero Telefonico">
+									placeholder="Escribe tu número de celular">
 							</p>
 
 							<p>
@@ -210,10 +210,10 @@
 							</p>
 
 							<p>
-								<label for="tipoCliente">Tipo de Cliente
+								<label for="tipoCliente">Tipo de Propietarios
 								</label>
 								<select class="registro1" name="tipoCliente" id="idTipocliente">
-									<option value="-1">[Seleccione Tipo de Cliente]</option>
+									<option value="-1">[Seleccione Tipo de Propietarios]</option>
 									<option th:each="bean:${depa}" th:value="${bean.idDepartamento}"
 										th:text="${bean.caracteristicasDepartamento.nroDepartamento}"></option>
 								</select>
@@ -256,7 +256,7 @@
      
    </article>
     <article></article> -->
-			<h1 style="text-align: center;">Lista de Cliente</h1>
+			<h1 style="text-align: center;">Lista de Propietarios</h1>
 			<br>
 
 			<div class="container-table100">
@@ -269,7 +269,7 @@
 									<th class="column2">Nombres</th>
 									<th class="column3">Apellidos</th>
 									<th class="column4">Documento</th>
-									<th class="column5">Telefono</th>
+									<th class="column5">Celular</th>
 									<th class="column6">Estado</th>
 									<th class="column7">Correo</th>
 									<th class="column8">Tipo de Cliente</th>
