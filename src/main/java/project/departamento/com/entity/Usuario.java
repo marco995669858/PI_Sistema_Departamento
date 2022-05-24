@@ -47,8 +47,17 @@ public class Usuario {
 	
 	private String telefono;
 	
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@ManyToOne(fetch = FetchType.LAZY)
+	
+	/**
+	 * 
+	 * JSON Y PROP FETCH DAN ERROR 
+	 * 
+	 * @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	 * 	@ManyToOne(fetch = FetchType.LAZY)
+	 * */
+	
+	
+	@ManyToOne
 	@JoinColumn(name = "idRol")
 	private Rol rol;
 	
@@ -61,5 +70,8 @@ public class Usuario {
 	public Usuario(Integer idUsuario) {
 		this.idUsuario = idUsuario;
 	}
+
+	 
+	
 	
 }
