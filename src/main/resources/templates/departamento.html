@@ -142,15 +142,16 @@
 						<h1 style="text-align: center;">Registro Departamento
 						</h1>
 
-						<form th:action="@{/registro/departamento/registra_actualiza}" method="post" onsubmit="">
+						<form th:action="@{/registro/departamento/registra_actualiza}" name="test" method="post" onsubmit="">
 							<input type="hidden" value="0" name="codigo" id="idcodigo">
 							<p>
 								<label for="tipoDepartamento">Tipo de Departamento
 								</label>
-								<select class="form-control" name="tipoDepartamento" id="idTipodepatamento">
+								<select class="form-control" name="tipoDepartamento" id="idTipodepatamento"
+									onchange="fillData(this.options[selectedIndex].value);">
 									<option value="-1">[Seleccione un Tipo de Departamento]</option>
-									<option th:each="bean:${depa}" th:value="${bean.idtipoDocumento}"
-										th:text="${bean.caracteristicasDepartamento.nroDepartamento}"></option>
+									<option th:each="bean:${tipodepartamento}" th:value="${bean.idTipo}"
+										th:text="${bean.descripcion}"></option>
 								</select>
 							</p>
 
@@ -171,11 +172,12 @@
 							<p>
 								<label for="nroHabitaciones">Número de Habitaciones
 								</label>
-								<input type="number" class="registro1" name="nroHabitaciones"
-									placeholder="Numero de Habitaciones" readonly="disableb" style="background-color: darkgray; color: black;;">
+								<input type="text" class="registro1" name="nroHabitaciones" id="idnro"
+									placeholder="Numero de Habitaciones"
+									style="background-color: darkgray; color: black;">
 							</p>
 
-							<p>
+							<!--<p>
 								<label for="estado">Estado
 								</label>
 								<select class="form-control" name="estado" id="idEstado">
@@ -183,7 +185,7 @@
 									<option th:each="bean:${depa}" th:value="${bean.idtipoDocumento}"
 										th:text="${bean.caracteristicasDepartamento.nroDepartamento}"></option>
 								</select>
-							</p>
+							</p>-->
 
 
 							<button class="botones1" type="submit" name="enviar_formulario" id="registrar">
@@ -216,11 +218,11 @@
 										<th class="column5">Número de Habitaciones</th>
 										<th class="column6">UserName</th>
 										<th class="column7">Fecha de Registro</th>
-										<th class="column8">Estado</th>					
+										<th class="column8">Estado</th>
 									</tr>
 								</thead>
 								<tbody>
-									
+
 
 								</tbody>
 							</table>
@@ -285,6 +287,21 @@
 			icon: 'warning',
 			title: mensaje
 		})
+
+	</script>
+	<script type="text/javascript">
+		function fillData(id) {
+			var someData = new Array();
+			someData[1] = new Array("1");
+			someData[2] = new Array("3");
+			someData[3] = new Array("2");
+			someData[4] = new Array("4");
+			someData[5] = new Array("5");
+
+			document.test.idnro.value = someData[id][0];
+		}
+
+
 
 	</script>
 

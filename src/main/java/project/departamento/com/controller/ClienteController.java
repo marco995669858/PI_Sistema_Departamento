@@ -33,7 +33,7 @@ public class ClienteController {
 
 	@RequestMapping("/")
 	public String index(Model model) {
-		return "usuario";
+		return "cliente";
 	}
 
 	@RequestMapping("/listar")
