@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Cliente</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrardepartamento.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrarformulario.css}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/visita.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/tablas.css}">
+	<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.css}">
+	<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.min.css}">
+
+
+</head>
+
+
+</head>
+
+
+<style>
+	.alertify .ajs-dialog {
+		top: 50%;
+		transform: translateY(-50%);
+		margin: auto;
+	}
+
+	.ajs-header {
+		background-color: #286090 !important;
+		color: white !important;
+		/*text-align: center;*/
+		font-size: 18px;
+		font-weight: bold;
+	}
+
+	.ajs-ok {
+		color: #fff;
+		background-color: #007bff;
+		border-color: #007bff;
+	}
+
+	.ajs-cancel {
+		color: #fff;
+		background-color: #dc3545;
+		border-color: #dc3545;
+	}
+
+	.btn-primary {
+		background-color: #286090 !important;
+	}
+
+	.dataTables_length,
+	.dataTables_info {
+		display: none;
+	}
+
+	.modal-lg,
+	.modal-xl {
+		max-width: 900px;
+		max-height: 800px;
+	}
+
+	.form-control-feedback2 {
+		margin: 1px;
+		position: absolute;
+		padding: 10px;
+		pointer-events: none;
+		background-color: #e9ecef;
+		border-style: none;
+	}
+
+	.form-control-feedback3 {
+		margin: 1px;
+		position: absolute;
+		margin-left: 225px;
+		padding: 10px;
+		pointer-events: none;
+		background-color: #e9ecef;
+		border-style: none;
+	}
+
+	.form-control {
+		padding-left: 40px !important;
+	}
+</style>
+
+<body>
+
+	<header class="page-header">
+		<nav>
+			<a href="admin.html" class="logo">
+				<img src="https://csn-spa.cl/wp-content/uploads/2019/10/csn-spa-logo.png" height="70" alt="">
+			</a>
+			<button class="toggle-mob-menu" aria-expanded="false" aria-label="open menu">
+				<svg width="20" height="20" aria-hidden="true">
+					<use xlink:href="#down"></use>
+				</svg>
+			</button>
+			<ul class="admin-menu">
+				<li class="menu-heading">
+					<h3>Admin</h3>
+				</li>
+				<li>
+					<a href="#0">
+						<i class="fa-solid fa-user"></i>
+						<span> Mi Perfil</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/departamento/}">
+						<i class="fa-solid fa-building-circle-check"></i>
+						<span>Registrar de Departamento</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/propietariodep/}">
+						<i class="fa-solid fa-building-circle-check"></i>
+						<span>Registrar de Propietario</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/visitante/}">
+						<i class="fa-solid fa-users"></i>
+						<span>Registrar Visitante</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/residente/}">
+						<i class="fa-solid fa-building-user"></i>
+						<span>Registrar Residente</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/usuario/}">
+						<i class="fa-solid fa-address-card"></i>
+						<span>Registrar Usuario</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/mascotas/}">
+						<i class="fa-solid fa-shield-dog"></i>
+						<span>Registrar Mascotas</span>
+					</a>
+				</li>
+
+
+				<li class="menu-heading">
+					<h3>Perfil</h3>
+				</li>
+				<li>
+					<a href="#0">
+						<i class="fa-solid fa-gear"></i>
+						<span>Ajustes</span>
+					</a>
+				</li>
+				<li>
+					<a href="#0">
+						<i class="fa-solid fa-wrench"></i>
+						<span>Opciones</span>
+					</a>
+				</li>
+				<li>
+					<a href="#0">
+						<i class="fa-solid fa-money-bill-trend-up"></i>
+						<span>Estadísticas</span>
+					</a>
+				</li>
+				<li>
+					<div class="switch">
+						<input type="checkbox" id="mode" checked>
+						<label for="mode">
+							<span></span>
+							<span>Oscuro</span>
+						</label>
+					</div>
+					<button class="collapse-btn" aria-expanded="true" aria-label="collapse menu">
+						<i class="fa-solid fa-angle-left"></i>
+						<span>Contraer</span>
+					</button>
+				</li>
+			</ul>
+		</nav>
+	</header>
+	<section class="page-content">
+		<section class="search-and-user">
+			<form>
+				<input type="hidden" placeholder="">
+				<button type="submit" aria-label="submit form">
+					<svg aria-hidden="true">
+						<use xlink:href="#search"></use>
+					</svg>
+				</button>
+			</form>
+			<div class="admin-profile" th:each="bean : ${session.objUsuario}">
+				<i class="fa-solid fa-circle-user"></i>
+
+				<span class="greeting"
+					th:text="${bean.nombres + ' ' + bean.apePaterno + ' '  + bean.apeMaterno}"></span>
+
+
+				<div class="notifications">
+
+
+					<svg>
+						<use xlink:href="#users"></use>
+					</svg>
+				</div>
+			</div>
+		</section>
+		<section class="grid">
+			<article>
+				<div class="contact_form">
+
+					<div class="formulario">
+
+						<h1 style="text-align: center;">Consultar Visita Salida</h1>
+
+
+						<form th:action="@{/rest/usuario/registrar}" onsubmit="return validarUsuario()">
+
+
+							<input class="registro1" type="hidden" value="0" name="codigo" id="idcodigo">
+
+							<div id="grid">
+
+								<div class="right" style="margin-right: 10px;">
+									<select class="form-control registro1" name="estado" id="idEstado"
+										style="width: 200px;">
+										<option value="-1">Seleccione Estado</option>
+										<option th:each="bean:${departamento}" th:value="${bean.idDepartamento}"
+											th:text="${bean.descripcion}"></option>
+									</select>
+								</div>
+								<div class="col-md-12 right" style="margin-right: 30px;">
+									<input class="registro2" type="search" name="documento" id="idDocumento"
+										placeholder="Escribe tu Dni">
+									<button type="button" class="button">
+										Buscar
+									</button>
+								</div>
+								<div class="left">
+									<select class="form-control registro1" name="tipoDocumento" id="idTipodocumento"
+										style="width: 250px;">
+										<option value="-1">Tipo de Documento</option>
+										<option th:each="bean:${departamento}" th:value="${bean.idDepartamento}"
+											th:text="${bean.descripcion}"></option>
+									</select>
+								</div>
+
+							</div>
+
+							<input class="registro1" type="text" name="nombres" id="idNombres"
+								placeholder="Nombre Completo">
+						</form>
+					</div>
+				</div>
+			</article>
+
+			<!-- Inicio del Modal -->
+			<div id="my-modal" class="modal">
+				<div class="modal-content">
+					<div class="modal-header">
+						<span class="close">&times;</span>
+						<center>
+							<h2>Hora Salida</h2>
+						</center>
+					</div>
+					<div class="modal-body">
+						<div id="grid">
+							<div class="col-md-12 right" style="margin-left: -90px; padding-top: 20px;">
+								<h3>Hora</h3>
+							</div>
+
+							<div style=" margin-left: 20px;" class="left">
+								<input class="registro2 " type="time" name="Documento" id="minor2"
+									placeholder="Documento"
+									style="width: 230px; background-color: rgb(192, 192, 192); color: black;"
+									onmousemove="myFunction()">
+							</div>
+
+						</div>
+
+						<div id="grid">
+							<div class="col-md-12 right" style=" padding-top: 20px;">
+								<h3>Comentario</h3>
+							</div>
+
+							<div style=" margin-left: 20px;" class="left">
+								<textarea class="registro2 " type="descripcion" name="Documento" id="idDocumento"
+									placeholder="Documento" style="width: 500px;"> Escribe aqui </textarea>
+							</div>
+
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button class="button" type="submit button">
+							Registrar
+						</button>
+					</div>
+
+				</div>
+
+
+			</div>
+
+
+
+			</div>
+			</div>
+			<!-- Fin del Modal -->
+
+
+			<div class="limiter">
+				<div class="container-table100">
+					<h1 style="text-align: center;">Listar Visita Salida</h1>
+
+					<div class="wrap-table100">
+						<div class="table100">
+							<table>
+								<thead>
+									<tr class="table100-head">
+										<th class="column1">Codigo</th>
+										<th class="column2">Nombres</th>
+										<th class="column3">Apellidos</th>
+										<th class="column4">Estado</th>
+
+									</tr>
+								</thead>
+								<tbody>
+
+									<tr th:each="bean:${listaUsuario}" class="text-center">
+										<td class="column1" th:text="${bean.idUsuario}"></td>
+										<td class="column2" th:text="${bean.nombres}"></td>
+										<td class="column3" th:text="${bean.apePaterno}"></td>
+										<td id="modal-btn" class="column4" th:text="${bean.apeMaterno}"></td>
+
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+		</section>
+		<footer class="page-footer">
+
+		</footer>
+	</section>
+	<!-- partial -->
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script th:src="@{/resources/js/adminjs.js}"></script>
+	<script th:src="@{/resources/js/main.js}"></script>
+	<script th:src="@{/resources/js/visita.js}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
+		integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script th:src="@{/resources/alertifyjs/alertify.js}"></script>
+	<script th:src="@{/resources/alertifyjs/alertify.min.js}"></script>
+
+	<script th:inline="javascript" th:if="${MENSAJE!=null}">
+		//obtener atributo MENSAJE
+		var mensaje =/*[[${MENSAJE}]]*/ null;
+		const Toast = Swal.mixin({
+			toast: true,
+			position: 'top-end',
+			showConfirmButton: false,
+			timer: 3000,
+			timerProgressBar: true,
+			didOpen: (toast) => {
+				toast.addEventListener('mouseenter', Swal.stopTimer)
+				toast.addEventListener('mouseleave', Swal.resumeTimer)
+			}
+		})
+
+		Toast.fire({
+			icon: 'success',
+			title: mensaje
+		})
+
+	</script>
+
+	<script th:inline="javascript" th:if="${existen!=null}">
+
+		var exist =/*[[${existen}]]*/ null;
+		const Toast = Swal.mixin({
+			toast: true,
+			position: 'top-end',
+			showConfirmButton: false,
+			timer: 3000,
+			timerProgressBar: true,
+			didOpen: (toast) => {
+				toast.addEventListener('mouseenter', Swal.stopTimer)
+				toast.addEventListener('mouseleave', Swal.resumeTimer)
+			}
+		})
+
+		Toast.fire({
+			icon: 'warning',
+			title: exist
+		})
+
+	</script>
+	<!--	<script>
+		$(document).on("click", "#idEditar", function () {
+			let codigo;
+			codigo = $(this).parents("tr").find("td")[0].innerHTML;
+			$.get("buscar?idUsuario=" + codigo, function (data) {
+				$("#idcodigo").val(data.idUsuario);
+				$("#idnombres").val(data.nombreCompleto);
+				$("#idapellidos").val(data.apellidoCompleto);
+				$("#idDni").val(data.dni);
+				$("#idcelular").val(data.celular);
+				$("#idcorreo").val(data.correo);
+				//$("#idcampo").css("display", "none");
+				$("#idRaza").val(data.raza);
+				$("#iddescripcion").val(data.descripcionRaza);
+			});
+		});
+	</script>-->
+
+	<script>
+		//btn-eliminar del modal
+		$(document).on("click", ".btn-eliminar", function () {
+			let cod;
+			cod = $(this).parents("tr").find("td")[0].innerHTML;
+			alertify.confirm("SISTEMA GESTION DE EDIFICIO", "¿Esta seguro de eliminar?",
+				function () {//SIIII
+
+				},
+				function () {//NOOOO
+					window.location = "eliminar?codigo=" + cod;
+				}).set('labels', {ok: 'Cancelar', cancel: 'Eliminar'});
+		})
+
+	</script>
+</body>
+
+
+</html>
