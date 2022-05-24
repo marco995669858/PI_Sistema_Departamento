@@ -154,7 +154,7 @@
 
 						<h1 style="text-align: center;">Perfil de Usuario</h1>
 
-						<form th:action="@{/res/usuario/registrar}" method="post" onsubmit="">
+						<form th:action="@{/res/usuario/registrar}" method="post" onsubmit="return validarPerfil()">
 
 
 							<input class="registro1" type="hidden" value="0" name="codigo" id="idcodigo">
@@ -238,5 +238,6 @@
 			</article>
 			 </section>
       </section>
+      <script th:src="@{/resources/js/validarPerfil.js}"></script>
       </body>
       </html>
