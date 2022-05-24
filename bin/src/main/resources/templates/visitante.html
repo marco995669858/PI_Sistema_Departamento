@@ -3,82 +3,20 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Cliente</title>
+	<title>Visita</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrardepartamento.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrarformulario.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/tablas.css}">
+	<script src="https://kit.fontawesome.com/7df5974cca.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-	
-	<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.css}">
-	<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.min.css}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+		integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
 </head>
 
-
-</head>
-
-
-<style>
-
-	
-	.alertify .ajs-dialog {
-	    top: 50%;
-	    transform: translateY(-50%);
-	    margin: auto;
-	}
-	
-	.ajs-header{
-		background-color: #286090 !important;
-		color: white !important;
-		/*text-align: center;*/
-		font-size: 18px;
-		font-weight: bold;
-	}
-	.ajs-ok{
-		color: #fff;
-	    background-color: #007bff;
-	    border-color: #007bff;
-	}
-	.ajs-cancel{
-		color: #fff;
-	    background-color: #dc3545;
-	    border-color: #dc3545;
-	}
-	.btn-primary{
-	background-color: #286090 !important;
-	}
-	.dataTables_length, .dataTables_info{
-		display: none;
-	}
-	.modal-lg, .modal-xl {
-		max-width: 900px;
-		max-height: 800px;
-	}
-	
-	.form-control-feedback2 {
-	  margin:1px;
-	  position: absolute;
-	  padding: 10px;
-	  pointer-events: none;
-	  background-color: #e9ecef;
-	  border-style: none;
-	}
-	.form-control-feedback3 {
-	  margin:1px;
-	  position: absolute;
-	  margin-left:225px;
-	  padding: 10px;
-	  pointer-events: none;
-	  background-color: #e9ecef;
-	  border-style: none;
-	}
-	.form-control {
-	  padding-left: 40px!important;
-	}
-</style> 
 <body>
-
 	<header class="page-header">
 		<nav>
 			<a href="admin.html" class="logo">
@@ -103,12 +41,6 @@
 					<a th:href="@{/registro/departamento/}">
 						<i class="fa-solid fa-building-circle-check"></i>
 						<span>Registrar de Departamento</span>
-					</a>
-				</li>
-				<li>
-					<a th:href="@{/registro/propietariodep/}">
-						<i class="fa-solid fa-building-circle-check"></i>
-						<span>Registrar de Propietario</span>
 					</a>
 				</li>
 				<li>
@@ -186,10 +118,8 @@
 			</form>
 			<div class="admin-profile" th:each="bean : ${session.objUsuario}">
 				<i class="fa-solid fa-circle-user"></i>
-
 				<span class="greeting"
 					th:text="${bean.nombres + ' ' + bean.apePaterno + ' '  + bean.apeMaterno}"></span>
-
 
 				<div class="notifications">
 
@@ -205,90 +135,82 @@
 				<div class="contact_form">
 
 					<div class="formulario">
+						<h1 style="text-align: center;">Registro Visitante</h1>
 
-						<h1 style="text-align: center;">Registro Usuario</h1>
-
-						
-						<form th:action="@{/rest/usuario/registrar}" onsubmit="return validarUsuario()">
-
-
-							<input class="registro1" type="hidden" value="0" name="codigo" id="idcodigo">
-
-							<p>
-
-								<label for="nomUsuario" class="form-control">Nombre de usuario
-									<span class="obligatorio">*</span>
-								</label>
-								<input class="registro1" type="text" name="nomUsuario" id="idNomusuario"
-									placeholder="Escribe tu Username">
-							</p>
-
-							<p>
-								<label for="nombres" class="form-control">Nombres
-									<span class="obligatorio">*</span>
-								</label>
-								<input class="registro1" type="text" name="nombres" id="idNombres"
-									placeholder="Escribe tus Nombres">
-
-							</p>
-
-							<p>
-								<label for="apellidos" class="colocar_apellidos">Apellido Paterno
-
-									<span class="obligatorio">*</span>
-
-								</label>
-								<input class="registro1" type="text" name="apePaterno" id="idapePaterno"
-									placeholder="Escribe tu apellido paterno">
-
-							</p>
-							<p>
-								<label for="apellidos" class="colocar_apellidos">Apellido Materno
-									<span class="obligatorio">*</span>
-
-								</label>
-								<input class="registro1" type="text" name="apeMaterno" id="idapeMaterno"
-									placeholder="Escribe tu apellido Materno">
-
-							</p>
-
-
-							<p>
-								<label for="cuentaUsuario" class="colocar_correo">Cuenta de Usuario
-									<span class="obligatorio">*</span>
-								</label>
-								<input class="registro1" type="email" name="cuentaUsuario" id="idCuentausuario"
-									placeholder="Escribe tu correo">
-
-							</p>
-
-							<p>
-								<label for="password" class="colocar_celular">Contraseña
-									<span class="obligatorio">*</span>
-								</label>
-								<input class="registro1" type="password" name="password" id="idPassword"
-									placeholder="Escribe tu contraseña">
-							</p>
-
-							<p>
-								<label for="telefono" class="form-control">Telefono
-									<span class="obligatorio">*</span>
-								</label>
-								<input class="registro1" type="number" name="telefono" id="idTelefono"
-									placeholder="Escribe tu Celular">
-							</p>
-
+						<form action="" method="post">
+							<input class="registro1" type="hidden" name="codigo" value="0">
+							
 							<div>
-								<label for="rol">Rol <span class="obligatorio">*</span></label>
+							<p>
+								<label for="nombre">Nombre de Archivo
+								</label>
+								<input  type="file" name="nombre" id="btnNombre"
+									required="obligatorio">
+							</p>
+							</div>
+						
+							<div class="col-md-12" >
+								<label for="especie"> Departamento
+									<span class="obligatorio">*</span></label>
+								<select class="form-control registro1" name="departamento" id="idDepartamento">
+									<option value="-1">[Seleccione un Departamento.] </option>
+									<option th:each="bean:${departamento}" th:value="${bean.idDepartamento}"
+										th:text="${bean.descripcion}"></option>
+								</select>
+							</div>
+							<p>
+								<label for="Nombres">Nombres
+								</label>
+								<input class="registro1" type="text" name="Nombres" id="idNombres"
+									required="obligatorio" placeholder="Escribe tus Nombres">
+							</p>
+							<p>
+								<label for="Apellidos">Apellidos
+									<span class="obligatorio">*</span>
+								</label>
+								<input class="registro1" type="text" name="Apellidos" id="idApellidos"
+									required="obligatorio" placeholder="Escribe tus Apellidos">
+							</p>
+							<div>
+								<label for="rol">Tipo de Documento <span class="obligatorio">*</span></label>
 								<select name="rol" class="registro1">
-									<option value="-1">Seleccione un Rol</option>
+									<option value="-1">Tipo de Documento</option>
 									<option th:each="bean:${rol}" th:value="${bean.idRol}"
 										th:utext="${bean.descripcion}"></option>
 								</select>
 							</div>
+							<p>
+								<label for="Documento">Documento
+								</label>
+								<input class="registro1" type="number" name="Documento" id="idDocumento"
+									required="obligatorio" placeholder="Escribe tu Documento">
+							</p>
+<p>
+								<p>
+								<label for="Telefono">Telefono
+								</label>
+								<input class="registro1" type="number" name="Telefono" id="idTelefono"
+									required="obligatorio" placeholder="Escribe tu Telefono">
+							</p>
+							<p>
+								<label for="Correo">Correo
+								</label>
+								<input class="registro1" type="email" name="Correo" id="idCorreo"
+									required="obligatorio" placeholder="Escribe tu correo">
+							</p>
+							<p>
+								<div class="col-md-12" >
+								<label for="cliente"> Cliente
+									<span class="obligatorio">*</span></label>
+								<select class="form-control registro1" name="	" id="idCliente">
+									<option value="-1">[Seleccione un Cliente.] </option>
+									<option th:each="bean:${cliente}" th:value="${bean.idCliente}"
+										th:text="${bean.descripcion}"></option>
+								</select>
+							</div>
+							</p>
 
-
-							<button class="botones1" type="submit" name="enviar_formulario" id="registrar">
+							<button class="botones1" type="submit" name="enviar_formulario" id="enviar">
 								<p>Registrar</p>
 							</button>
 
@@ -300,42 +222,56 @@
 					</div>
 				</div>
 			</article>
-
-
+			<!--  <article>
+     
+   </article>
+    <article></article> -->
+			<h1 style="text-align: center;">Lista de Visitante</h1>
+			<br>
 			<div class="limiter">
+				<div style="text-align: center;">
+					<button class="botonEditar" type="submit" name="editar" id="editar">
+						<p>Editar</p>
+					</button>
+					<button class="botonEliminar" type="submit" name="eliminar" id="eliminar">
+						<p>Eliminar</p>
+					</button>
+				</div>
 				<div class="container-table100">
-					<h1 style="text-align: center;">Lista de Usuario</h1>
-
 					<div class="wrap-table100">
 						<div class="table100">
 							<table>
 								<thead>
 									<tr class="table100-head">
-										<th class="column1">Codigo</th>
-										<th class="column2">Nombres</th>
-										<th class="column3">Paterno</th>
-										<th class="column4">Materno</th>
-										<th class="column5">Correo</th>
+										<th class="column1">Visitante</th>
+										<th class="column2">Nombre de Archivo</th>
+										<th class="column3">Departamento</th>
+										<th class="column4">Nombres</th>
+										<th class="column5">Apellidos</th>
+										<th class="column6">Tipo Documento</th>
+										<th class="column6">Documento</th>
 										<th class="column6">Telefono</th>
-										<th class="column7">Rol</th>
-										<th class="column8">Fecha de Registro</th>
-										<th class="column1"></th>
+										<th class="column6">Correo</th>
+										<th class="column6">Cliente</th>
+										<th class="column6">Usuario</th>
+										<th class="column6">Fecha de Registro</th>
 									</tr>
 								</thead>
 								<tbody>
-
-									<tr th:each="bean:${listaUsuario}" class="text-center">
-										<td class="column1" th:text="${bean.idUsuario}"></td>
-										<td class="column2" th:text="${bean.nombres}"></td>
-										<td class="column3" th:text="${bean.apePaterno}"></td>
-										<td class="column4" th:text="${bean.apeMaterno}"></td>
-										<td class="column5" th:text="${bean.cuentaUsuario}"></td>
-										<td class="column6" th:text="${bean.telefono}"></td>
-										<td class="column7" th:text="${bean.rol.descripcion}"></td>
+									<tr class=""th:each="bean:${visitante}">
+										<td class="column1" th:text="${bean.idVisitante}"></td>
+										<td class="column2" th:text="${bean.nombreArchivo}"></td>
+										<td class="column3" th:text="${bean.nombres}"></td>
+										<td class="column3" th:text="${bean.apellidos}"></td>
+										<td class="column4" th:text="${bean.tipodocumentoFK.descripcion}"></td>
+										<td class="column3" th:text="${bean.documento}"></td>
+										<td class="column3" th:text="${bean.telefono}"></td>
+										<td class="column3" th:text="${bean.correo}"></td>
+										<td class="column4" th:text="${bean.clienteFK.nombres}"></td>
+										<td class="column4" th:text="${bean.usuarioFK.nombres}"></td>
 										<td class="column8" th:text="${bean.fechaRegistro}"></td>
-										<td class="column1"><a class="btn-eliminar"><i
-													class="fa-solid fa-trash-can"></i></a></td>
 									</tr>
+
 
 								</tbody>
 							</table>
@@ -356,8 +292,7 @@
 		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 	<script th:src="@{/resources/js/adminjs.js}"></script>
 	<script th:src="@{/resources/js/main.js}"></script>
-	
-	<script th:src="@{/resources/js/validarUsuario.js}"></script>
+	<script th:src="@{/resources/js/validarCliente.js}"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
 		integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ=="
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -408,11 +343,11 @@
 		})
 
 	</script>
-<!--	<script>
+	<script>
 		$(document).on("click", "#idEditar", function () {
 			let codigo;
 			codigo = $(this).parents("tr").find("td")[0].innerHTML;
-			$.get("buscar?idUsuario=" + codigo, function (data) {
+			$.get("buscar?idVisitanteo=" + codigo, function (data) {
 				$("#idcodigo").val(data.idUsuario);
 				$("#idnombres").val(data.nombreCompleto);
 				$("#idapellidos").val(data.apellidoCompleto);
@@ -424,7 +359,7 @@
 				$("#iddescripcion").val(data.descripcionRaza);
 			});
 		});
-	</script>-->
+	</script>
 
 	<script>
 		//btn-eliminar del modal
@@ -436,7 +371,7 @@
 
 				},
 				function () {//NOOOO
-					window.location = "eliminar?codigo=" + cod;
+					window.location = "eliminar?idVisitante=" + cod;
 				}).set('labels', {ok: 'Cancelar', cancel: 'Eliminar'});
 		})
 

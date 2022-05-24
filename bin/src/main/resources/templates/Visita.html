@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Visita</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrardepartamento.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrarformulario.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/visita.css}">
+	<script src="https://kit.fontawesome.com/7df5974cca.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+		integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+</head>
+
+<body>
+	<header class="page-header">
+		<nav>
+			<a href="admin.html" class="logo">
+				<img src="https://csn-spa.cl/wp-content/uploads/2019/10/csn-spa-logo.png" height="70" alt="">
+			</a>
+			<button class="toggle-mob-menu" aria-expanded="false" aria-label="open menu">
+				<svg width="20" height="20" aria-hidden="true">
+					<use xlink:href="#down"></use>
+				</svg>
+			</button>
+			<ul class="admin-menu">
+				<li class="menu-heading">
+					<h3>Admin</h3>
+				</li>
+				<li>
+					<a href="#0">
+						<i class="fa-solid fa-user"></i>
+						<span> Mi Perfil</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/departamento/}">
+						<i class="fa-solid fa-building-circle-check"></i>
+						<span>Registrar de Departamento</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/visitante/}">
+						<i class="fa-solid fa-users"></i>
+						<span>Registrar Visitante</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/residente/}">
+						<i class="fa-solid fa-building-user"></i>
+						<span>Registrar Residente</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/usuario/}">
+						<i class="fa-solid fa-address-card"></i>
+						<span>Registrar Usuario</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/mascotas/}">
+						<i class="fa-solid fa-shield-dog"></i>
+						<span>Registrar Mascotas</span>
+					</a>
+				</li>
+
+
+				<li class="menu-heading">
+					<h3>Perfil</h3>
+				</li>
+				<li>
+					<a href="#0">
+						<i class="fa-solid fa-gear"></i>
+						<span>Ajustes</span>
+					</a>
+				</li>
+				<li>
+					<a href="#0">
+						<i class="fa-solid fa-wrench"></i>
+						<span>Opciones</span>
+					</a>
+				</li>
+				<li>
+					<a href="#0">
+						<i class="fa-solid fa-money-bill-trend-up"></i>
+						<span>Estadísticas</span>
+					</a>
+				</li>
+				<li>
+					<div class="switch">
+						<input type="checkbox" id="mode" checked>
+						<label for="mode">
+							<span></span>
+							<span>Oscuro</span>
+						</label>
+					</div>
+					<button class="collapse-btn" aria-expanded="true" aria-label="collapse menu">
+						<i class="fa-solid fa-angle-left"></i>
+						<span>Contraer</span>
+					</button>
+				</li>
+			</ul>
+		</nav>
+	</header>
+	<section class="page-content">
+		<section class="search-and-user">
+			<form>
+				<input type="hidden" placeholder="">
+				<button type="submit" aria-label="submit form">
+					<svg aria-hidden="true">
+						<use xlink:href="#search"></use>
+					</svg>
+				</button>
+			</form>
+			<div class="admin-profile" th:each="bean : ${session.objUsuario}">
+				<i class="fa-solid fa-circle-user"></i>
+				<span class="greeting"
+					th:text="${bean.nombres + ' ' + bean.apePaterno + ' '  + bean.apeMaterno}"></span>
+
+				<div class="notifications">
+
+
+					<svg>
+						<use xlink:href="#users"></use>
+					</svg>
+				</div>
+			</div>
+		</section>
+		<section class="grid">
+			<article>
+				<div class="contact_form">
+
+					<div class="formulario">
+
+						<h1 style="text-align: center;">Registro Visita</h1>
+
+						<form action="" method="post">
+							<input class="registro1" type="hidden" value="0">
+
+							<div>
+								<div>
+									<p>
+										<label for="documento" class="form-control">Documento
+											<span class="obligatorio">*</span>
+										</label>
+										<input class="registro1" type="search" name="documento" id="idDocumento"
+											placeholder="Escribe tu Dni">
+										<button type="button" class="button">
+											Buscar
+										</button>
+										<button id="modal-btn" type="button" class="button">
+											<h4>...</h4>
+										</button>
+									</p>
+
+								</div>
+							</div>
+
+							<p>
+								<label for="visitante" class="form-control">Visitante
+									<span class="obligatorio">*</span>
+								</label>
+								<input class="registro1" type="text" name="visitante" id="idVisitante"
+									placeholder="Visitante" readonly="disabled"
+									style="background-color: rgb(192, 192, 192); color: black;">
+							</p>
+
+
+							<p>
+								<label for="horaIngreso" class="form-control">Hora de Ingreso
+									<span class="obligatorio">*</span>
+								</label>
+								<input class="registro1" type="time" name="horaIngreso" id="minor2" readonly="readonly"
+									style="background-color: rgb(192, 192, 192); color: black;"
+									onmousemove="myFunction()">
+							</p>
+
+							<p>
+								<label for="horaIngreso" class="form-control">Hora de Salida
+									<span class="obligatorio">*</span>
+								</label>
+								<input class="registro1" type="time" name="horaIngreso" id="HoraActual">
+							</p>
+
+							<p>
+								<label for="cliente" class="form-control">Cliente
+									<span class="obligatorio">*</span>
+								</label>
+								<input class="registro1" type="text" name="cliente" id="idCliente"
+									placeholder="Cliente" readonly="disabled"
+									style="background-color: rgb(192, 192, 192); color: black;">
+							</p>
+
+							<button class="botones1" type="submit" name="enviar_formulario" id="enviar">
+								<p>Registrar</p>
+							</button>
+
+							<p class="aviso">
+								<span class="obligatorio"> * </span>los campos son obligatorios.
+							</p>
+
+						</form>
+					</div>
+				</div>
+			</article>
+
+			<div id="my-modal" class="modal">
+				<div class="modal-content">
+					<div class="modal-header">
+						<span class="close">&times;</span>
+						<h2>Modal Header</h2>
+					</div>
+					<div class="modal-body">
+						<p>This is my modal</p>
+						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla repellendus
+							nisi, sunt consectetur ipsa velit
+							repudiandae aperiam modi quisquam nihil nam asperiores doloremque mollitia
+							dolor deleniti quibusdam nemo
+							commodi ab.</p>
+					</div>
+					<div class="modal-footer">
+						<h3>Modal Footer</h3>
+					</div>
+				</div>
+			</div>
+		</section>
+		<footer class="page-footer">
+
+		</footer>
+	</section>
+	<!-- partial -->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+	<script th:src="@{/resources/js/adminjs.js}"></script>
+	<script th:src="@{/resources/js/visita.js}"></script>
+	<script th:src="@{/resources/js/main.js}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
+		integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</body>
+
+</html>
