@@ -35,7 +35,31 @@
   padding-left: 10px;
   margin-bottom: 20px; 
 }
+.registro2{
+  background-color: #fbfbfb; 
+  width: 200px;
+  size: 30;
+  height: 40px; 
+  border-radius: 5px;  
+  border-style: solid; 
+  border-width: 1px; 
+  border-color: rgb(0, 64, 128); 
+  margin-top: 10px;  
+  padding-left: 0px;
+  margin-bottom: 0px; 
+}
+#grid {
+  display: inline;
+ overflow: hidden;
 
+}
+.right{
+	float:right;
+	
+}
+.left{
+	overflow: hidden;
+}
 .descripcion1{
   background-color: #fbfbfb; 
   width: 900px; 
