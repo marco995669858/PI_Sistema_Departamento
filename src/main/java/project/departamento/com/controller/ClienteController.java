@@ -27,7 +27,7 @@ import project.departamento.com.service.ClienteService;
 @Controller
 @RequestMapping("/rest/cliente")
 public class ClienteController {
-
+	//eo
 	@Autowired
 	private ClienteService service;
 
