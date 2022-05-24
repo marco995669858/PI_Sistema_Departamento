@@ -28,7 +28,7 @@ public class MascotasController {
 		model.addAttribute("mascotas", service.listarMascotas());
 		model.addAttribute("especie", service.listarEspecies());
 		model.addAttribute("departamento", service.listarDepartamentos());
-		return "Mascotas";
+		return "mascotas";
 	}
 
 //	@RequestMapping("/registrar")
