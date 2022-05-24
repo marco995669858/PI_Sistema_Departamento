@@ -8,12 +8,8 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrarformulario.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/tablas.css}">
 	<script src="https://kit.fontawesome.com/7df5974cca.js" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-		integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-		crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.css}">
-	<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.min.css}">
+	<!--<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.css}">
+	<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.min.css}">-->
 </head>
 
 <style>
@@ -210,7 +206,8 @@
 						<h1 style="text-align: center;">Registro Departamento
 						</h1>
 
-						<form th:action="@{/rest/departamento/registrar}" name="test" method="post" onsubmit="">
+					<form th:action="@{/rest/departamento/registrar}" 
+					onsubmit="return validarDepartamentos()">
 							<input type="hidden" value="0" name="codigo" id="idcodigo">
 							<p>
 								<label for="tipoDepartamento">Tipo de Departamento
@@ -227,13 +224,13 @@
 								<label for="piso">Número de Piso
 									<span class="obligatorio">*</span>
 								</label>
-								<input type="number" class="registro1" name="piso" id="idpiso" placeholder="Numero de Piso">
+								<input type="number" class="registro1" name="idpiso" id="idpiso" placeholder="Numero de Piso">
 							</p>
 
 							<p>
 								<label for="nroDepartamento">Número de departamento
 								</label>
-								<input type="number" class="registro1" name="nroDepartamento" id="idnroDepartamento"
+								<input type="number" class="registro1" name="idnroDepartamento" id="idnroDepartamento"
 									placeholder="Numero de Departamento">
 							</p>
 
@@ -254,12 +251,11 @@
 										th:text="${bean.caracteristicasDepartamento.nroDepartamento}"></option>
 								</select>
 							</p>-->
+								
 
-
-							<button class="botones1" type="submit" name="enviar_formulario" id="registrar">
+							<button class="botones1" type="submit" name="enviar_formulario" id="enviar">
 								<p>Registrar</p>
 							</button>
-
 
 							<p class="aviso">
 								<span class="obligatorio"> * </span>los campos son obligatorios.
@@ -312,21 +308,19 @@
 					</div>
 				</div>
 			</div>
-
+	<!--kkk -->
 		</section>
 		<footer class="page-footer">
 
 		</footer>
 	</section>
 	<!-- partial -->
-	<script src="https://releases.jquery.com/git/jquery-git.js"></script>
+	<script th:src="@{/resources/js/validarDepa.js}"></script>
+	<!--<script src="https://releases.jquery.com/git/jquery-git.js"></script>-->
 	<script th:src="@{/resources/js/adminjs.js}"></script>
 	<script th:src="@{/resources/js/main.js}"></script>
-	<script th:src="@{/resources/js/validarDepa.js}"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
-		integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ=="
-		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	
 	<script th:src="@{/resources/alertifyjs/alertify.js}"></script>
 	<script th:src="@{/resources/alertifyjs/alertify.min.js}"></script>
 
@@ -413,7 +407,9 @@
 
 
 	</script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
+		integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 
 </html>
