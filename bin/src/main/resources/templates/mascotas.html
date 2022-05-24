@@ -3,80 +3,90 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Cliente</title>
+	<title>Mascotas</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrardepartamento.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrarformulario.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/tablas.css}">
+	<script src="https://kit.fontawesome.com/7df5974cca.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+		integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 	<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.css}">
 	<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.min.css}">
 
-
-</head>
 
 
 </head>
 
 
 <style>
-
-	
 	.alertify .ajs-dialog {
-	    top: 50%;
-	    transform: translateY(-50%);
-	    margin: auto;
+		top: 50%;
+		transform: translateY(-50%);
+		margin: auto;
 	}
-	
-	.ajs-header{
+
+	.ajs-header {
 		background-color: #286090 !important;
 		color: white !important;
 		/*text-align: center;*/
 		font-size: 18px;
 		font-weight: bold;
 	}
-	.ajs-ok{
+
+	.ajs-ok {
 		color: #fff;
-	    background-color: #007bff;
-	    border-color: #007bff;
+		background-color: #007bff;
+		border-color: #007bff;
 	}
-	.ajs-cancel{
+
+	.ajs-cancel {
 		color: #fff;
-	    background-color: #dc3545;
-	    border-color: #dc3545;
+		background-color: #dc3545;
+		border-color: #dc3545;
 	}
-	.btn-primary{
-	background-color: #286090 !important;
+
+	.btn-primary {
+		background-color: #286090 !important;
 	}
-	.dataTables_length, .dataTables_info{
+
+	.dataTables_length,
+	.dataTables_info {
 		display: none;
 	}
-	.modal-lg, .modal-xl {
+
+	.modal-lg,
+	.modal-xl {
 		max-width: 900px;
 		max-height: 800px;
 	}
-	
+
 	.form-control-feedback2 {
-	  margin:1px;
-	  position: absolute;
-	  padding: 10px;
-	  pointer-events: none;
-	  background-color: #e9ecef;
-	  border-style: none;
+		margin: 1px;
+		position: absolute;
+		padding: 10px;
+		pointer-events: none;
+		background-color: #e9ecef;
+		border-style: none;
 	}
+
 	.form-control-feedback3 {
-	  margin:1px;
-	  position: absolute;
-	  margin-left:225px;
-	  padding: 10px;
-	  pointer-events: none;
-	  background-color: #e9ecef;
-	  border-style: none;
+		margin: 1px;
+		position: absolute;
+		margin-left: 225px;
+		padding: 10px;
+		pointer-events: none;
+		background-color: #e9ecef;
+		border-style: none;
 	}
+
 	.form-control {
-	  padding-left: 40px!important;
+		padding-left: 40px !important;
 	}
-</style> 
+</style>
+
 <body>
 
 	<header class="page-header">
@@ -136,7 +146,6 @@
 					</a>
 				</li>
 
-
 				<li class="menu-heading">
 					<h3>Perfil</h3>
 				</li>
@@ -186,10 +195,8 @@
 			</form>
 			<div class="admin-profile" th:each="bean : ${session.objUsuario}">
 				<i class="fa-solid fa-circle-user"></i>
-
 				<span class="greeting"
 					th:text="${bean.nombres + ' ' + bean.apePaterno + ' '  + bean.apeMaterno}"></span>
-
 
 				<div class="notifications">
 
@@ -206,96 +213,46 @@
 
 					<div class="formulario">
 
-						<h1 style="text-align: center;">Registro Usuario</h1>
+						<h1 style="text-align: center;">Registrar Mascotas</h1>
 
-						
-						<form th:action="@{/rest/usuario/registrar}" onsubmit="return validarUsuario()">
+						<form th:action="@{/res/mascotas/registrar}" method="post">
 
 
 							<input class="registro1" type="hidden" value="0" name="codigo" id="idcodigo">
 
-							<p>
+							<div class="col-md-12">
+								<label for="nroDepartamento"> Numero del Departamento
+									<span class="obligatorio">*</span></label>
+								<select class="form-control registro1" name="nroDepartamento" id="idnroDepartamento">
+									<option value="-1">[Seleccione un número de Departamento.] </option>
+									<option th:each="bean:${departamento}" th:value="${bean.idDepartamento}"
+										th:utext="${bean.nroDepartamento}"></option>
 
-								<label for="nomUsuario" class="form-control">Nombre de usuario
-									<span class="obligatorio">*</span>
-								</label>
-								<input class="registro1" type="text" name="nomUsuario" id="idNomusuario"
-									placeholder="Escribe tu Username">
-							</p>
-
-							<p>
-								<label for="nombres" class="form-control">Nombres
-									<span class="obligatorio">*</span>
-								</label>
-								<input class="registro1" type="text" name="nombres" id="idNombres"
-									placeholder="Escribe tus Nombres">
-
-							</p>
+								</select>
+							</div>
 
 							<p>
-								<label for="apellidos" class="colocar_apellidos">Apellido Paterno
-
-									<span class="obligatorio">*</span>
-
-								</label>
-								<input class="registro1" type="text" name="apePaterno" id="idapePaterno"
-									placeholder="Escribe tu apellido paterno">
-
-							</p>
-							<p>
-								<label for="apellidos" class="colocar_apellidos">Apellido Materno
-									<span class="obligatorio">*</span>
-
-								</label>
-								<input class="registro1" type="text" name="apeMaterno" id="idapeMaterno"
-									placeholder="Escribe tu apellido Materno">
-
-							</p>
-
-
-							<p>
-								<label for="cuentaUsuario" class="colocar_correo">Cuenta de Usuario
+								<label for="nombres" class="colocar_nombres">Nombre de la mascota
 									<span class="obligatorio">*</span>
 								</label>
-								<input class="registro1" type="email" name="cuentaUsuario" id="idCuentausuario"
-									placeholder="Escribe tu correo">
-
+								<input class="registro1" type="text" name="nombres" id="idnombres"
+									placeholder="Escriba Nombre de la Mascota">
 							</p>
 
-							<p>
-								<label for="password" class="colocar_celular">Contraseña
-									<span class="obligatorio">*</span>
-								</label>
-								<input class="registro1" type="password" name="password" id="idPassword"
-									placeholder="Escribe tu contraseña">
-							</p>
-
-							<p>
-								<label for="telefono" class="form-control">Telefono
-									<span class="obligatorio">*</span>
-								</label>
-								<input class="registro1" type="number" name="telefono" id="idTelefono"
-									placeholder="Escribe tu Celular">
-							</p>
-
-							<div>
-								<label for="rol">Rol <span class="obligatorio">*</span></label>
-								<select name="rol" class="registro1">
-									<option value="-1">Seleccione un Rol</option>
-									<option th:each="bean:${rol}" th:value="${bean.idRol}"
-										th:utext="${bean.descripcion}"></option>
+							<div class="col-md-12">
+								<label for="especie"> Especie
+									<span class="obligatorio">*</span></label>
+								<select class="form-control registro1" name="especie" id="idEspecie">
+									<option value="-1">[Seleccione Especie.] </option>
+									<option th:each="bean:${especie}" th:value="${bean.idEspecie}"
+										th:text="${bean.animal}"></option>
 								</select>
 							</div>
 
 
-							<button class="botones1" type="submit" name="enviar_formulario" id="registrar">
+							<button class="botones1" type="submit" name="enviar_formulario" id="enviar">
 								<p>Registrar</p>
 							</button>
-
-							<p class="aviso">
-								<span class="obligatorio"> * </span>los campos son obligatorios.
-							</p>
-
 						</form>
 					</div>
 				</div>
@@ -304,7 +261,7 @@
 
 			<div class="limiter">
 				<div class="container-table100">
-					<h1 style="text-align: center;">Lista de Usuario</h1>
+					<h1 style="text-align: center;">Lista de Mascotas</h1>
 
 					<div class="wrap-table100">
 						<div class="table100">
@@ -312,29 +269,26 @@
 								<thead>
 									<tr class="table100-head">
 										<th class="column1">Codigo</th>
-										<th class="column2">Nombres</th>
-										<th class="column3">Paterno</th>
-										<th class="column4">Materno</th>
-										<th class="column5">Correo</th>
-										<th class="column6">Telefono</th>
-										<th class="column7">Rol</th>
-										<th class="column8">Fecha de Registro</th>
-										<th class="column1"></th>
+										<th class="column8">Nro Departamento</th>
+										<th class="column8">Nombre de la Mascota</th>
+										<th class="column8">Especie de la Mascota</th>
+										<th class="column8">Nombre del trabajador</th>
+										<th></th>
+										<th></th>
 									</tr>
 								</thead>
 								<tbody>
-
-									<tr th:each="bean:${listaUsuario}" class="text-center">
-										<td class="column1" th:text="${bean.idUsuario}"></td>
-										<td class="column2" th:text="${bean.nombres}"></td>
-										<td class="column3" th:text="${bean.apePaterno}"></td>
-										<td class="column4" th:text="${bean.apeMaterno}"></td>
-										<td class="column5" th:text="${bean.cuentaUsuario}"></td>
-										<td class="column6" th:text="${bean.telefono}"></td>
-										<td class="column7" th:text="${bean.rol.descripcion}"></td>
-										<td class="column8" th:text="${bean.fechaRegistro}"></td>
+									<tr class="" th:each="bean:${mascotas}">
+										<td class="column1" th:text="${bean.idMascotas}"></td>
+										<td class="column8" th:text="${bean.departamento.nroDepartamento}"></td>
+										<td class="column8" th:text="${bean.nombres}"></td>
+										<td class="column8" th:text="${bean.especie.animal}"></td>
+										<td class="column8" th:text="${bean.usuario.nomUsuario}"></td>
+										<td class="column1"><a class="btn btn-info btn-actualizar"><i
+													class="fa-solid fa-pen-to-square"></i></a></td>
 										<td class="column1"><a class="btn-eliminar"><i
 													class="fa-solid fa-trash-can"></i></a></td>
+
 									</tr>
 
 								</tbody>
@@ -343,8 +297,6 @@
 					</div>
 				</div>
 			</div>
-
-
 
 		</section>
 		<footer class="page-footer">
@@ -356,15 +308,13 @@
 		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 	<script th:src="@{/resources/js/adminjs.js}"></script>
 	<script th:src="@{/resources/js/main.js}"></script>
-	
-	<script th:src="@{/resources/js/validarUsuario.js}"></script>
+	<script th:src="@{/resources/js/validarCliente.js}"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
 		integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ=="
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script th:src="@{/resources/alertifyjs/alertify.js}"></script>
 	<script th:src="@{/resources/alertifyjs/alertify.min.js}"></script>
-
 	<script th:inline="javascript" th:if="${MENSAJE!=null}">
 		//obtener atributo MENSAJE
 		var mensaje =/*[[${MENSAJE}]]*/ null;
@@ -386,10 +336,8 @@
 		})
 
 	</script>
-
-	<script th:inline="javascript" th:if="${existen!=null}">
-
-		var exist =/*[[${existen}]]*/ null;
+	<script th:inline="javascript" th:if="${existente!=null}">
+		var mensaje =/*[[${existente}]]*/ null;
 		const Toast = Swal.mixin({
 			toast: true,
 			position: 'top-end',
@@ -404,30 +352,24 @@
 
 		Toast.fire({
 			icon: 'warning',
-			title: exist
+			title: mensaje
 		})
 
 	</script>
-<!--	<script>
-		$(document).on("click", "#idEditar", function () {
-			let codigo;
-			codigo = $(this).parents("tr").find("td")[0].innerHTML;
-			$.get("buscar?idUsuario=" + codigo, function (data) {
-				$("#idcodigo").val(data.idUsuario);
-				$("#idnombres").val(data.nombreCompleto);
-				$("#idapellidos").val(data.apellidoCompleto);
-				$("#idDni").val(data.dni);
-				$("#idcelular").val(data.celular);
-				$("#idcorreo").val(data.correo);
-				//$("#idcampo").css("display", "none");
-				$("#idRaza").val(data.raza);
-				$("#iddescripcion").val(data.descripcionRaza);
-			});
-		});
-	</script>-->
-
 	<script>
-		//btn-eliminar del modal
+
+		$(document).on("click", ".btn-actualizar", function () {
+			let cod;
+			cod = $(this).parents("tr").find("td")[0].innerHTML;
+			$.get("buscar?codigo=" + cod, function (response) {
+				$("#idcodigo").val(response.idMascotas);
+				$("#idnroDepartamento").val(response.departamento.idDepartamento);
+				$("#idnombres").val(response.nombres);
+				$("#idEspecie").val(response.especie.idEspecie);
+
+			})
+		});
+
 		$(document).on("click", ".btn-eliminar", function () {
 			let cod;
 			cod = $(this).parents("tr").find("td")[0].innerHTML;
@@ -438,10 +380,9 @@
 				function () {//NOOOO
 					window.location = "eliminar?codigo=" + cod;
 				}).set('labels', {ok: 'Cancelar', cancel: 'Eliminar'});
-		})
 
+		});
 	</script>
 </body>
-
 
 </html>

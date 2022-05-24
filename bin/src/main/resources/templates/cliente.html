@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Registro Residente</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrardepartamento.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrarformulario.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/tablas.css}">
+	<script src="https://kit.fontawesome.com/7df5974cca.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<header class="page-header">
+		<nav>
+			<a href="admin.html" class="logo">
+				<img src="https://csn-spa.cl/wp-content/uploads/2019/10/csn-spa-logo.png" height="70" alt="">
+			</a>
+			<button class="toggle-mob-menu" aria-expanded="false" aria-label="open menu">
+				<svg width="20" height="20" aria-hidden="true">
+					<use xlink:href="#down"></use>
+				</svg>
+			</button>
+			<ul class="admin-menu">
+				<li class="menu-heading">
+					<h3>Admin</h3>
+				</li>
+				<li>
+					<a href="#0">
+						<i class="fa-solid fa-user"></i>
+						<span> Mi Perfil</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/departamento/}">
+						<i class="fa-solid fa-building-circle-check"></i>
+						<span>Registrar de Departamento</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/propietariodep/}">
+						<i class="fa-solid fa-building-circle-check"></i>
+						<span>Registrar de Propietario</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/visitante/}">
+						<i class="fa-solid fa-users"></i>
+						<span>Registrar Visitante</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/residente/}">
+						<i class="fa-solid fa-building-user"></i>
+						<span>Registrar Residente</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/usuario/}">
+						<i class="fa-solid fa-address-card"></i>
+						<span>Registrar Usuario</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/mascotas/}">
+						<i class="fa-solid fa-shield-dog"></i>
+						<span>Registrar Mascotas</span>
+					</a>
+				</li>
+				<!-- <li>
+        <a href="#0">
+          <svg>
+            <use xlink:href="#comments"></use>
+          </svg>
+          <span>Otros</span>
+        </a>
+      </li> -->
+
+				<li class="menu-heading">
+					<h3>Perfil</h3>
+				</li>
+				<li>
+					<a href="#0">
+						<i class="fa-solid fa-gear"></i>
+						<span>Ajustes</span>
+					</a>
+				</li>
+				<li>
+					<a href="#0">
+						<i class="fa-solid fa-wrench"></i>
+						<span>Opciones</span>
+					</a>
+				</li>
+				<li>
+					<a href="#0">
+						<i class="fa-solid fa-money-bill-trend-up"></i>
+						<span>Estadísticas</span>
+					</a>
+				</li>
+				<li>
+					<div class="switch">
+						<input type="checkbox" id="mode" checked>
+						<label for="mode">
+							<span></span>
+							<span>Oscuro</span>
+						</label>
+					</div>
+					<button class="collapse-btn" aria-expanded="true" aria-label="collapse menu">
+						<i class="fa-solid fa-angle-left"></i>
+						<span>Contraer</span>
+					</button>
+				</li>
+			</ul>
+		</nav>
+	</header>
+	<section class="page-content">
+		<section class="search-and-user">
+			<form>
+				<input type="hidden" placeholder="">
+				<button type="submit" aria-label="submit form">
+					<svg aria-hidden="true">
+						<use xlink:href="#search"></use>
+					</svg>
+				</button>
+			</form>
+			<div class="admin-profile" th:each="bean : ${session.objUsuario}">
+				<i class="fa-solid fa-circle-user"></i>
+				<!--<span class="greeting" th:text="${bean.nombres + ' ' + bean.apePaterno + ' '  + bean.apeMaterno}"></span>-->
+
+				<div class="notifications">
+
+
+					<svg>
+						<use xlink:href="#users"></use>
+					</svg>
+				</div>
+			</div>
+		</section>
+		<section class="grid">
+			<article>
+				<div class="contact_form">
+
+					<div class="formulario">
+						<h1 style="text-align: center;">Registro de Cliente</h1>
+
+						<form th:action="@{/registro/residente/registrarResidente}" method="post">
+							<input type="hidden" value="0" name="codigo" id="idcodigo">
+
+							<p>
+								<label for="nombre" class="colocar_nombres">Nombres Completos
+									<span class="obligatorio">*</span>
+								</label>
+								<input class="registro1" type="text" name="nombres" id="idnombres"
+									placeholder="Escribe tu Nombres">
+							</p>
+
+							<p>
+								<label for="apellidos" class="colocar_apellidos">Apellido Paterno
+									<span class="obligatorio">*</span>
+								</label>
+								<input class="registro1" type="text" name="apePaterno" id="idapePaterno"
+									placeholder="Escribe tus apellidos">
+							</p>
+
+							<p>
+								<label for="tipoDocumento">Tipo de Documento
+								</label>
+								<select class="form-control" name="tipoDocumento" id="idtipoDocumento">
+									<option value="-1">[Seleccione un Tipo de Documento]</option>
+									<option th:each="bean:${depa}" th:value="${bean.idtipoDocumento}"
+										th:text="${bean.caracteristicasDepartamento.nroDepartamento}"></option>
+								</select>
+							</p>
+
+
+
+							<p>
+								<label for="documento" class="form-control">Documento
+
+									<span class="obligatorio">*</span>
+								</label>
+								<input class="registro1" type="text" name="documento" id="idDocumento"
+									placeholder="Escribe tu Documento">
+							</p>
+
+							<p>
+								<label for="telefono" class="form-control">Telefono
+									<span class="obligatorio">*</span>
+								</label>
+								<input class="registro1" type="number" name="telefono" id="idTelefono"
+									placeholder="Escribe tu Numero Telefonico">
+							</p>
+
+							<p>
+								<label for="estado">Estado
+								</label>
+								<select class="form-control" name="estado" id="idEstado">
+									<option value="-1">[Seleccione Estado]</option>
+									<option th:each="bean:${depa}" th:value="${bean.idtipoDocumento}"
+										th:text="${bean.caracteristicasDepartamento.nroDepartamento}"></option>
+								</select>
+							</p>
+
+							<p>
+								<label for="correo" class="form-control">Correo
+									<span class="obligatorio">*</span>
+								</label>
+								<input class="registro1" type="text" name="correo" id="idCorreo"
+									placeholder="Escribe tu Correo">
+							</p>
+
+							<p>
+								<label for="tipoCliente">Tipo de Cliente
+								</label>
+								<select class="registro1" name="tipoCliente" id="idTipocliente">
+									<option value="-1">[Seleccione Tipo de Cliente]</option>
+									<option th:each="bean:${depa}" th:value="${bean.idDepartamento}"
+										th:text="${bean.caracteristicasDepartamento.nroDepartamento}"></option>
+								</select>
+							</p>
+
+							<p>
+								<label for="sexo">Sexo
+								</label>
+								<select class="registro1" name="sexo" id="idSexo">
+									<option value="-1">[Seleccione Sexo</option>
+									<option value="Hombre">Hombre</option>
+									<option value="Mujer">Mujer</option>
+								</select>
+							</p>
+
+							<p>
+								<label for="departamento">Departamento
+								</label>
+								<select class="registro1" name="departamento" id="idDepartamento">
+									<option value="-1">[Seleccione Departamento]</option>
+									<option th:each="bean:${depa}" th:value="${bean.idDepartamento}"
+										th:text="${bean.caracteristicasDepartamento.nroDepartamento}"></option>
+								</select>
+							</p>
+
+							<button class="botones1" type="submit" name="enviar_formulario" id="enviar">
+								<p>Registrar</p>
+							</button>
+
+
+							<p class="aviso">
+								<span class="obligatorio"> * </span>los campos son obligatorios.
+							</p>
+
+						</form>
+					</div>
+				</div>
+			</article>
+			<!--  <article>
+     
+   </article>
+    <article></article> -->
+			<h1 style="text-align: center;">Lista de Cliente</h1>
+			<br>
+
+			<div class="container-table100">
+				<div class="wrap-table100">
+					<div class="table100">
+						<table>
+							<thead>
+								<tr class="table100-head">
+									<th class="column1">Codigo</th>
+									<th class="column2">Nombres</th>
+									<th class="column3">Apellidos</th>
+									<th class="column4">Documento</th>
+									<th class="column5">Telefono</th>
+									<th class="column6">Estado</th>
+									<th class="column7">Correo</th>
+									<th class="column8">Tipo de Cliente</th>
+									<th class="column9">Sexo</th>
+									<th class="column10">Departamento</th>
+
+
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+								</tr>
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			</div>
+
+
+
+		</section>
+		<footer class="page-footer">
+
+		</footer>
+	</section>
+	<!-- partial -->
+	<script th:src="@{/resources/js/adminjs.js}"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script th:inline="javascript" th:if="${MENSAJE!=null}">
+		//obtener atributo MENSAJE
+		var mensaje =/*[[${MENSAJE}]]*/ null;
+		const Toast = Swal.mixin({
+			toast: true,
+			position: 'top-end',
+			showConfirmButton: false,
+			timer: 3000,
+			timerProgressBar: true,
+			didOpen: (toast) => {
+				toast.addEventListener('mouseenter', Swal.stopTimer)
+				toast.addEventListener('mouseleave', Swal.resumeTimer)
+			}
+		})
+
+		Toast.fire({
+			icon: 'success',
+			title: mensaje
+		})
+
+	</script>
+	<script th:inline="javascript" th:if="${x!=null}">
+		//obtener atributo MENSAJE
+		var mensaje =/*[[${x}]]*/ null;
+		const Toast = Swal.mixin({
+			toast: true,
+			position: 'top-end',
+			showConfirmButton: false,
+			timer: 3000,
+			timerProgressBar: true,
+			didOpen: (toast) => {
+				toast.addEventListener('mouseenter', Swal.stopTimer)
+				toast.addEventListener('mouseleave', Swal.resumeTimer)
+			}
+		})
+
+		Toast.fire({
+			icon: 'warning',
+			title: mensaje
+		})
+
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
+		integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+
+</html>

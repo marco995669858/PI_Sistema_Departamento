@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Perfil Departamento</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrardepartamento.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrarformulario.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/tablas.css}">
+	<script src="https://kit.fontawesome.com/7df5974cca.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+		integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.css}">
+	<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.min.css}">
+
+
+</head>
+
+
+</head>
+
+
+<body>
+
+	<header class="page-header">
+		<nav>
+			<a href="admin.html" class="logo">
+				<img src="https://csn-spa.cl/wp-content/uploads/2019/10/csn-spa-logo.png" height="70" alt="">
+			</a>
+			<button class="toggle-mob-menu" aria-expanded="false" aria-label="open menu">
+				<svg width="20" height="20" aria-hidden="true">
+					<use xlink:href="#down"></use>
+				</svg>
+			</button>
+			<ul class="admin-menu">
+				<li class="menu-heading">
+					<h3>Admin</h3>
+				</li>
+				<li>
+					<a href="#0">
+						<i class="fa-solid fa-user"></i>
+						<span> Mi Perfil</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/departamento/}">
+						<i class="fa-solid fa-building-circle-check"></i>
+						<span>Registrar de Departamento</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/propietariodep/}">
+						<i class="fa-solid fa-building-circle-check"></i>
+						<span>Registrar de Propietario</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/visitante/}">
+						<i class="fa-solid fa-users"></i>
+						<span>Registrar Visitante</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/residente/}">
+						<i class="fa-solid fa-building-user"></i>
+						<span>Registrar Residente</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/usuario/}">
+						<i class="fa-solid fa-address-card"></i>
+						<span>Registrar Usuario</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/registro/mascotas/}">
+						<i class="fa-solid fa-shield-dog"></i>
+						<span>Registrar Mascotas</span>
+					</a>
+				</li>
+
+
+				<li class="menu-heading">
+					<h3>Perfil</h3>
+				</li>
+				<li>
+					<a href="#0">
+						<i class="fa-solid fa-gear"></i>
+						<span>Ajustes</span>
+					</a>
+				</li>
+				<li>
+					<a href="#0">
+						<i class="fa-solid fa-wrench"></i>
+						<span>Opciones</span>
+					</a>
+				</li>
+				<li>
+					<a href="#0">
+						<i class="fa-solid fa-money-bill-trend-up"></i>
+						<span>Estadísticas</span>
+					</a>
+				</li>
+				<li>
+					<div class="switch">
+						<input type="checkbox" id="mode" checked>
+						<label for="mode">
+							<span></span>
+							<span>Oscuro</span>
+						</label>
+					</div>
+					<button class="collapse-btn" aria-expanded="true" aria-label="collapse menu">
+						<i class="fa-solid fa-angle-left"></i>
+						<span>Contraer</span>
+					</button>
+				</li>
+			</ul>
+		</nav>
+	</header>
+	<section class="page-content">
+		<section class="search-and-user">
+			<form>
+				<input type="hidden" placeholder="">
+				<button type="submit" aria-label="submit form">
+					<svg aria-hidden="true">
+						<use xlink:href="#search"></use>
+					</svg>
+				</button>
+			</form>
+			<div class="admin-profile" th:each="bean : ${session.objUsuario}">
+				<i class="fa-solid fa-circle-user"></i>
+
+				<span class="greeting"
+					th:text="${bean.nombres + ' ' + bean.apePaterno + ' '  + bean.apeMaterno}"></span>
+
+
+				<div class="notifications">
+
+
+					<svg>
+						<use xlink:href="#users"></use>
+					</svg>
+				</div>
+			</div>
+		</section>
+		<section class="grid">
+			<article>
+				<div class="contact_form">
+
+					<div class="formulario">
+
+						<h1 style="text-align: center;">Perfil de Usuario</h1>
+
+						<form th:action="@{/res/usuario/registrar}" method="post" onsubmit="">
+
+
+							<input class="registro1" type="hidden" value="0" name="codigo" id="idcodigo">
+
+							<p>
+
+								<label for="nomUsuario" class="form-control">Nombre de usuario
+									<span class="obligatorio">*</span>
+								</label>
+								<input class="registro1" type="text" name="nomUsuario" id="idNomusuario"
+									placeholder="Escribe tu Username">
+							</p>
+
+							<p>
+								<label for="nombres" class="form-control">Nombres
+									<span class="obligatorio">*</span>
+								</label>
+								<input class="registro1" type="text" name="nombres" id="idNombres"
+									placeholder="Escribe tus Nombres">
+
+							</p>
+
+							<p>
+								<label for="apellidos" class="colocar_apellidos">Apellido Paterno
+
+									<span class="obligatorio">*</span>
+
+								</label>
+								<input class="registro1" type="text" name="apePaterno" id="idapePaterno"
+									placeholder="Escribe tu apellido paterno">
+
+							</p>
+							<p>
+								<label for="apellidos" class="colocar_apellidos">Apellido Materno
+									<span class="obligatorio">*</span>
+
+								</label>
+								<input class="registro1" type="text" name="apeMaterno" id="idapeMaterno"
+									placeholder="Escribe tu apellido Materno">
+
+							</p>
+
+
+							<p>
+								<label for="cuentaUsuario" class="colocar_correo">Correo
+									<span class="obligatorio">*</span>
+								</label>
+								<input class="registro1" type="email" name="cuentaUsuario" id="idCuentausuario"
+									placeholder="Escribe tu correo">
+
+							</p>
+
+							<p>
+								<label for="password" class="colocar_celular">Contraseña
+									<span class="obligatorio">*</span>
+								</label>
+								<input class="registro1" type="password" name="password" id="idPassword"
+									placeholder="Escribe tu contraseña">
+							</p>
+
+							<p>
+								<label for="password" class="colocar_celular">Confirmar Contraseña
+									<span class="obligatorio">*</span>
+								</label>
+								<input class="registro1" type="password" name="password" id="idPassword"
+									placeholder="Escribe tu contraseña">
+							</p>
+
+							
+
+
+							<button class="botones1" type="submit" name="enviar_formulario" id="registrar">
+								<p>Guardar</p>
+							</button>
+
+							
+
+						</form>
+					</div>
+				</div>
+			</article>
+			 </section>
+      </section>
+      </body>
+      </html>

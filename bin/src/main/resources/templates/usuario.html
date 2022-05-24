@@ -208,8 +208,7 @@
 
 						<h1 style="text-align: center;">Registro Usuario</h1>
 
-						
-						<form th:action="@{/rest/usuario/registrar}" onsubmit="return validarUsuario()">
+						<form th:action="@{/rest/usuario/registrar}" method="post" onsubmit="">
 
 
 							<input class="registro1" type="hidden" value="0" name="codigo" id="idcodigo">
@@ -304,7 +303,7 @@
 
 			<div class="limiter">
 				<div class="container-table100">
-					<h1 style="text-align: center;">Lista de Usuario</h1>
+					<h1 style="text-align: center;">Lista de usuarios</h1>
 
 					<div class="wrap-table100">
 						<div class="table100">
@@ -356,8 +355,7 @@
 		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 	<script th:src="@{/resources/js/adminjs.js}"></script>
 	<script th:src="@{/resources/js/main.js}"></script>
-	
-	<script th:src="@{/resources/js/validarUsuario.js}"></script>
+	<script th:src="@{/resources/js/validarCliente.js}"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
 		integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ=="
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
