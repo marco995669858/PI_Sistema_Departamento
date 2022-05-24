@@ -29,12 +29,12 @@
               <div class="container">
                 <div class="form">
                   <h2>Iniciar Sesion</h2>
-                  <form class="" action="/login/verificar" method="post">
+                  <form class="" th:action="@{/login}" method="post">
                     <div class="inputBox">
-                      <input type="text" name="gmail" id="gmail" placeholder="Email">
+                      <input type="text" name="username" id="username" placeholder="username" required>
                     </div>
                     <div class="inputBox">
-                      <input type="password" name="password" id="password" value="" placeholder="Password">
+                      <input type="password" name="password" id="password" placeholder="Password" required>
                     </div>
                     <div class="inputBox">
                       <input type="submit" name="" value="Login">

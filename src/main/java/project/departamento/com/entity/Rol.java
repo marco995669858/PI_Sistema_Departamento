@@ -1,5 +1,7 @@
 package project.departamento.com.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -7,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -26,14 +29,25 @@ public class Rol {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer idRol;
+	private int idRol;
 	
 	private String descripcion;
 	
+	/**
+	 * 
+	 * JSON Y PROP FETCH DAN ERROR 
+	 * 
+	 * @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	 * 	@ManyToOne(fetch = FetchType.LAZY)
+	 * */
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY) 
 	@JoinColumn(name = "idEstado")
 	private Estado estado;
+	
+	
+	 @OneToMany(mappedBy = "rol") private List<Usuario> listaUsuario;
+	
 	
 	public Rol(Integer idRol) {
 		this.idRol = idRol;
