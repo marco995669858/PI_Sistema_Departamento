@@ -12,7 +12,75 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
 		integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
 		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.css}">
+	<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.min.css}">
 </head>
+
+<style>
+	.alertify .ajs-dialog {
+		top: 50%;
+		transform: translateY(-50%);
+		margin: auto;
+	}
+
+	.ajs-header {
+		background-color: #286090 !important;
+		color: white !important;
+		/*text-align: center;*/
+		font-size: 18px;
+		font-weight: bold;
+	}
+
+	.ajs-ok {
+		color: #fff;
+		background-color: #007bff;
+		border-color: #007bff;
+	}
+
+	.ajs-cancel {
+		color: #fff;
+		background-color: #dc3545;
+		border-color: #dc3545;
+	}
+
+	.btn-primary {
+		background-color: #286090 !important;
+	}
+
+	.dataTables_length,
+	.dataTables_info {
+		display: none;
+	}
+
+	.modal-lg,
+	.modal-xl {
+		max-width: 900px;
+		max-height: 800px;
+	}
+
+	.form-control-feedback2 {
+		margin: 1px;
+		position: absolute;
+		padding: 10px;
+		pointer-events: none;
+		background-color: #e9ecef;
+		border-style: none;
+	}
+
+	.form-control-feedback3 {
+		margin: 1px;
+		position: absolute;
+		margin-left: 225px;
+		padding: 10px;
+		pointer-events: none;
+		background-color: #e9ecef;
+		border-style: none;
+	}
+
+	.form-control {
+		padding-left: 40px !important;
+	}
+</style>
 
 <body>
 
@@ -142,7 +210,7 @@
 						<h1 style="text-align: center;">Registro Departamento
 						</h1>
 
-						<form th:action="@{/registro/departamento/registra_actualiza}" name="test" method="post" onsubmit="">
+						<form th:action="@{/rest/departamento/registrar}" name="test" method="post" onsubmit="">
 							<input type="hidden" value="0" name="codigo" id="idcodigo">
 							<p>
 								<label for="tipoDepartamento">Tipo de Departamento
@@ -159,13 +227,13 @@
 								<label for="piso">Número de Piso
 									<span class="obligatorio">*</span>
 								</label>
-								<input type="number" class="registro1" name="piso" placeholder="Numero de Piso">
+								<input type="number" class="registro1" name="piso" id="idpiso" placeholder="Numero de Piso">
 							</p>
 
 							<p>
 								<label for="nroDepartamento">Número de departamento
 								</label>
-								<input type="number" class="registro1" name="nroDepartamento"
+								<input type="number" class="registro1" name="nroDepartamento" id="idnroDepartamento"
 									placeholder="Numero de Departamento">
 							</p>
 
@@ -173,7 +241,7 @@
 								<label for="nroHabitaciones">Número de Habitaciones
 								</label>
 								<input type="text" class="registro1" name="nroHabitaciones" id="idnro"
-									placeholder="Numero de Habitaciones"
+									placeholder="Numero de Habitaciones" readonly
 									style="background-color: darkgray; color: black;">
 							</p>
 
@@ -212,17 +280,31 @@
 								<thead>
 									<tr class="table100-head">
 										<th class="column1">Codigo</th>
-										<th class="column2">Tipo Departamento</th>
-										<th class="column3">Piso</th>
-										<th class="column4">Número de Departamento</th>
-										<th class="column5">Número de Habitaciones</th>
-										<th class="column6">UserName</th>
-										<th class="column7">Fecha de Registro</th>
-										<th class="column8">Estado</th>
+										<th class="column8">Tipo Departamento</th>
+										<th class="column1">Piso</th>
+										<th class="column8">Número de Departamento</th>
+										<th class="column8">Número de Habitaciones</th>
+										<th class="column1">Rol</th>
+										<th class="column1">Estado</th>
+										<th class="column1"></th>
+										<th class="column1"></th>
 									</tr>
 								</thead>
 								<tbody>
 
+									<tr th:each="bean:${listaDepartamento}">
+										<td class="column1" th:text="${bean.idDepartamento}"></td>
+										<td class="column8" th:text="${bean.tipoDepartamento.descripcion}"></td>
+										<td class="column1" th:text="${bean.piso}"></td>
+										<td class="column8" th:text="${bean.nroDepartamento}"></td>
+										<td class="column8" th:text="${bean.nroHabitaciones}"></td>
+										<td class="column1" th:text="${bean.usuario.nomUsuario}"></td>
+										<td class="column1" th:text="${bean.estado.nomEstado}"></td>
+										<td class="column1"><a class="btn-eliminar"><i
+													class="fa-solid fa-trash-can"></i></a></td>
+										<td class="column1"><a id="idEditar"><i
+													class="fa-solid fa-pen-to-square"></i></a></td>
+									</tr>
 
 								</tbody>
 							</table>
@@ -245,6 +327,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
 		integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ=="
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script th:src="@{/resources/alertifyjs/alertify.js}"></script>
+	<script th:src="@{/resources/alertifyjs/alertify.min.js}"></script>
 
 	<script th:inline="javascript" th:if="${MENSAJE!=null}">
 		//obtener atributo MENSAJE
@@ -268,9 +352,9 @@
 
 	</script>
 
-	<script th:inline="javascript" th:if="${existente!=null}">
-		//obtener atributo MENSAJE
-		var mensaje =/*[[${existente}]]*/ null;
+	<script th:inline="javascript" th:if="${existen!=null}">
+
+		var exist =/*[[${existen}]]*/ null;
 		const Toast = Swal.mixin({
 			toast: true,
 			position: 'top-end',
@@ -285,7 +369,7 @@
 
 		Toast.fire({
 			icon: 'warning',
-			title: mensaje
+			title: exist
 		})
 
 	</script>
@@ -299,7 +383,32 @@
 			someData[5] = new Array("5");
 
 			document.test.idnro.value = someData[id][0];
-		}
+		};
+
+		$(document).on("click", "#idEditar", function () {
+			let codigo;
+			codigo = $(this).parents("tr").find("td")[0].innerHTML;
+			$.get("buscar?idDepartamento=" + codigo, function (data) {
+				$("#idcodigo").val(data.idDepartamento);
+				$("#idTipodepatamento").val(data.tipoDepartamento.idTipo);
+				$("#idpiso").val(data.piso);
+				$("#idnroDepartamento").val(data.nroDepartamento);
+				$("#idnro").val(data.nroHabitaciones);
+			});
+		});
+		
+		$(document).on("click", ".btn-eliminar", function () {
+			let cod;
+			cod = $(this).parents("tr").find("td")[0].innerHTML;
+			alertify.confirm("SISTEMA GESTION DE EDIFICIO", "¿Esta seguro de eliminar?",
+				function () {//SIIII
+
+				},
+				function () {//NOOOO
+					window.location = "eliminar?codigo=" + cod;
+				}).set('labels', {ok: 'Cancelar', cancel: 'Eliminar'});
+		})
+	</script>
 
 
 

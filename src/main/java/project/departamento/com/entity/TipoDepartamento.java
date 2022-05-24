@@ -25,4 +25,7 @@ public class TipoDepartamento {
 	
 	private String descripcion;
 
+	public TipoDepartamento(Integer idTipo) {
+		this.idTipo = idTipo;
+	}
 }

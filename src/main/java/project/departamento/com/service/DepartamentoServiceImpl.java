@@ -1,6 +1,7 @@
 package project.departamento.com.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,24 @@ public class DepartamentoServiceImpl implements DepartamentoService{
 	@Override
 	public List<Departamento> listarDepartamentos() {
 		return repository.findAll();
+	}
+
+
+	@Override
+	public Optional<Departamento> buscarNroDepartamento(String nroDepartamento) {
+		return repository.buscarNroDepartamento(nroDepartamento);
+	}
+
+
+	@Override
+	public Departamento buscarDepartamentoporcodigo(Integer codigo) {
+		return repository.findById(codigo).orElse(null);
+	}
+
+
+	@Override
+	public List<Departamento> DepartamentosActivos(int eliminado) {
+		return repository.findByEliminado(eliminado);
 	}
 
 }
