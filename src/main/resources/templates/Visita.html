@@ -157,6 +157,116 @@
 										</button>
 									</p>
 
+									<!-- Inicio del Modal -->
+									<div id="my-modal" class="modal">
+										<div class="modal-content">
+											<div class="modal-header">
+												<span class="close">&times;</span>
+												<center>
+													<h2>Registro de Visitante</h2>
+												</center>
+											</div>
+											<div class="modal-body">
+
+
+												<div id="grid">
+													<div class="col-md-12 right" style="margin-right: 50px;">
+														<select class="form-control registro2" name="tipoDocumento"
+															id="idTipodocumento" style="width: 250px;">
+															<option value="-1">Tipo de Documento</option>
+															<option th:each="bean:${departamento}"
+																th:value="${bean.idDepartamento}"
+																th:text="${bean.descripcion}"></option>
+														</select>
+													</div>
+
+													<div style=" margin-left: 20px;" class="left">
+														<input class="registro2 " type="number" name="Documento"
+															id="idDocumento" placeholder="Documento"
+															style="width: 230px;">
+													</div>
+
+												</div>
+
+												<div id="grid">
+													<div style="margin-left: 20px;" class="right">
+														<input class="registro2 " type="text" name="Apellidos"
+															id="idApellidos" placeholder="Apellidos"
+															style="width: 300px">
+													</div>
+													<div style=" margin-left: 20px;" class="left">
+														<input class="registro2 " type="text" name="nombre"
+															id="idNombre" placeholder="Nombres" style="width: 300px">
+													</div>
+
+
+												</div>
+
+												<div id="grid">
+													<div class="col-md-12 right" style="margin-right: 50px;">
+														<select class="form-control registro2" name="departamento"
+															id="idDepartamento" style="width: 250px;">
+															<option value="-1">Seleccione un Departamento</option>
+															<option th:each="bean:${departamento}"
+																th:value="${bean.idDepartamento}"
+																th:text="${bean.descripcion}"></option>
+														</select>
+													</div>
+
+													<div style=" margin-left: 20px;" class="left">
+														<input class="registro2 " type="number" name="numero"
+															id="idNombre" placeholder="Telefono" style="width: 300px">
+													</div>
+
+												</div>
+												<div id="grid">
+													<div class="col-md-12 right" style="margin-right: 50px;">
+														<select class="form-control registro2" name="tipoDocumento"
+															id="idTipodocumento" style="width: 250px;">
+															<option value="-1">Tipo de Documento</option>
+															<option th:each="bean:${departamento}"
+																th:value="${bean.idDepartamento}"
+																th:text="${bean.descripcion}"></option>
+														</select>
+													</div>
+
+													<div style=" margin-left: 20px;" class="left">
+														<input class="registro2 " type="number" name="Documento"
+															id="idDocumento" placeholder="Documento"
+															style="width: 230px;">
+													</div>
+
+												</div>
+
+												<div id="grid">
+													<div class="col-md-12 right" style="margin-right: 50px;">
+														<select class="form-control registro2" name="cliente"
+															id="idCliente" style="width: 250px;">
+															<option value="-1">Cliente</option>
+															<option th:each="bean:${departamento}"
+																th:value="${bean.idDepartamento}"
+																th:text="${bean.descripcion}"></option>
+														</select>
+													</div>
+
+													<div style=" margin-left: 20px;" class="left">
+														<input class="registro2 " type="text" name="correo"
+															id="idCorreo" placeholder="Correo" style="width: 300px;">
+													</div>
+
+												</div>
+
+											</div>
+
+											<div class="modal-footer">
+												<button class="button" type="submit button">
+													Registrar Visitante
+												</button>
+											</div>
+										</div>
+									</div>
+									<!-- Fin del Modal -->
+
 								</div>
 							</div>
 
@@ -190,9 +300,8 @@
 								<label for="cliente" class="form-control">Cliente
 									<span class="obligatorio">*</span>
 								</label>
-								<input class="registro1" type="text" name="cliente" id="idCliente"
-									placeholder="Cliente" readonly="disabled"
-									style="background-color: rgb(192, 192, 192); color: black;">
+								<input class="registro1" type="text" name="cliente" id="idCliente" placeholder="Cliente"
+									readonly="disabled" style="background-color: rgb(192, 192, 192); color: black;">
 							</p>
 
 							<button class="botones1" type="submit" name="enviar_formulario" id="enviar">
@@ -203,30 +312,15 @@
 								<span class="obligatorio"> * </span>los campos son obligatorios.
 							</p>
 
+
+
+
 						</form>
 					</div>
 				</div>
 			</article>
 
-			<div id="my-modal" class="modal">
-				<div class="modal-content">
-					<div class="modal-header">
-						<span class="close">&times;</span>
-						<h2>Modal Header</h2>
-					</div>
-					<div class="modal-body">
-						<p>This is my modal</p>
-						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla repellendus
-							nisi, sunt consectetur ipsa velit
-							repudiandae aperiam modi quisquam nihil nam asperiores doloremque mollitia
-							dolor deleniti quibusdam nemo
-							commodi ab.</p>
-					</div>
-					<div class="modal-footer">
-						<h3>Modal Footer</h3>
-					</div>
-				</div>
-			</div>
+
 		</section>
 		<footer class="page-footer">
 
