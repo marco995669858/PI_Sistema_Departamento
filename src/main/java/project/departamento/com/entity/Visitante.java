@@ -32,11 +32,7 @@ public class Visitante {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idVisitante;
-	
-	private String ruta;
-	
-	private String nombreArchivo;
-	
+		
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idDepartamento")
