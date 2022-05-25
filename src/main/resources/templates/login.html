@@ -28,8 +28,10 @@
               <div class="square" style="--i:4;"></div>
               <div class="container">
                 <div class="form">
+
                   <h2>Iniciar Sesion</h2>
                   <form class="" action="login" method="post">
+
                     <div class="inputBox">
                       <input type="text" name="username" id="username" value="marcos995669858@gmail.com" placeholder="username" required>
                     </div>
@@ -38,6 +40,16 @@
                     </div>
                     <div class="inputBox">
                       <input type="submit" name="" value="Login">
+                    </div>
+                    <div class="errorMSG">
+                      <div th:if=${param.error}>
+                        <h4 class="">Usuario o contraseña inválidos!!!</h4>
+                      </div>
+            
+                      <div th:if=${param.logout}>
+                        <div class="alert alert-dark"> Se ha cerrado la sesión
+                        </div>
+                      </div>
                     </div>
                   </form>
                 </div>
@@ -49,6 +61,10 @@
 
 </html>
 <!-- partial -->
+<script>
+ 
+
+</script>
 <script th:href="@{/resources/js/loginscript.js}"></script>
 </body>
 

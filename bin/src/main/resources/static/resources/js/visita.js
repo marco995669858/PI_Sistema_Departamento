@@ -1,3 +1,5 @@
+//Para acceder a la camara
+
 // Get DOM Elements
 const modal = document.querySelector('#my-modal');
 const modalBtn = document.querySelector('#modal-btn');
@@ -29,3 +31,4 @@ function myFunction() {
       var output = (fecha.getHours()<10 ? '0' : '') +fecha.getHours()+ ":"+ (fecha.getMinutes()<10 ? '0' : '')+fecha.getMinutes();
     document.getElementById("minor2").value = output;
   }
+  
