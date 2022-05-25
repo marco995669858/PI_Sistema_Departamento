@@ -26,4 +26,6 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer>{
 //	public String eliminarCliente(int eliminado, Integer idCliente);
 	
 	public List<Cliente> findByIdCliente(Integer idCliente);
+	
+	public List<Cliente> findByEliminado(int eliminado);
 }

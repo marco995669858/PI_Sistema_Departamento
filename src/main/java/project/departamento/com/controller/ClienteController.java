@@ -1,20 +1,15 @@
 package project.departamento.com.controller;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-
 import org.springframework.stereotype.Controller;
-
 import org.springframework.ui.Model;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import project.departamento.com.entity.Cliente;
 import project.departamento.com.entity.Departamento;
@@ -33,26 +28,24 @@ public class ClienteController {
 
 	@RequestMapping("/")
 	public String index(Model model) {
+		model.addAttribute("tabla", service.listarEliminadoactivo(1));
+		model.addAttribute("comboTipoDocumento", service.listarTipoDocumento());
+		model.addAttribute("comboTipoCliente", service.listarTipoClientes());
+		model.addAttribute("comboDepartamento", service.listarDepartamento());
+		
 		return "cliente";
 	}
 
-	@RequestMapping("/listar")
-	public ResponseEntity<List<Cliente>> listarClientes() {
-		List<Cliente> salida = service.listarTodoslosClientes();
-		return ResponseEntity.ok(salida);
-
-	}
 
 	@RequestMapping("/registrar")
-	public ResponseEntity<Map<String, Object>> registrarActualizaCliente(@RequestParam("codigo") int codigo,
-			@RequestParam("nombre") String nombre, @RequestParam("apellidos") String apellidos,
-			@RequestParam("documento") String documento, @RequestParam("tipoDocumento") int tipoDocumento,
-			@RequestParam("telefono") String telefono, @RequestParam("estado") int estado,
+	public String registrarActualizaCliente(@RequestParam("codigo") int codigo,
+			@RequestParam("nombres") String nombre, @RequestParam("apePaterno") String apellidos,
+			@RequestParam("tipoDocumento") int tipoDocumento, @RequestParam("documento") String documento,
+			@RequestParam("telefono") String telefono,
 			@RequestParam("correo") String correo, @RequestParam("tipoCliente") int tipoCliente,
 			@RequestParam("sexo") String sexo, @RequestParam("departamento") int departamento,
-			@RequestParam("usuario") int usuario) {
+			@RequestParam("usuario") int usuario, RedirectAttributes redirect) {
 
-		Map<String, Object> salida = new HashMap<>();
 		try {
 			Optional<Cliente> buscarDocuemento = service.buscarDocumento(documento, codigo);
 			Optional<Cliente> buscarCorreo = service.buscarCorreo(correo, codigo);
@@ -61,13 +54,13 @@ public class ClienteController {
 			Optional<Cliente> buscarTelefono = service.buscarTelefono(telefono, codigo);
 
 			if (buscarDocuemento.isPresent()) {
-				salida.put("existen", "El documento que ingreso ya existe " + documento + " ingrese otro documento.");
+				redirect.addFlashAttribute("existen", "El documento que ingreso ya existe " + documento + " ingrese otro documento.");
 			} else if (buscarCorreo.isPresent()) {
-				salida.put("Existen", "El correo que ingreso ya existe " + correo + " ingrese otro correo.");
+				redirect.addFlashAttribute("existen", "El correo que ingreso ya existe " + correo + " ingrese otro correo.");
 			} else if (buscarclientedepartamento.isPresent()) {
-				salida.put("Existen", "El departamento que a seleccionado esta ocupado.");
+				redirect.addFlashAttribute("existen", "El departamento que a seleccionado esta ocupado.");
 			} else if (buscarTelefono.isPresent()) {
-				salida.put("Existen", "El telefono que ingreso ya existe " + telefono + " ingrese otro telefono.");
+				redirect.addFlashAttribute("existen", "El telefono que ingreso ya existe " + telefono + " ingrese otro telefono.");
 			} else {
 				Cliente registro = new Cliente();
 				registro.setNombres(nombre);
@@ -82,14 +75,14 @@ public class ClienteController {
 				registro.setDepartamento(new Departamento(departamento));
 				registro.setUsuario(new Usuario(usuario));
 				registro.setFechaRegistro(new Date());
-				registro.setEliminado(0);
+				registro.setEliminado(1);
 				if (codigo != 0) {
 					registro.setIdCliente(codigo);
 					service.registrarActualizarCliente(registro);
-					salida.put("MENSAJE", "Se actualizo el cliente correctamente.");
+					redirect.addFlashAttribute("MENSAJE", "Se actualizo el cliente correctamente.");
 				} else {
 					service.registrarActualizarCliente(registro);
-					salida.put("MENSAJE", "Se registro el cliente correctamente.");
+					redirect.addFlashAttribute("MENSAJE", "Se registro el cliente correctamente.");
 				}
 
 			}
@@ -98,32 +91,35 @@ public class ClienteController {
 			e.printStackTrace();
 		}
 
-		return ResponseEntity.ok(salida);
+		return "redirect:/rest/cliente/";
 	}
 
 	@RequestMapping("/eliminar")
-	public ResponseEntity<Map<String, Object>> eliminarCliente(@RequestParam("codigo") int codigo) {
-
-		Map<String, Object> salida = new HashMap<>();
+	public String eliminarCliente(@RequestParam("codigo") int codigo, RedirectAttributes redirect) {
 
 		try {
-
-			List<Cliente> buscarIdcliente = service.buscarClienteporid(codigo);
-			if (CollectionUtils.isEmpty(buscarIdcliente)) {
-
-				salida.put("MENSAJE", "El codigo esta eliminado o ingreso un codigo erroneo");
-
-			} else {
-
-				service.eliminarCliente(codigo);
-				salida.put("MENSAJE", "El cliente se elimino exitosamente");
-			}
-
+			Cliente bean = service.buscarClienteparaactualizar(codigo);
+			bean.setEliminado(0);
+			service.eliminarCliente(bean);
+			redirect.addFlashAttribute("MENSAJE", "Usuario eliminado");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/rest/cliente/";
+	}
+	
+	
+	@RequestMapping("/buscar")
+	@ResponseBody
+	public Cliente buscarCliente(@RequestParam("codigo") int codigo) {
+		Cliente bean = null;
+		try {
+			bean = service.buscarClienteparaactualizar(codigo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return ResponseEntity.ok(salida);
+		return bean;
 	}
 
 }

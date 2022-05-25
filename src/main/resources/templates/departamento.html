@@ -1,15 +1,10 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head>
+<head th:insert="menu.html :: head">
 	<meta charset="UTF-8">
 	<title>Departamento</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrardepartamento.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrarformulario.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/tablas.css}">
-	<script src="https://kit.fontawesome.com/7df5974cca.js" crossorigin="anonymous"></script>
-	<!--<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.css}">
-	<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.min.css}">-->
+
 </head>
 
 <style>
@@ -80,169 +75,55 @@
 
 <body>
 
-	<header class="page-header">
-		<nav>
-			<a href="admin.html" class="logo">
-				<img src="https://csn-spa.cl/wp-content/uploads/2019/10/csn-spa-logo.png" height="70" alt="">
-			</a>
-			<button class="toggle-mob-menu" aria-expanded="false" aria-label="open menu">
-				<svg width="20" height="20" aria-hidden="true">
-					<use xlink:href="#down"></use>
-				</svg>
-			</button>
-			<ul class="admin-menu">
-				<li class="menu-heading">
-					<h3>Admin</h3>
-				</li>
-				<li>
-					<a href="#0">
-						<i class="fa-solid fa-user"></i>
-						<span> Mi Perfil</span>
-					</a>
-				</li>
-				<li>
-					<a th:href="@{/registro/departamento/}">
-						<i class="fa-solid fa-building-circle-check"></i>
-						<span>Registrar de Departamento</span>
-					</a>
-				</li>
-				<li>
-					<a th:href="@{/registro/propietariodep/}">
-						<i class="fa-solid fa-building-circle-check"></i>
-						<span>Registrar de Propietario</span>
-					</a>
-				</li>
-				<li>
-					<a th:href="@{/registro/visitante/}">
-						<i class="fa-solid fa-users"></i>
-						<span>Registrar Visitante</span>
-					</a>
-				</li>
-				<li>
-					<a th:href="@{/registro/propietariodep/}">
-						<i class="fa-solid fa-building-user"></i>
-						<span>Registrar Residente</span>
-					</a>
-				</li>
-				<li>
-					<a th:href="@{/registro/usuario/}">
-						<i class="fa-solid fa-address-card"></i>
-						<span>Registrar Usuario</span>
-					</a>
-				</li>
-				<li>
-					<a th:href="@{/registro/mascotas/}">
-						<i class="fa-solid fa-shield-dog"></i>
-						<span>Registrar Mascotas</span>
-					</a>
-				</li>
-
-				<li class="menu-heading">
-					<h3>Perfil</h3>
-				</li>
-				<li>
-					<a href="#0">
-						<i class="fa-solid fa-gear"></i>
-						<span>Ajustes</span>
-					</a>
-				</li>
-				<li>
-					<a href="#0">
-						<i class="fa-solid fa-wrench"></i>
-						<span>Opciones</span>
-					</a>
-				</li>
-				<li>
-					<a href="#0">
-						<i class="fa-solid fa-money-bill-trend-up"></i>
-						<span>Estadísticas</span>
-					</a>
-				</li>
-				<li>
-					<div class="switch">
-						<input type="checkbox" id="mode" checked>
-						<label for="mode">
-							<span></span>
-							<span>Oscuro</span>
-						</label>
-					</div>
-					<button class="collapse-btn" aria-expanded="true" aria-label="collapse menu">
-						<i class="fa-solid fa-angle-left"></i>
-						<span>Contraer</span>
-					</button>
-				</li>
-			</ul>
-		</nav>
-	</header>
-	<section class="page-content">
-		<section class="search-and-user">
-			<form>
-				<input type="hidden" placeholder="">
-				<button type="submit" aria-label="submit form">
-					<svg aria-hidden="true">
-						<use xlink:href="#search"></use>
-					</svg>
-				</button>
-			</form>
-			<div class="admin-profile" th:each="bean : ${session.objUsuario}">
-				<i class="fa-solid fa-circle-user"></i>
-				<span class="greeting"
-					th:text="${bean.nombres + ' ' + bean.apePaterno + ' '  + bean.apeMaterno}"></span>
-
-				<div class="notifications">
+	<th:block th:replace="menu.html :: header">
+	</th:block>
 
 
-					<svg>
-						<use xlink:href="#users"></use>
-					</svg>
-				</div>
-			</div>
-		</section>
-		<section class="grid">
-			<article>
-				<div class="contact_form">
+	<section class="grid">
+		<article>
+			<div class="contact_form">
 
-					<div class="formulario">
-						<h1 style="text-align: center;">Registro Departamento
-						</h1>
+				<div class="formulario">
+					<h1 style="text-align: center;">Registro Departamento
+					</h1>
 
-					<form th:action="@{/rest/departamento/registrar}" 
-					onsubmit="return validarDepartamentos()">
-							<input type="hidden" value="0" name="codigo" id="idcodigo">
-							<p>
-								<label for="tipoDepartamento">Tipo de Departamento
-								</label>
-								<select class="form-control" name="tipoDepartamento" id="idTipodepatamento"
-									onchange="fillData(this.options[selectedIndex].value);">
-									<option value="-1">[Seleccione un Tipo de Departamento]</option>
-									<option th:each="bean:${tipodepartamento}" th:value="${bean.idTipo}"
-										th:text="${bean.descripcion}"></option>
-								</select>
-							</p>
+					<form name="test" th:action="@{/rest/departamento/registrar}" onsubmit="return validarDepartamentos()">
+						<input type="hidden" value="0" name="codigo" id="idcodigo">
+						<p>
+							<label for="tipoDepartamento">Tipo de Departamento
+							</label>
+							<select class="form-control" name="tipoDepartamento" id="idTipodepatamento"
+								onchange="fillData(this.options[selectedIndex].value);">
+								<option value="-1">[Seleccione un Tipo de Departamento]</option>
+								<option th:each="bean:${tipodepartamento}" th:value="${bean.idTipo}"
+									th:text="${bean.descripcion}"></option>
+							</select>
+						</p>
 
-							<p>
-								<label for="piso">Número de Piso
-									<span class="obligatorio">*</span>
-								</label>
-								<input type="number" class="registro1" name="idpiso" id="idpiso" placeholder="Numero de Piso">
-							</p>
+						<p>
+							<label for="piso">Número de Piso
+								<span class="obligatorio">*</span>
+							</label>
+							<input type="number" class="registro1" name="idpiso" id="idpiso"
+								placeholder="Numero de Piso">
+						</p>
 
-							<p>
-								<label for="nroDepartamento">Número de departamento
-								</label>
-								<input type="number" class="registro1" name="idnroDepartamento" id="idnroDepartamento"
-									placeholder="Numero de Departamento">
-							</p>
+						<p>
+							<label for="nroDepartamento">Número de departamento
+							</label>
+							<input type="number" class="registro1" name="idnroDepartamento" id="idnroDepartamento"
+								placeholder="Numero de Departamento">
+						</p>
 
-							<p>
-								<label for="nroHabitaciones">Número de Habitaciones
-								</label>
-								<input type="text" class="registro1" name="nroHabitaciones" id="idnro"
-									placeholder="Numero de Habitaciones" readonly
-									style="background-color: darkgray; color: black;">
-							</p>
+						<p>
+							<label for="nroHabitaciones">Número de Habitaciones
+							</label>
+							<input type="number" class="registro1" name="nroHabitaciones" id="idnro"
+								placeholder="Numero de Habitaciones" readonly
+								style="background-color: darkgray; color: black;">
+						</p>
 
-							<!--<p>
+						<!--<p>
 								<label for="estado">Estado
 								</label>
 								<select class="form-control" name="estado" id="idEstado">
@@ -251,78 +132,69 @@
 										th:text="${bean.caracteristicasDepartamento.nroDepartamento}"></option>
 								</select>
 							</p>-->
-								
 
-							<button class="botones1" type="submit" name="enviar_formulario" id="enviar">
-								<p>Registrar</p>
-							</button>
 
-							<p class="aviso">
-								<span class="obligatorio"> * </span>los campos son obligatorios.
-							</p>
+						<button class="botones1" type="submit" name="enviar_formulario" id="enviar">
+							<p>Registrar</p>
+						</button>
 
-						</form>
-					</div>
+						<p class="aviso">
+							<span class="obligatorio"> * </span>los campos son obligatorios.
+						</p>
+
+					</form>
 				</div>
-			</article>
+			</div>
+		</article>
 
-			<div class="limiter">
-				<div class="container-table100">
-					<h1 style="text-align: center;">Lista de Departamentos</h1>
+		<div class="limiter">
+			<div class="container-table100">
+				<h1 style="text-align: center;">Lista de Departamentos</h1>
 
-					<div class="wrap-table100">
-						<div class="table100">
-							<table>
-								<thead>
-									<tr class="table100-head">
-										<th class="column1">Codigo</th>
-										<th class="column8">Tipo Departamento</th>
-										<th class="column1">Piso</th>
-										<th class="column8">Número de Departamento</th>
-										<th class="column8">Número de Habitaciones</th>
-										<th class="column1">Rol</th>
-										<th class="column1">Estado</th>
-										<th class="column1"></th>
-										<th class="column1"></th>
-									</tr>
-								</thead>
-								<tbody>
+				<div class="wrap-table100">
+					<div class="table100">
+						<table>
+							<thead>
+								<tr class="table100-head">
+									<th class="column1">Codigo</th>
+									<th class="column8">Tipo Departamento</th>
+									<th class="column1">Piso</th>
+									<th class="column8">Número de Departamento</th>
+									<th class="column8">Número de Habitaciones</th>
+									<th class="column1">Rol</th>
+									<th class="column1">Estado</th>
+									<th class="column1"></th>
+									<th class="column1"></th>
+								</tr>
+							</thead>
+							<tbody>
 
-									<tr th:each="bean:${listaDepartamento}">
-										<td class="column1" th:text="${bean.idDepartamento}"></td>
-										<td class="column8" th:text="${bean.tipoDepartamento.descripcion}"></td>
-										<td class="column1" th:text="${bean.piso}"></td>
-										<td class="column8" th:text="${bean.nroDepartamento}"></td>
-										<td class="column8" th:text="${bean.nroHabitaciones}"></td>
-										<td class="column1" th:text="${bean.usuario.nomUsuario}"></td>
-										<td class="column1" th:text="${bean.estado.nomEstado}"></td>
-										<td class="column1"><a class="btn-eliminar"><i
-													class="fa-solid fa-trash-can"></i></a></td>
-										<td class="column1"><a id="idEditar"><i
-													class="fa-solid fa-pen-to-square"></i></a></td>
-									</tr>
+								<tr th:each="bean:${listaDepartamento}">
+									<td class="column1" th:text="${bean.idDepartamento}"></td>
+									<td class="column8" th:text="${bean.tipoDepartamento.descripcion}"></td>
+									<td class="column1" th:text="${bean.piso}"></td>
+									<td class="column8" th:text="${bean.nroDepartamento}"></td>
+									<td class="column8" th:text="${bean.nroHabitaciones}"></td>
+									<td class="column1" th:text="${bean.usuario.nomUsuario}"></td>
+									<td class="column1" th:text="${bean.estado.nomEstado}"></td>
+									<td class="column1"><a class="btn-eliminar"><i
+												class="fa-solid fa-trash-can"></i></a></td>
+									<td class="column1"><a id="idEditar"><i class="fa-solid fa-pen-to-square"></i></a>
+									</td>
+								</tr>
 
-								</tbody>
-							</table>
-						</div>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
-	<!--kkk -->
-		</section>
-		<footer class="page-footer">
-
-		</footer>
+		</div>
+		<!--kkk -->
 	</section>
-	<!-- partial -->
-	<script th:src="@{/resources/js/validarDepa.js}"></script>
-	<!--<script src="https://releases.jquery.com/git/jquery-git.js"></script>-->
-	<script th:src="@{/resources/js/adminjs.js}"></script>
-	<script th:src="@{/resources/js/main.js}"></script>
-	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	
-	<script th:src="@{/resources/alertifyjs/alertify.js}"></script>
-	<script th:src="@{/resources/alertifyjs/alertify.min.js}"></script>
+	</section>
+
+	<th:block th:replace="menu.html :: footer">
+	</th:block>
 
 	<script th:inline="javascript" th:if="${MENSAJE!=null}">
 		//obtener atributo MENSAJE
@@ -390,7 +262,7 @@
 				$("#idnro").val(data.nroHabitaciones);
 			});
 		});
-		
+
 		$(document).on("click", ".btn-eliminar", function () {
 			let cod;
 			cod = $(this).parents("tr").find("td")[0].innerHTML;
@@ -407,7 +279,7 @@
 
 
 	</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
 		integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ=="
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>

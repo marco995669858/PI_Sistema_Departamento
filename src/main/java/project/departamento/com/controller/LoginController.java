@@ -2,17 +2,13 @@ package project.departamento.com.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import project.departamento.com.entity.Enlace;
 import project.departamento.com.entity.Usuario;
@@ -24,27 +20,46 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 	
+//	@Autowired
+//	private 
+	
 	 @RequestMapping(value = "/login")
 	 public String home() {
+		
 		 return "login";
 	 }
 	 
-	@GetMapping(value = "/")
-	 public String menu(Authentication auth,Model model, HttpSession session, RedirectAttributes redirect) {
-		 String usu = auth.getName();
-		 Usuario user = loginService.buscarUsuario(usu);
-		 session.setAttribute("usuario", user);
-	
-		 String fullname = user.getNombres() + " " + user.getApeMaterno();
-		 model.addAttribute("fullNameUser", fullname);
-		
-		 model.addAttribute("rol", user.getRol().getIdRol());
-		 model.addAttribute("rolDesc", user.getRol().getDescripcion());
-		 
-		 
-		 return "redirect:/rest/usuario/";
-
-	 }
+//	@GetMapping(value = "/")
+//	 public String menu(Authentication auth,Model model, HttpSession session) {
+//		 String usu = auth.getName();
+//		 Usuario user = loginService.buscarUsuario(usu);
+//		 session.setAttribute("usuario", user);
+//	
+//		 String fullname = user.getNombres() + " " + user.getApeMaterno();
+//		 model.addAttribute("fullNameUser", fullname);
+//		
+//		 model.addAttribute("rol", user.getRol().getIdRol());
+//		 model.addAttribute("rolDesc", user.getRol().getDescripcion());
+//		 
+//		 
+//		 return "redirect:/rest/usuario/";
+//
+//	 }
+	 
+	 @RequestMapping(value = "/Ingresar")
+		public String menu(Authentication auth,HttpServletRequest  request) {	
+			// recuperar nombre del usuario
+			String nomUsu = auth.getName();
+			// invocar al metodo "iniciarsession"
+			Usuario bean = loginService.buscarUsuario(nomUsu);
+			// traer enlace segun el rol
+			List<Enlace> lista = loginService.traenEnlaces(bean.getRol().getIdRol());
+			HttpSession session = request.getSession();
+			session.setAttribute("menus", lista);
+			session.setAttribute("usuario", bean);
+			
+			return "redirect:/Principal/";
+		}
 			
 	 
 	 

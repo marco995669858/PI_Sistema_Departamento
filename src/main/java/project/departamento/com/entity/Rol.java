@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -26,29 +27,30 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Rol {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idRol;
-	
+
 	private String descripcion;
-	
+
 	/**
 	 * 
-	 * JSON Y PROP FETCH DAN ERROR 
+	 * JSON Y PROP FETCH DAN ERROR
 	 * 
 	 * @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	 * 	@ManyToOne(fetch = FetchType.LAZY)
-	 * */
+	 * 
+	 * @ManyToOne(fetch = FetchType.LAZY)
+	 */
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@ManyToOne(fetch = FetchType.LAZY) 
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idEstado")
 	private Estado estado;
 	
-	
-	 @OneToMany(mappedBy = "rol") private List<Usuario> listaUsuario;
-	
-	
+	@JsonIgnore
+	@OneToMany(mappedBy = "rol")
+	private List<Usuario> listaUsuario;
+
 	public Rol(Integer idRol) {
 		this.idRol = idRol;
 	}

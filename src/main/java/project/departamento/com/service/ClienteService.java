@@ -4,9 +4,18 @@ import java.util.List;
 import java.util.Optional;
 
 import project.departamento.com.entity.Cliente;
+import project.departamento.com.entity.Departamento;
+import project.departamento.com.entity.TipoCliente;
+import project.departamento.com.entity.TipoDocumento;
 
 public interface ClienteService {
+	
+	public abstract List<TipoDocumento> listarTipoDocumento();
+	
+	public abstract List<TipoCliente> listarTipoClientes();
 
+	public abstract List<Departamento> listarDepartamento();
+	
 	public abstract Optional<Cliente> buscarDocumento(String documento, Integer IdCliente);
 
 	public abstract Optional<Cliente> buscarCorreo(String correo, Integer IdCliente);
@@ -17,10 +26,14 @@ public interface ClienteService {
 
 	public abstract List<Cliente> listarTodoslosClientes();
 
-	public abstract List<Cliente> buscarClienteporid(Integer idCliente);
+	public abstract List<Cliente>  buscarClienteporid(Integer idCliente);
 	
-	public abstract void eliminarCliente(Integer codigo);
+	public abstract Cliente eliminarCliente(Cliente codigo);
 
 	public abstract Cliente registrarActualizarCliente(Cliente bean);
+	
+	public List<Cliente> listarEliminadoactivo(int eliminado);
+	
+	public abstract Cliente buscarClienteparaactualizar(int codigo);
 	
 }
