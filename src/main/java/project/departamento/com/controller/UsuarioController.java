@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import project.departamento.com.entity.Rol;
 import project.departamento.com.entity.Usuario;
 import project.departamento.com.service.UsuarioService;
+import project.departamento.com.util.EncryptPassword;
 
 @Controller
 @RequestMapping("/rest/usuario")
@@ -20,6 +21,9 @@ public class UsuarioController {
 
 	@Autowired
 	private UsuarioService service;
+	
+	@Autowired
+	private EncryptPassword encriptar;
 
 	@RequestMapping("/")
 	public String index(Model model) {
@@ -52,7 +56,7 @@ public class UsuarioController {
 				registro.setApePaterno(apePaterno);
 				registro.setApeMaterno(apeMaterno);
 				registro.setCuentaUsuario(correo);
-				registro.setPasswordUsuario(password);
+				registro.setPasswordUsuario(encriptar.Encriptar(password));
 				registro.setTelefono(telefono);
 				registro.setRol(new Rol(rol));
 				registro.setFechaRegistro(new Date());

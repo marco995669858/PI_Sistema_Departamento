@@ -7,13 +7,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import project.departamento.com.entity.Cliente;
+import project.departamento.com.entity.Departamento;
+import project.departamento.com.entity.TipoCliente;
+import project.departamento.com.entity.TipoDocumento;
 import project.departamento.com.repository.ClienteRepository;
+import project.departamento.com.repository.DepartamentoRepository;
+import project.departamento.com.repository.TipoClienteRepository;
+import project.departamento.com.repository.TipoDocumentoRepository;
 
 @Service
 public class ClienteServiceImpl implements ClienteService{
 	
 	@Autowired
 	private ClienteRepository repository;
+	
+	@Autowired
+	private TipoDocumentoRepository documentoRepository;
+	
+	@Autowired
+	private TipoClienteRepository clienteRepository;
+	
+	@Autowired
+	private DepartamentoRepository departamentoRepository;
 	
 	@Override
 	public Optional<Cliente> buscarDocumento(String documento, Integer IdCliente) {
@@ -53,9 +68,34 @@ public class ClienteServiceImpl implements ClienteService{
 	}
 
 	@Override
-	public void eliminarCliente(Integer codigo) {
-		repository.deleteById(codigo);
+	public Cliente eliminarCliente(Cliente codigo) {
+		return repository.save(codigo);
 		
+	}
+
+	@Override
+	public List<TipoDocumento> listarTipoDocumento() {
+		return documentoRepository.findAll();
+	}
+
+	@Override
+	public List<TipoCliente> listarTipoClientes() {
+		return clienteRepository.findAll();
+	}
+
+	@Override
+	public List<Departamento> listarDepartamento() {
+		return departamentoRepository.findAll();
+	}
+
+	@Override
+	public List<Cliente> listarEliminadoactivo(int eliminado) {
+		return repository.findByEliminado(eliminado);
+	}
+
+	@Override
+	public Cliente buscarClienteparaactualizar(int codigo) {
+		return repository.findById(codigo).orElse(null);
 	}
 
 	
