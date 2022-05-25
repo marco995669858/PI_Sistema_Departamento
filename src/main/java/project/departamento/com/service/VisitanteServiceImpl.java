@@ -75,4 +75,9 @@ public class VisitanteServiceImpl implements VisitanteService {
 		return repository.findByCorreo(correo);
 	}
 
+	@Override
+	public List<Visitante> buscarVisitantepordni(String dni) {
+		return repository.buscarDocumento(dni);
+	}
+
 }

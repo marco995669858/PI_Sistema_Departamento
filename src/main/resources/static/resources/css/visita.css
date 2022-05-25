@@ -15,6 +15,21 @@
   cursor: pointer;
 }
 
+
+.btn{
+  background: #428bca;
+  padding: 1em 2em;
+  color: #fff;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #3876ac;
+}
+
+
 .button:hover {
   background: #3876ac;
 }

@@ -28,4 +28,6 @@ public interface VisitanteService {
 	public abstract void eliminarVisitante(Integer codigo);
 	
 	public abstract Visitante registraActualizaVisitante(Visitante bean);
+	
+	public abstract List<Visitante> buscarVisitantepordni(String dni);
 }
