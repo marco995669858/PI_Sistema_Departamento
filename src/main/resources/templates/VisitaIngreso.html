@@ -159,8 +159,7 @@
 							<label for="visitante" class="form-control">Visitante
 								<span class="obligatorio">*</span>
 							</label>
-							<select name="visitante" id="codigVisitante">
-								<option></option>
+							<select name="visitante" id="codigVisitante" disabled>
 								<!--<option th:each="bean:${comboVisitante}" th:value="${bean.idVisitante}"
 										th:text="${bean.nombres + ' ' + bean.apellidos}"></option>-->
 							</select>
@@ -220,10 +219,9 @@
 		$(document).on("click", "#idEditar", function () {
 			let codigo;
 			codigo = document.getElementById("idDocumento").value;
-			$.get("/rest/controlvisita/buscardni?dni=" + document.getElementById("idDocumento").value, function (data) {
-				console.log(data)
-				$.each(datos, function (key, value) {
-					$("#codigVisitante").append("<option value=" + data.idVisitante + ">" + data.nombres + "</option>");
+			$.get("/rest/controlvisita/buscardni?dni=" + codigo, function (data) {
+				$.each(data, function (key, value) {
+					$("#codigVisitante").append("<option value=" + key.idVisitante + ">" + value.nombres + "</option>");
 				});
 			});
 		});
