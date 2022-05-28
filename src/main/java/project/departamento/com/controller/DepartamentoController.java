@@ -33,7 +33,7 @@ public class DepartamentoController {
 	
 	@RequestMapping("/registrar")
 	public String registraActualizaDepartamento(@RequestParam("codigo") int codigo,@RequestParam("tipoDepartamento") int tipoDepartamento,
-												@RequestParam("piso") String piso,@RequestParam("nroDepartamento") String nroDepartamento,
+												@RequestParam("idpiso") String piso,@RequestParam("idnroDepartamento") String nroDepartamento,
 												@RequestParam("nroHabitaciones") int nroHabitaciones,RedirectAttributes redirect) {
 		 try {
 			
