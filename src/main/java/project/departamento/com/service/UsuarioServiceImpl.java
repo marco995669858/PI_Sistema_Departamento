@@ -53,24 +53,6 @@ public class UsuarioServiceImpl implements UsuarioService{
 		return rolRepository.findAll();
 	}
 
-	@Override
-	public Usuario eliminarUsuario(Usuario bean) {
-		return repository.save(bean);
-	}
 
-	@Override
-	public Usuario buscarUsarioPorCodigo(Integer codigo) {
-		return repository.findById(codigo).orElse(null);
-	}
-//
-//	@Override
-//	public Optional<Usuario> buscarCuentaUsuario(String correo) {
-//		return repository.buscarccCuentaUsuario(correo);
-//	}
-//
-//	@Override
-//	public Optional<Usuario> buscarTelefonovacio(String telefono) {
-//		return repository.buscarTelefonovacio(telefono);
-//	}
 
 }

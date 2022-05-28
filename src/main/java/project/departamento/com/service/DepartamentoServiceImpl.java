@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import project.departamento.com.entity.Departamento;
+import project.departamento.com.entity.Estado;
 import project.departamento.com.entity.TipoDepartamento;
 import project.departamento.com.repository.DepartamentoRepository;
+import project.departamento.com.repository.EstadoRepository;
 import project.departamento.com.repository.TipoDepartamentoRepository;
 
 @Service
@@ -19,6 +21,9 @@ public class DepartamentoServiceImpl implements DepartamentoService{
 	
 	@Autowired
 	private TipoDepartamentoRepository tipoDepartamentoRepository;
+	
+	@Autowired
+	private EstadoRepository estadoRepository;
 	
 	
 	@Override
@@ -34,8 +39,8 @@ public class DepartamentoServiceImpl implements DepartamentoService{
 
 
 	@Override
-	public Departamento eliminarDepartamento(Departamento bean) {
-		return repository.save(bean);
+	public void eliminarDepartamento(int bean) {
+		 repository.deleteById(bean);
 	}
 
 
@@ -60,6 +65,18 @@ public class DepartamentoServiceImpl implements DepartamentoService{
 	@Override
 	public List<Departamento> DepartamentosActivos(int eliminado) {
 		return repository.findByEliminado(eliminado);
+	}
+
+
+	@Override
+	public List<Estado> listarEstados(int ocupado, int desocupado) {
+		return estadoRepository.listarEstados(ocupado, desocupado);
+	}
+
+
+	@Override
+	public Optional<Departamento> buscarDepartamentoExistente(String nroDepartamento, int idDepartamento) {
+		return repository.buscarDepartamentoExistente(nroDepartamento, idDepartamento);
 	}
 
 }

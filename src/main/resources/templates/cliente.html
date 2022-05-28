@@ -104,7 +104,7 @@
 						<p>
 							<label for="tipoDocumento">Tipo de Documento
 							</label>
-							<select class="form-control" name="tipoDocumento" id="idtipoDocumento">
+							<select class="select" name="tipoDocumento" id="idtipoDocumento">
 								<option value="-1">[Seleccione un Tipo de Documento]</option>
 								<option th:each="bean:${comboTipoDocumento}" th:value="${bean.idTipoDocumento}"
 									th:text="${bean.descripcion}"></option>
@@ -112,7 +112,7 @@
 						</p>
 
 						<p>
-							<label for="documento" class="form-control">DNI
+							<label for="documento">DNI
 
 								<span class="obligatorio">*</span>
 							</label>
@@ -121,7 +121,7 @@
 						</p>
 
 						<p>
-							<label for="telefono" class="form-control">Celular
+							<label for="telefono">Celular
 								<span class="obligatorio">*</span>
 							</label>
 							<input class="registro1" type="number" name="telefono" id="idTelefono"
@@ -129,7 +129,7 @@
 						</p>
 
 						<p>
-							<label for="correo" class="form-control">Correo
+							<label for="correo">Correo
 								<span class="obligatorio">*</span>
 							</label>
 							<input class="registro1" type="text" name="correo" id="idCorreo"
@@ -239,10 +239,6 @@
 	</section>
 	<th:block th:replace="menu.html :: footer">
 	</th:block>
-	<!-- partial -->
-	<!--<script th:src="@{/resources/js/validarCliente.js}"></script>
-	<script th:src="@{/resources/js/adminjs.js}"></script>
-	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>-->
 	<script th:inline="javascript" th:if="${MENSAJE!=null}">
 		//obtener atributo MENSAJE
 		var mensaje =/*[[${MENSAJE}]]*/ null;

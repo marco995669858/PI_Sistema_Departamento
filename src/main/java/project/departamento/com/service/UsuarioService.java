@@ -9,11 +9,6 @@ import project.departamento.com.entity.Usuario;
 public interface UsuarioService {
 
 	/* para buscar los usuarios que si existen */
-//	public abstract Optional<Usuario> buscarCuentaUsuario(String correo);
-//
-//	public abstract Optional<Usuario> buscarTelefonovacio(String telefono);
-
-	public abstract Usuario buscarUsarioPorCodigo(Integer codigo);
 
 	public abstract List<Usuario> listarTodosLosUsuarioActivos(int eliminado);
 
@@ -25,7 +20,6 @@ public interface UsuarioService {
 
 	public abstract Usuario registrarActualizaUsuario(Usuario bean);
 
-	public abstract Usuario eliminarUsuario(Usuario bean);
 
 	public abstract List<Rol> listarRoles();
 }

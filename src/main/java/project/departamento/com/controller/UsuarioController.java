@@ -75,9 +75,7 @@ public class UsuarioController {
 	public String eliminarUsuario(@RequestParam("codigo") int codigo, RedirectAttributes redirect) {
 
 		try {
-			Usuario bean = service.buscarUsarioPorCodigo(codigo);
-			bean.setEliminado(0);
-			service.eliminarUsuario(bean);
+			service.eliminarUsuario(codigo);
 			redirect.addFlashAttribute("MENSAJE", "Usuario eliminado");
 		} catch (Exception e) {
 			e.printStackTrace();
