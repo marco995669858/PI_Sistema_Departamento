@@ -22,15 +22,15 @@
 					<form action="" method="post">
 						<input class="registro1" type="hidden" name="codigo" value="0">
 
-						<div class="col-md-12">
+						<p>
 							<label for="especie"> Departamento
 								<span class="obligatorio">*</span></label>
-							<select class="form-control registro1" name="departamento" id="idDepartamento">
+							<select class="registro1" name="departamento" id="idDepartamento">
 								<option value="-1">[Seleccione un Departamento.] </option>
 								<option th:each="bean:${departamento}" th:value="${bean.idDepartamento}"
 									th:text="${bean.descripcion}"></option>
 							</select>
-						</div>
+						</p>
 						<p>
 							<label for="Nombres">Nombres
 							</label>
@@ -72,15 +72,15 @@
 								placeholder="Escribe tu correo">
 						</p>
 						<p>
-						<div class="col-md-12">
+						<p>
 							<label for="cliente"> Cliente
 								<span class="obligatorio">*</span></label>
-							<select class="form-control registro1" name="	" id="idCliente">
+							<select class="registro1" name="	" id="idCliente">
 								<option value="-1">[Seleccione un Cliente.] </option>
 								<option th:each="bean:${cliente}" th:value="${bean.idCliente}"
 									th:text="${bean.descripcion}"></option>
 							</select>
-						</div>
+						</p>
 						</p>
 
 						<button class="botones1" type="submit" name="enviar_formulario" id="enviar">
