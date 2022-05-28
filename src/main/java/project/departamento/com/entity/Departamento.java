@@ -41,6 +41,10 @@ public class Departamento {
 	
 	private int nroHabitaciones;
 	
+	private int banio;
+	
+	private String lavanderia;
+	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idUsuario")

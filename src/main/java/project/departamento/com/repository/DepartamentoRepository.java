@@ -10,8 +10,11 @@ import project.departamento.com.entity.Departamento;
 
 public interface DepartamentoRepository extends JpaRepository<Departamento, Integer>{
 	
-	@Query("select d from Departamento d where d.nroDepartamento = ?1 and d.eliminado != 0")
+	@Query("select d from Departamento d where d.nroDepartamento = ?1")
 	public Optional<Departamento> buscarNroDepartamento(String nroDepartamento);
+	
+	@Query("select d from Departamento d where d.nroDepartamento = ?1 and d.idDepartamento <> idDepartamento")
+	public Optional<Departamento> buscarDepartamentoExistente(String nroDepartamento, int idDepartamento);
 	
 	public List<Departamento> findByEliminado(int eliminado);
 }

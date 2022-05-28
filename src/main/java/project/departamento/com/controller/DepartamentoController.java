@@ -20,72 +20,114 @@ import project.departamento.com.service.DepartamentoService;
 @Controller
 @RequestMapping("/rest/departamento")
 public class DepartamentoController {
-	
+
 	@Autowired
 	private DepartamentoService service;
-	
+
 	@RequestMapping("/")
 	public String index(Model model) {
 		model.addAttribute("tipodepartamento", service.listarTipoDepartamento());
 		model.addAttribute("listaDepartamento", service.DepartamentosActivos(1));
+		model.addAttribute("estado", service.listarEstados(1, 2));
+		model.addAttribute("reDepartamento", new Departamento());
 		return "departamento";
 	}
-	
+
 	@RequestMapping("/registrar")
-	public String registraActualizaDepartamento(@RequestParam("codigo") int codigo,@RequestParam("tipoDepartamento") int tipoDepartamento,
-												@RequestParam("idpiso") String piso,@RequestParam("idnroDepartamento") String nroDepartamento,
-												@RequestParam("nroHabitaciones") int nroHabitaciones,RedirectAttributes redirect) {
-		 try {
-			
-			 Optional<Departamento> buscarNrodepartamento = service.buscarNroDepartamento(nroDepartamento);
-			 if(buscarNrodepartamento.isPresent()) {
-				 redirect.addFlashAttribute("existen", "El numero del departamento ya existe ingrese otro numero.");
-			 }else {
-				 Departamento bean = new Departamento();
-				 bean.setTipoDepartamento(new TipoDepartamento(tipoDepartamento));
-				 bean.setPiso(piso);
-				 bean.setNroDepartamento(nroDepartamento);
-				 bean.setNroHabitaciones(nroHabitaciones);
-				 bean.setUsuario(new Usuario(1));
-				 bean.setFecharegistro(new Date());
-				 bean.setEstado(new Estado(2));
-				 bean.setEliminado(1);
-				 if(codigo != 0) {
-					 bean.setIdDepartamento(codigo);
-					 service.registraActualizaDepartamento(bean);
-					 redirect.addFlashAttribute("MENSAJE", "Se actualizo el departamento correctamente");
-				 }else {
-					 service.registraActualizaDepartamento(bean);
-					 redirect.addFlashAttribute("MENSAJE", "Se registro el departamento correctamente");
-					 
-				 }
-			 }
-			 
-		} catch (Exception e) {
+	public String registrarDepartamento(@RequestParam("tipoDepartamento") int tipoDepartamento,
+			@RequestParam("idpiso") String piso, @RequestParam("idnroDepartamento") String nroDepartamento,
+			@RequestParam("nroHabitaciones") int nroHabitaciones, @RequestParam("banio") int banio,
+			@RequestParam("lavanderia") String lavanderia, @RequestParam("usuario") int usuario,
+			RedirectAttributes redirect) {
+		try {
+
+			Optional<Departamento> buscarNrodepartamento = service.buscarNroDepartamento(nroDepartamento);
+			if (buscarNrodepartamento.isPresent()) {
+				redirect.addFlashAttribute("existen", "El numero del departamento ya existe ingrese otro numero.");
+			} else {
+				Departamento bean = new Departamento();
+				bean.setTipoDepartamento(new TipoDepartamento(tipoDepartamento));
+				bean.setPiso(piso);
+				bean.setNroDepartamento(nroDepartamento);
+				bean.setNroHabitaciones(nroHabitaciones);
+				bean.setBanio(banio);
+				bean.setLavanderia(lavanderia);
+				bean.setUsuario(new Usuario(usuario));
+				bean.setFecharegistro(new Date());
+				bean.setEstado(new Estado(2));
+				bean.setEliminado(1);
+
+				service.registraActualizaDepartamento(bean);
+				redirect.addFlashAttribute("MENSAJE", "Se registro el departamento correctamente");
+
+			}
+
+		} catch (
+
+		Exception e) {
 			e.printStackTrace();
 		}
-		 return "redirect:/rest/departamento/";
+		return "redirect:/rest/departamento/";
 	}
-	
+
+	@RequestMapping("/actualizar")
+	public String actualizarDepartamento(@RequestParam("codigo") int codigo,
+			@RequestParam("tipoDepartamento") int tipoDepartamento, @RequestParam("idpiso") String piso,
+			@RequestParam("idnroDepartamento") String nroDepartamento,
+			@RequestParam("nroHabitaciones") int nroHabitaciones, @RequestParam("banio") int banio,
+			@RequestParam("lavanderia") String lavanderia, @RequestParam("estado") int estado,
+			@RequestParam("usuario") int usuario, RedirectAttributes redirect) {
+		try {
+
+			Optional<Departamento> buscarNrodepartamento = service.buscarDepartamentoExistente(nroDepartamento, codigo);
+			if (buscarNrodepartamento.isPresent()) {
+				redirect.addFlashAttribute("existen", "El numero del departamento ya existe ingrese otro numero.");
+			} else {
+				Departamento bean = new Departamento();
+				bean.setTipoDepartamento(new TipoDepartamento(tipoDepartamento));
+				bean.setPiso(piso);
+				bean.setNroDepartamento(nroDepartamento);
+				bean.setNroHabitaciones(nroHabitaciones);
+				bean.setBanio(banio);
+				bean.setLavanderia(lavanderia);
+				bean.setUsuario(new Usuario(usuario));
+				bean.setFecharegistro(new Date());
+				bean.setEstado(new Estado(estado));
+				bean.setEliminado(1);
+				if (codigo != 0) {
+					bean.setIdDepartamento(codigo);
+					service.registraActualizaDepartamento(bean);
+					redirect.addFlashAttribute("MENSAJE", "Se actualizo el departamento correctamente");
+				}
+
+			}
+
+		} catch (
+
+		Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/rest/departamento/";
+	}
+
 	@RequestMapping("/eliminar")
 	public String eliminar(@RequestParam("codigo") int codigo, RedirectAttributes redirect) {
 		try {
-			Departamento bean = service.buscarDepartamentoporcodigo(codigo);
-			bean.setEliminado(0);
-			service.eliminarDepartamento(bean);
+			
+			service.eliminarDepartamento(codigo);
 			redirect.addFlashAttribute("MENSAJE", "Departamento eliminado");
 		} catch (Exception e) {
-			
+
 		}
-		return  "redirect:/rest/departamento/";
+		return "redirect:/rest/departamento/";
 	}
-	
+
 	@RequestMapping(value = "/buscar")
 	@ResponseBody
 	public Departamento buscar(@RequestParam("idDepartamento") int cod) {
-		Departamento bean=null;
+		Departamento bean = null;
 		try {
-			bean=service.buscarDepartamentoporcodigo(cod);
+			bean = service.buscarDepartamentoporcodigo(cod);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

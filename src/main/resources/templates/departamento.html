@@ -4,7 +4,6 @@
 <head th:insert="menu.html :: head">
 	<meta charset="UTF-8">
 	<title>Departamento</title>
-
 </head>
 
 <style>
@@ -87,12 +86,13 @@
 					<h1 style="text-align: center;">Registro Departamento
 					</h1>
 
-					<form name="test" th:action="@{/rest/departamento/registrar}" onsubmit="return validarDepartamentos()">
+					<form name="test" th:action="@{/rest/departamento/registrar}"
+						onsubmit="return validarDepartamentos()">
 						<input type="hidden" value="0" name="codigo" id="idcodigo">
 						<p>
 							<label for="tipoDepartamento">Tipo de Departamento
 							</label>
-							<select class="form-control" name="tipoDepartamento" id="idTipodepatamento"
+							<select class="select" name="tipoDepartamento" id="idTipodepatamento"
 								onchange="fillData(this.options[selectedIndex].value);">
 								<option value="-1">[Seleccione un Tipo de Departamento]</option>
 								<option th:each="bean:${tipodepartamento}" th:value="${bean.idTipo}"
@@ -122,18 +122,23 @@
 								placeholder="Numero de Habitaciones" readonly
 								style="background-color: darkgray; color: black;">
 						</p>
-
-						<!--<p>
-								<label for="estado">Estado
-								</label>
-								<select class="form-control" name="estado" id="idEstado">
-									<option value="-1">[Seleccione Estado]</option>
-									<option th:each="bean:${depa}" th:value="${bean.idtipoDocumento}"
-										th:text="${bean.caracteristicasDepartamento.nroDepartamento}"></option>
-								</select>
-							</p>-->
-
-
+						<p>
+							<label for="nroHabitaciones">Baño
+							</label>
+							<input type="number" class="registro1" name="banio" id="idBanio"
+								placeholder="Numero de baños" readonly
+								style="background-color: darkgray; color: black;">
+						</p>
+						<p>
+							<label for="nroHabitaciones">Lavanderia
+							</label>
+							<input type="text" class="registro1" name="lavanderia" id="idlavanderia"
+								placeholder="Personal y/o Compartida" readonly
+								style="background-color: darkgray; color: black;">
+						</p>
+						<p th:each="bean : ${session.usuario}">
+							<input type="hidden" name="usuario" th:value="${bean.idUsuario}" readonly>
+						</p>
 						<button class="botones1" type="submit" name="enviar_formulario" id="enviar">
 							<p>Registrar</p>
 						</button>
@@ -146,6 +151,83 @@
 				</div>
 			</div>
 		</article>
+
+		<div class="modal fade" id="modalEditar" data-backdrop="static" data-keyboard="false" tabindex="-1"
+			aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog modal-xl">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="staticBackdropLabel">Actualizar Departamento</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form name="test2" method="post" th:action="@{/rest/departamento/actualizar}">
+							<input type="hidden" value="0" name="codigo" id="idCodigo">
+							<div class="form-row">
+								<div class="form-group col-md-6">
+									<label for="inputEmail4">Tipo departamento</label>
+									<select class="form-control" name="tipoDepartamento" id="idTipodepatamento2"
+										onchange="fillData2(this.options[selectedIndex].value);">
+										<option value="-1">[Seleccione un Tipo de Departamento]</option>
+										<option th:each="bean:${tipodepartamento}" th:value="${bean.idTipo}"
+											th:text="${bean.descripcion}"></option>
+									</select>
+								</div>
+								<div class="form-group col-md-6">
+									<label for="inputPassword4">Nro de Piso</label>
+									<input type="number" class="form-control" name="idpiso" id="idnroPiso2">
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-6">
+									<label for="inputEmail4">Nro de departamento</label>
+									<input type="number" class="form-control" name="idnroDepartamento"
+										id="idnroDepartamento2">
+								</div>
+								<div class="form-group col-md-6">
+									<label for="inputPassword4">Nro de habitaciones</label>
+									<input type="number" class="form-control" name="nroHabitaciones" readonly
+										id="idnro2">
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-6">
+									<label for="inputEmail4">Baño</label>
+									<input type="number" class="form-control" name="banio" id="idBanio2" readonly>
+								</div>
+								<div class="form-group col-md-6">
+									<label for="inputPassword4">Lavanderia</label>
+									<input type="text" class="form-control" name="lavanderia" readonly
+										id="idlavanderia2">
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-6">
+									<label for="inputEmail4">Estado</label>
+									<select class="form-control" name="estado" id="idestado">
+										<option value="-1">[Seleccione un estado]</option>
+										<option th:each="bean:${estado}" th:value="${bean.idEstado}"
+											th:text="${bean.nomEstado}"></option>
+									</select>
+								</div>
+							</div>
+
+							<p th:each="bean : ${session.usuario}">
+								<input type="hidden" name="usuario" id="idusuario" th:value="${bean.idUsuario}"
+									readonly>
+							</p>
+
+							<div class="modal-footer">
+								<button type="submit" class="btn btn-primary">Actulizar</button>
+							</div>
+						</form>
+					</div>
+
+				</div>
+			</div>
+		</div>
 
 		<div class="limiter">
 			<div class="container-table100">
@@ -161,7 +243,7 @@
 									<th class="column1">Piso</th>
 									<th class="column8">Número de Departamento</th>
 									<th class="column8">Número de Habitaciones</th>
-									<th class="column1">Rol</th>
+									<th class="column1">Usuario</th>
 									<th class="column1">Estado</th>
 									<th class="column1"></th>
 									<th class="column1"></th>
@@ -179,7 +261,8 @@
 									<td class="column1" th:text="${bean.estado.nomEstado}"></td>
 									<td class="column1"><a class="btn-eliminar"><i
 												class="fa-solid fa-trash-can"></i></a></td>
-									<td class="column1"><a id="idEditar"><i class="fa-solid fa-pen-to-square"></i></a>
+									<td class="column1"><a id="idEditar" data-toggle="modal"
+											data-target="#modalEditar"><i class="fa-solid fa-pen-to-square"></i></a>
 									</td>
 								</tr>
 
@@ -189,7 +272,6 @@
 				</div>
 			</div>
 		</div>
-		<!--kkk -->
 	</section>
 	</section>
 
@@ -242,24 +324,50 @@
 	<script type="text/javascript">
 		function fillData(id) {
 			var someData = new Array();
-			someData[1] = new Array("1");
-			someData[2] = new Array("3");
-			someData[3] = new Array("2");
-			someData[4] = new Array("4");
-			someData[5] = new Array("5");
+
+			someData[-1] = new Array('', '', '');
+			someData[1] = new Array("1", "1", "Compartida");
+			someData[2] = new Array("3", "2", "Personal");
+			someData[3] = new Array("2", "1", "Personal");
+			someData[4] = new Array("4", "3", "Compartida");
+			someData[5] = new Array("5", "3", "Personal");
 
 			document.test.idnro.value = someData[id][0];
+			document.test.idBanio.value = someData[id][1];
+			document.test.idlavanderia.value = someData[id][2];
+
+		};
+
+		function fillData2(id) {
+			var someData2 = new Array();
+
+			someData2[-1] = new Array('', '', '');
+			someData2[1] = new Array("1", "1", "Compartida");
+			someData2[2] = new Array("3", "2", "Personal");
+			someData2[3] = new Array("2", "1", "Personal");
+			someData2[4] = new Array("4", "3", "Compartida");
+			someData2[5] = new Array("5", "3", "Personal");
+
+			document.test2.idnro2.value = someData2[id][0];
+			document.test2.idBanio2.value = someData2[id][1];
+			document.test2.idlavanderia2.value = someData2[id][2];
+
 		};
 
 		$(document).on("click", "#idEditar", function () {
 			let codigo;
 			codigo = $(this).parents("tr").find("td")[0].innerHTML;
 			$.get("buscar?idDepartamento=" + codigo, function (data) {
-				$("#idcodigo").val(data.idDepartamento);
-				$("#idTipodepatamento").val(data.tipoDepartamento.idTipo);
-				$("#idpiso").val(data.piso);
-				$("#idnroDepartamento").val(data.nroDepartamento);
-				$("#idnro").val(data.nroHabitaciones);
+				console.log(data)
+				$("#idCodigo").val(data.idDepartamento);
+				$("#idTipodepatamento2").val(data.tipoDepartamento.idTipo);
+				$("#idnroDepartamento2").val(data.nroDepartamento);
+				$("#idnroPiso2").val(data.piso);
+				$("#idnro2").val(data.nroHabitaciones);
+				$("#idBanio2").val(data.banio);
+				$("#idlavanderia2").val(data.lavanderia);
+				$("#idusuario").val(data.usuario.idUsuario);
+				$("#idestado").val(data.estado.idEstado);
 			});
 		});
 
@@ -279,9 +387,7 @@
 
 
 	</script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
-		integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ=="
-		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 </body>
 
 </html>

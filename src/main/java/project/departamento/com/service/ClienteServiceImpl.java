@@ -68,8 +68,8 @@ public class ClienteServiceImpl implements ClienteService{
 	}
 
 	@Override
-	public Cliente eliminarCliente(Cliente codigo) {
-		return repository.save(codigo);
+	public void eliminarCliente(int codigo) {
+		 repository.deleteById(codigo);
 		
 	}
 

@@ -98,9 +98,7 @@ public class ClienteController {
 	public String eliminarCliente(@RequestParam("codigo") int codigo, RedirectAttributes redirect) {
 
 		try {
-			Cliente bean = service.buscarClienteparaactualizar(codigo);
-			bean.setEliminado(0);
-			service.eliminarCliente(bean);
+			service.eliminarCliente(codigo);
 			redirect.addFlashAttribute("MENSAJE", "Usuario eliminado");
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -28,7 +28,7 @@ public interface ClienteService {
 
 	public abstract List<Cliente>  buscarClienteporid(Integer idCliente);
 	
-	public abstract Cliente eliminarCliente(Cliente codigo);
+	public abstract void eliminarCliente(int codigo);
 
 	public abstract Cliente registrarActualizarCliente(Cliente bean);
 	
