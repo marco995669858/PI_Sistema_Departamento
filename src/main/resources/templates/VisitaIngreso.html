@@ -34,13 +34,12 @@
 					</p>
 
 
-
 					<p>
 						<label for="visitante">Visitante
 							<span class="obligatorio">*</span>
 						</label>
 						<input type="hidden" name="visitante" id="codigVisitante" readonly>
-						<input type="text" class="registro1"  id="nomVisitante" readonly>
+						<input type="text" class="registro1" id="nomVisitante" readonly>
 					</p>
 
 
@@ -53,19 +52,12 @@
 					</p>
 
 					<p>
-						<label for="horaIngreso">Fecha de salida
-							<span class="obligatorio">*</span>
-						</label>
-						<input class="registro1" type="datetime-local" name="fechaSalida" id="HoraActual">
-					</p>
-
-					<p>
 						<label for="cliente">Visita a
 							<span class="obligatorio">*</span>
 						</label>
 						<input type="hidden" name="cliente" id="idclientevisi">
-						<input class="registro1" type="text" id="nomCliente" placeholder="Visita a"
-							readonly="disabled" style="background-color: rgb(192, 192, 192); color: black;">
+						<input class="registro1" type="text" id="nomCliente" placeholder="Visita a" readonly="disabled"
+							style="background-color: rgb(192, 192, 192); color: black;">
 					</p>
 					<p th:each="bean : ${session.usuario}">
 						<input type="hidden" name="usuario" th:value="${bean.idUsuario}" id="idusuario" readonly>
@@ -210,12 +202,40 @@
 			let dni1;
 			dni1 = document.getElementById("idDocumento").value;
 			$.get("buscardni?dni=" + dni1, function (data) {
-				console.log(data)
-				$("#codigVisitante").val(data.idVisitante);
-				$("#nomVisitante").val(data.nombres + ' ' + data.apellidos);
-				$("#idclientevisi").val(data.cliente.idCliente);
-				$("#nomCliente").val(data.cliente.nombres + ' ' + data.cliente.apellidos);
-				
+				if (dni1 == "") {
+					const Toast = Swal.mixin({
+						toast: true,
+						position: 'top-end',
+						showConfirmButton: false,
+						timer: 3000,
+						timerProgressBar: true,
+						didOpen: (toast) => {
+							toast.addEventListener('mouseenter', Swal.stopTimer)
+							toast.addEventListener('mouseleave', Swal.resumeTimer)
+						}
+					})
+
+					Toast.fire({
+						icon: 'error',
+						title: 'Ingrese datos en el campo dni.'
+					});
+
+					document.getElementById("codigVisitante").value = "";
+					document.getElementById("nomVisitante").value = "";
+					document.getElementById("idclientevisi").value = "";
+					document.getElementById("nomCliente").value = "";
+				}
+				else {
+
+					$("#codigVisitante").val(data.idVisitante);
+					$("#nomVisitante").val(data.nombres + ' ' + data.apellidos);
+					$("#idclientevisi").val(data.cliente.idCliente);
+					$("#nomCliente").val(data.cliente.nombres + ' ' + data.cliente.apellidos);
+
+				}
+
+
+
 			});
 		});
 	</script>

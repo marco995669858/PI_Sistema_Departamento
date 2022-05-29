@@ -104,7 +104,7 @@
 						<p>
 							<label for="tipoDocumento">Tipo de Documento
 							</label>
-							<select class="select" name="tipoDocumento" id="idtipoDocumento">
+							<select class="registro1" name="tipoDocumento" id="idtipoDocumento">
 								<option value="-1">[Seleccione un Tipo de Documento]</option>
 								<option th:each="bean:${comboTipoDocumento}" th:value="${bean.idTipoDocumento}"
 									th:text="${bean.descripcion}"></option>

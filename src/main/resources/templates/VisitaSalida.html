@@ -4,6 +4,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Cliente</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+		integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrardepartamento.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrarformulario.css}">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -218,98 +220,55 @@
 
 
 						<form th:action="@{/rest/usuario/registrar}" onsubmit="return validarUsuario()">
-
-
-							<input class="registro1" type="hidden" value="0" name="codigo" id="idcodigo">
-
-							<div id="grid">
-
-								<div class="right" style="margin-right: 10px;">
-									<select class="form-control registro1" name="estado" id="idEstado"
-										style="width: 200px;">
-										<option value="-1">Seleccione Estado</option>
-										<option th:each="bean:${departamento}" th:value="${bean.idDepartamento}"
-											th:text="${bean.descripcion}"></option>
+							<div class="form-row">
+								<div class="form-group col-md-6">
+									<label for="inputEmail4">Documento</label>
+									<input type="text" class="form-control" id="">
+								</div>
+								<div class="form-group col-md-6">
+									<label for="">Nombre</label>
+									<input type="password" class="form-control" id="">
+								</div>
+							</div>
+							<div class="form-group col-md-4">
+								<label for="">Estado</label>
+								<select class="form-control">[Seleccione un estado]</select>
+							</div>
+							<div class="form-group">
+								<label for="inputAddress2">Address 2</label>
+								<input type="text" class="form-control" id="inputAddress2"
+									placeholder="Apartment, studio, or floor">
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-6">
+									<label for="inputCity">City</label>
+									<input type="text" class="form-control" id="inputCity">
+								</div>
+								<div class="form-group col-md-4">
+									<label for="inputState">State</label>
+									<select id="inputState" class="form-control">
+										<option selected>Choose...</option>
+										<option>...</option>
 									</select>
 								</div>
-								<div class="col-md-12 right" style="margin-right: 30px;">
-									<input class="registro2" type="search" name="documento" id="idDocumento"
-										placeholder="Escribe tu Dni">
-									<button type="button" class="button">
-										Buscar
-									</button>
+								<div class="form-group col-md-2">
+									<label for="inputZip">Zip</label>
+									<input type="text" class="form-control" id="inputZip">
 								</div>
-								<div class="left">
-									<select class="form-control registro1" name="tipoDocumento" id="idTipodocumento"
-										style="width: 250px;">
-										<option value="-1">Tipo de Documento</option>
-										<option th:each="bean:${departamento}" th:value="${bean.idDepartamento}"
-											th:text="${bean.descripcion}"></option>
-									</select>
+							</div>
+							<div class="form-group">
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" id="gridCheck">
+									<label class="form-check-label" for="gridCheck">
+										Check me out
+									</label>
 								</div>
-
 							</div>
 
-							<input class="registro1" type="text" name="nombres" id="idNombres"
-								placeholder="Nombre Completo">
 						</form>
 					</div>
 				</div>
 			</article>
-
-			<!-- Inicio del Modal -->
-			<div id="my-modal" class="modal">
-				<div class="modal-content">
-					<div class="modal-header">
-						<span class="close">&times;</span>
-						<center>
-							<h2>Hora Salida</h2>
-						</center>
-					</div>
-					<div class="modal-body">
-						<div id="grid">
-							<div class="col-md-12 right" style="margin-left: -90px; padding-top: 20px;">
-								<h3>Hora</h3>
-							</div>
-
-							<div style=" margin-left: 20px;" class="left">
-								<input class="registro2 " type="time" name="Documento" id="minor2"
-									placeholder="Documento"
-									style="width: 230px; background-color: rgb(192, 192, 192); color: black;"
-									onmousemove="myFunction()">
-							</div>
-
-						</div>
-
-						<div id="grid">
-							<div class="col-md-12 right" style=" padding-top: 20px;">
-								<h3>Comentario</h3>
-							</div>
-
-							<div style=" margin-left: 20px;" class="left">
-								<textarea class="registro2 " type="descripcion" name="Documento" id="idDocumento"
-									placeholder="Documento" style="width: 500px;"> Escribe aqui </textarea>
-							</div>
-
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button class="button" type="submit button">
-							Registrar
-						</button>
-					</div>
-
-				</div>
-
-
-			</div>
-
-
-
-			</div>
-			</div>
-			<!-- Fin del Modal -->
-
 
 			<div class="limiter">
 				<div class="container-table100">
@@ -355,6 +314,9 @@
 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
 		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+		crossorigin="anonymous"></script>
 	<script th:src="@{/resources/js/adminjs.js}"></script>
 	<script th:src="@{/resources/js/main.js}"></script>
 	<script th:src="@{/resources/js/visita.js}"></script>
