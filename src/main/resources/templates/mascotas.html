@@ -90,7 +90,7 @@
 
 							<input class="registro1" type="hidden" value="0" name="codigo" id="idcodigo">
 
-							<div class="col-md-12">
+							<p>
 								<label for="nroDepartamento"> Numero del Departamento
 									<span class="obligatorio">*</span></label>
 								<select class="form-control registro1" name="nroDepartamento" id="idnroDepartamento">
@@ -99,7 +99,7 @@
 										th:utext="${bean.nroDepartamento}"></option>
 
 								</select>
-							</div>
+							</p>
 
 							<p>
 								<label for="nombres" class="colocar_nombres">Nombre de la mascota
@@ -109,7 +109,7 @@
 									placeholder="Escriba Nombre de la Mascota">
 							</p>
 
-							<div class="col-md-12">
+							<p>
 								<label for="especie"> Especie
 									<span class="obligatorio">*</span></label>
 								<select class="form-control registro1" name="especie" id="idEspecie">
@@ -117,7 +117,7 @@
 									<option th:each="bean:${especie}" th:value="${bean.idEspecie}"
 										th:text="${bean.animal}"></option>
 								</select>
-							</div>
+							</p>
 							
 							<p th:each="bean : ${session.usuario}">		
 								<input type="hidden" name="usuario" th:value="${bean.idUsuario}" readonly>
@@ -157,9 +157,9 @@
 										<td class="column8" th:text="${bean.nombres}"></td>
 										<td class="column8" th:text="${bean.especie.animal}"></td>
 										<td class="column8" th:text="${bean.usuario.nomUsuario}"></td>
-										<td class="column1"><a class="btn btn-info btn-actualizar"><i
+										<td class="column1"><a class="btn btn-actualizar"><i
 													class="fa-solid fa-pen-to-square"></i></a></td>
-										<td class="column1"><a class="btn-eliminar"><i
+										<td class="column1"><a class="btn btn-eliminar"><i
 													class="fa-solid fa-trash-can"></i></a></td>
 
 									</tr>

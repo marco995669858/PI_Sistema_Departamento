@@ -25,12 +25,12 @@
 						<div>
 							<div>
 								<p>
-									<label for="documento" class="form-control">Documento
+									<label for="documento">Documento
 										<span class="obligatorio">*</span>
 									</label>
 									<input class="registro1" type="text" name="documento" id="idDocumento"
 										placeholder="Escribe tu Dni">
-									<button type="button" class="button" id="idEditar">
+									<button type="button" class="btn btn-primary button" id="idEditar">
 										Buscar
 									</button>
 									<a th:href="@{/rest/visitante/}" class="btn">
@@ -42,27 +42,27 @@
 						</div>
 
 						<p>
-							<label for="visitante" class="form-control">Visitante
+							<label for="visitante">Visitante
 								<span class="obligatorio">*</span>
 							</label>
-							<select name="visitante" id="codigVisitante" disabled>
+							<select class="registro1" name="visitante" id="codigVisitante" disabled>
 							</select>
 						</p>
 
 
 						<p>
-							<label for="horaIngreso" class="form-control">Hora de Ingreso
+							<label for="horaIngreso">Fecha de ingreso
 								<span class="obligatorio">*</span>
 							</label>
-							<input class="registro1" type="time" name="horaIngreso" id="minor2" readonly="readonly"
+							<input class="registro1" type="datetime-local" name="horaIngreso" id="minor2" readonly="readonly"
 								style="background-color: rgb(192, 192, 192); color: black;" onmousemove="myFunction()">
 						</p>
 
 						<p>
-							<label for="horaIngreso" class="form-control">Hora de Salida
+							<label for="horaIngreso">Fecha de salida
 								<span class="obligatorio">*</span>
 							</label>
-							<input class="registro1" type="time" name="horaIngreso" id="HoraActual">
+							<input class="registro1" type="datetime-local" name="horaIngreso" id="HoraActual">
 						</p>
 
 						<p>
