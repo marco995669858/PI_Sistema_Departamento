@@ -37,5 +37,5 @@ public interface VisitanteService {
 
 	public abstract Visitante registraActualizaVisitante(Visitante bean);
 
-	public abstract List<Visitante> buscarVisitantepordni(String dni);
+	public abstract Visitante buscarVisitantepordni(String dni);
 }

@@ -112,7 +112,7 @@
 							<p>
 								<label for="especie"> Especie
 									<span class="obligatorio">*</span></label>
-								<select class="form-control registro1" name="especie" id="idEspecie">
+								<select class="registro1" name="especie" id="idEspecie">
 									<option value="-1">[Seleccione Especie.] </option>
 									<option th:each="bean:${especie}" th:value="${bean.idEspecie}"
 										th:text="${bean.animal}"></option>

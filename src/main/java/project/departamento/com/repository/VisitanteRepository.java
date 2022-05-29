@@ -1,6 +1,5 @@
 package project.departamento.com.repository;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,7 +19,7 @@ public interface VisitanteRepository extends JpaRepository<Visitante, Integer>{
 	public Optional<Visitante> findByCorreo(String correo);
 	
 	@Query("select v from Visitante v where v.documento = ?1")
-	public List<Visitante> buscarDocumento(String documento);
+	public Visitante buscarDocumento(String documento);
 		
 	@Query("select v from Visitante v where v.documento =?1 and v.idVisitante <> ?2")
 	public Optional<Visitante> buscarDocumentoactualizar(String documento, int codigo);
