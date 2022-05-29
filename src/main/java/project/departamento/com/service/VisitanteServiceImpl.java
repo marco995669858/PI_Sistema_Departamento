@@ -80,4 +80,24 @@ public class VisitanteServiceImpl implements VisitanteService {
 		return repository.buscarDocumento(dni);
 	}
 
+	@Override
+	public Visitante buscarVisitantePorCodigo(Integer codigo) {
+		return repository.findById(codigo).orElse(null);
+	}
+
+	@Override
+	public Optional<Visitante> buscarDocumentoactualizar(String documento, int codigo) {
+		return repository.buscarDocumentoactualizar(documento, codigo);
+	}
+
+	@Override
+	public Optional<Visitante> buscarTelefonoactualizar(String telefono, int codigo) {
+		return repository.buscarTelefonoactualizar(telefono, codigo);
+	}
+
+	@Override
+	public Optional<Visitante> buscarCorreoactualizar(String correo, int codigo) {
+		return repository.buscarCorreoactualizar(correo, codigo);
+	}
+
 }

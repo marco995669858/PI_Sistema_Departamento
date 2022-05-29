@@ -21,6 +21,15 @@ public interface VisitanteRepository extends JpaRepository<Visitante, Integer>{
 	
 	@Query("select v from Visitante v where v.documento = ?1")
 	public List<Visitante> buscarDocumento(String documento);
+		
+	@Query("select v from Visitante v where v.documento =?1 and v.idVisitante <> ?2")
+	public Optional<Visitante> buscarDocumentoactualizar(String documento, int codigo);
+	
+	@Query("select v from Visitante v where v.telefono =?1 and v.idVisitante <> ?2")
+	public Optional<Visitante> buscarTelefonoactualizar(String telefono, int codigo);
+
+	@Query("select v from Visitante v where v.correo =?1 and v.idVisitante <> ?2")
+	public Optional<Visitante> buscarCorreoactualizar(String correo, int codigo);
 	
 	
 	
