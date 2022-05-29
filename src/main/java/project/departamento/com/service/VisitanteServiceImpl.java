@@ -76,7 +76,7 @@ public class VisitanteServiceImpl implements VisitanteService {
 	}
 
 	@Override
-	public List<Visitante> buscarVisitantepordni(String dni) {
+	public Visitante buscarVisitantepordni(String dni) {
 		return repository.buscarDocumento(dni);
 	}
 

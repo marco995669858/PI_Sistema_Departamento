@@ -45,7 +45,13 @@ public class Visita {
 	
 	private String horaIngreso;
 	
+	
 	private String horaSalida;
+	
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idCliente")
+	private Cliente cliente;
 	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -53,6 +59,8 @@ public class Visita {
 	private Estado estado;
 	
 	private String comentario;
+	
+	
 	
 	@Temporal(TemporalType.DATE)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd" , timezone = "America/Lima")

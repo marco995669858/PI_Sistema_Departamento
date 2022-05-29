@@ -11,103 +11,214 @@
 	<th:block th:replace="menu.html :: header">
 	</th:block>
 
-	<section class="grid">
-		<article>
-			<div class="contact_form">
+	<article>
+		<div class="contact_form">
 
-				<div class="formulario">
+			<div class="formulario">
 
-					<h1 style="text-align: center;">Registro Visita Ingreso</h1>
+				<h1 style="text-align: center;">Registro Visita Ingreso</h1>
 
-					<form action="" method="post">
-						<input class="registro1" type="hidden" value="0">
+				<form th:action="@{/rest/controlvisita/registrarControl}" method="post">
+					<p>
+						<label for="documento">Documento
+							<span class="obligatorio">*</span>
+						</label>
+						<input class="registro1" type="text" name="documento" id="idDocumento"
+							placeholder="Escribe tu Dni">
+						<button type="button" class="btn btn-primary button" id="idEditar">
+							Buscar
+						</button>
+						<button type="button" data-toggle="modal" data-target="#modalEditarvisita" class="btn btn-info">
+							.....
+						</button>
+					</p>
 
-						<div>
-							<div>
-								<p>
-									<label for="documento">Documento
-										<span class="obligatorio">*</span>
-									</label>
-									<input class="registro1" type="text" name="documento" id="idDocumento"
-										placeholder="Escribe tu Dni">
-									<button type="button" class="btn btn-primary button" id="idEditar">
-										Buscar
-									</button>
-									<a th:href="@{/rest/visitante/}" class="btn">
-										.....
-									</a>
-								</p>
 
+
+					<p>
+						<label for="visitante">Visitante
+							<span class="obligatorio">*</span>
+						</label>
+						<input type="hidden" name="visitante" id="codigVisitante" readonly>
+						<input type="text" class="registro1"  id="nomVisitante" readonly>
+					</p>
+
+
+					<p>
+						<label for="horaIngreso">Fecha de ingreso
+							<span class="obligatorio">*</span>
+						</label>
+						<input class="registro1" type="datetime-local" name="fechaIngreso" id="minor2" readonly
+							style="background-color: rgb(192, 192, 192); color: black;">
+					</p>
+
+					<p>
+						<label for="horaIngreso">Fecha de salida
+							<span class="obligatorio">*</span>
+						</label>
+						<input class="registro1" type="datetime-local" name="fechaSalida" id="HoraActual">
+					</p>
+
+					<p>
+						<label for="cliente">Visita a
+							<span class="obligatorio">*</span>
+						</label>
+						<input type="hidden" name="cliente" id="idclientevisi">
+						<input class="registro1" type="text" id="nomCliente" placeholder="Visita a"
+							readonly="disabled" style="background-color: rgb(192, 192, 192); color: black;">
+					</p>
+					<p th:each="bean : ${session.usuario}">
+						<input type="hidden" name="usuario" th:value="${bean.idUsuario}" id="idusuario" readonly>
+					</p>
+
+					<button class="botones1" type="submit" name="enviar_formulario" id="enviar">
+						<p>Registrar</p>
+					</button>
+
+					<p class="aviso">
+						<span class="obligatorio"> * </span>los campos son obligatorios.
+					</p>
+				</form>
+			</div>
+		</div>
+	</article>
+	<div class="modal fade" id="modalEditarvisita" data-backdrop="static" data-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog modal-xl">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="staticBackdropLabel">Registrar Visitante</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form name="test2" method="post" th:action="@{/rest/controlvisita/registrar}">
+						<input type="hidden" value="0" name="codigo" id="idCodigo">
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="inputEmail4">Departamento</label>
+								<select class="form-control" name="departamento" id="idDepartamento">
+									<option value="-1">[Seleccione un Tipo de Departamento]</option>
+									<option th:each="bean:${comboDepartamento}" th:value="${bean.idDepartamento}"
+										th:text="${bean.nroDepartamento}"></option>
+								</select>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="inputPassword4">Nombre</label>
+								<input type="text" class="form-control" name="Nombres" id="idNombre">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="inputEmail4">Apellido</label>
+								<input type="text" class="form-control" name="Apellidos" id="idApellido">
+							</div>
+							<div class="form-group col-md-6">
+								<label for="inputEmail4">Tipo de documento</label>
+								<select class="form-control" name="idTipoDocumento" id="idTipoDocume">
+									<option value="-1">[Seleccione tipo de documento]</option>
+									<option th:each="bean:${comboTipoDocuemnto}" th:value="${bean.idTipoDocumento}"
+										th:text="${bean.descripcion}"></option>
+								</select>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="">Docuemnto</label>
+								<input type="number" class="form-control" name="Documento" id="idDocumento">
+							</div>
+							<div class="form-group col-md-6">
+								<label for="inputPassword4">Telefono</label>
+								<input type="number" class="form-control" name="telefono" id="idTelefono">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="">Correo</label>
+								<input type="email" class="form-control" name="correo" id="idCorreo">
+							</div>
+							<div class="form-group col-md-6">
+								<label for="">Cliente</label>
+								<select class="form-control" name="cliente" id="idclie">
+									<option value="-1">[Seleccione un Cliente.] </option>
+									<option th:each="bean:${comCliente}" th:value="${bean.idCliente}"
+										th:text="${bean.nombres + ' ' + bean.apellidos}"></option>
+								</select>
 							</div>
 						</div>
 
-						<p>
-							<label for="visitante">Visitante
-								<span class="obligatorio">*</span>
-							</label>
-							<select class="registro1" name="visitante" id="codigVisitante" disabled>
-							</select>
+						<p th:each="bean : ${session.usuario}">
+							<input type="hidden" name="usuario" id="idusuario" th:value="${bean.idUsuario}" readonly>
 						</p>
 
-
-						<p>
-							<label for="horaIngreso">Fecha de ingreso
-								<span class="obligatorio">*</span>
-							</label>
-							<input class="registro1" type="datetime-local" name="horaIngreso" id="minor2" readonly="readonly"
-								style="background-color: rgb(192, 192, 192); color: black;" onmousemove="myFunction()">
-						</p>
-
-						<p>
-							<label for="horaIngreso">Fecha de salida
-								<span class="obligatorio">*</span>
-							</label>
-							<input class="registro1" type="datetime-local" name="horaIngreso" id="HoraActual">
-						</p>
-
-						<p>
-							<label for="cliente" class="form-control">Cliente
-								<span class="obligatorio">*</span>
-							</label>
-							<input class="registro1" type="text" name="cliente" id="idCliente" placeholder="Cliente"
-								readonly="disabled" style="background-color: rgb(192, 192, 192); color: black;">
-						</p>
-
-						<button class="botones1" type="submit" name="enviar_formulario" id="enviar">
-							<p>Registrar</p>
-						</button>
-
-						<p class="aviso">
-							<span class="obligatorio"> * </span>los campos son obligatorios.
-						</p>
-
-
-
-
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-primary">Registrar</button>
+						</div>
 					</form>
 				</div>
+
 			</div>
-		</article>
+		</div>
+	</div>
 
-
-	</section>
-	</section>
 	<th:block th:replace="menu.html :: footer">
 	</th:block>
-	<script src="https://code.jquery.com/jquery-3.6.0.js"
-		integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+	<script th:inline="javascript" th:if="${MENSAJE!=null}">
+		//obtener atributo MENSAJE
+		var mensaje =/*[[${MENSAJE}]]*/ null;
+		const Toast = Swal.mixin({
+			toast: true,
+			position: 'top-end',
+			showConfirmButton: false,
+			timer: 3000,
+			timerProgressBar: true,
+			didOpen: (toast) => {
+				toast.addEventListener('mouseenter', Swal.stopTimer)
+				toast.addEventListener('mouseleave', Swal.resumeTimer)
+			}
+		})
+
+		Toast.fire({
+			icon: 'success',
+			title: mensaje
+		});
+
+	</script>
+	<script th:inline="javascript" th:if="${existen!=null}">
+		var mensaje =/*[[${existen}]]*/ null;
+		const Toast = Swal.mixin({
+			toast: true,
+			position: 'top-end',
+			showConfirmButton: false,
+			timer: 3000,
+			timerProgressBar: true,
+			didOpen: (toast) => {
+				toast.addEventListener('mouseenter', Swal.stopTimer)
+				toast.addEventListener('mouseleave', Swal.resumeTimer)
+			}
+		})
+
+		Toast.fire({
+			icon: 'warning',
+			title: mensaje
+		});
+	</script>
 	<script>
 		$(document).on("click", "#idEditar", function () {
-			let codigo;
-			codigo = document.getElementById("idDocumento").value;
-			$.get("/rest/controlvisita/buscardni?dni=" + codigo, function (data) {
-				$.each(data, function (key, value) {
-					$("#codigVisitante").append("<option value=" + key.idVisitante + ">" + value.nombres + "</option>");
-				});
+			let dni1;
+			dni1 = document.getElementById("idDocumento").value;
+			$.get("buscardni?dni=" + dni1, function (data) {
+				console.log(data)
+				$("#codigVisitante").val(data.idVisitante);
+				$("#nomVisitante").val(data.nombres + ' ' + data.apellidos);
+				$("#idclientevisi").val(data.cliente.idCliente);
+				$("#nomCliente").val(data.cliente.nombres + ' ' + data.cliente.apellidos);
+				
 			});
 		});
 	</script>
-
 </body>
 
 </html>

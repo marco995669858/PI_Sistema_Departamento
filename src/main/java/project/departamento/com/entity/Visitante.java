@@ -66,5 +66,9 @@ public class Visitante {
 	@Temporal(TemporalType.DATE)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd" , timezone = "America/Lima")
 	private Date fechaRegistro;
+	
+	public Visitante(Integer idVisitante) {
+		this.idVisitante = idVisitante;
+	}
 
 }
