@@ -40,9 +40,6 @@ public class ControlVisitaController {
 		model.addAttribute("comCliente", visitanteService.listarCliente());
 		return "VisitaIngreso";
 	}
-	
-	
-	
 
 	@GetMapping(value = "/buscardni")
 	@ResponseBody
@@ -55,31 +52,30 @@ public class ControlVisitaController {
 		}
 		return bean;
 	}
-	
+
 	@RequestMapping("/registrarControl")
-	public String registrarControlVisitante(@RequestParam("usuario") int usuario,@RequestParam("visitante") int visitante,
-			@RequestParam("fechaIngreso") String fechaIngreso, @RequestParam("fechaSalida") String fechaSalida,
-			@RequestParam("cliente") int cliente,RedirectAttributes redirect) {
+	public String registrarControlVisitante(@RequestParam("usuario") int usuario,
+			@RequestParam("visitante") int visitante, @RequestParam("fechaIngreso") String fechaIngreso,
+			@RequestParam("cliente") int cliente, RedirectAttributes redirect) {
 		try {
-			
+
 			Visita bean = new Visita();
 			bean.setUsuario(new Usuario(usuario));
 			bean.setVisitante(new Visitante(visitante));
 			bean.setHoraIngreso(fechaIngreso);
-			bean.setHoraSalida(fechaSalida);
+			bean.setHoraSalida(null);
 			bean.setCliente(new Cliente(cliente));
 			bean.setEstado(new Estado(6));
 			bean.setComentario(null);
 			bean.setFechaRegistro(new Date());
 			service.registraActualiza(bean);
 			redirect.addFlashAttribute("MENSAJE", "Se registro la visita correctamente");
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return "redirect:/rest/controlvisita/";
 	}
-	
 
 	@RequestMapping("/registrar")
 	public String registraActualizaVisitante(@RequestParam("codigo") int codigo,

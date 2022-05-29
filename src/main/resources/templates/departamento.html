@@ -92,7 +92,7 @@
 						<p>
 							<label for="tipoDepartamento">Tipo de Departamento
 							</label>
-							<select class="select" name="tipoDepartamento" id="idTipodepatamento"
+							<select class="registro1" name="tipoDepartamento" id="idTipodepatamento"
 								onchange="fillData(this.options[selectedIndex].value);">
 								<option value="-1">[Seleccione un Tipo de Departamento]</option>
 								<option th:each="bean:${tipodepartamento}" th:value="${bean.idTipo}"
