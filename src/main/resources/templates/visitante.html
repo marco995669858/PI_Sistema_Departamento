@@ -82,7 +82,8 @@
 				<div class="formulario">
 					<h1 style="text-align: center;">Registro Visitante</h1>
 
-					<form th:action="@{/rest/visitante/registrar}" method="post">
+					<form th:action="@{/rest/visitante/registrar}" onsubmit="return validarVisitante()">
+					
 						<input type="hidden" name="codigo" id="idcodigo" value="0">
 
 						<p>
@@ -218,9 +219,10 @@
 	</section>
 	<th:block th:replace="menu.html :: footer">
 	</th:block>
-
+<script th:src="@{/resources/js/validarVisitante.js}"></script>
 
 	<script th:inline="javascript" th:if="${MENSAJE!=null}">
+	
 		//obtener atributo MENSAJE
 		var mensaje =/*[[${MENSAJE}]]*/ null;
 		const Toast = Swal.mixin({
