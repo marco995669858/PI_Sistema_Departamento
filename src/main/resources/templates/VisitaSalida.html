@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head>
+<head th:insert="menu.html :: head">
 	<meta charset="UTF-8">
-	<title>Cliente</title>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+	<title>Consulta visita</title>
+	<!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
 		integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrardepartamento.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrarformulario.css}">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/visita.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/tablas.css}">
 	<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.css}">
-	<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.min.css}">
+	<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.min.css}">-->
 
 
 </head>
@@ -89,204 +88,133 @@
 
 <body>
 
-	<header class="page-header">
-		<nav>
-			<a href="admin.html" class="logo">
-				<img src="https://csn-spa.cl/wp-content/uploads/2019/10/csn-spa-logo.png" height="70" alt="">
-			</a>
-			<button class="toggle-mob-menu" aria-expanded="false" aria-label="open menu">
-				<svg width="20" height="20" aria-hidden="true">
-					<use xlink:href="#down"></use>
-				</svg>
-			</button>
-			<ul class="admin-menu">
-				<li class="menu-heading">
-					<h3>Admin</h3>
-				</li>
-				<li>
-					<a href="#0">
-						<i class="fa-solid fa-user"></i>
-						<span> Mi Perfil</span>
-					</a>
-				</li>
-				<li>
-					<a th:href="@{/registro/departamento/}">
-						<i class="fa-solid fa-building-circle-check"></i>
-						<span>Registrar de Departamento</span>
-					</a>
-				</li>
-				<li>
-					<a th:href="@{/registro/propietariodep/}">
-						<i class="fa-solid fa-building-circle-check"></i>
-						<span>Registrar de Propietario</span>
-					</a>
-				</li>
-				<li>
-					<a th:href="@{/registro/visitante/}">
-						<i class="fa-solid fa-users"></i>
-						<span>Registrar Visitante</span>
-					</a>
-				</li>
-				<li>
-					<a th:href="@{/registro/residente/}">
-						<i class="fa-solid fa-building-user"></i>
-						<span>Registrar Residente</span>
-					</a>
-				</li>
-				<li>
-					<a th:href="@{/registro/usuario/}">
-						<i class="fa-solid fa-address-card"></i>
-						<span>Registrar Usuario</span>
-					</a>
-				</li>
-				<li>
-					<a th:href="@{/registro/mascotas/}">
-						<i class="fa-solid fa-shield-dog"></i>
-						<span>Registrar Mascotas</span>
-					</a>
-				</li>
+	<th:block th:replace="menu.html :: header">
+	</th:block>
+	<section class="grid">
+		<article>
+			<div class="contact_form">
+
+				<div class="formulario">
+
+					<h1 style="text-align: center;">Consultar Visita Salida</h1>
 
 
-				<li class="menu-heading">
-					<h3>Perfil</h3>
-				</li>
-				<li>
-					<a href="#0">
-						<i class="fa-solid fa-gear"></i>
-						<span>Ajustes</span>
-					</a>
-				</li>
-				<li>
-					<a href="#0">
-						<i class="fa-solid fa-wrench"></i>
-						<span>Opciones</span>
-					</a>
-				</li>
-				<li>
-					<a href="#0">
-						<i class="fa-solid fa-money-bill-trend-up"></i>
-						<span>Estadísticas</span>
-					</a>
-				</li>
-				<li>
-					<div class="switch">
-						<input type="checkbox" id="mode" checked>
-						<label for="mode">
-							<span></span>
-							<span>Oscuro</span>
-						</label>
-					</div>
-					<button class="collapse-btn" aria-expanded="true" aria-label="collapse menu">
-						<i class="fa-solid fa-angle-left"></i>
-						<span>Contraer</span>
-					</button>
-				</li>
-			</ul>
-		</nav>
-	</header>
-	<section class="page-content">
-		<section class="search-and-user">
-			<form>
-				<input type="hidden" placeholder="">
-				<button type="submit" aria-label="submit form">
-					<svg aria-hidden="true">
-						<use xlink:href="#search"></use>
-					</svg>
-				</button>
-			</form>
-			<div class="admin-profile" th:each="bean : ${session.objUsuario}">
-				<i class="fa-solid fa-circle-user"></i>
-
-				<span class="greeting"
-					th:text="${bean.nombres + ' ' + bean.apePaterno + ' '  + bean.apeMaterno}"></span>
-
-
-				<div class="notifications">
-
-
-					<svg>
-						<use xlink:href="#users"></use>
-					</svg>
-				</div>
-			</div>
-		</section>
-		<section class="grid">
-			<article>
-				<div class="contact_form">
-
-					<div class="formulario">
-
-						<h1 style="text-align: center;">Consultar Visita Salida</h1>
-
-
-						<form th:action="@{/rest/usuario/registrar}" onsubmit="return validarUsuario()">
-							<div class="form-row ">
-								<div class="form-group col-md-4">
-									<label for="inputEmail4">Documento</label>
-									<input type="number" class="form-control" id="">
-								</div>
-								<div class="form-group col-md-4">
-									<label for="">Nombre</label>
-									<input type="text" class="form-control" id="">
-								</div>
-								<div class="form-group col-md-2">
-									<label for="">Estado</label>
-									<select class="form-control">[Seleccione un estado]</select>
-								</div>
+					<form th:action="@{/rest/usuario/registrar}" onsubmit="return validarUsuario()">
+						<div class="form-row ">
+							<div class="form-group col-md-4">
+								<label for="inputEmail4">Visitante</label>
+								<select class="form-control" name="visita" id="idVisitante">
+									<option value="-1">[Seleccione un visitante]</option>
+									<option th:each="bean:${comboVisitante}" th:value="${bean.idVisitante}"
+										th:utext="${bean.nombres + ' ' + bean.apellidos}"></option>
+								</select>
 							</div>
-							<div class="text-center">
-								<button type="button" class="btn btn-primary">Buscar</button>
+							<div class="form-group col-md-4">
+								<label for="">Visita a</label>
+								<select class="form-control" name="cliente" id="idCliente">
+									<option value="-1">[Seleccione un Propietario o residente]</option>
+									<option th:each="bean:${comboCliente}" th:value="${bean.idCliente}"
+										th:utext="${bean.nombres + ' ' + bean.apellidos}"></option>
+								</select>
 							</div>
-
-
-						</form>
-					</div>
-				</div>
-			</article>
-
-			<div class="limiter">
-				<div class="container-table100">
-					<h1 style="text-align: center;">Listar Visita Salida</h1>
-
-					<div class="wrap-table100">
-						<div class="table100">
-							<table>
-								<thead>
-									<tr class="table100-head">
-										<th class="column1">Codigo</th>
-										<th class="column2">Nombres</th>
-										<th class="column3">Apellidos</th>
-										<th class="column4">Estado</th>
-
-									</tr>
-								</thead>
-								<tbody>
-
-									<tr th:each="bean:${listaUsuario}" class="text-center">
-										<td class="column1" th:text="${bean.idUsuario}"></td>
-										<td class="column2" th:text="${bean.nombres}"></td>
-										<td class="column3" th:text="${bean.apePaterno}"></td>
-										<td id="modal-btn" class="column4" th:text="${bean.apeMaterno}"></td>
-
-									</tr>
-
-								</tbody>
-							</table>
+							<div class="form-group col-md-3">
+								<label for="">Estado</label>
+								<select class="form-control" name="estado" id="idEstado">
+									<option value="-1">[Seleccione un estado]</option>
+									<option th:each="bean:${comboEstado}" th:value="${bean.idEstado}"
+										th:utext="${bean.nomEstado}"></option>
+								</select>
+							</div>
 						</div>
+						<div class="text-center">
+							<button type="button" class="btn btn-primary consultar">Buscar</button>
+						</div>
+
+
+					</form>
+				</div>
+			</div>
+		</article>
+
+		<div class="limiter">
+			<div class="container-table100">
+				<h1 style="text-align: center;">Listar Visita Salida</h1>
+
+				<div class="wrap-table100">
+					<div class="table100">
+						<table id="tablaconsultVisita">
+							<thead>
+								<tr class="table100-head">
+									<th class="column1">Codigo</th>
+									<th class="column8">Nombres completos</th>
+									<th class="column8">Fecha de ingreso</th>
+									<th class="column8">Fecha de salida</th>
+									<th class="column8">Cliente</th>
+									<th class="column8">Comentario</th>
+									<th class="column3">Estado</th>
+									<th class="column1"></th>
+
+								</tr>
+							</thead>
+							<tbody>
+
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
+		</div>
+
+		<div class="modal fade" id="modalActualizarControlVisitante" data-backdrop="static" data-keyboard="false"
+			tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="staticBackdropLabel">Visitante actualizar fecha de salida</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form th:action="@{/rest/consulta/actualizarFechaSalida}">
+							<input type="hidden" name="codigo" id="idcodigo" readonly>
+							<div class="form-row">
+								<div class="form-group col-md-6">
+									<label>Fecha de salida</label>
+									<input type="datetime-local" class="form-control" name="fechaSalida" id="minor2"
+										readonly style="background-color: darkgray; color: black;">
+								</div>
+								<div class="form-group col-md-6">
+									<label>Fecha de salida</label>
+									<textarea type="datetime-local" class="form-inline" name="comentario"
+										style="width: 400px; max-height: 250;"></textarea>
+								</div>
+							</div>
+							<p th:each="bean : ${session.usuario}">
+								<input type="hidden" name="usuario" th:value="${bean.idUsuario}" readonly>
+							</p>
+							<div class="text-center">
+								<div class="modal-footer">
+									<button type="submit" class="btn btn-primary">Registrar</button>
+								</div>
+							</div>
+						</form>
 
 
+					</div>
 
-		</section>
-		<footer class="page-footer">
 
-		</footer>
+				</div>
+			</div>
+		</div>
+
+
 	</section>
+	<th:block th:replace="menu.html :: footer">
+		</th:block>
 	<!-- partial -->
 
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+	<!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"
 		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
@@ -300,7 +228,7 @@
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script th:src="@{/resources/alertifyjs/alertify.js}"></script>
 	<script th:src="@{/resources/alertifyjs/alertify.min.js}"></script>
-
+-->
 	<script th:inline="javascript" th:if="${MENSAJE!=null}">
 		//obtener atributo MENSAJE
 		var mensaje =/*[[${MENSAJE}]]*/ null;
@@ -323,7 +251,7 @@
 
 	</script>
 
-	<script th:inline="javascript" th:if="${existen!=null}">
+	<!--<script th:inline="javascript" th:if="${existen!=null}">
 
 		var exist =/*[[${existen}]]*/ null;
 		const Toast = Swal.mixin({
@@ -343,38 +271,48 @@
 			title: exist
 		})
 
-	</script>
-	<!--	<script>
-		$(document).on("click", "#idEditar", function () {
-			let codigo;
-			codigo = $(this).parents("tr").find("td")[0].innerHTML;
-			$.get("buscar?idUsuario=" + codigo, function (data) {
-				$("#idcodigo").val(data.idUsuario);
-				$("#idnombres").val(data.nombreCompleto);
-				$("#idapellidos").val(data.apellidoCompleto);
-				$("#idDni").val(data.dni);
-				$("#idcelular").val(data.celular);
-				$("#idcorreo").val(data.correo);
-				//$("#idcampo").css("display", "none");
-				$("#idRaza").val(data.raza);
-				$("#iddescripcion").val(data.descripcionRaza);
-			});
-		});
 	</script>-->
 
+
 	<script>
-		//btn-eliminar del modal
-		$(document).on("click", ".btn-eliminar", function () {
+		/*$(document).on("click", ".btn-eliminar", function () {
+				let cod;
+				cod = $(this).parents("tr").find("td")[0].innerHTML;
+				alertify.confirm("SISTEMA GESTION DE EDIFICIO", "¿Esta seguro de eliminar?",
+					function () {//SIIII
+	
+					},
+					function () {//NOOOO
+						window.location = "eliminar?codigo=" + cod;
+					}).set('labels', {ok: 'Cancelar', cancel: 'Eliminar'});
+			});*/
+
+		$(document).on("click", ".consultar", function () {
+			let visita, cliente, estado;
+			visita = $("#idVisitante").val();
+			cliente = $("#idCliente").val();
+			estado = $("#idEstado").val();;
+			$.get("consultaVisitante?visita=" + visita + "&cliente=" + cliente + "&estado=" + estado, function (response) {
+				$("#tablaconsultVisita tbody").empty();
+				$.each(response, function (index, item) {
+
+					$("#tablaconsultVisita").append("<tr><td class='column1'>" + item.idVisita + "</td><td class='column8'>" + item.visitante.nombres + ' ' + item.visitante.apellidos + "</td><td class='column8'>" + item.horaIngreso + "</td><td class='column8' >" +
+						item.horaSalida + "</td><td class='column8'>" + item.cliente.nombres + ' ' + item.cliente.apellidos + "</td><td class='column8'>" + item.comentario + "</td><td class='column3'>" +
+						item.estado.nomEstado + "</td><td class='column1'><a  type='button' class='btn acutalizar' data-toggle='modal' data-target='#modalActualizarControlVisitante'><i class='fa-solid fa-pen-to-square'></i></a></td></tr>");
+				})
+			})
+		});
+
+		$(document).on("click", ".acutalizar", function () {
 			let cod;
 			cod = $(this).parents("tr").find("td")[0].innerHTML;
-			alertify.confirm("SISTEMA GESTION DE EDIFICIO", "¿Esta seguro de eliminar?",
-				function () {//SIIII
+			$.get("buscar?codigo=" + cod, function (response) {
+				console.log(response);
+				$("#idcodigo").val(response.idVisita);
+			})
+		});
 
-				},
-				function () {//NOOOO
-					window.location = "eliminar?codigo=" + cod;
-				}).set('labels', {ok: 'Cancelar', cancel: 'Eliminar'});
-		})
+
 
 	</script>
 </body>
