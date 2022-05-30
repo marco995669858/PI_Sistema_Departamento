@@ -5,239 +5,225 @@
 <head th:insert="menu.html :: head">
 	<meta charset="UTF-8">
 	<title>Mascotas</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-<link rel="stylesheet" th:href="@{/resources/datepicker/bootstrap-datepicker.css}">
-<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.css}">
-<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.min.css}"> 
+
 </head>
 
 
 
 <style>
-	.modal-header, h4, .close {
+	.modal-header,
+	h4,
+	.close {
 		background-color: #286090;
 		color: white !important;
 		text-align: center;
 		font-size: 20px;
 	}
-	.help-block{
-	 color: red;
-	 /*display: none;*/
+
+	.help-block {
+		color: red;
+		/*display: none;*/
 	}
+
 	.form-group.has-error .form-control-label {
-	  color: red;
+		color: red;
 	}
+
 	.form-group.has-error .form-control {
-	  border: 1px solid red;
-	  box-shadow: 0 0 0 0.2rem rgba(250, 16, 0, 0.18);
+		border: 1px solid red;
+		box-shadow: 0 0 0 0.2rem rgba(250, 16, 0, 0.18);
 	}
-	
+
 	.alertify .ajs-dialog {
-	    top: 50%;
-	    transform: translateY(-50%);
-	    margin: auto;
+		top: 50%;
+		transform: translateY(-50%);
+		margin: auto;
 	}
-	
-	.ajs-header{
+
+	.ajs-header {
 		background-color: #286090 !important;
 		color: white !important;
 		/*text-align: center;*/
 		font-size: 18px;
 		font-weight: bold;
 	}
-	.ajs-ok{
+
+	.ajs-ok {
 		color: #fff;
-	    background-color: #007bff;
-	    border-color: #007bff;
+		background-color: #007bff;
+		border-color: #007bff;
 	}
-	.ajs-cancel{
+
+	.ajs-cancel {
 		color: #fff;
-	    background-color: #dc3545;
-	    border-color: #dc3545;
+		background-color: #dc3545;
+		border-color: #dc3545;
 	}
-	.btn-primary{
-	background-color: #286090 !important;
+
+	.btn-primary {
+		background-color: #286090 !important;
 	}
-	.dataTables_length, .dataTables_info{
+
+	.dataTables_length,
+	.dataTables_info {
 		display: none;
 	}
-	.modal-lg, .modal-xl {
+
+	.modal-lg,
+	.modal-xl {
 		max-width: 900px;
 		max-height: 800px;
 	}
-	
+
 	.form-control-feedback2 {
-	  margin:1px;
-	  position: absolute;
-	  padding: 10px;
-	  pointer-events: none;
-	  background-color: #e9ecef;
-	  border-style: none;
+		margin: 1px;
+		position: absolute;
+		padding: 10px;
+		pointer-events: none;
+		background-color: #e9ecef;
+		border-style: none;
 	}
+
 	.form-control-feedback3 {
-	  margin:1px;
-	  position: absolute;
-	  margin-left:225px;
-	  padding: 10px;
-	  pointer-events: none;
-	  background-color: #e9ecef;
-	  border-style: none;
+		margin: 1px;
+		position: absolute;
+		margin-left: 225px;
+		padding: 10px;
+		pointer-events: none;
+		background-color: #e9ecef;
+		border-style: none;
 	}
+
 	.form-control {
-	  padding-left: 40px!important;
+		padding-left: 40px !important;
 	}
-	/*.toast-succes{
-		width: 120px;
-	}*/
 </style>
 
 <body>
 
 	<th:block th:replace="menu.html :: header">
 	</th:block>
-	
-	
-	<!--	<section class="grid">
-		
-		
-			<article>
-				<div class="contact_form">
 
-					<div class="formulario">
+	<div class="container">
+		<!-- begin #modal-dialog : MODAL MASCOTA-->
+		<div class="modal fade" id="modalMascota" data-backdrop="static" data-keyboard="false" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-login modal-lg">
+				<div class="modal-content">
+					<div class="modal-header bg-blue-darker">
+						<h4 class="modal-title text-white">FORMULARIO: MASCOTA</h4>
+					</div>
+					<div class="modal-body">
+						<form th:action="@{/rest/mascotas/registrar}" method="post" id="idRegistra">
+							<input class="registro1" type="hidden" value="0" name="codigo" id="idcodigo">
+							<div class="container">
+								<div class="row">
 
-						<h1 style="text-align: center;">Registrar Mascotas</h1>
-						
-						<button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#modalMascota" id="btn-nuevo">
-			 <i class="far fa-file"></i> Nueva Mascota
-			</button> -->
 
-						<!-- begin #modal-dialog : MODAL MASCOTA-->
-			<div class="modal fade" id="modalMascota" data-backdrop="static" 
-							data-keyboard="false" tabindex="-1" 
-							aria-labelledby="exampleModalLabel" aria-hidden="true">
-						<div class="modal-dialog modal-dialog-centered modal-login modal-lg" >					
-							<div class="modal-content">
-								<div class="modal-header bg-blue-darker">
-									<h4 class="modal-title text-white">FORMULARIO: MASCOTA</h4>
+									<div class="form-group has-feedback col-md-6">
+										<label for="exampleInputEmail1"><b>Departamento</b></label><br>
+										<i class="fas fa-prescription-bottle-alt form-control-feedback2"></i>
+										<select class="form-control" name="nroDepartamento" id="idnroDepartamento">
+											<option value="-1">[Seleccione un número de Departamento.] </option>
+											<option th:each="bean:${departamento}" th:value="${bean.idDepartamento}"
+												th:utext="${bean.nroDepartamento}"></option>
+										</select>
+									</div>
+
+									<div class="form-group has-feedback col-md-6">
+										<label for="nombres" class="colocar_nombres">Nombre de la mascota <span
+												class="obligatorio">*</span>
+										</label><br>
+										<i class="fas fa-file-signature form-control-feedback2"></i>
+										<input class="form-control" type="text" name="nombres" id="idnombres"
+											placeholder="Escriba Nombre de la Mascota">
+									</div>
+
+
+									<div class="form-group has-feedback col-md-6">
+										<label for="exampleInputEmail1"><b>Especie</b></label><br>
+										<i class="fas fa-prescription-bottle-alt form-control-feedback2"></i>
+										<select class="form-control" name="especie" id="idEspecie">
+											<option value="-1">[Seleccione Especie.] </option>
+											<option th:each="bean:${especie}" th:value="${bean.idEspecie}"
+												th:text="${bean.animal}"></option>
+										</select>
+									</div>
+
+
 								</div>
-								<div class="modal-body">
-									<form th:action="@{/rest/mascotas/registrar}" method="post" id="idRegistra">
-										<input class="registro1" type="hidden" value="0" name="codigo" id="idcodigo">
-										<div class="container">
-											<div class="row">
-											
-											
-											<div class="form-group has-feedback col-md-6">	
-														<label for="exampleInputEmail1"><b>Departamento</b></label><br>
-												        <i class="fas fa-prescription-bottle-alt form-control-feedback2"></i>
-														<select class="form-control" name="nroDepartamento" id="idnroDepartamento">
-															<option value="-1">[Seleccione un número de Departamento.] </option>
-															<option th:each="bean:${departamento}" th:value="${bean.idDepartamento}"
-															th:utext="${bean.nroDepartamento}"></option>
-													    </select>
-												</div>
-												
-												<div class="form-group has-feedback col-md-6">
-													<label for="nombres" class="colocar_nombres">Nombre de la mascota <span class="obligatorio">*</span>
-													</label><br>		
-														<i class="fas fa-file-signature form-control-feedback2"></i>	
-														<input class="form-control" type="text" name="nombres" id="idnombres"
-														placeholder="Escriba Nombre de la Mascota">
-												</div>
-																								
-												
-												<div class="form-group has-feedback col-md-6">	
-														<label for="exampleInputEmail1"><b>Especie</b></label><br>
-												        <i class="fas fa-prescription-bottle-alt form-control-feedback2"></i>
-														<select class="form-control" name="especie" id="idEspecie">
-															<option value="-1">[Seleccione Especie.] </option>
-															<option th:each="bean:${especie}" th:value="${bean.idEspecie}"
-																th:text="${bean.animal}"></option>
-														</select>
-												</div>
-												
-											
-											</div>
-											<p th:each="bean : ${session.usuario}">		
-													<input type="hidden" name="usuario" th:value="${bean.idUsuario}" readonly>
-												</p>
-										</div>								
-										<div class="col-md-12 text-center mt-4"> 										
-											<button type="submit" id="Guardar" class="btn btn-primary"><i class="fas fa-save"></i> Registrar</button>
-											<button type="button" id="btn-cerrar" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-undo-alt"></i> Cancelar</button>
-										</div> 																								
-									</form>
-								</div>
+								<p th:each="bean : ${session.usuario}">
+									<input type="hidden" name="usuario" th:value="${bean.idUsuario}" readonly>
+								</p>
 							</div>
-						</div>
+							<div class="col-md-12 text-center mt-4">
+								<button type="submit" id="Guardar" class="btn btn-primary"><i class="fas fa-save"></i>
+									Registrar</button>
+								<button type="button" id="btn-cerrar" class="btn btn-danger" data-dismiss="modal"><i
+										class="fas fa-undo-alt"></i> Cancelar</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
 		</div>
-		<!-- FIN Modal MASCOTA-->	
-						
-	<!--				</div>
+		<!-- FIN Modal MASCOTA-->
+
+		<!--				</div>
 				</div>
 			</article>-->
 
 
-			<div class="limiter">
-				<div class="container-table100">
-					<h1 style="text-align: center;">Lista de Mascotas</h1>
-					
-					
-			
-			
+		<div class="limiter">
+			<div class="container-table100">
+				<h1 style="text-align: center;">Lista de Mascotas</h1>
 
-					<div class="wrap-table100">
-					<button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#modalMascota" id="btn-nuevo">
-			 <i class="far fa-file"></i> Nueva Mascota
-			</button>
-			<br>
-			<br>
-			<br>
-						<div class="table100">
-							<table>
-								<thead>
-									<tr class="table100-head">
-										<th class="column1">Codigo</th>
-										<th class="column8">Nro Departamento</th>
-										<th class="column8">Nombre de la Mascota</th>
-										<th class="column8">Especie de la Mascota</th>
-										<th class="column8">Nombre del trabajador</th>
-										<th></th>
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr class="" th:each="bean:${mascotas}">
-										<td class="column1" th:text="${bean.idMascotas}"></td>
-										<td class="column8" th:text="${bean.departamento.nroDepartamento}"></td>
-										<td class="column8" th:text="${bean.nombres}"></td>
-										<td class="column8" th:text="${bean.especie.animal}"></td>
-										<td class="column8" th:text="${bean.usuario.nomUsuario}"></td>
-										<td class="column1"><a class="btn btn-actualizar"><i
-													class="fa-solid fa-pen-to-square"></i></a></td>
-										<td class="column1"><a class="btn btn-eliminar"><i
-													class="fa-solid fa-trash-can"></i></a></td>
+				<div class="wrap-table100">
+					<button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#modalMascota"
+						id="btn-nuevo">
+						<i class="far fa-file"></i> Nueva Mascota
+					</button>
+					<br>
+					<br>
+					<br>
+					<div class="table100">
+						<table>
+							<thead>
+								<tr class="table100-head">
+									<th class="column1">Codigo</th>
+									<th class="column8">Nro Departamento</th>
+									<th class="column8">Nombre de la Mascota</th>
+									<th class="column8">Especie de la Mascota</th>
+									<th class="column8">Nombre del trabajador</th>
+									<th></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="" th:each="bean:${mascotas}">
+									<td class="column1" th:text="${bean.idMascotas}"></td>
+									<td class="column8" th:text="${bean.departamento.nroDepartamento}"></td>
+									<td class="column8" th:text="${bean.nombres}"></td>
+									<td class="column8" th:text="${bean.especie.animal}"></td>
+									<td class="column8" th:text="${bean.usuario.nomUsuario}"></td>
+									<td class="column1"><a class="btn btn-actualizar"><i
+												class="fa-solid fa-pen-to-square"></i></a></td>
+									<td class="column1"><a class="btn btn-eliminar"><i
+												class="fa-solid fa-trash-can"></i></a></td>
 
-									</tr>
+								</tr>
 
-								</tbody>
-							</table>
-						</div>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
+		</div>
 
 
 		<th:block th:replace="menu.html :: footer">
-
-
-	
-
-	
-
 		</th:block>
+	</div>
 
 	<script th:inline="javascript" th:if="${MENSAJE!=null}">
 		//obtener atributo MENSAJE
@@ -307,51 +293,51 @@
 
 		});
 	</script>
-	
-	<script type="text/javascript">    
-	    $(document).ready(function(){     
-	        $('#idRegistra').bootstrapValidator({     
-	        	feedbackIcons: {
-	                valid: 'glyphicon glyphicon-ok',
-	                invalid: 'glyphicon glyphicon-remove',
-	                validating: 'glyphicon glyphicon-refresh'
-	            },
-	        	 fields:{
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#idRegistra').bootstrapValidator({
+				feedbackIcons: {
+					valid: 'glyphicon glyphicon-ok',
+					invalid: 'glyphicon glyphicon-remove',
+					validating: 'glyphicon glyphicon-refresh'
+				},
+				fields: {
 					nroDepartamento: {
-	     	    		selector:'#idnroDepartamento',   
-	                    validators: {    
-	                        notEmpty: {    
-	                            message: 'Seleccione Numero Departamento'    
-	                        }					
-	                    }    
-	                },
+						selector: '#idnroDepartamento',
+						validators: {
+							notEmpty: {
+								message: 'Seleccione Numero Departamento'
+							}
+						}
+					},
 					Especie: {
-	     	    		selector:'#idEspecie',   
-	                    validators: {    
-	                        notEmpty: {    
-	                            message: 'Seleccione una Especie'    
-	                        }					
-	                    }    
-	                },	 	        		 
-	        		 Nombres: {
-	     	    		selector:'#idnombres',   
-	                    validators: {    
-	                        notEmpty: {    
-	                            message: 'Ingrese Nombre de la mascota'    
-	                        },
-	                        regexp: {    
-	                            regexp: /^[A-Za-z����������\s]{3,20}$/,    
-	                            message: 'Ingrese solo letras entre 3 y 20 caracteres'    
-	                        }      
-	                    }    
-	                }  
-	                				
-	                
-	        	 }
-	        });   				
-	    });    
-	</script>  
-	
+						selector: '#idEspecie',
+						validators: {
+							notEmpty: {
+								message: 'Seleccione una Especie'
+							}
+						}
+					},
+					Nombres: {
+						selector: '#idnombres',
+						validators: {
+							notEmpty: {
+								message: 'Ingrese Nombre de la mascota'
+							},
+							regexp: {
+								regexp: /^[A-Za-z����������\s]{3,20}$/,
+								message: 'Ingrese solo letras entre 3 y 20 caracteres'
+							}
+						}
+					}
+
+
+				}
+			});
+		});    
+	</script>
+
 </body>
 
 </html>
