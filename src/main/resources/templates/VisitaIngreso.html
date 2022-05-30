@@ -35,16 +35,16 @@
 
 
 					<p>
-						<label for="visitante">Visitante
+						<label for="">Visitante
 							<span class="obligatorio">*</span>
 						</label>
-						<input type="hidden" name="visitante" id="codigVisitante" readonly>
+						<input type="hidden" name="visitantes" id="codigVisitante" readonly>
 						<input type="text" class="registro1" id="nomVisitante" readonly>
 					</p>
 
 
 					<p>
-						<label for="horaIngreso">Fecha de ingreso
+						<label for="">Fecha de ingreso
 							<span class="obligatorio">*</span>
 						</label>
 						<input class="registro1" type="datetime-local" name="fechaIngreso" id="minor2" readonly
@@ -52,7 +52,7 @@
 					</p>
 
 					<p>
-						<label for="cliente">Visita a
+						<label for="">Visita a
 							<span class="obligatorio">*</span>
 						</label>
 						<input type="hidden" name="cliente" id="idclientevisi">
@@ -85,7 +85,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form name="test2" method="post" th:action="@{/rest/controlvisita/registrar}">
+					<form name="test2" method="post" th:action="@{/rest/controlvisita/registrarvisitante}">
 						<input type="hidden" value="0" name="codigo" id="idCodigo">
 						<div class="form-row">
 							<div class="form-group col-md-6">
@@ -132,7 +132,7 @@
 							</div>
 							<div class="form-group col-md-6">
 								<label for="">Cliente</label>
-								<select class="form-control" name="cliente" id="idclie">
+								<select class="form-control" name="clientes" id="idclie">
 									<option value="-1">[Seleccione un Cliente.] </option>
 									<option th:each="bean:${comCliente}" th:value="${bean.idCliente}"
 										th:text="${bean.nombres + ' ' + bean.apellidos}"></option>

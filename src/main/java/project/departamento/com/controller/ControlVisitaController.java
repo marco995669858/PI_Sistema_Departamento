@@ -55,7 +55,7 @@ public class ControlVisitaController {
 
 	@RequestMapping("/registrarControl")
 	public String registrarControlVisitante(@RequestParam("usuario") int usuario,
-			@RequestParam("visitante") int visitante, @RequestParam("fechaIngreso") String fechaIngreso,
+			@RequestParam("visitantes") int visitante, @RequestParam("fechaIngreso") String fechaIngreso,
 			@RequestParam("cliente") int cliente, RedirectAttributes redirect) {
 		try {
 
@@ -66,7 +66,7 @@ public class ControlVisitaController {
 			bean.setHoraSalida(null);
 			bean.setCliente(new Cliente(cliente));
 			bean.setEstado(new Estado(6));
-			bean.setComentario(null);
+			bean.setComentario("------------------");
 			bean.setFechaRegistro(new Date());
 			service.registraActualiza(bean);
 			redirect.addFlashAttribute("MENSAJE", "Se registro la visita correctamente");
@@ -77,58 +77,39 @@ public class ControlVisitaController {
 		return "redirect:/rest/controlvisita/";
 	}
 
-	@RequestMapping("/registrar")
+	@RequestMapping("/registrarvisitante")
 	public String registraActualizaVisitante(@RequestParam("codigo") int codigo,
 			@RequestParam("departamento") int idDepartamento, @RequestParam("Nombres") String nombres,
 			@RequestParam("Apellidos") String apellidos, @RequestParam("idTipoDocumento") int idTipoDocumento,
 			@RequestParam("Documento") String documento, @RequestParam("telefono") String telefono,
-			@RequestParam("correo") String correo, @RequestParam("cliente") int idCliente,
+			@RequestParam("correo") String correo, @RequestParam("clientes") int clientes,
 			@RequestParam("usuario") int usuario, RedirectAttributes redirect) {
 		try {
 
-			Visitante bean = new Visitante();
-			bean.setDepartamento(new Departamento(idDepartamento));
-			bean.setNombres(nombres);
-			bean.setApellidos(apellidos);
-			bean.setTipoDocumento(new TipoDocumento(idTipoDocumento));
-			bean.setDocumento(documento);
-			bean.setTelefono(telefono);
-			bean.setCorreo(correo);
-			bean.setCliente(new Cliente(idCliente));
-			bean.setUsuario(new Usuario(usuario));
-			bean.setFechaRegistro(new Date());
-			if (codigo != 0) {
-				Optional<Visitante> buscarDniactualizar = visitanteService.buscarDocumentoactualizar(documento, codigo);
-				Optional<Visitante> buscarTelefonoactualizar = visitanteService.buscarTelefonoactualizar(telefono,
-						codigo);
-				Optional<Visitante> buscarCorreoactualizar = visitanteService.buscarCorreoactualizar(correo, codigo);
-				if (buscarDniactualizar.isPresent()) {
-					redirect.addFlashAttribute("existen", "El documento que ingreso ya existe");
-				} else if (buscarTelefonoactualizar.isPresent()) {
-					redirect.addFlashAttribute("existen", "El telefono que ingreso ya existe");
-				} else if (buscarCorreoactualizar.isPresent()) {
-					redirect.addFlashAttribute("existen", "El correo que ingreso ya existe");
-				} else {
-					bean.setIdVisitante(codigo);
-					visitanteService.registraActualizaVisitante(bean);
-					redirect.addFlashAttribute("MENSAJE", "El visitante se actualizo correctamente");
-				}
+			Optional<Visitante> buscarDni = visitanteService.buscarDocumento(documento);
+			Optional<Visitante> buscarTelefono = visitanteService.buscarDocumento(telefono);
+			Optional<Visitante> buscarCorreo = visitanteService.buscarDocumento(correo);
 
+			if (buscarDni.isPresent()) {
+				redirect.addFlashAttribute("existen", "El documento que ingreso ya existe");
+			} else if (buscarTelefono.isPresent()) {
+				redirect.addFlashAttribute("existen", "El telefono que ingreso ya existe");
+			} else if (buscarCorreo.isPresent()) {
+				redirect.addFlashAttribute("existen", "El correo que ingreso ya existe");
 			} else {
-				Optional<Visitante> buscarDni = visitanteService.buscarDocumento(documento);
-				Optional<Visitante> buscarTelefono = visitanteService.buscarDocumento(telefono);
-				Optional<Visitante> buscarCorreo = visitanteService.buscarDocumento(correo);
-
-				if (buscarDni.isPresent()) {
-					redirect.addFlashAttribute("existen", "El documento que ingreso ya existe");
-				} else if (buscarTelefono.isPresent()) {
-					redirect.addFlashAttribute("existen", "El telefono que ingreso ya existe");
-				} else if (buscarCorreo.isPresent()) {
-					redirect.addFlashAttribute("existen", "El correo que ingreso ya existe");
-				} else {
-					visitanteService.registraActualizaVisitante(bean);
-					redirect.addFlashAttribute("MENSAJE", "El visitante se registro correctamente");
-				}
+				Visitante bean = new Visitante();
+				bean.setDepartamento(new Departamento(idDepartamento));
+				bean.setNombres(nombres);
+				bean.setApellidos(apellidos);
+				bean.setTipoDocumento(new TipoDocumento(idTipoDocumento));
+				bean.setDocumento(documento);
+				bean.setTelefono(telefono);
+				bean.setCorreo(correo);
+				bean.setCliente(new Cliente(clientes));
+				bean.setUsuario(new Usuario(usuario));
+				bean.setFechaRegistro(new Date());
+				visitanteService.registraActualizaVisitante(bean);
+				redirect.addFlashAttribute("MENSAJE", "El visitante se registro correctamente");
 			}
 
 		} catch (Exception e) {
