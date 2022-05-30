@@ -34,9 +34,9 @@
 				</button>
 				<ul class="admin-menu">
 					<li th:each="bean : ${session.menus}">
-						<a th:text="${bean.descripcion}" th:href="${bean.ruta}">
-							<i class="fa-solid fa-building-circle-check"></i>
-							<span>Registrar de Departamento</span>
+						<a th:href="${bean.ruta}">
+							<i th:class="${bean.icon}" style="max-height: 15px;"></i>
+							<span th:text="${bean.descripcion}"></span>
 						</a>
 					</li>
 
@@ -102,7 +102,7 @@
 			crossorigin="anonymous"></script>
 		<script th:src="@{/resources/js/adminjs.js}"></script>
 		<script th:src="@{/resources/js/main.js}"></script>
-	<script src="https://cdn.bootcdn.net/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
+		<script src="https://cdn.bootcdn.net/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
 		<script th:src="@{/resources/js/validarUsuario.js}"></script>
 		<script th:src="@{/resources/js/visita.js}"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"

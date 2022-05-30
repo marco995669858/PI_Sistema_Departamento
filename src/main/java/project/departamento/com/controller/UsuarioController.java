@@ -24,6 +24,11 @@ public class UsuarioController {
 	
 	@Autowired
 	private EncryptPassword encriptar;
+	
+	@RequestMapping("/user/")
+	public String usuario() {
+		return "usuario2";
+	}
 
 	@RequestMapping("/")
 	public String index(Model model) {
