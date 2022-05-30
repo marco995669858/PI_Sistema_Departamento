@@ -17,20 +17,16 @@ function mensaje(msj){
 		})
 }
 
-
 function validarDepartamentos() {
-	
-	let piso = document.getElementById("idPiso").value;
+	let departamento=document.getElementById("idTipodepatamento").value;
+	let piso = document.getElementById("idpiso").value;
 	let nroDepartamento = document.getElementById("idnroDepartamento").value;
-
-
+	let habitaciones = document.getElementById("idnro").value;
+	let banio = document.getElementById("idBanio").value;
+	let lavanderia = document.getElementById("idlavanderia").value;
 
 	if (!piso || !nroDepartamento) {
 		mensaje("Todos los campos son obligatorios");
 		return false;
-	}  else if (nroDepartamento.length < 3 || nroDepartamento.length >=5) {
-		mensaje('El número del departamento acepta 4 digitos como máximo');
-		return false;
-	} 
-	return true;
+	}  
 }
