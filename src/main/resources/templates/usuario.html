@@ -11,227 +11,225 @@
 
 
 <style>
-
-	
 	.alertify .ajs-dialog {
-	    top: 50%;
-	    transform: translateY(-50%);
-	    margin: auto;
+		top: 50%;
+		transform: translateY(-50%);
+		margin: auto;
 	}
-	
-	.ajs-header{
+
+	.ajs-header {
 		background-color: #286090 !important;
 		color: white !important;
 		/*text-align: center;*/
 		font-size: 18px;
 		font-weight: bold;
 	}
-	.ajs-ok{
+
+	.ajs-ok {
 		color: #fff;
-	    background-color: #007bff;
-	    border-color: #007bff;
+		background-color: #007bff;
+		border-color: #007bff;
 	}
-	.ajs-cancel{
+
+	.ajs-cancel {
 		color: #fff;
-	    background-color: #dc3545;
-	    border-color: #dc3545;
+		background-color: #dc3545;
+		border-color: #dc3545;
 	}
-	.btn-primary{
-	background-color: #286090 !important;
+
+	.btn-primary {
+		background-color: #286090 !important;
 	}
-	.dataTables_length, .dataTables_info{
+
+	.dataTables_length,
+	.dataTables_info {
 		display: none;
 	}
-	.modal-lg, .modal-xl {
+
+	.modal-lg,
+	.modal-xl {
 		max-width: 900px;
 		max-height: 800px;
 	}
-	
+
 	.form-control-feedback2 {
-	  margin:1px;
-	  position: absolute;
-	  padding: 10px;
-	  pointer-events: none;
-	  background-color: #e9ecef;
-	  border-style: none;
+		margin: 1px;
+		position: absolute;
+		padding: 10px;
+		pointer-events: none;
+		background-color: #e9ecef;
+		border-style: none;
 	}
+
 	.form-control-feedback3 {
-	  margin:1px;
-	  position: absolute;
-	  margin-left:225px;
-	  padding: 10px;
-	  pointer-events: none;
-	  background-color: #e9ecef;
-	  border-style: none;
+		margin: 1px;
+		position: absolute;
+		margin-left: 225px;
+		padding: 10px;
+		pointer-events: none;
+		background-color: #e9ecef;
+		border-style: none;
 	}
+
 	.form-control {
-	  padding-left: 40px!important;
+		padding-left: 40px !important;
 	}
-</style> 
+</style>
+
 <body>
-	
+
 	<th:block th:replace="menu.html :: header">
 	</th:block>
-	
-		<section class="grid">
-			<article>
-				<div class="contact_form">
 
-					<div class="formulario">
+		<!-- begin #modal-dialog : MODAL DEPARTAMENTO-->
+		<div class="modal fade" id="modalUsuario" data-backdrop="static" data-keyboard="false" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
 
-						<h1 style="text-align: center;">Registro Usuario</h1>
+			<div class="modal-dialog modal-dialog-centered modal-login modal-lg">
+				<div class="modal-content">
+					<div class="modal-header bg-blue-darker">
+						<h4 class="modal-title text-white">FORMULARIO: USUARIO</h4>
+					</div>
+					<div class="modal-body">
+						<form method="POST" id="idRegistra" th:action="@{/rest/usuario/registrar}">
+							<input type="hidden" id="idUsuario" name="codigo" value="0">
+							<div class="container">
+								<div class="row">
 
-						
-						<form th:action="@{/rest/usuario/registrar}" onsubmit="return validarUsuario()">
+									<div class="form-group has-feedback col-md-6">
+										<label for="exampleInputEmail1"><b>Nombre de Usuario</b></label><br>
+										<i class="fas fa-file-signature form-control-feedback2"></i>
+										<input type="text" class="form-control" id="idNomusuario"
+											placeholder="Ingrese Nombre Usuario" name="nombres">
+									</div>
 
+									<div class="form-group has-feedback col-md-6">
+										<label for="exampleInputEmail1"><b>Nombres</b></label><br>
+										<i class="fas fa-file-signature form-control-feedback2"></i>
+										<input type="text" class="form-control" id="idNombres"
+											placeholder="Ingrese Nombres" name="apellidos">
+									</div>
 
-							<input class="registro1" type="hidden" value="0" name="codigo" id="idcodigo">
+									<div class="form-group has-feedback col-md-6">
+										<label for="exampleInputEmail1"><b>Apellido Paterno</b></label><br>
+										<i class="fas fa-file-signature form-control-feedback2"></i>
+										<input type="text" class="form-control" id="idapePaterno"
+											placeholder="Escribe tu apellido paterno" name="apellidos">
+									</div>
 
-							<p>
+									<div class="form-group has-feedback col-md-6">
+										<label for="exampleInputEmail1"><b>Apellido Materno</b></label><br>
+										<i class="fas fa-file-signature form-control-feedback2"></i>
+										<input type="text" class="form-control" id="idapeMaterno"
+											placeholder="Escribe tu apellido materno" name="apellidos">
+									</div>
 
-								<label for="nomUsuario">Nombre de usuario
-									<span class="obligatorio">*</span>
-								</label>
-								<input class="registro1" type="text" name="nomUsuario" id="idNomusuario"
-									placeholder="Escribe tu Username">
-							</p>
+									<div class="form-group has-feedback col-md-6">
+										<label for="exampleInputEmail1"><b>Correo de Usuario</b></label><br>
+										<i class="fas fa-file-signature form-control-feedback2"></i>
+										<input type="text" class="form-control" id="idCuentausuario"
+											placeholder="Escribe tu correo" name="dni">
+									</div>
 
-							<p>
-								<label for="nombres">Nombres
-									<span class="obligatorio">*</span>
-								</label>
-								<input class="registro1" type="text" name="nombres" id="idNombres"
-									placeholder="Escribe tus Nombres">
+									<div class="form-group has-feedback col-md-6">
+										<label for="exampleInputEmail1"><b>Contraseña</b></label><br>
+										<i class="fas fa-file-signature form-control-feedback2"></i>
+										<input type="text" class="form-control" id="idPassword"
+											placeholder="Escribe tu contraseña" name="dni">
+									</div>
 
-							</p>
+									<div class="form-group has-feedback col-md-6">
+										<label for="exampleInputEmail1"><b>Telefono</b></label><br>
+										<i class="fas fa-file-signature form-control-feedback2"></i>
+										<input type="text" class="form-control" id="idTelefono"
+											placeholder="Ingrese Telefono" name="dni">
+									</div>
 
-							<p>
-								<label for="apellidos" class="colocar_apellidos">Apellido Paterno
+									<div class="form-group has-feedback col-md-6">
+										<label for="exampleInputEmail1"><b>Rol</b></label><br>
+										<i class="fas fa-prescription-bottle-alt form-control-feedback2"></i>
+										<select class="form-control form-margin" name="idTipoDocumento" id="idCliente">
+											<option value=" ">[Seleccione un Rol]</option>
+											<option th:each="bean:${rol}" th:value="${bean.idRol}"
+												th:utext="${bean.descripcion}"></option>
+										</select>
+									</div>
 
-									<span class="obligatorio">*</span>
+								</div>
 
-								</label>
-								<input class="registro1" type="text" name="apePaterno" id="idapePaterno"
-									placeholder="Escribe tu apellido paterno">
-
-							</p>
-							<p>
-								<label for="apellidos" class="colocar_apellidos">Apellido Materno
-									<span class="obligatorio">*</span>
-
-								</label>
-								<input class="registro1" type="text" name="apeMaterno" id="idapeMaterno"
-									placeholder="Escribe tu apellido Materno">
-
-							</p>
-
-
-							<p>
-								<label for="cuentaUsuario" class="colocar_correo">Cuenta de Usuario
-									<span class="obligatorio">*</span>
-								</label>
-								<input class="registro1" type="email" name="cuentaUsuario" id="idCuentausuario"
-									placeholder="Escribe tu correo">
-
-							</p>
-
-							<p>
-								<label for="password" class="colocar_celular">Contraseña
-									<span class="obligatorio">*</span>
-								</label>
-								<input class="registro1" type="password" name="password" id="idPassword"
-									placeholder="Escribe tu contraseña">
-							</p>
-
-							<p>
-								<label for="telefono">Telefono
-									<span class="obligatorio">*</span>
-								</label>
-								<input class="registro1" type="number" name="telefono" id="idTelefono"
-									placeholder="Escribe tu Celular">
-							</p>
-
-							<div>
-								<label for="rol">Rol <span class="obligatorio">*</span></label>
-								<select name="rol" class="registro1">
-									<option value="-1">Seleccione un Rol</option>
-									<option th:each="bean:${rol}" th:value="${bean.idRol}"
-										th:utext="${bean.descripcion}"></option>
-								</select>
 							</div>
-
-
-							<button class="botones1" type="submit" name="enviar_formulario" id="registrar">
-								<p>Registrar</p>
-							</button>
-
-							<p class="aviso">
-								<span class="obligatorio"> * </span>los campos son obligatorios.
-							</p>
-
+							<div class="col-md-12 text-center mt-4">
+								<button type="submit" id="Guardar" class="btn btn-primary"><i class="fas fa-save"></i>
+									Registrar</button>
+								<button type="button" id="btn-cerrar" class="btn btn-danger" data-dismiss="modal"><i
+										class="fas fa-undo-alt"></i> Cancelar</button>
+							</div>
 						</form>
 					</div>
 				</div>
-			</article>
+			</div>
+		</div>
+		<!-- FIN Modal VISITANTE-->
 
+		<div class="limiter">
+			<div class="container-table100">
+				<h1 style="text-align: center;">Lista de Usuario</h1>
 
-			<div class="limiter">
-				<div class="container-table100">
-					<h1 style="text-align: center;">Lista de Usuario</h1>
+				<div class="wrap-table100">
+					<button type="button" class="btn btn-primary mt-4" data-toggle="modal" data-target="#modalUsuario"
+						id="btn-nuevo">
+						<i class='bx bx-file-blank'></i> Nuevo Departamento
+					</button>
+					<br><br>
+					<div class="table100">
+						<table>
+							<thead>
+								<tr class="table100-head">
+									<th class="column1">Codigo</th>
+									<th class="column2">Nombres</th>
+									<th class="column3">Paterno</th>
+									<th class="column4">Materno</th>
+									<th class="column5">Correo</th>
+									<th class="column6">Telefono</th>
+									<th class="column7">Rol</th>
+									<th class="column8">Fecha de Registro</th>
+									<th class="column1"></th>
+								</tr>
+							</thead>
+							<tbody>
 
-					<div class="wrap-table100">
-						<div class="table100">
-							<table>
-								<thead>
-									<tr class="table100-head">
-										<th class="column1">Codigo</th>
-										<th class="column2">Nombres</th>
-										<th class="column3">Paterno</th>
-										<th class="column4">Materno</th>
-										<th class="column5">Correo</th>
-										<th class="column6">Telefono</th>
-										<th class="column7">Rol</th>
-										<th class="column8">Fecha de Registro</th>
-										<th class="column1"></th>
-									</tr>
-								</thead>
-								<tbody>
+								<tr th:each="bean:${listaUsuario}" class="text-center">
+									<td class="column1" th:text="${bean.idUsuario}"></td>
+									<td class="column2" th:text="${bean.nombres}"></td>
+									<td class="column3" th:text="${bean.apePaterno}"></td>
+									<td class="column4" th:text="${bean.apeMaterno}"></td>
+									<td class="column5" th:text="${bean.cuentaUsuario}"></td>
+									<td class="column6" th:text="${bean.telefono}"></td>
+									<td class="column7" th:text="${bean.rol.descripcion}"></td>
+									<td class="column8" th:text="${bean.fechaRegistro}"></td>
+									<td class="column1"><a class="btn-eliminar"><i
+												class="fa-solid fa-trash-can"></i></a></td>
+								</tr>
 
-									<tr th:each="bean:${listaUsuario}" class="text-center">
-										<td class="column1" th:text="${bean.idUsuario}"></td>
-										<td class="column2" th:text="${bean.nombres}"></td>
-										<td class="column3" th:text="${bean.apePaterno}"></td>
-										<td class="column4" th:text="${bean.apeMaterno}"></td>
-										<td class="column5" th:text="${bean.cuentaUsuario}"></td>
-										<td class="column6" th:text="${bean.telefono}"></td>
-										<td class="column7" th:text="${bean.rol.descripcion}"></td>
-										<td class="column8" th:text="${bean.fechaRegistro}"></td>
-										<td class="column1"><a class="btn-eliminar"><i
-													class="fa-solid fa-trash-can"></i></a></td>
-									</tr>
-
-								</tbody>
-							</table>
-						</div>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
+		</div>
 
+	<footer class="page-footer">
 
-
-		</section>
-		<footer class="page-footer">
-
-		</footer>
+	</footer>
 	</section>
 	<!-- partial -->
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
 		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 	<script th:src="@{/resources/js/adminjs.js}"></script>
 	<script th:src="@{/resources/js/main.js}"></script>
-	
+
 	<script th:src="@{/resources/js/validarUsuario.js}"></script>
-	
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
 		integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ=="
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -282,7 +280,7 @@
 		})
 
 	</script>
-<!--	<script>
+	<!--	<script>
 		$(document).on("click", "#idEditar", function () {
 			let codigo;
 			codigo = $(this).parents("tr").find("td")[0].innerHTML;
