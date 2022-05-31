@@ -110,8 +110,12 @@
 
 				<h1 style="text-align: center; font-family: 'Times New Roman', Times, serif;">Registro de Ingreso de Visitas</h1>
 
-				<form method="POST" onsubmit="return validarUsuario()"
-					th:action="@{/rest/controlvisita/registrarControl}">
+				
+				
+				
+				<form name="test" th:action="@{/rest/controlvisita/registrarControl}" id="idRegistra" method="post"
+							>	
+							
 					<input type="hidden" id="idUsuario" name="codigo" value="0">
 					<div class="container">
 						<div class="row">
@@ -342,6 +346,33 @@
 			});
 		});
 	</script>
+	
+	<script type="text/javascript">    
+	    $(document).ready(function(){     
+	        $('#idRegistra').bootstrapValidator({     
+	        	feedbackIcons: {
+	                valid: 'glyphicon glyphicon-ok',
+	                invalid: 'glyphicon glyphicon-remove',
+	                validating: 'glyphicon glyphicon-refresh'
+	            },
+	        	 fields:{        		 	
+					DNI: {
+	     	    		selector:'#idDocumento',   
+	                    validators: {    
+	                        notEmpty: {    
+	                            message: 'Ingrese DNI'    
+	                        },
+	                        regexp: {    
+								regexp: /[0-9]{8}/,     
+	                             message: 'Ingrese solo 8 digitos'     
+	                        }      
+	                    }    
+	                }
+	        	 }
+	        });   				
+	    });    
+	</script> 
+	
 </body>
 
 </html>
