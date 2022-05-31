@@ -184,7 +184,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form name="test2" method="post" th:action="@{/rest/controlvisita/registrarvisitante}">
+					<form name="test2" method="post" th:action="@{/rest/controlvisita/registrarvisitante}" onsubmit="return validarModalVisitante()">
 						<input type="hidden" value="0" name="codigo" id="idCodigo">
 						<div class="form-row">
 							<div class="form-group col-md-6">
@@ -263,6 +263,8 @@
 
 	<th:block th:replace="menu.html :: footer">
 	</th:block>
+		<script th:src="@{/resources/js/validarModalVisitante.js}"></script>
+
 
 	<script th:inline="javascript" th:if="${MENSAJE!=null}">
 		//obtener atributo MENSAJE
