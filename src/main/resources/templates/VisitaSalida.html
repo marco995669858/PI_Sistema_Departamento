@@ -21,6 +21,29 @@
 
 
 <style>
+.modal-header,
+	h4,
+	.close {
+		background-color: #286090;
+		color: white !important;
+		text-align: center;
+		font-size: 20px;
+	}
+
+	.help-block {
+		color: red;
+		/*display: none;*/
+	}
+
+	.form-group.has-error .form-control-label {
+		color: red;
+	}
+
+	.form-group.has-error .form-control {
+		border: 1px solid red;
+		box-shadow: 0 0 0 0.2rem rgba(250, 16, 0, 0.18);
+	}
+
 	.alertify .ajs-dialog {
 		top: 50%;
 		transform: translateY(-50%);
@@ -90,19 +113,21 @@
 
 	<th:block th:replace="menu.html :: header">
 	</th:block>
+	<div class="container">
 	<section class="grid">
 		<article>
-			<div class="contact_form">
+			<div style="min-width: 1070px;" class="contact_form">
 
 				<div class="formulario">
 
 					<h1 style="text-align: center;">Consultar Visita Salida</h1>
 
-
+		
 					<form th:action="@{/rest/usuario/registrar}" onsubmit="return validarUsuario()">
 						<div class="form-row ">
 							<div class="form-group col-md-4">
-								<label for="inputEmail4">Visitante</label>
+								<label for="inputEmail4">Visitante</label><br>
+								<i class="fas fa-user-friends form-control-feedback2"></i>	
 								<select class="form-control" name="visita" id="idVisitante">
 									<option value="-1">[Seleccione un visitante]</option>
 									<option th:each="bean:${comboVisitante}" th:value="${bean.idVisitante}"
@@ -110,7 +135,8 @@
 								</select>
 							</div>
 							<div class="form-group col-md-4">
-								<label for="">Visita a</label>
+								<label for="">Visita a</label><br>
+								<i class="fas fa-user-tag form-control-feedback2"></i>	
 								<select class="form-control" name="cliente" id="idCliente">
 									<option value="-1">[Seleccione un Propietario o residente]</option>
 									<option th:each="bean:${comboCliente}" th:value="${bean.idCliente}"
@@ -118,7 +144,8 @@
 								</select>
 							</div>
 							<div class="form-group col-md-3">
-								<label for="">Estado</label>
+								<label for="">Estado</label><br>
+								<i class="fas fa-sign-out-alt form-control-feedback2"></i>	
 								<select class="form-control" name="estado" id="idEstado">
 									<option value="-1">[Seleccione un estado]</option>
 									<option th:each="bean:${comboEstado}" th:value="${bean.idEstado}"
@@ -138,14 +165,14 @@
 
 		<div class="limiter">
 			<div class="container-table100">
-				<h1 style="text-align: center;">Listar Visita Salida</h1>
+				<h1 style="text-align: center;">Listado Visita|Salida</h1>
 
 				<div class="wrap-table100">
 					<div class="table100">
 						<table id="tablaconsultVisita">
 							<thead>
 								<tr class="table100-head">
-									<th class="column1">Codigo</th>
+									<th class="column1">Código</th>
 									<th class="column8">Nombres completos</th>
 									<th class="column8">Fecha de ingreso</th>
 									<th class="column8">Fecha de salida</th>
@@ -170,7 +197,7 @@
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="staticBackdropLabel">Visitante actualizar fecha de salida</h5>
+						<h5 class="modal-title" id="staticBackdropLabel">Actualizar Fecha de Salida de Visitante</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
@@ -181,13 +208,14 @@
 							<div class="form-row">
 								<div class="form-group col-md-6">
 									<label>Fecha de salida</label>
+									<i class="fas fa-door-open form-control-feedback2"></i>	
 									<input type="datetime-local" class="form-control" name="fechaSalida" id="minor2"
-										readonly style="background-color: darkgray; color: black;">
+										readonly>
 								</div>
 								<div class="form-group col-md-6">
-									<label>Fecha de salida</label>
-									<textarea type="datetime-local" class="form-inline" name="comentario"
-										style="width: 400px; max-height: 250;"></textarea>
+									<label>Deje un Comentario Aquí ↓</label>
+									<textarea type="datetime-local" class=" form-control" name="comentario"
+										style="width: 400px; height: 250px;"></textarea>
 								</div>
 							</div>
 							<p th:each="bean : ${session.usuario}">
@@ -210,6 +238,7 @@
 
 
 	</section>
+	</div >
 	<th:block th:replace="menu.html :: footer">
 		</th:block>
 	<!-- partial -->
