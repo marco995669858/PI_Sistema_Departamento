@@ -7,78 +7,93 @@
 </head>
 
 <style>
-		.modal-header, h4, .close {
+	.modal-header,
+	h4,
+	.close {
 		background-color: #286090;
 		color: white !important;
 		text-align: center;
 		font-size: 20px;
 	}
-	.help-block{
-	 color: red;
-	 /*display: none;*/
+
+	.help-block {
+		color: red;
+		/*display: none;*/
 	}
+
 	.form-group.has-error .form-control-label {
-	  color: red;
+		color: red;
 	}
+
 	.form-group.has-error .form-control {
-	  border: 1px solid red;
-	  box-shadow: 0 0 0 0.2rem rgba(250, 16, 0, 0.18);
+		border: 1px solid red;
+		box-shadow: 0 0 0 0.2rem rgba(250, 16, 0, 0.18);
 	}
-	
+
 	.alertify .ajs-dialog {
-	    top: 50%;
-	    transform: translateY(-50%);
-	    margin: auto;
+		top: 50%;
+		transform: translateY(-50%);
+		margin: auto;
 	}
-	
-	.ajs-header{
+
+	.ajs-header {
 		background-color: #286090 !important;
 		color: white !important;
 		/*text-align: center;*/
 		font-size: 18px;
 		font-weight: bold;
 	}
-	.ajs-ok{
+
+	.ajs-ok {
 		color: #fff;
-	    background-color: #007bff;
-	    border-color: #007bff;
+		background-color: #007bff;
+		border-color: #007bff;
 	}
-	.ajs-cancel{
+
+	.ajs-cancel {
 		color: #fff;
-	    background-color: #dc3545;
-	    border-color: #dc3545;
+		background-color: #dc3545;
+		border-color: #dc3545;
 	}
-	.btn-primary{
-	background-color: #286090 !important;
+
+	.btn-primary {
+		background-color: #286090 !important;
 	}
-	.dataTables_length, .dataTables_info{
+
+	.dataTables_length,
+	.dataTables_info {
 		display: none;
 	}
-	.modal-lg, .modal-xl {
+
+	.modal-lg,
+	.modal-xl {
 		max-width: 900px;
 		max-height: 800px;
 	}
-	
+
 	.form-control-feedback2 {
-	  margin:1px;
-	  position: absolute;
-	  padding: 10px;
-	  pointer-events: none;
-	  background-color: #e9ecef;
-	  border-style: none;
+		margin: 1px;
+		position: absolute;
+		padding: 10px;
+		pointer-events: none;
+		background-color: #e9ecef;
+		border-style: none;
 	}
+
 	.form-control-feedback3 {
-	  margin:1px;
-	  position: absolute;
-	  margin-left:225px;
-	  padding: 10px;
-	  pointer-events: none;
-	  background-color: #e9ecef;
-	  border-style: none;
+		margin: 1px;
+		position: absolute;
+		margin-left: 225px;
+		padding: 10px;
+		pointer-events: none;
+		background-color: #e9ecef;
+		border-style: none;
 	}
+
 	.form-control {
-	  padding-left: 40px!important;
+		padding-left: 40px !important;
 	}
+
 	/*.toast-succes{
 		width: 120px;
 	}*/
@@ -88,151 +103,169 @@
 	<th:block th:replace="menu.html :: header">
 	</th:block>
 	<!-- begin #modal-dialog : MODAL-->
-			<div class="modal fade" id="modalVisitante" data-backdrop="static" 
-							data-keyboard="false" tabindex="-1" 
-							aria-labelledby="exampleModalLabel" aria-hidden="true">
-							
-						<div class="modal-dialog modal-dialog-centered modal-login modal-lg" >					
-							<div class="modal-content">
-								<div class="modal-header bg-blue-darker">
-									<h4 class="modal-title text-white">FORMULARIO: VISITANTE</h4>
-								</div>
-								<div class="modal-body">
-									<form method="POST" id="idRegistra" th:action="@{/rest/visitante/registrar}" onsubmit="return validarVisitante()">	
-										<input type="hidden" id="idcodigo" name="codigo" value="0">
-										<div class="container">
-											<div class="row">
-											
-												<div class="form-group has-feedback col-md-6">	
-													<label for="exampleInputEmail1"><b>Departamento</b></label><br>
-													<i class="fas fa-building form-control-feedback2"></i>
-													<select class="form-control" name="idDepartamento" id="Departamento">
-								<option value="-1">[Seleccione un Departamento] </option>
-								<option th:each="bean:${comDepartamento}" th:value="${bean.idDepartamento}"
-									th:text="${bean.nroDepartamento}"></option>
-							</select>
-											</div>
-																								
-												<div class="form-group has-feedback col-md-6">
-														<label for="exampleInputEmail1"><b>Nombres</b></label><br>		
-														<i class="fas fa-file-signature form-control-feedback2"></i>	
-														<input type="text" class="form-control" id="idNombres" placeholder="Ingrese Nombres" name="Nombres">																										
-												</div>
-											
-												<div class="form-group has-feedback col-md-6">
-														<label for="exampleInputEmail1"><b>Apellidos</b></label><br>		
-														<i class="fas fa-file-signature form-control-feedback2"></i>	
-													<input type="text" class="form-control" id="idApellidos" placeholder="Ingrese Apellidos" name="Apellidos">																										
-												</div>
-															
-												<div class="form-group has-feedback col-md-6">	
-														<label for="exampleInputEmail1"><b>Tipo de Documento</b></label><br>
-												        <i class="fas fa-address-card form-control-feedback2"></i>
-													    <select class="form-control form-margin" name="idTipoDocumento" id="idtipodocum">
-													      <option value=" " >[Seleccione un tipo de documento]</option>
-													      <option th:each="bean:${comTipoDocumento}" th:value="${bean.idTipoDocumento}"
-									                         th:utext="${bean.descripcion}">
-								                               </option>
-													    </select>
-												</div>
-												<div class="form-group has-feedback col-md-6">
-													<label for="exampleInputEmail1"><b>Documento</b></label><br>		
-													<i class="fas fa-id-badge form-control-feedback2"></i>	
-													<input type="text" class="form-control" id="idDocumento" placeholder="Ingrese Documento" name="Documento">																										
-											</div>
-											<div class="form-group has-feedback col-md-6">
-												<label for="exampleInputEmail1"><b>Celular</b></label><br>		
-												<i class="fas fa-mobile-alt form-control-feedback2"></i>	
-												<input type="text" class="form-control" id="idTelefono" placeholder="Ingrese Celular" name="telefono">																										
-										</div>
-										<div class="form-group has-feedback col-md-6">
-											<label for="exampleInputEmail1"><b>Correo</b></label><br>		
-											<i class="fas fa-at form-control-feedback2"></i>	
-											<input type="text" class="form-control" id="idCorreo" placeholder="Ingrese Correo" name="correo">																										
+	<div class="modal fade" id="modalVisitante" data-backdrop="static" data-keyboard="false" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+		<div class="modal-dialog modal-dialog-centered modal-login modal-lg">
+			<div class="modal-content">
+				<div class="modal-header bg-blue-darker">
+					<h4 class="modal-title text-white">FORMULARIO: VISITANTE</h4>
+				</div>
+				<div class="modal-body">
+					<form method="POST" id="idRegistra" th:action="@{/rest/visitante/registrar}" class="validacion">
+						<input type="hidden" id="idcodigo" name="codigo" value="0">
+						<div class="container">
+							<div class="row">
+
+								<div class="form-group has-feedback col-md-6">
+									<label for="exampleInputEmail1"><b>Departamento</b></label><br>
+									<i class="fas fa-building form-control-feedback2"></i>
+									<select class="form-control combobox" name="idDepartamento" id="Departamento"
+										required="">
+										<option selected disabled value="-1">[Seleccione un Departamento] </option>
+										<option th:each="bean:${comDepartamento}" th:value="${bean.idDepartamento}"
+											th:text="${bean.nroDepartamento}"></option>
+									</select>
+									<div class="invalid-feedback">
+										Please select a valid state.
 									</div>
+								</div>
 
-									<div class="form-group has-feedback col-md-6">	
-										<label for="exampleInputEmail1"><b>Cliente</b></label><br>
-										<i class="fas fa-users form-control-feedback2"></i>
-										<select class="form-control form-margin" name="idCliente" id="idCliente">
-										  <option value=" " >[Seleccione un Cliente]</option>
-										  <option th:each="bean:${comCliente}" th:value="${bean.idCliente}"
-										  th:text="${bean.nombres + ' ' + bean.apellidos}"></option>
-										</select>
+								<div class="form-group has-feedback col-md-6">
+									<label for="exampleInputEmail1"><b>Nombres</b></label><br>
+									<i class="fas fa-file-signature form-control-feedback2"></i>
+									<input type="text" class="form-control" id="idNombres" placeholder="Ingrese Nombres"
+										name="Nombres">
 								</div>
-												
-											</div>
-											
-											
-											
-											
-											<p th:each="bean : ${session.usuario}">
-												<input type="hidden" name="usuario" id="idusuario" th:value="${bean.idUsuario}" readonly>
-											</p>
-										</div>								
-										<div class="col-md-12 text-center mt-4"> 										
-											<button type="submit" id="Guardar" class="btn btn-primary"><i class="fas fa-save"></i> Registrar</button>
-											<button type="button" id="btn-cerrar" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-undo-alt"></i> Cancelar</button>
-										</div> 																								
-									</form>
+
+								<div class="form-group has-feedback col-md-6">
+									<label for="exampleInputEmail1"><b>Apellidos</b></label><br>
+									<i class="fas fa-file-signature form-control-feedback2"></i>
+									<input type="text" class="form-control" id="idApellidos"
+										placeholder="Ingrese Apellidos" name="Apellidos">
 								</div>
+
+								<div class="form-group has-feedback col-md-6">
+									<label for="exampleInputEmail1"><b>Tipo de Documento</b></label><br>
+									<i class="fas fa-address-card form-control-feedback2"></i>
+									<select class="form-control combobox" name="idTipoDocumento" id="idtipodocum"
+										required="">
+										<option selected disabled value=" ">[Seleccione un tipo de documento]</option>
+										<option th:each="bean:${comTipoDocumento}" th:value="${bean.idTipoDocumento}"
+											th:utext="${bean.descripcion}">
+										</option>
+									</select>
+									<div class="invalid-feedback">
+										Please select a valid state.
+									</div>
+								</div>
+								<div class="form-group has-feedback col-md-6">
+									<label for="exampleInputEmail1"><b>Documento</b></label><br>
+									<i class="fas fa-id-badge form-control-feedback2"></i>
+									<input type="text" class="form-control" id="idDocumento"
+										placeholder="Ingrese Documento" name="Documento">
+								</div>
+								<div class="form-group has-feedback col-md-6">
+									<label for="exampleInputEmail1"><b>Celular</b></label><br>
+									<i class="fas fa-mobile-alt form-control-feedback2"></i>
+									<input type="text" class="form-control" id="idTelefono"
+										placeholder="Ingrese Celular" name="telefono">
+								</div>
+								<div class="form-group has-feedback col-md-6">
+									<label for="exampleInputEmail1"><b>Correo</b></label><br>
+									<i class="fas fa-at form-control-feedback2"></i>
+									<input type="text" class="form-control" id="idCorreo" placeholder="Ingrese Correo"
+										name="correo">
+								</div>
+
+								<div class="form-group has-feedback col-md-6">
+									<label for="exampleInputEmail1"><b>Cliente</b></label><br>
+									<i class="fas fa-users form-control-feedback2"></i>
+									<select class="form-control combobox" name="idCliente" id="idCliente" required="">
+										<option selected disabled value=" ">[Seleccione un Cliente]</option>
+										<option th:each="bean:${comCliente}" th:value="${bean.idCliente}"
+											th:text="${bean.nombres + ' ' + bean.apellidos}"></option>
+									</select>
+									<div class="invalid-feedback">
+										Seleccione un Cliente
+									</div>
+								</div>
+
 							</div>
+
+
+
+
+							<p th:each="bean : ${session.usuario}">
+								<input type="hidden" name="usuario" id="idusuario" th:value="${bean.idUsuario}"
+									readonly>
+							</p>
 						</div>
-		</div>
-		<!-- FIN Modal VISITANTE-->	
-		
-		<h1 style="text-align: center; font-family: 'Times New Roman', Times, serif;">Listado de Visitantes</h1>
-		<br>
-		<div class="limiter">
-			<div style="text-align: center;">
-			</div>
-			<div class="container-table100">
-				<div class="wrap-table100">
-				<button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#modalVisitante" id="btn-nuevo">
-			 <i class="far fa-file"></i> Nuevo Visitante
-			</button>
-			<br>
-			<br>
-					<div class="table100">
-						<table>
-							<thead>
-								<tr class="table100-head">
-									<th class="column1">Código</th>
-									<th class="column3">Departamento</th>
-									<th class="column8">Nombres y Apellidos</th>
-									<th class="column8">Tipo Documento</th>
-									<th class="column3">Documento</th>
-									<th class="column6">Celular</th>
-									<th class="column6">Correo</th>
-									<th class="column8">Usuario</th>
-									<th class="column1"></th>
-									<th class="column1"></th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="bean:${tabla}">
-									<td class="column1" th:text="${bean.idVisitante}"></td>
-									<td class="column3" th:text="${bean.departamento.nroDepartamento}"></td>
-									<td class="column8" th:text="${bean.nombres + ' ' + bean.apellidos}"></td>
-									<td class="column8" th:text="${bean.tipoDocumento.descripcion}"></td>
-									<td class="column3" th:text="${bean.documento}"></td>
-									<td class="column6" th:text="${bean.telefono}"></td>
-									<td class="column6" th:text="${bean.correo}"></td>
-									<td class="column4" th:text="${bean.usuario.nomUsuario}"></td>
-									<td class="column1"><a class="btn btn-actualizar" data-toggle="modal"
-											data-target="#modalVisitante"><i
-												class="fa-solid fa-pen-to-square"></i></a></td>
-									<td class="column1"><a class="btn btn-eliminar"><i
-												class="fa-solid fa-trash-can"></i></a></td>
-								</tr>
-
-
-							</tbody>
-						</table>
-					</div>
+						<div class="col-md-12 text-center mt-4">
+							<button type="submit" id="Guardar" class="btn btn-primary"><i class="fas fa-save"></i>
+								Registrar</button>
+							<button type="button" id="btn-cerrar" class="btn btn-danger" data-dismiss="modal"><i
+									class="fas fa-undo-alt"></i> Cancelar</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
+	</div>
+	<!-- FIN Modal VISITANTE-->
+
+	<h1 style="text-align: center; font-family: 'Times New Roman', Times, serif;">Listado de Visitantes</h1>
+	<br>
+	<div class="limiter">
+		<div style="text-align: center;">
+		</div>
+		<div class="container-table100">
+			<div class="wrap-table100">
+				<button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#modalVisitante"
+					id="btn-nuevo">
+					<i class="far fa-file"></i> Nuevo Visitante
+				</button>
+				<br>
+				<br>
+				<div class="table100">
+					<table>
+						<thead>
+							<tr class="table100-head">
+								<th class="column1">Código</th>
+								<th class="column3">Departamento</th>
+								<th class="column8">Nombres y Apellidos</th>
+								<th class="column8">Tipo Documento</th>
+								<th class="column3">Documento</th>
+								<th class="column6">Celular</th>
+								<th class="column6">Correo</th>
+								<th class="column8">Usuario</th>
+								<th class="column1"></th>
+								<th class="column1"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="bean:${tabla}">
+								<td class="column1" th:text="${bean.idVisitante}"></td>
+								<td class="column3" th:text="${bean.departamento.nroDepartamento}"></td>
+								<td class="column8" th:text="${bean.nombres + ' ' + bean.apellidos}"></td>
+								<td class="column8" th:text="${bean.tipoDocumento.descripcion}"></td>
+								<td class="column3" th:text="${bean.documento}"></td>
+								<td class="column6" th:text="${bean.telefono}"></td>
+								<td class="column6" th:text="${bean.correo}"></td>
+								<td class="column4" th:text="${bean.usuario.nomUsuario}"></td>
+								<td class="column1"><a class="btn btn-actualizar" data-toggle="modal"
+										data-target="#modalVisitante"><i class="fa-solid fa-pen-to-square"></i></a></td>
+								<td class="column1"><a class="btn btn-eliminar"><i
+											class="fa-solid fa-trash-can"></i></a></td>
+							</tr>
+
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 
@@ -243,7 +276,7 @@
 	<script th:src="@{/resources/js/validarVisitante.js}"></script>
 
 	<script th:inline="javascript" th:if="${MENSAJE!=null}">
-	
+
 		//obtener atributo MENSAJE
 		var mensaje =/*[[${MENSAJE}]]*/ null;
 		const Toast = Swal.mixin({
@@ -320,13 +353,111 @@
 					window.location = "eliminar?codigo=" + cod;
 				}).set('labels', {ok: 'Cancelar', cancel: 'Eliminar'});
 		})
-		
+
 		$(document).on("click", "#btn-cerrar", function () {
 			$('#idRegistra').trigger("reset");
 			$('#idRegistra').data("bootstrapValidator").resetForm();
 			$("#idcodigo").val(0);
 		});
 
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#idRegistra').bootstrapValidator({
+				feedbackIcons: {
+					valid: 'glyphicon glyphicon-ok',
+					invalid: 'glyphicon glyphicon-remove',
+					validating: 'glyphicon glyphicon-refresh'
+				},
+
+				fields: {
+
+					Nombres: {
+						selector: '#idNombres',
+						validators: {
+							notEmpty: {
+								message: 'Ingrese Nombres'
+							},
+							regexp: {
+								regexp: /^[A-Za-z����������\s]{3,20}$/,
+								message: 'Ingrese solo letras entre 3 y 20 caracteres'
+							}
+						}
+					},
+					Apellidos: {
+						selector: '#idApellidos',
+						validators: {
+							notEmpty: {
+								message: 'Ingrese Apellidos'
+							},
+							regexp: {
+								regexp: /^[A-Za-z����������\s]{3,20}$/,
+								message: 'Ingrese solo letras entre 3 y 20 caracteres'
+							}
+						}
+					},
+					DNI: {
+						selector: '#idDocumento',
+						validators: {
+							notEmpty: {
+								message: 'Ingrese Documento'
+							},
+							regexp: {
+								regexp: /[0-9]{8}/,
+								message: 'Ingrese solo 8 digitos '
+							}
+						}
+					},
+					Telefono: {
+						selector: '#idTelefono',
+						validators: {
+							notEmpty: {
+								message: 'Ingrese Teléfono'
+							},
+							regexp: {
+								regexp: /[0-9]{9}/,
+								message: 'Ingrese solo 9 digitos'
+							}
+						}
+					},
+					Correo: {
+						selector: '#idCorreo',
+						validators: {
+							notEmpty: {
+								message: 'Ingrese Cuenta'
+							},
+							regexp :{
+								regexp: /^\w.+@\w+\.+[a-z]{2,3}$/,
+								message: 'ejemplo holaxd@gmail.com'
+							}
+
+						}
+					}
+
+				}
+
+			});
+		});
+	</script>
+	<script>
+		// Example starter JavaScript for disabling form submissions if there are invalid fields
+		(function () {
+			'use strict';
+			window.addEventListener('load', function () {
+				// Fetch all the forms we want to apply custom Bootstrap validation styles to
+				var forms = document.getElementsByClassName('validacion combobox');
+				// Loop over them and prevent submission
+				var validation = Array.prototype.filter.call(forms, function (form) {
+					form.addEventListener('submit', function (event) {
+						if (form.checkValidity() === false) {
+							event.preventDefault();
+							event.stopPropagation();
+						}
+						form.classList.add('was-validated');
+					}, false);
+				});
+			}, false);
+		})();
 	</script>
 </body>
 
