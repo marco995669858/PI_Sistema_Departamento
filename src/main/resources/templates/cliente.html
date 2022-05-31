@@ -112,7 +112,9 @@
 						<h4 class="modal-title text-white">FORMULARIO: CLIENTE</h4>
 					</div>
 					<div class="modal-body">
-						<form id="idRegistra" name="test" th:action="@{/rest/cliente/registrar}" method="post">
+
+						<form  name="test" th:action="@{/rest/cliente/registrar}" method="post" id="idRegistra">
+
 							<div class="container">
 								<div class="row">
 									<input type="hidden" value="0" name="codigo" id="idcodigo">
@@ -147,8 +149,8 @@
 									<div class="form-group col-md-6">
 										<label for="telefono"><b>Celular</b></label><br>
 										<i class="fas fa-toilet form-control-feedback2"></i>
-										<input class="form-control" type="number" name="telefono" id="idTelefono"
-								placeholder="Escribe tu número de celular">
+										<input type="text" class="form-control" id="idTelefono" placeholder="Ingrese Telefono" name="telefono">
+										
 									</div>
 									<div class="form-group col-md-6">
 										<label for="correo"><b>Correo</b></label><br>
@@ -341,6 +343,79 @@
 			$("#idcodigo").val(0);
 		});
 	</script>
+	
+	<script type="text/javascript">    
+	    $(document).ready(function(){     
+	        $('#idRegistra').bootstrapValidator({     
+	        	feedbackIcons: {
+	                valid: 'glyphicon glyphicon-ok',
+	                invalid: 'glyphicon glyphicon-remove',
+	                validating: 'glyphicon glyphicon-refresh'
+	            },
+	        	 fields:{        		 
+	        		 Nombres: {
+	     	    		selector:'#idnombres',   
+	                    validators: {    
+	                        notEmpty: {    
+	                            message: 'Ingrese Nombres'    
+	                        },
+	                        regexp: {    
+	                            regexp: /^[A-Za-z����������\s]{3,20}$/,    
+	                            message: 'Ingrese solo letras entre 3 y 20 caracteres'    
+	                        }      
+	                    }    
+	                },
+					Apellidos: {
+	     	    		selector:'#idapePaterno',   
+	                    validators: {    
+	                        notEmpty: {    
+	                            message: 'Ingrese Apellidos'    
+	                        },
+	                        regexp: {    
+	                            regexp: /^[A-Za-z����������\s]{3,20}$/,    
+	                            message: 'Ingrese solo letras entre 3 y 20 caracteres'    
+	                        }      
+	                    }    
+	                },
+					DNI: {
+	     	    		selector:'#idDocumento',   
+	                    validators: {    
+	                        notEmpty: {    
+	                            message: 'Ingrese Documento'    
+	                        },
+	                        regexp: {    
+								regexp: /[0-9]{8}/,     
+	                            message: 'Ingrese solo 9 digitos '    
+	                        }      
+	                    }    
+	                },
+					Telefono: {
+	     	    		selector:'#idTelefono',   
+	                    validators: {    
+	                        notEmpty: {    
+	                            message: 'Ingrese Telefono'    
+	                        },
+	                        regexp: {    
+	                            regexp: /[0-9]{9}/,     
+	                            message: 'Ingrese solo 9 digitos'    
+	                        }      
+	                    }    
+	                },
+					Correo: {
+	     	    		selector:'#idCorreo',   
+	                    validators: {    
+	                        notEmpty: {    
+	                            message: 'Ingrese Cuenta'    
+	                        }
+	                            
+	                    }    
+	                },
+					
+	        	 }
+	        });   				
+	    });    
+	</script>  
+	
 </body>
 
 </html>
