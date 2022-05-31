@@ -17,7 +17,7 @@ public class WebSecConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private UserService service;
-	
+
 	@Autowired
 	private Securityhandler securityhandler;
 
@@ -25,58 +25,19 @@ public class WebSecConfig extends WebSecurityConfigurerAdapter {
 	public BCryptPasswordEncoder passEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
+
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(service).passwordEncoder(passEncoder());
 	}
 
-
-//	@Override
-//	protected void configure(HttpSecurity http) throws Exception {
-//		http.authorizeRequests().antMatchers(
-//				"/resources/**",
-//				"/alertifyjs/**",
-//				"/static/**",
-//				"/js/**",
-//				"/css/**",
-//				"/datepicker/**").permitAll()
-//		.antMatchers("/rest/usuario/**","/rest/cliente/**", "/rest/controlvisita/**",
-//				"/rest/departamento/**", "/res/mascotas/**", "/rest/visitante/**")
-//		.hasAuthority("Administrador")
-//		.antMatchers("/rest/controlvisita/**")
-//		.hasAuthority("Counter")
-//		.antMatchers("/rest/visitante/**")
-//		.hasAnyAuthority("Propietario","Residente")
-//		.anyRequest().authenticated().and()
-//		.formLogin()
-//		.loginPage("/login")
-//		.permitAll()
-//		.usernameParameter("username")
-//        .passwordParameter("password")
-//        .successHandler(securityhandler)
-//        .and().headers().frameOptions().sameOrigin();
-//	}
-	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable()
-		.authorizeRequests().antMatchers("/Principal/*").authenticated()
-//		.antMatchers("/Empleos/*").authenticated()
-//		.antMatchers("/datos/*").authenticated()
-//		.antMatchers("/nosotros/*").authenticated()
-//		.antMatchers("/consultas/*").authenticated()
-//		.antMatchers("/buzon/*").authenticated()
-//		.antMatchers("/rol/*").authenticated()
-//		.antMatchers("/Permisos/*").authenticated()
-//		.antMatchers("/Empleos/*").authenticated()
-		.and()
-		.formLogin()
-		.loginPage("/login")
-		.permitAll()
-		.usernameParameter("username")
-        .passwordParameter("password")
-        .successHandler(securityhandler)
-	.and().headers().frameOptions().sameOrigin();
+		http.csrf().disable().authorizeRequests().antMatchers("/Principal/**","/rest/visitante/**").authenticated()
+				.antMatchers("/rest/usuario/**", "/rest/cliente/**").authenticated()
+				.antMatchers("/rest/departamento/**", "/rest/controlvisita/**").authenticated()
+				.antMatchers("/rest/consulta/**", "/rest/mascotas/**").authenticated().and().formLogin()
+				.loginPage("/login").permitAll().usernameParameter("username").passwordParameter("password")
+				.successHandler(securityhandler).and().headers().frameOptions().sameOrigin();
 	}
 
 }

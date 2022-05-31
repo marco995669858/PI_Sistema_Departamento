@@ -44,17 +44,7 @@ public class Usuario {
 	private String passwordUsuario;
 	
 	private String telefono;
-	
-	
-	/**
-	 * 
-	 * JSON Y PROP FETCH DAN ERROR 
-	 * 
-	 * @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	 * 	@ManyToOne(fetch = FetchType.LAZY)
-	 * */
-	
-	
+		
 	@ManyToOne
 	@JoinColumn(name = "idRol")
 	private Rol rol;

@@ -34,6 +34,7 @@
 				</button>
 				<ul class="admin-menu">
 					<li th:each="bean : ${session.menus}">
+						<span th:href="${bean.ruta}"></span>
 						<a th:href="${bean.ruta}">
 							<i th:class="${bean.icon}" style="max-height: 15px;"></i>
 							<span th:text="${bean.descripcion}"></span>
