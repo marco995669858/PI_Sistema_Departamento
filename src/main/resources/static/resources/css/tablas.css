@@ -28,7 +28,7 @@
 table {
   border-spacing: 1;
   border-collapse: collapse;
-  background: white;
+  background: white; /*1,3*/
   border-radius: 10px;
   overflow: hidden;
   width: 100%;
@@ -43,7 +43,7 @@ table td, table th {
 }
 table thead tr {
   height: 50px;
-  background: #35B729;
+  background: #395C6B;
 }
 table tbody tr {
   height: 50px;
@@ -74,20 +74,20 @@ table td.r, table th.r {
 }
 
 tbody tr:nth-child(even) {
-  background-color: #f5f5f5;
+  background-color: #CAF0F8; /*tablas 2,4*/
 }
 
 tbody tr {
   font-family: OpenSans-Regular;
   font-size: 15px;
-  color: #808080;
+  color: #003554;
   line-height: 1.2;
   font-weight: unset;
 }
 
 tbody tr:hover {
   color: white;
-  background-color: #e44f2b;
+  background-color: #4059AD;
   cursor: pointer;
 }
 
