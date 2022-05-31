@@ -102,7 +102,7 @@
 <body>
 	<th:block th:replace="menu.html :: header">
 	</th:block>
-	
+	<div class="container">
 	<!-- begin #modal-dialog : MODAL DEPARTAMENTO-->
 		<div class="modal fade" id="modalCliente" data-backdrop="static" data-keyboard="false" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -112,7 +112,7 @@
 						<h4 class="modal-title text-white">FORMULARIO: CLIENTE</h4>
 					</div>
 					<div class="modal-body">
-						<form  name="test" th:action="@{/rest/cliente/registrar}" method="post">
+						<form id="idRegistra" name="test" th:action="@{/rest/cliente/registrar}" method="post">
 							<div class="container">
 								<div class="row">
 									<input type="hidden" value="0" name="codigo" id="idcodigo">
@@ -241,7 +241,7 @@
 								<td class="column8" th:text="${bean.tipoCliente.descripcion}"></td>
 								<td class="column9" th:text="${bean.sexo}"></td>
 								<td class="column10" th:text="${bean.departamento.nroDepartamento}"></td>
-								<td class="column1"><a class="btn btn-actualizar"><i
+								<td data-toggle="modal" data-target="#modalCliente" class="column1"><a class="btn btn-actualizar"><i
 											class="fa-solid fa-pen-to-square"></i></a></td>
 								<td class="column1"><a class="btn btn-eliminar"><i class="fa-solid fa-trash-can"></i></a>
 								</td>
@@ -255,7 +255,8 @@
 		</div>
 		</div>
 	</section>
-	</section>
+	
+	</div>
 	<th:block th:replace="menu.html :: footer">
 	</th:block>
 	<script th:inline="javascript" th:if="${MENSAJE!=null}">
@@ -332,6 +333,12 @@
 					window.location = "eliminar?codigo=" + cod;
 				}).set('labels', {ok: 'Cancelar', cancel: 'Eliminar'});
 
+		});
+		
+		$(document).on("click", "#btn-cerrar", function () {
+			$('#idRegistra').trigger("reset");
+			$('#idRegistra').data("bootstrapValidator").resetForm();
+			$("#idcodigo").val(0);
 		});
 	</script>
 </body>
