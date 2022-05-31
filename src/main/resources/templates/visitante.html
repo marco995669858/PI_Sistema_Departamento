@@ -98,7 +98,7 @@
 									<h4 class="modal-title text-white">FORMULARIO: VISITANTE</h4>
 								</div>
 								<div class="modal-body">
-									<form method="POST" id="idRegistra" th:action="@{/rest/visitante/registrar}">	
+									<form method="POST" id="idRegistra" th:action="@{/rest/visitante/registrar}" onsubmit="return validarVisitante()">	
 										<input type="hidden" id="idcodigo" name="codigo" value="0">
 										<div class="container">
 											<div class="row">
@@ -240,7 +240,7 @@
 	</section>
 	<th:block th:replace="menu.html :: footer">
 	</th:block>
-<script th:src="@{/resources/js/validarVisitante.js}"></script>
+	<script th:src="@{/resources/js/validarVisitante.js}"></script>
 
 	<script th:inline="javascript" th:if="${MENSAJE!=null}">
 	
