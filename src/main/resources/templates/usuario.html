@@ -113,7 +113,7 @@
 						<h4 class="modal-title text-white">FORMULARIO: USUARIO</h4>
 					</div>
 					<div class="modal-body">
-						<form method="POST" id="idRegistra" th:action="@{/rest/usuario/registrar}">
+						<form method="POST" onsubmit="return validarUsuario()" id="idRegistra" th:action="@{/rest/usuario/registrar}">
 							<input type="hidden" id="idUsuario" name="codigo" value="0">
 							<div class="container">
 								<div class="row">
@@ -308,10 +308,16 @@ $(document).on("click", "#btn-cerrar", function () {
 			$("#idcodigo").val(0);
 		});
 	</script>
+	<script th:src="@{/resources/js/ValidarUsuario.js}"></script>
+
+	
 	
 	<!-- bootstrap validator  -->
-<script type="text/javascript">    
+<!--<script type="text/javascript">    
 	$(document).ready(function(){     
+		var regexcorreo = /^\w.+@\w+\.+[a-z]{2,3}$/;
+		var regexnombre = /^[A-Za-zƒŠŒŽšœžñŸÀÁÂÃÄÅÆÈÉÊËÌÍÎÏÑÒÓÔÕÖØÙÚÛÜÝàáâãäåæçèé êëìíîïðñòóôõöùúûüýþÿ]*$/;
+
 		$('#idRegistra').bootstrapValidator({     
 			feedbackIcons: {
 				valid: 'glyphicon glyphicon-ok',
@@ -338,7 +344,7 @@ $(document).on("click", "#btn-cerrar", function () {
 							message: 'Ingrese nombres del visitante'    
 						},
 						regexp: {    
-							regexp: /^[A-Za-z����������\s]{3,20}$/,    
+							regexp: regexnombre,    
 							message: 'Ingrese solo letras entre 3 y 20 caracteres'    
 						}      
 					}    
@@ -350,7 +356,7 @@ $(document).on("click", "#btn-cerrar", function () {
 							message: 'Ingrese Apellido Paterno'    
 						},
 						regexp: {    
-							regexp: /^[A-Za-z����������\s]{3,20}$/,    
+							regexp: regexnombre,    
 							message: 'Ingrese solo letras entre 3 y 20 caracteres'    
 						}   
 					}    
@@ -362,7 +368,7 @@ $(document).on("click", "#btn-cerrar", function () {
 							message: 'Ingrese Apellido Materno'    
 						},
 						regexp: {    
-							regexp: /^[A-Za-z����������\s]{3,20}$/,    
+							regexp: regexnombre,    
 							message: 'Ingrese solo letras entre 3 y 20 caracteres'    
 						}   
 					}    
@@ -374,7 +380,7 @@ $(document).on("click", "#btn-cerrar", function () {
 							message: 'Ingrese Correo'    
 						},
 						regexp: {    
-							  
+							regexp: regexcorreo,
 							message: 'Ingrese solo letras entre 3 y 20 caracteres'    
 						}      
 					}    
@@ -385,6 +391,7 @@ $(document).on("click", "#btn-cerrar", function () {
 						notEmpty: {    
 							message: 'Ingrese Contraseña'    
 						},
+						
 						regexp: {    
 							  
 							message: 'Ingrese solo Minimo 3 a 10 Caracteres'    
@@ -406,7 +413,7 @@ $(document).on("click", "#btn-cerrar", function () {
 			 }
 		});   				
 	});    
-</script>  
+</script>  -->
 	
 	
 
