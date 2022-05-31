@@ -114,8 +114,10 @@
 						<h4 class="modal-title text-white">FORMULARIO: DEPARTAMENTO</h4>
 					</div>
 					<div class="modal-body">
+					
 						<form name="test" th:action="@{/rest/departamento/registrar}" id="idRegistra" method="post"
 							onsubmit="return validarDepartamentos()">
+							
 							<div class="container">
 								<div class="row">
 									<input type="hidden" value="0" name="codigo" id="idcodigo">
@@ -298,11 +300,12 @@
 										<td class="column8" th:text="${bean.nroHabitaciones}"></td>
 										<td class="column1" th:text="${bean.usuario.nomUsuario}"></td>
 										<td class="column1" th:text="${bean.estado.nomEstado}"></td>
-										<td class="column1"><a class="btn-eliminar"><i
-													class="fa-solid fa-trash-can"></i></a></td>
+										
 										<td class="column1"><a id="idEditar" data-toggle="modal"
 												data-target="#modalEditar"><i class="fa-solid fa-pen-to-square"></i></a>
 										</td>
+										<td class="column1"><a class="btn-eliminar"><i
+													class="fa-solid fa-trash-can"></i></a></td>
 									</tr>
 
 								</tbody>
