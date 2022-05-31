@@ -153,12 +153,12 @@ body {
 
 .page-header .admin-menu li:last-child {
   margin-top: auto;
-  margin-bottom: 20px;
+  margin-bottom: 1px;
 }
 
 .page-header .admin-menu li > * {
   width: 100%;
-  padding: 12px 15px;
+  padding-left:15px;
 }
 
 .page-header .admin-menu .switcher {
@@ -532,10 +532,10 @@ body {
 /* LIGHT MODE STYLES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .light-mode {
-  --page-header-bgColor: #ffe8cd; 
-  --page-header-bgColor-hover: rgb(243, 156, 50); /*hover de sidebar del modo claro*/
-  --page-header-txtColor: #2c303a;
-  --page-header-headingColor: #979595;
+  --page-header-bgColor: #1D3557; 
+  --page-header-bgColor-hover: #BFD7FF; /*hover de sidebar del modo claro*/
+  --page-header-txtColor: #fff;
+  --page-header-headingColor: #000;
   --page-content-bgColor: #fff;
   --box-shadow: 0 0 10px -2px rgba(0, 0, 0, 0.25);
 }
