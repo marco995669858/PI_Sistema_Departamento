@@ -103,7 +103,7 @@
 	<th:block th:replace="menu.html :: header">
 	</th:block>
 	<div class="container">
-	<!-- begin #modal-dialog : MODAL DEPARTAMENTO-->
+		<!-- begin #modal-dialog : MODAL DEPARTAMENTO-->
 		<div class="modal fade" id="modalCliente" data-backdrop="static" data-keyboard="false" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered modal-login modal-lg">
@@ -113,85 +113,113 @@
 					</div>
 					<div class="modal-body">
 
-						<form  name="test" th:action="@{/rest/cliente/registrar}" method="post" id="idRegistra">
+						<form name="test" th:action="@{/rest/cliente/registrar}" method="post" id="idRegistra"
+							class="validacion">
 
 							<div class="container">
 								<div class="row">
 									<input type="hidden" value="0" name="codigo" id="idcodigo">
-									
+
 									<div class="form-group col-md-6">
 										<label for="nombre"><b>Nombres</b></label><br>
 										<i class="fas fa-file-signature form-control-feedback2"></i>
 										<input class="form-control" type="text" name="nombres" id="idnombres"
-								placeholder="Escribe tu Nombres">
+											placeholder="Escribe tu Nombres">
 									</div>
 									<div class="form-group col-md-6">
 										<label for="apellidos"><b>Apellidos</b></label><br>
 										<i class="fas fa-file-signature form-control-feedback2"></i>
 										<input class="form-control" type="text" name="apePaterno" id="idapePaterno"
-								placeholder="Escribe tus apellidos">
+											placeholder="Escribe tus apellidos">
 									</div>
 									<div class="form-group col-md-6">
 										<label for="tipoDocumento"><b>Tipo de Documento</b></label><br>
 										<i class="fas fa-id-card form-control-feedback2"></i>
-										<select class="form-control" name="tipoDocumento" id="idtipoDocumento">
-								<option value="-1">[Seleccione un Tipo de Documento]</option>
-								<option th:each="bean:${comboTipoDocumento}" th:value="${bean.idTipoDocumento}"
-									th:text="${bean.descripcion}"></option>
-							</select>
+										<select class="form-control combobox" name="tipoDocumento" id="idtipoDocumento"
+											required="" oninvalid="this.setCustomValidity('Please Enter valid email')"
+											oninput="setCustomValidity('')">
+											<option selected disabled value="">[Seleccione un Tipo de Documento]
+											</option>
+											<option th:each="bean:${comboTipoDocumento}"
+												th:value="${bean.idTipoDocumento}" th:text="${bean.descripcion}">
+											</option>
+										</select>
+										<div class="invalid-feedback">
+											Seleccione Tipo de Documento
+										</div>
 									</div>
 									<div class="form-group col-md-6">
 										<label for="documento"><b>DNI</b></label><br>
 										<i class="fas fa-portrait form-control-feedback2"></i>
 										<input class="form-control" type="text" name="documento" id="idDocumento"
-								placeholder="Escribe tu Documento">
+											placeholder="Escribe tu Documento">
 									</div>
 									<div class="form-group col-md-6">
 										<label for="telefono"><b>Celular</b></label><br>
 										<i class="fas fa-mobile-alt form-control-feedback2"></i>
-										<input type="text" class="form-control" id="idTelefono" placeholder="Ingrese Celular" name="telefono">
-										
+										<input type="text" class="form-control" id="idTelefono"
+											placeholder="Ingrese Celular" name="telefono">
+
 									</div>
 									<div class="form-group col-md-6">
 										<label for="correo"><b>Correo</b></label><br>
 										<i class="fas fa-at form-control-feedback2"></i>
 										<input class="form-control" type="text" name="correo" id="idCorreo"
-								placeholder="Escribe tu Correo">
+											placeholder="Escribe tu Correo">
 									</div>
 									<div class="form-group col-md-6">
 										<label for="tipoCliente"><b>Tipo de Cliente</b></label><br>
 										<i class="fas fa-user-plus form-control-feedback2"></i>
-										<select class="form-control" name="tipoCliente" id="idTipocliente">
-								<option value="-1">[Seleccione Tipo de Propietarios]</option>
-								<option th:each="bean:${comboTipoCliente}" th:value="${bean.idTipoCliente}"
-									th:text="${bean.descripcion}"></option>
-							</select>
+										<select class="form-control combobox" name="tipoCliente" id="idTipocliente"
+											required="">
+											<option selected disabled value="">[Seleccione Tipo de Propietarios]
+											</option>
+											<option th:each="bean:${comboTipoCliente}" th:value="${bean.idTipoCliente}"
+												th:text="${bean.descripcion}"></option>
+										</select>
+										<div class="invalid-feedback">
+											Seleccione Tipo de Cliente
+										</div>
 									</div>
 									<div class="form-group col-md-6">
 										<label for="sexo"><b>Sexo</b></label><br>
 										<i class="fas fa-venus-mars form-control-feedback2"></i>
-										<select class="form-control" name="sexo" id="idSexo">
-								<option value="-1">[Seleccione Sexo</option>
-								<option value="Masculino">Hombre</option>
-								<option value="Femenino">Mujer</option>
-							</select>
+										<select class="form-control combobox" name="sexo" id="idSexo" required="">
+											<option selected disabled value="">[Seleccione Sexo</option>
+											<option value="Masculino">Hombre</option>
+											<option value="Femenino">Mujer</option>
+
+										</select>
+										<div class="invalid-feedback">
+											Seleccione Sexo
+										</div>
 									</div>
+
 									<div class="form-group col-md-6">
 										<label for="departamento"><b>Tipo de Departamento</b></label><br>
 										<i class="fa-regular fa-building form-control-feedback2"></i>
-										<select class="form-control" name="departamento" id="idDepartamento">
-								<option value="-1">[Seleccione Departamento]</option>
-								<option th:each="bean:${comboDepartamento}" th:value="${bean.idDepartamento}"
-									th:text="${bean.nroDepartamento}"></option>
-							</select>
+										<select class="form-control combobox" name="departamento" id="idDepartamento"
+											required="">
+											<option selected disabled value="">[Seleccione Departamento]</option>
+											<option th:each="bean:${comboDepartamento}"
+												th:value="${bean.idDepartamento}" th:text="${bean.nroDepartamento}">
+											</option>
+										</select>
+										<div class="invalid-feedback">
+											Please select a valid state.
+										</div>
+
 									</div>
+
 									<p th:each="bean:${session.usuario}">
-										<input type="hidden" id="idusuario" name="usuario" th:value="${bean.idUsuario}" readonly>
+										<input type="hidden" id="idusuario" name="usuario" th:value="${bean.idUsuario}"
+											readonly>
 									</p>
 								</div>
 							</div>
 							<div class="col-md-12 text-center mt-4">
-								<button type="submit" id="Guardar" class="btn btn-primary"><i class="fas fa-save"></i>
+								<button type="submit" id="Guardar" class="btn btn-primary" onclick="validarCliente();"
+									value="validarCliente"><i class="fas fa-save"></i>
 									Registrar</button>
 								<button type="button" id="btn-cerrar" class="btn btn-danger" data-dismiss="modal"><i
 										class="fas fa-undo-alt"></i> Cancelar</button>
@@ -202,62 +230,65 @@
 			</div>
 		</div>
 		<!-- FIN Modal Departamento-->
-	<section class="grid">
-		<h1 style="text-align: center; font-family: 'Times New Roman', Times, serif;">Listado de Clientes</h1>
-		<br>
-
-		<div class="container-table100">
-			<div class="wrap-table100">
-			<button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#modalCliente" id="btn-nuevo">
-			 <i class="far fa-file"></i> Nuevo Cliente
-			</button>
+		<section class="grid">
+			<h1 style="text-align: center; font-family: 'Tiwes Roman';">Listado de Clientes</h1>
 			<br>
-			<br>
-				<div class="table100">
-					<table>
-						<thead>
-							<tr class="table100-head">
-								<th class="column1">Código</th>
-								<th class="column2">Nombres</th>
-								<th class="column3">Apellidos</th>
-								<th class="column4">Documento</th>
-								<th class="column5">Celular</th>
-								<th class="column7">Correo</th>
-								<th class="column8">Tipo de Cliente</th>
-								<th class="column9">Sexo</th>
-								<th class="column10">Departamento</th>
-								<th></th>
-								<th></th>
+
+			<div class="container-table100">
+				<div class="wrap-table100">
+					<button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#modalCliente"
+						id="btn-nuevo">
+						<i class="far fa-file"></i> Nuevo Cliente
+					</button>
+					<br>
+					<br>
+					<div class="table100">
+						<table>
+							<thead>
+								<tr class="table100-head">
+									<th class="column1">Código</th>
+									<th class="column2">Nombres</th>
+									<th class="column3">Apellidos</th>
+									<th class="column4">Documento</th>
+									<th class="column5">Celular</th>
+									<th class="column7">Correo</th>
+									<th class="column8">Tipo de Cliente</th>
+									<th class="column9">Sexo</th>
+									<th class="column10">Departamento</th>
+									<th></th>
+									<th></th>
 
 
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="bean:${tabla}">
-								<td class="column1" th:text="${bean.idCliente}"></td>
-								<td class="column2" th:text="${bean.nombres}"></td>
-								<td class="column3" th:text="${bean.apellidos}"></td>
-								<td class="column4" th:text="${bean.documento}"></td>
-								<td class="column5" th:text="${bean.telefono}"></td>
-								<td class="column7" th:text="${bean.correo}"></td>
-								<td class="column8" th:text="${bean.tipoCliente.descripcion}"></td>
-								<td class="column9" th:text="${bean.sexo}"></td>
-								<td class="column10" th:text="${bean.departamento.nroDepartamento}"></td>
-								<td data-toggle="modal" data-target="#modalCliente" class="column1"><a class="btn btn-actualizar"><i
-											class="fa-solid fa-pen-to-square"></i></a></td>
-								<td class="column1"><a class="btn btn-eliminar"><i class="fa-solid fa-trash-can"></i></a>
-								</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="bean:${tabla}">
+									<td class="column1" th:text="${bean.idCliente}"></td>
+									<td class="column2" th:text="${bean.nombres}"></td>
+									<td class="column3" th:text="${bean.apellidos}"></td>
+									<td class="column4" th:text="${bean.documento}"></td>
+									<td class="column5" th:text="${bean.telefono}"></td>
+									<td class="column7" th:text="${bean.correo}"></td>
+									<td class="column8" th:text="${bean.tipoCliente.descripcion}"></td>
+									<td class="column9" th:text="${bean.sexo}"></td>
+									<td class="column10" th:text="${bean.departamento.nroDepartamento}"></td>
+									<td data-toggle="modal" data-target="#modalCliente" class="column1"><a
+											class="btn btn-actualizar"><i class="fa-solid fa-pen-to-square"></i></a>
+									</td>
+									<td class="column1"><a class="btn btn-eliminar"><i
+												class="fa-solid fa-trash-can"></i></a>
+									</td>
 
-							</tr>
+								</tr>
 
-						</tbody>
-					</table>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
-		</div>
-		</div>
+	</div>
 	</section>
-	
+
 	</div>
 	<th:block th:replace="menu.html :: footer">
 	</th:block>
@@ -319,7 +350,7 @@
 				$("#idSexo").val(response.sexo);
 				$("#idDepartamento").val(response.departamento.idDepartamento);
 				$("#idusuario").val(response.usuario.idUsuario);
-				
+
 
 			})
 		});
@@ -336,86 +367,111 @@
 				}).set('labels', {ok: 'Cancelar', cancel: 'Eliminar'});
 
 		});
-		
+
 		$(document).on("click", "#btn-cerrar", function () {
 			$('#idRegistra').trigger("reset");
 			$('#idRegistra').data("bootstrapValidator").resetForm();
 			$("#idcodigo").val(0);
 		});
 	</script>
-	
-	<script type="text/javascript">    
-	    $(document).ready(function(){     
-	        $('#idRegistra').bootstrapValidator({     
-	        	feedbackIcons: {
-	                valid: 'glyphicon glyphicon-ok',
-	                invalid: 'glyphicon glyphicon-remove',
-	                validating: 'glyphicon glyphicon-refresh'
-	            },
-	        	 fields:{        		 
-	        		 Nombres: {
-	     	    		selector:'#idnombres',   
-	                    validators: {    
-	                        notEmpty: {    
-	                            message: 'Ingrese Nombres'    
-	                        },
-	                        regexp: {    
-	                            regexp: /^[A-Za-z����������\s]{3,20}$/,    
-	                            message: 'Ingrese solo letras entre 3 y 20 caracteres'    
-	                        }      
-	                    }    
-	                },
+
+
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#idRegistra').bootstrapValidator({
+				feedbackIcons: {
+					valid: 'glyphicon glyphicon-ok',
+					invalid: 'glyphicon glyphicon-remove',
+					validating: 'glyphicon glyphicon-refresh'
+				},
+
+				fields: {
+
+					Nombres: {
+						selector: '#idnombres',
+						validators: {
+							notEmpty: {
+								message: 'Ingrese Nombres'
+							},
+							regexp: {
+								regexp: /^[A-Za-z����������\s]{3,20}$/,
+								message: 'Ingrese solo letras entre 3 y 20 caracteres'
+							}
+						}
+					},
 					Apellidos: {
-	     	    		selector:'#idapePaterno',   
-	                    validators: {    
-	                        notEmpty: {    
-	                            message: 'Ingrese Apellidos'    
-	                        },
-	                        regexp: {    
-	                            regexp: /^[A-Za-z����������\s]{3,20}$/,    
-	                            message: 'Ingrese solo letras entre 3 y 20 caracteres'    
-	                        }      
-	                    }    
-	                },
+						selector: '#idapePaterno',
+						validators: {
+							notEmpty: {
+								message: 'Ingrese Apellidos'
+							},
+							regexp: {
+								regexp: /^[A-Za-z����������\s]{3,20}$/,
+								message: 'Ingrese solo letras entre 3 y 20 caracteres'
+							}
+						}
+					},
 					DNI: {
-	     	    		selector:'#idDocumento',   
-	                    validators: {    
-	                        notEmpty: {    
-	                            message: 'Ingrese Documento'    
-	                        },
-	                        regexp: {    
-								regexp: /[0-9]{8}/,     
-	                            message: 'Ingrese solo 9 digitos '    
-	                        }      
-	                    }    
-	                },
+						selector: '#idDocumento',
+						validators: {
+							notEmpty: {
+								message: 'Ingrese Documento'
+							},
+							regexp: {
+								regexp: /[0-9]{8}/,
+								message: 'Ingrese solo 8 digitos '
+							}
+						}
+					},
 					Telefono: {
-	     	    		selector:'#idTelefono',   
-	                    validators: {    
-	                        notEmpty: {    
-	                            message: 'Ingrese Telefono'    
-	                        },
-	                        regexp: {    
-	                            regexp: /[0-9]{9}/,     
-	                            message: 'Ingrese solo 9 digitos'    
-	                        }      
-	                    }    
-	                },
+						selector: '#idTelefono',
+						validators: {
+							notEmpty: {
+								message: 'Ingrese Telefono'
+							},
+							regexp: {
+								regexp: /[0-9]{9}/,
+								message: 'Ingrese solo 9 digitos'
+							}
+						}
+					},
 					Correo: {
-	     	    		selector:'#idCorreo',   
-	                    validators: {    
-	                        notEmpty: {    
-	                            message: 'Ingrese Cuenta'    
-	                        }
-	                            
-	                    }    
-	                },
-					
-	        	 }
-	        });   				
-	    });    
-	</script>  
-	
+						selector: '#idCorreo',
+						validators: {
+							notEmpty: {
+								message: 'Ingrese Cuenta'
+							}
+
+						}
+					}
+
+				}
+
+			});
+		});
+	</script>
+	<script>
+		// Example starter JavaScript for disabling form submissions if there are invalid fields
+		(function () {
+			'use strict';
+			window.addEventListener('load', function () {
+				// Fetch all the forms we want to apply custom Bootstrap validation styles to
+				var forms = document.getElementsByClassName('validacion combobox');
+				// Loop over them and prevent submission
+				var validation = Array.prototype.filter.call(forms, function (form) {
+					form.addEventListener('submit', function (event) {
+						if (form.checkValidity() === false) {
+							event.preventDefault();
+							event.stopPropagation();
+						}
+						form.classList.add('was-validated');
+					}, false);
+				});
+			}, false);
+		})();
+	</script>
+
 </body>
 
 </html>
