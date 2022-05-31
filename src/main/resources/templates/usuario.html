@@ -301,7 +301,114 @@
 				}).set('labels', {ok: 'Cancelar', cancel: 'Eliminar'});
 		})
 
+
+$(document).on("click", "#btn-cerrar", function () {
+			$('#idRegistra').trigger("reset");
+			$('#idRegistra').data("bootstrapValidator").resetForm();
+			$("#idcodigo").val(0);
+		});
 	</script>
+	
+	<!-- bootstrap validator  -->
+<script type="text/javascript">    
+	$(document).ready(function(){     
+		$('#idRegistra').bootstrapValidator({     
+			feedbackIcons: {
+				valid: 'glyphicon glyphicon-ok',
+				invalid: 'glyphicon glyphicon-remove',
+				validating: 'glyphicon glyphicon-refresh'
+			},
+			 fields:{	    
+				NomUsuario: {
+					 selector:'#idNomusuario',   
+					validators: {    
+						notEmpty: {    
+							message: 'Ingrese Nombre de Usuario'    
+						},
+						regexp: {    
+							  
+							message: 'Ingrese solo letras entre 3 y 20 caracteres'    
+						}      
+					}    
+				},      		 
+				 Nombre: {
+					 selector:'#idNombres',   
+					validators: {    
+						notEmpty: {    
+							message: 'Ingrese nombres del visitante'    
+						},
+						regexp: {    
+							regexp: /^[A-Za-z����������\s]{3,20}$/,    
+							message: 'Ingrese solo letras entre 3 y 20 caracteres'    
+						}      
+					}    
+				},   
+				ApellidoPaterno: {
+					 selector:'#idapePaterno',      
+					validators: {    
+						notEmpty: {    
+							message: 'Ingrese Apellido Paterno'    
+						},
+						regexp: {    
+							regexp: /^[A-Za-z����������\s]{3,20}$/,    
+							message: 'Ingrese solo letras entre 3 y 20 caracteres'    
+						}   
+					}    
+				},
+				ApellidoMaterno: {
+					 selector:'#idapeMaterno',      
+					validators: {    
+						notEmpty: {    
+							message: 'Ingrese Apellido Materno'    
+						},
+						regexp: {    
+							regexp: /^[A-Za-z����������\s]{3,20}$/,    
+							message: 'Ingrese solo letras entre 3 y 20 caracteres'    
+						}   
+					}    
+				},    
+				Correo: {
+					 selector:'#idCuentausuario',   
+					validators: {    
+						notEmpty: {    
+							message: 'Ingrese Correo'    
+						},
+						regexp: {    
+							  
+							message: 'Ingrese solo letras entre 3 y 20 caracteres'    
+						}      
+					}    
+				},
+				Contraseña: {
+					 selector:'#idPassword',   
+					validators: {    
+						notEmpty: {    
+							message: 'Ingrese Contraseña'    
+						},
+						regexp: {    
+							  
+							message: 'Ingrese solo Minimo 3 a 10 Caracteres'    
+						}      
+					}    
+				},         
+			   telefono: {
+					 selector:'#idTelefono',      
+					validators: {    
+						notEmpty: {    
+							message: 'Ingrese Telefono'    
+						},
+						regexp: {    
+							regexp: /[0-9]{9}/,    
+							message: 'Ingrese solo números'    
+						}   
+					}    
+				}	
+			 }
+		});   				
+	});    
+</script>  
+	
+	
 
 </body>
 
