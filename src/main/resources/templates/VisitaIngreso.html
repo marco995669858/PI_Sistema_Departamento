@@ -6,6 +6,98 @@
 	<title>Control visita</title>
 
 </head>
+<style>
+	.modal-header,
+	h4,
+	.close {
+		background-color: #286090;
+		color: white !important;
+		text-align: center;
+		font-size: 20px;
+	}
+
+	.help-block {
+		color: red;
+		/*display: none;*/
+	}
+
+	.form-group.has-error .form-control-label {
+		color: red;
+	}
+
+	.form-group.has-error .form-control {
+		border: 1px solid red;
+		box-shadow: 0 0 0 0.2rem rgba(250, 16, 0, 0.18);
+	}
+
+	.alertify .ajs-dialog {
+		top: 50%;
+		transform: translateY(-50%);
+		margin: auto;
+	}
+
+	.ajs-header {
+		background-color: #286090 !important;
+		color: white !important;
+		/*text-align: center;*/
+		font-size: 18px;
+		font-weight: bold;
+	}
+
+	.ajs-ok {
+		color: #fff;
+		background-color: #007bff;
+		border-color: #007bff;
+	}
+
+	.ajs-cancel {
+		color: #fff;
+		background-color: #dc3545;
+		border-color: #dc3545;
+	}
+
+	.btn-primary {
+		background-color: #286090 !important;
+	}
+
+	.dataTables_length,
+	.dataTables_info {
+		display: none;
+	}
+
+	.modal-lg,
+	.modal-xl {
+		max-width: 900px;
+		max-height: 800px;
+	}
+
+	.form-control-feedback2 {
+		margin: 1px;
+		position: absolute;
+		padding: 10px;
+		pointer-events: none;
+		background-color: #e9ecef;
+		border-style: none;
+	}
+
+	.form-control-feedback3 {
+		margin: 1px;
+		position: absolute;
+		margin-left: 225px;
+		padding: 10px;
+		pointer-events: none;
+		background-color: #e9ecef;
+		border-style: none;
+	}
+
+	.form-control {
+		padding-left: 40px !important;
+	}
+
+	/*.toast-succes{
+		width: 120px;
+	}*/
+</style>
 
 <body>
 	<th:block th:replace="menu.html :: header">
@@ -16,60 +108,63 @@
 
 			<div class="formulario">
 
-				<h1 style="text-align: center;">Registro Visita Ingreso</h1>
+				<h1 style="text-align: center;">Registro de Ingreso de Visita</h1>
 
-				<form th:action="@{/rest/controlvisita/registrarControl}" method="post">
-					<p>
-						<label for="documento">Documento
-							<span class="obligatorio">*</span>
-						</label>
-						<input class="registro1" type="text" name="documento" id="idDocumento"
-							placeholder="Escribe tu Dni">
-						<button type="button" class="btn btn-primary button" id="idEditar">
-							Buscar
-						</button>
-						<button type="button" data-toggle="modal" data-target="#modalEditarvisita" class="btn btn-info">
-							.....
-						</button>
-					</p>
+				<form method="POST" onsubmit="return validarUsuario()"
+					th:action="@{/rest/controlvisita/registrarControl}">
+					<input type="hidden" id="idUsuario" name="codigo" value="0">
+					<div class="container">
+						<div class="row">
 
+							<div class="form-group has-feedback col-md-6">
+								<label for="exampleInputEmail1"><b>Documento de Identidad</b></label><br>
+								<i class="fas fa-address-card form-control-feedback2"></i>
+								<input class="form-control" type="text" name="documento" id="idDocumento"
+							placeholder="Escribe tu DNI">
+							</div>
 
-					<p>
-						<label for="">Visitante
-							<span class="obligatorio">*</span>
-						</label>
-						<input type="hidden" name="visitantes" id="codigVisitante" readonly>
-						<input type="text" class="registro1" id="nomVisitante" readonly>
-					</p>
+							<div class="form-group has-feedback col-md-6">
+								<label style="color:#fbfbfb" for="exampleInputEmail1"><b>Busque un DNI</b></label><br>
+								<button type="button" id="idEditar" class="btn btn-dark"><i class="fas fa-save"></i>
+									Buscar DNI</button>
+								<button type="button" data-toggle="modal" data-target="#modalEditarvisita"
+									class="btn btn-outline-dark">
+									<i class="fas fa-bars"></i>
+								</button>
+							</div>
 
+							<div class="form-group has-feedback col-md-6">
+								<label for="exampleInputEmail1"><b>Visitante</b></label><br>
+								<i class="fas fa-lock form-control-feedback2"></i>
+								<input type="hidden" name="visitantes" id="codigVisitante" readonly>
+								<input type="text" class="form-control" id="nomVisitante" placeholder="Nombre de Visitante" readonly>
+							</div>
 
-					<p>
-						<label for="">Fecha de ingreso
-							<span class="obligatorio">*</span>
-						</label>
-						<input class="registro1" type="datetime-local" name="fechaIngreso" id="minor2" readonly
-							style="background-color: rgb(192, 192, 192); color: black;">
-					</p>
+							<div class="form-group has-feedback col-md-6">
+								<label for="exampleInputEmail1"><b>Fecha de Ingreso</b></label><br>
+								<i class="fas fa-calendar-alt form-control-feedback2"></i>
+								<input class="form-control" type="datetime-local" name="fechaIngreso" id="minor2" readonly>
+							</div>
 
-					<p>
-						<label for="">Visita a
-							<span class="obligatorio">*</span>
-						</label>
-						<input type="hidden" name="cliente" id="idclientevisi">
-						<input class="registro1" type="text" id="nomCliente" placeholder="Visita a" readonly="disabled"
-							style="background-color: rgb(192, 192, 192); color: black;">
-					</p>
-					<p th:each="bean : ${session.usuario}">
-						<input type="hidden" name="usuario" th:value="${bean.idUsuario}" id="idusuario" readonly>
-					</p>
+							<div class="form-group has-feedback col-md-6">
+								<label for="exampleInputEmail1"><b>Desea visitar a ...</b></label><br>
+								<i class="fas fa-lock form-control-feedback2"></i>
+								<input type="hidden" name="cliente" id="idclientevisi">
+								<input class="form-control" type="text" id="nomCliente" placeholder="Nombre de Cliente" readonly="disabled">
+								
+							</div>
+							<div th:each="bean : ${session.usuario}">
+							<input type="hidden" name="usuario" th:value="${bean.idUsuario}" id="idusuario" readonly>
+							</div>
+						</div>
 
-					<button class="botones1" type="submit" name="enviar_formulario" id="enviar">
-						<p>Registrar</p>
-					</button>
-
-					<p class="aviso">
-						<span class="obligatorio"> * </span>los campos son obligatorios.
-					</p>
+					</div>
+					<div class="col-md-12 text-center mt-4">
+						<button type="submit" id="Guardar" class="btn btn-primary"><i class="fas fa-save"></i>
+							Registrar</button>
+						<button type="button" id="btn-cerrar" class="btn btn-danger" data-dismiss="modal"><i
+								class="fas fa-undo-alt"></i> Cancelar</button>
+					</div>
 				</form>
 			</div>
 		</div>
@@ -89,7 +184,8 @@
 						<input type="hidden" value="0" name="codigo" id="idCodigo">
 						<div class="form-row">
 							<div class="form-group col-md-6">
-								<label for="inputEmail4">Departamento</label>
+								<label for="inputEmail4">Departamento</label><br>
+								<i class="fas fa-building form-control-feedback2"></i>
 								<select class="form-control" name="departamento" id="idDepartamento">
 									<option value="-1">[Seleccione un Tipo de Departamento]</option>
 									<option th:each="bean:${comboDepartamento}" th:value="${bean.idDepartamento}"
@@ -97,19 +193,22 @@
 								</select>
 							</div>
 							<div class="form-group col-md-6">
-								<label for="inputPassword4">Nombre</label>
-								<input type="text" class="form-control" name="Nombres" id="idNombre">
+								<label for="inputPassword4">Nombre</label><br>
+								<i class="fas fa-file-signature form-control-feedback2"></i>	
+								<input type="text" class="form-control" name="Nombres" id="idNombre" placeholder="Ingrese un Nombre">
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-6">
-								<label for="inputEmail4">Apellido</label>
-								<input type="text" class="form-control" name="Apellidos" id="idApellido">
+								<label for="inputEmail4">Apellido</label><br>
+								<i class="fas fa-file-signature form-control-feedback2"></i>	
+								<input type="text" class="form-control" name="Apellidos" id="idApellido" placeholder="Ingrese un Apellido">
 							</div>
 							<div class="form-group col-md-6">
-								<label for="inputEmail4">Tipo de documento</label>
+								<label for="inputEmail4">Tipo de documento</label><br>
+								<i class="fas fa-id-card form-control-feedback2"></i>
 								<select class="form-control" name="idTipoDocumento" id="idTipoDocume">
-									<option value="-1">[Seleccione tipo de documento]</option>
+									<option value="-1">[Seleccione Tipo de Documento]</option>
 									<option th:each="bean:${comboTipoDocuemnto}" th:value="${bean.idTipoDocumento}"
 										th:text="${bean.descripcion}"></option>
 								</select>
@@ -117,23 +216,27 @@
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-6">
-								<label for="">Docuemnto</label>
-								<input type="number" class="form-control" name="Documento" id="idDocumento">
+								<label for="">Documento</label><br>
+								<i class="fas fa-id-badge form-control-feedback2"></i>
+								<input type="number" class="form-control" name="Documento" id="idDocumento" placeholder="Ingrese un Documento">
 							</div>
 							<div class="form-group col-md-6">
-								<label for="inputPassword4">Telefono</label>
-								<input type="number" class="form-control" name="telefono" id="idTelefono">
+								<label for="inputPassword4">Celular</label><br>
+								<i class="fas fa-mobile-alt form-control-feedback2"></i>
+								<input type="number" class="form-control" name="telefono" id="idTelefono" placeholder="Ingrese un Celular">
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-6">
-								<label for="">Correo</label>
-								<input type="email" class="form-control" name="correo" id="idCorreo">
+								<label for="">Correo</label><br>
+								<i class="fas fa-at form-control-feedback2"></i>
+								<input type="email" class="form-control" name="correo" id="idCorreo" placeholder="Ingrese un Correo">
 							</div>
 							<div class="form-group col-md-6">
-								<label for="">Cliente</label>
+								<label for="">Cliente</label><br>
+								<i class="fas fa-users form-control-feedback2"></i>
 								<select class="form-control" name="clientes" id="idclie">
-									<option value="-1">[Seleccione un Cliente.] </option>
+									<option value="-1">[Seleccione un Cliente] </option>
 									<option th:each="bean:${comCliente}" th:value="${bean.idCliente}"
 										th:text="${bean.nombres + ' ' + bean.apellidos}"></option>
 								</select>

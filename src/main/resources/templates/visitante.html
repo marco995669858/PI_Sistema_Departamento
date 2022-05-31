@@ -105,9 +105,9 @@
 											
 												<div class="form-group has-feedback col-md-6">	
 													<label for="exampleInputEmail1"><b>Departamento</b></label><br>
-													<i class="fas fa-prescription-bottle-alt form-control-feedback2"></i>
+													<i class="fas fa-building form-control-feedback2"></i>
 													<select class="form-control" name="idDepartamento" id="Departamento">
-								<option value="-1">[Seleccione un Departamento.] </option>
+								<option value="-1">[Seleccione un Departamento] </option>
 								<option th:each="bean:${comDepartamento}" th:value="${bean.idDepartamento}"
 									th:text="${bean.nroDepartamento}"></option>
 							</select>
@@ -127,7 +127,7 @@
 															
 												<div class="form-group has-feedback col-md-6">	
 														<label for="exampleInputEmail1"><b>Tipo de Documento</b></label><br>
-												        <i class="fas fa-prescription-bottle-alt form-control-feedback2"></i>
+												        <i class="fas fa-address-card form-control-feedback2"></i>
 													    <select class="form-control form-margin" name="idTipoDocumento" id="idtipodocum">
 													      <option value=" " >[Seleccione un tipo de documento]</option>
 													      <option th:each="bean:${comTipoDocumento}" th:value="${bean.idTipoDocumento}"
@@ -137,23 +137,23 @@
 												</div>
 												<div class="form-group has-feedback col-md-6">
 													<label for="exampleInputEmail1"><b>Documento</b></label><br>		
-													<i class="fas fa-file-signature form-control-feedback2"></i>	
+													<i class="fas fa-id-badge form-control-feedback2"></i>	
 													<input type="text" class="form-control" id="idDocumento" placeholder="Ingrese Documento" name="Documento">																										
 											</div>
 											<div class="form-group has-feedback col-md-6">
-												<label for="exampleInputEmail1"><b>Telefono</b></label><br>		
-												<i class="fas fa-file-signature form-control-feedback2"></i>	
-												<input type="text" class="form-control" id="idTelefono" placeholder="Ingrese Telefono" name="telefono">																										
+												<label for="exampleInputEmail1"><b>Celular</b></label><br>		
+												<i class="fas fa-mobile-alt form-control-feedback2"></i>	
+												<input type="text" class="form-control" id="idTelefono" placeholder="Ingrese Celular" name="telefono">																										
 										</div>
 										<div class="form-group has-feedback col-md-6">
 											<label for="exampleInputEmail1"><b>Correo</b></label><br>		
-											<i class="fas fa-file-signature form-control-feedback2"></i>	
+											<i class="fas fa-at form-control-feedback2"></i>	
 											<input type="text" class="form-control" id="idCorreo" placeholder="Ingrese Correo" name="correo">																										
 									</div>
 
 									<div class="form-group has-feedback col-md-6">	
 										<label for="exampleInputEmail1"><b>Cliente</b></label><br>
-										<i class="fas fa-prescription-bottle-alt form-control-feedback2"></i>
+										<i class="fas fa-users form-control-feedback2"></i>
 										<select class="form-control form-margin" name="idCliente" id="idCliente">
 										  <option value=" " >[Seleccione un Cliente]</option>
 										  <option th:each="bean:${comCliente}" th:value="${bean.idCliente}"
@@ -197,12 +197,12 @@
 						<table>
 							<thead>
 								<tr class="table100-head">
-									<th class="column1">Codigo</th>
+									<th class="column1">Código</th>
 									<th class="column3">Departamento</th>
 									<th class="column8">Nombres y apellido</th>
 									<th class="column8">Tipo Documento</th>
 									<th class="column3">Documento</th>
-									<th class="column6">Telefono</th>
+									<th class="column6">Celular</th>
 									<th class="column6">Correo</th>
 									<th class="column8">Usuario</th>
 									<th class="column1"></th>

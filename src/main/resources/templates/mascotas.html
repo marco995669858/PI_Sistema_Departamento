@@ -122,19 +122,18 @@
 
 									<div class="form-group has-feedback col-md-6">
 										<label for="exampleInputEmail1"><b>Departamento</b></label><br>
-										<i class="fas fa-prescription-bottle-alt form-control-feedback2"></i>
+										<i class="fas fa-building form-control-feedback2"></i>
 										<select class="form-control" name="nroDepartamento" id="idnroDepartamento">
-											<option value="-1">[Seleccione un número de Departamento.] </option>
+											<option value="-1">[Seleccione un número de Departamento] </option>
 											<option th:each="bean:${departamento}" th:value="${bean.idDepartamento}"
 												th:utext="${bean.nroDepartamento}"></option>
 										</select>
 									</div>
 
 									<div class="form-group has-feedback col-md-6">
-										<label for="nombres" class="colocar_nombres">Nombre de la mascota <span
-												class="obligatorio">*</span>
+										<label for="nombres" class="colocar_nombres">Nombre de la mascota 
 										</label><br>
-										<i class="fas fa-file-signature form-control-feedback2"></i>
+										<i class="fas fa-paw form-control-feedback2"></i>
 										<input class="form-control" type="text" name="nombres" id="idnombres"
 											placeholder="Escriba Nombre de la Mascota">
 									</div>
@@ -142,9 +141,9 @@
 
 									<div class="form-group has-feedback col-md-6">
 										<label for="exampleInputEmail1"><b>Especie</b></label><br>
-										<i class="fas fa-prescription-bottle-alt form-control-feedback2"></i>
+										<i class="fas fa-paw form-control-feedback2"></i>
 										<select class="form-control" name="especie" id="idEspecie">
-											<option value="-1">[Seleccione Especie.] </option>
+											<option value="-1">[Seleccione Especie] </option>
 											<option th:each="bean:${especie}" th:value="${bean.idEspecie}"
 												th:text="${bean.animal}"></option>
 										</select>
@@ -190,11 +189,11 @@
 						<table>
 							<thead>
 								<tr class="table100-head">
-									<th class="column1">Codigo</th>
-									<th class="column8">Nro Departamento</th>
-									<th class="column8">Nombre de la Mascota</th>
-									<th class="column8">Especie de la Mascota</th>
-									<th class="column8">Nombre del trabajador</th>
+									<th class="column1">Código</th>
+									<th class="column8">N° Departamento</th>
+									<th class="column8">Nombre de Mascota</th>
+									<th class="column8">Especie de Mascota</th>
+									<th class="column8">Nombre de trabajador</th>
 									<th></th>
 									<th></th>
 								</tr>

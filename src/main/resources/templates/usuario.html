@@ -148,28 +148,28 @@
 
 									<div class="form-group has-feedback col-md-6">
 										<label for="exampleInputEmail1"><b>Correo de Usuario</b></label><br>
-										<i class="fas fa-file-signature form-control-feedback2"></i>
+										<i class="fas fa-at form-control-feedback2"></i>
 										<input type="text" class="form-control" id="idCuentausuario"
 											placeholder="Escribe tu correo" name="cuentaUsuario">
 									</div>
 
 									<div class="form-group has-feedback col-md-6">
 										<label for="exampleInputEmail1"><b>Contraseña</b></label><br>
-										<i class="fas fa-file-signature form-control-feedback2"></i>
+										<i class="fas fa-key form-control-feedback2"></i>
 										<input type="password" class="form-control" id="idPassword"
 											placeholder="Escribe tu contraseña" name="password">
 									</div>
 
 									<div class="form-group has-feedback col-md-6">
-										<label for="exampleInputEmail1"><b>Telefono</b></label><br>
-										<i class="fas fa-file-signature form-control-feedback2"></i>
+										<label for="exampleInputEmail1"><b>Celular</b></label><br>
+										<i class="fas fa-mobile-alt form-control-feedback2"></i>
 										<input type="text" class="form-control" id="idTelefono"
-											placeholder="Ingrese Telefono" name="telefono">
+											placeholder="Ingrese Celular" name="telefono">
 									</div>
 
 									<div class="form-group has-feedback col-md-6">
 										<label for="exampleInputEmail1"><b>Rol</b></label><br>
-										<i class="fas fa-prescription-bottle-alt form-control-feedback2"></i>
+										<i class="fas fa-address-book form-control-feedback2"></i>
 										<select class="form-control form-margin" name="rol" id="idCliente">
 											<option value=" ">[Seleccione un Rol]</option>
 											<option th:each="bean:${rol}" th:value="${bean.idRol}"
@@ -207,12 +207,12 @@
 						<table>
 							<thead>
 								<tr class="table100-head">
-									<th class="column1">Codigo</th>
+									<th class="column1">Código</th>
 									<th class="column2">Nombres</th>
-									<th class="column3">Paterno</th>
-									<th class="column4">Materno</th>
+									<th class="column3"> Apellido Paterno</th>
+									<th class="column4">Apellido Materno</th>
 									<th class="column5">Correo</th>
-									<th class="column6">Telefono</th>
+									<th class="column6">Celular</th>
 									<th class="column7">Rol</th>
 									<th class="column8">Fecha de Registro</th>
 									<th class="column1"></th>
