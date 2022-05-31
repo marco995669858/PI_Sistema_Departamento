@@ -121,7 +121,7 @@
 									
 									<div class="form-group col-md-6">
 										<label for="nombre"><b>Nombres</b></label><br>
-										<i class="fas fa-sort-numeric-up-alt form-control-feedback2"></i>
+										<i class="fas fa-file-signature form-control-feedback2"></i>
 										<input class="form-control" type="text" name="nombres" id="idnombres"
 								placeholder="Escribe tu Nombres">
 									</div>
@@ -133,7 +133,7 @@
 									</div>
 									<div class="form-group col-md-6">
 										<label for="tipoDocumento"><b>Tipo de Documento</b></label><br>
-										<i class="fas fa-prescription-bottle-alt form-control-feedback2"></i>
+										<i class="fas fa-id-card form-control-feedback2"></i>
 										<select class="form-control" name="tipoDocumento" id="idtipoDocumento">
 								<option value="-1">[Seleccione un Tipo de Documento]</option>
 								<option th:each="bean:${comboTipoDocumento}" th:value="${bean.idTipoDocumento}"
@@ -142,25 +142,25 @@
 									</div>
 									<div class="form-group col-md-6">
 										<label for="documento"><b>DNI</b></label><br>
-										<i class="fas fa-bed form-control-feedback2"></i>
+										<i class="fas fa-portrait form-control-feedback2"></i>
 										<input class="form-control" type="text" name="documento" id="idDocumento"
 								placeholder="Escribe tu Documento">
 									</div>
 									<div class="form-group col-md-6">
 										<label for="telefono"><b>Celular</b></label><br>
-										<i class="fas fa-toilet form-control-feedback2"></i>
-										<input type="text" class="form-control" id="idTelefono" placeholder="Ingrese Telefono" name="telefono">
+										<i class="fas fa-mobile-alt form-control-feedback2"></i>
+										<input type="text" class="form-control" id="idTelefono" placeholder="Ingrese Celular" name="telefono">
 										
 									</div>
 									<div class="form-group col-md-6">
 										<label for="correo"><b>Correo</b></label><br>
-										<i class="fas fa-toilet form-control-feedback2"></i>
+										<i class="fas fa-at form-control-feedback2"></i>
 										<input class="form-control" type="text" name="correo" id="idCorreo"
 								placeholder="Escribe tu Correo">
 									</div>
 									<div class="form-group col-md-6">
 										<label for="tipoCliente"><b>Tipo de Cliente</b></label><br>
-										<i class="fa-regular fa-building form-control-feedback2"></i>
+										<i class="fas fa-user-plus form-control-feedback2"></i>
 										<select class="form-control" name="tipoCliente" id="idTipocliente">
 								<option value="-1">[Seleccione Tipo de Propietarios]</option>
 								<option th:each="bean:${comboTipoCliente}" th:value="${bean.idTipoCliente}"
@@ -169,7 +169,7 @@
 									</div>
 									<div class="form-group col-md-6">
 										<label for="sexo"><b>Sexo</b></label><br>
-										<i class="fa-regular fa-building form-control-feedback2"></i>
+										<i class="fas fa-venus-mars form-control-feedback2"></i>
 										<select class="form-control" name="sexo" id="idSexo">
 								<option value="-1">[Seleccione Sexo</option>
 								<option value="Masculino">Hombre</option>
@@ -217,7 +217,7 @@
 					<table>
 						<thead>
 							<tr class="table100-head">
-								<th class="column1">Codigo</th>
+								<th class="column1">Código</th>
 								<th class="column2">Nombres</th>
 								<th class="column3">Apellidos</th>
 								<th class="column4">Documento</th>
