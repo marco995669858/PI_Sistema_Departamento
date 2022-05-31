@@ -20,8 +20,7 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 	
-//	@Autowired
-//	private 
+
 	
 	 @RequestMapping(value = "/login")
 	 public String home() {
@@ -29,22 +28,7 @@ public class LoginController {
 		 return "login";
 	 }
 	 
-//	@GetMapping(value = "/")
-//	 public String menu(Authentication auth,Model model, HttpSession session) {
-//		 String usu = auth.getName();
-//		 Usuario user = loginService.buscarUsuario(usu);
-//		 session.setAttribute("usuario", user);
-//	
-//		 String fullname = user.getNombres() + " " + user.getApeMaterno();
-//		 model.addAttribute("fullNameUser", fullname);
-//		
-//		 model.addAttribute("rol", user.getRol().getIdRol());
-//		 model.addAttribute("rolDesc", user.getRol().getDescripcion());
-//		 
-//		 
-//		 return "redirect:/rest/usuario/";
-//
-//	 }
+
 	 
 	 @RequestMapping(value = "/Ingresar")
 		public String menu(Authentication auth,HttpServletRequest  request) {	
