@@ -7,6 +7,29 @@
 </head>
 
 <style>
+	.modal-header,
+	h4,
+	.close {
+		background-color: #286090;
+		color: white !important;
+		text-align: center;
+		font-size: 20px;
+	}
+
+	.help-block {
+		color: red;
+		/*display: none;*/
+	}
+
+	.form-group.has-error .form-control-label {
+		color: red;
+	}
+
+	.form-group.has-error .form-control {
+		border: 1px solid red;
+		box-shadow: 0 0 0 0.2rem rgba(250, 16, 0, 0.18);
+	}
+
 	.alertify .ajs-dialog {
 		top: 50%;
 		transform: translateY(-50%);
@@ -70,128 +93,124 @@
 	.form-control {
 		padding-left: 40px !important;
 	}
+
+	/*.toast-succes{
+		width: 120px;
+	}*/
 </style>
 
 <body>
 	<th:block th:replace="menu.html :: header">
 	</th:block>
-	<section class="grid">
-		<article>
-			<div class="contact_form">
-
-				<div class="formulario">
-					<h1 style="text-align: center;">Registro de cliente</h1>
-
-					<form th:action="@{/rest/cliente/registrar}" onsubmit="return validarClientes()">
-						<input type="hidden" value="0" name="codigo" id="idcodigo">
-
-						<p>
-							<label for="nombre" class="colocar_nombres">Nombres Completos
-								<span class="obligatorio">*</span>
-							</label>
-							<input class="registro1" type="text" name="nombres" id="idnombres"
+	
+	<!-- begin #modal-dialog : MODAL DEPARTAMENTO-->
+		<div class="modal fade" id="modalCliente" data-backdrop="static" data-keyboard="false" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-login modal-lg">
+				<div class="modal-content">
+					<div class="modal-header bg-blue-darker">
+						<h4 class="modal-title text-white">FORMULARIO: CLIENTE</h4>
+					</div>
+					<div class="modal-body">
+						<form  name="test" th:action="@{/rest/cliente/registrar}" method="post">
+							<div class="container">
+								<div class="row">
+									<input type="hidden" value="0" name="codigo" id="idcodigo">
+									
+									<div class="form-group col-md-6">
+										<label for="nombre"><b>Nombres</b></label><br>
+										<i class="fas fa-sort-numeric-up-alt form-control-feedback2"></i>
+										<input class="form-control" type="text" name="nombres" id="idnombres"
 								placeholder="Escribe tu Nombres">
-						</p>
-
-						<p>
-							<label for="apellidos" class="colocar_apellidos">Apellidos
-								<span class="obligatorio">*</span>
-							</label>
-							<input class="registro1" type="text" name="apePaterno" id="idapePaterno"
+									</div>
+									<div class="form-group col-md-6">
+										<label for="apellidos"><b>Apellidos</b></label><br>
+										<i class="fas fa-file-signature form-control-feedback2"></i>
+										<input class="form-control" type="text" name="apePaterno" id="idapePaterno"
 								placeholder="Escribe tus apellidos">
-						</p>
-
-						<p>
-							<label for="tipoDocumento">Tipo de Documento
-							</label>
-							<select class="registro1" name="tipoDocumento" id="idtipoDocumento">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="tipoDocumento"><b>Tipo de Documento</b></label><br>
+										<i class="fas fa-prescription-bottle-alt form-control-feedback2"></i>
+										<select class="form-control" name="tipoDocumento" id="idtipoDocumento">
 								<option value="-1">[Seleccione un Tipo de Documento]</option>
 								<option th:each="bean:${comboTipoDocumento}" th:value="${bean.idTipoDocumento}"
 									th:text="${bean.descripcion}"></option>
 							</select>
-						</p>
-
-						<p>
-							<label for="documento">DNI
-
-								<span class="obligatorio">*</span>
-							</label>
-							<input class="registro1" type="text" name="documento" id="idDocumento"
+									</div>
+									<div class="form-group col-md-6">
+										<label for="documento"><b>DNI</b></label><br>
+										<i class="fas fa-bed form-control-feedback2"></i>
+										<input class="form-control" type="text" name="documento" id="idDocumento"
 								placeholder="Escribe tu Documento">
-						</p>
-
-						<p>
-							<label for="telefono">Celular
-								<span class="obligatorio">*</span>
-							</label>
-							<input class="registro1" type="number" name="telefono" id="idTelefono"
+									</div>
+									<div class="form-group col-md-6">
+										<label for="telefono"><b>Celular</b></label><br>
+										<i class="fas fa-toilet form-control-feedback2"></i>
+										<input class="form-control" type="number" name="telefono" id="idTelefono"
 								placeholder="Escribe tu número de celular">
-						</p>
-
-						<p>
-							<label for="correo">Correo
-								<span class="obligatorio">*</span>
-							</label>
-							<input class="registro1" type="text" name="correo" id="idCorreo"
+									</div>
+									<div class="form-group col-md-6">
+										<label for="correo"><b>Correo</b></label><br>
+										<i class="fas fa-toilet form-control-feedback2"></i>
+										<input class="form-control" type="text" name="correo" id="idCorreo"
 								placeholder="Escribe tu Correo">
-						</p>
-
-						<p>
-							<label for="tipoCliente">Tipo de Propietarios
-							</label>
-							<select class="registro1" name="tipoCliente" id="idTipocliente">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="tipoCliente"><b>Tipo de Cliente</b></label><br>
+										<i class="fa-regular fa-building form-control-feedback2"></i>
+										<select class="form-control" name="tipoCliente" id="idTipocliente">
 								<option value="-1">[Seleccione Tipo de Propietarios]</option>
 								<option th:each="bean:${comboTipoCliente}" th:value="${bean.idTipoCliente}"
 									th:text="${bean.descripcion}"></option>
 							</select>
-						</p>
-
-						<p>
-							<label for="sexo">Sexo
-							</label>
-							<select class="registro1" name="sexo" id="idSexo">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="sexo"><b>Sexo</b></label><br>
+										<i class="fa-regular fa-building form-control-feedback2"></i>
+										<select class="form-control" name="sexo" id="idSexo">
 								<option value="-1">[Seleccione Sexo</option>
 								<option value="Masculino">Hombre</option>
 								<option value="Femenino">Mujer</option>
 							</select>
-						</p>
-
-						<p>
-							<label for="departamento">Departamento
-							</label>
-							<select class="registro1" name="departamento" id="idDepartamento">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="departamento"><b>Tipo de Departamento</b></label><br>
+										<i class="fa-regular fa-building form-control-feedback2"></i>
+										<select class="form-control" name="departamento" id="idDepartamento">
 								<option value="-1">[Seleccione Departamento]</option>
 								<option th:each="bean:${comboDepartamento}" th:value="${bean.idDepartamento}"
 									th:text="${bean.nroDepartamento}"></option>
 							</select>
-						</p>
-
-						<p th:each="bean:${session.usuario}">
-							<input type="hidden" id="idusuario" name="usuario" th:value="${bean.idUsuario}" readonly>
-						</p>
-
-						<button class="botones1" type="submit" name="enviar_formulario" id="enviar">
-							<p>Registrar</p>
-						</button>
-
-
-						<p class="aviso">
-							<span class="obligatorio"> * </span>los campos son obligatorios.
-						</p>
-
-					</form>
+									</div>
+									<p th:each="bean:${session.usuario}">
+										<input type="hidden" id="idusuario" name="usuario" th:value="${bean.idUsuario}" readonly>
+									</p>
+								</div>
+							</div>
+							<div class="col-md-12 text-center mt-4">
+								<button type="submit" id="Guardar" class="btn btn-primary"><i class="fas fa-save"></i>
+									Registrar</button>
+								<button type="button" id="btn-cerrar" class="btn btn-danger" data-dismiss="modal"><i
+										class="fas fa-undo-alt"></i> Cancelar</button>
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
-		</article>
-		<!--  <article>
-     
-   </article>
-    <article></article> -->
-		<h1 style="text-align: center;">Lista de Propietarios</h1>
+		</div>
+		<!-- FIN Modal Departamento-->
+	<section class="grid">
+		<h1 style="text-align: center;">Lista de Clientes</h1>
 		<br>
 
 		<div class="container-table100">
 			<div class="wrap-table100">
+			<button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#modalCliente" id="btn-nuevo">
+			 <i class="far fa-file"></i> Nuevo Cliente
+			</button>
+			<br>
+			<br>
 				<div class="table100">
 					<table>
 						<thead>
