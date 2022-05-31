@@ -122,55 +122,55 @@
 										<label for="exampleInputEmail1"><b>Nombre de Usuario</b></label><br>
 										<i class="fas fa-file-signature form-control-feedback2"></i>
 										<input type="text" class="form-control" id="idNomusuario"
-											placeholder="Ingrese Nombre Usuario" name="nombres">
+											placeholder="Ingrese Nombre Usuario" name="nomUsuario">
 									</div>
 
 									<div class="form-group has-feedback col-md-6">
 										<label for="exampleInputEmail1"><b>Nombres</b></label><br>
 										<i class="fas fa-file-signature form-control-feedback2"></i>
 										<input type="text" class="form-control" id="idNombres"
-											placeholder="Ingrese Nombres" name="apellidos">
+											placeholder="Ingrese Nombres" name="nombres">
 									</div>
 
 									<div class="form-group has-feedback col-md-6">
 										<label for="exampleInputEmail1"><b>Apellido Paterno</b></label><br>
 										<i class="fas fa-file-signature form-control-feedback2"></i>
 										<input type="text" class="form-control" id="idapePaterno"
-											placeholder="Escribe tu apellido paterno" name="apellidos">
+											placeholder="Escribe tu apellido paterno" name="apePaterno">
 									</div>
 
 									<div class="form-group has-feedback col-md-6">
 										<label for="exampleInputEmail1"><b>Apellido Materno</b></label><br>
 										<i class="fas fa-file-signature form-control-feedback2"></i>
 										<input type="text" class="form-control" id="idapeMaterno"
-											placeholder="Escribe tu apellido materno" name="apellidos">
+											placeholder="Escribe tu apellido materno" name="apeMaterno">
 									</div>
 
 									<div class="form-group has-feedback col-md-6">
 										<label for="exampleInputEmail1"><b>Correo de Usuario</b></label><br>
 										<i class="fas fa-file-signature form-control-feedback2"></i>
 										<input type="text" class="form-control" id="idCuentausuario"
-											placeholder="Escribe tu correo" name="dni">
+											placeholder="Escribe tu correo" name="cuentaUsuario">
 									</div>
 
 									<div class="form-group has-feedback col-md-6">
 										<label for="exampleInputEmail1"><b>Contraseña</b></label><br>
 										<i class="fas fa-file-signature form-control-feedback2"></i>
-										<input type="text" class="form-control" id="idPassword"
-											placeholder="Escribe tu contraseña" name="dni">
+										<input type="password" class="form-control" id="idPassword"
+											placeholder="Escribe tu contraseña" name="password">
 									</div>
 
 									<div class="form-group has-feedback col-md-6">
 										<label for="exampleInputEmail1"><b>Telefono</b></label><br>
 										<i class="fas fa-file-signature form-control-feedback2"></i>
 										<input type="text" class="form-control" id="idTelefono"
-											placeholder="Ingrese Telefono" name="dni">
+											placeholder="Ingrese Telefono" name="telefono">
 									</div>
 
 									<div class="form-group has-feedback col-md-6">
 										<label for="exampleInputEmail1"><b>Rol</b></label><br>
 										<i class="fas fa-prescription-bottle-alt form-control-feedback2"></i>
-										<select class="form-control form-margin" name="idTipoDocumento" id="idCliente">
+										<select class="form-control form-margin" name="rol" id="idCliente">
 											<option value=" ">[Seleccione un Rol]</option>
 											<option th:each="bean:${rol}" th:value="${bean.idRol}"
 												th:utext="${bean.descripcion}"></option>
@@ -200,7 +200,7 @@
 				<div class="wrap-table100">
 					<button type="button" class="btn btn-primary mt-4" data-toggle="modal" data-target="#modalUsuario"
 						id="btn-nuevo">
-						<i class='bx bx-file-blank'></i> Nuevo Departamento
+						<i class='bx bx-file-blank'></i> Nuevo Usuario
 					</button>
 					<br><br>
 					<div class="table100">
