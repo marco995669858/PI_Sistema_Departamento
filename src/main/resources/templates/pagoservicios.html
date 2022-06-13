@@ -120,41 +120,54 @@
 
 				<div class="formulario">
 
-					<h1 style="text-align: center; font-family: 'Times New Roman', Times, serif;">Filtrar Salida de Visitas</h1>
+					<h1 style="text-align: center; font-family: 'Times New Roman', Times, serif;">Generar Boleta</h1>
 
 		
 					<form th:action="@{/rest/usuario/registrar}" onsubmit="return validarUsuario()">
 						<div class="form-row ">
-							<div class="form-group col-md-4">
-								<label for="inputEmail4">Visitante</label><br>
-								<i class="fas fa-user-friends form-control-feedback2"></i>	
-								<select class="form-control" name="visita" id="idVisitante">
-									<option value="-1">[Seleccione un visitante]</option>
-									<option th:each="bean:${comboVisitante}" th:value="${bean.idVisitante}"
-										th:utext="${bean.nombres + ' ' + bean.apellidos}"></option>
-								</select>
-							</div>
-							<div class="form-group col-md-4">
-								<label for="">Visita a</label><br>
-								<i class="fas fa-user-tag form-control-feedback2"></i>	
-								<select class="form-control" name="cliente" id="idCliente">
-									<option value="-1">[Seleccione un Propietario o residente]</option>
-									<option th:each="bean:${comboCliente}" th:value="${bean.idCliente}"
-										th:utext="${bean.nombres + ' ' + bean.apellidos}"></option>
-								</select>
-							</div>
-							<div class="form-group col-md-3">
-								<label for="">Estado</label><br>
-								<i class="fas fa-sign-out-alt form-control-feedback2"></i>	
-								<select class="form-control" name="estado" id="idEstado">
-									<option value="-1">[Seleccione un estado]</option>
-									<option th:each="bean:${comboEstado}" th:value="${bean.idEstado}"
-										th:utext="${bean.nomEstado}"></option>
-								</select>
+							<div class="form-group col-md-6">
+										<label for="nombre"><b>Servicio</b></label><br>
+										<i class="fas fa-file-signature form-control-feedback2"></i>
+										<input class="form-control" type="text" name="nombres" id="idnombres"
+											placeholder="Ejm: MANTENIMIENTO">
+									</div>
+							<div class="form-group col-md-6">
+										<label for="tipoCliente"><b>Tipo de Cliente</b></label><br>
+										<i class="fas fa-user-plus form-control-feedback2"></i>
+										<select class="form-control combobox" name="tipoCliente" id="idTipocliente"
+											required="">
+											<option selected disabled value="">[Seleccione Tipo de Cliente]
+											</option>
+											<option th:each="bean:${comboTipoCliente}" th:value="${bean.idTipoCliente}"
+												th:text="${bean.descripcion}"></option>
+										</select>
+										<div class="invalid-feedback">
+											Seleccione Tipo de Cliente
+										</div>
+									</div>
+							<div class="form-group col-md-6">
+										<label for="departamento"><b>Cliente</b></label><br>
+										<i class="fa-regular fa-building form-control-feedback2"></i>
+										<select class="form-control combobox" name="departamento" id="idDepartamento"
+											required="">
+											<option selected disabled value="">[Seleccione Cliente]</option>
+											<option th:each="bean:${comboDepartamento}"
+												th:value="${bean.idDepartamento}" th:text="${bean.nroDepartamento}">
+											</option>
+										</select>
+										<div class="invalid-feedback">
+											Please select a valid state.
+										</div>
+
+									</div>
+									<div class="form-group has-feedback col-md-6">
+								<label for="exampleInputEmail1"><b>Fecha de Ingreso</b></label><br>
+								<i class="fas fa-calendar-alt form-control-feedback2"></i>
+								<input class="form-control" type="datetime-local" name="fechaIngreso" id="minor2">
 							</div>
 						</div>
 						<div class="text-center">
-							<button type="button" class="btn btn-primary consultar">Buscar</button>
+							<button type="button" class="btn btn-primary consultar">Generar</button>
 						</div>
 
 
