@@ -173,44 +173,7 @@
 				</div>
 			</article>
 			
-			<div class="limiter">
-				<div class="container-table100">
-					<h1 style="text-align: center; font-family: 'Times New Roman', Times, serif;">Listado de
-						Visitas|Salidas</h1>
-
-					<div class="wrap-table100">
-						<div class="table100">
-							<table id="tablaconsultVisita">
-								<thead>
-									<tr class="table100-head">
-										<th class="column8">Tipo de boleta</th>
-										<th class="column8">Nro departamento</th>
-										<th class="column8">Mes</th>
-										<th class="column8">Fecha Pago</th>
-										<th class="column8">Servicios</th>
-										<th class="column8">Usuario</th>
-										<th class="column3">Monto</th>
-										<th class="column1"></th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr th:each="bean:${tablaDocuementoTributario}">
-										<td class="column8" th:text="${bean.iniciales}"></td>
-										<td class="column3" th:text="${bean.departamento.nroDepartamento}"></td>
-										<td class="column1" th:text="${bean.mes}"></td>
-										<td class="column8" th:text="${bean.fechaPago}"></td>
-										<td class="column8" th:text="${bean.servicios.tipodeServicio}"></td>
-										<td class="column3" th:text="${bean.usuario.nomUsuario}"></td>
-										<td class="column3" th:text="${bean.monto}"></td>										
-										<td></td>
-									</tr>
-
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
+			
 
 			<div class="modal fade" id="modalActualizarControlVisitante" data-backdrop="static" data-keyboard="false"
 				tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
