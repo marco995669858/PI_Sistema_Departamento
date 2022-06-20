@@ -114,7 +114,7 @@
 						<h4 class="modal-title text-white">FORMULARIO: MASCOTA</h4>
 					</div>
 					<div class="modal-body">
-						<form th:action="@{/rest/mascotas/registrar}" method="post" id="idRegistra">
+						<form th:action="@{/rest/mascotas/registrar}" method="post" id="idRegistra" class="validacion">
 							<input class="registro1" type="hidden" value="0" name="codigo" id="idcodigo">
 							<div class="container">
 								<div class="row">
@@ -123,11 +123,14 @@
 									<div class="form-group has-feedback col-md-6">
 										<label for="exampleInputEmail1"><b>Departamento</b></label><br>
 										<i class="fas fa-building form-control-feedback2"></i>
-										<select class="form-control" name="nroDepartamento" id="idnroDepartamento">
-											<option value="-1">[Seleccione un número de Departamento] </option>
+										<select class="form-control combobox" name="nroDepartamento" id="idnroDepartamento">
+											<option value="">[Seleccione un número de Departamento] </option>
 											<option th:each="bean:${departamento}" th:value="${bean.idDepartamento}"
 												th:utext="${bean.nroDepartamento}"></option>
 										</select>
+										<div class="invalid-feedback">
+											Seleccione un Departamento
+										</div>
 									</div>
 
 									<div class="form-group has-feedback col-md-6">
@@ -143,7 +146,7 @@
 										<label for="exampleInputEmail1"><b>Especie</b></label><br>
 										<i class="fas fa-paw form-control-feedback2"></i>
 										<select class="form-control" name="especie" id="idEspecie">
-											<option value="-1">[Seleccione Especie] </option>
+											<option value="">[Seleccione Especie] </option>
 											<option th:each="bean:${especie}" th:value="${bean.idEspecie}"
 												th:text="${bean.animal}"></option>
 										</select>
@@ -343,7 +346,28 @@
 			});
 		});    
 	</script>
-
+	
+	
+<script>
+		// Example starter JavaScript for disabling form submissions if there are invalid fields
+		(function () {
+			'use strict';
+			window.addEventListener('load', function () {
+				// Fetch all the forms we want to apply custom Bootstrap validation styles to
+				var forms = document.getElementsByClassName('validacion combobox');
+				// Loop over them and prevent submission
+				var validation = Array.prototype.filter.call(forms, function (form) {
+					form.addEventListener('submit', function (event) {
+						if (form.checkValidity() === false) {
+							event.preventDefault();
+							event.stopPropagation();
+						}
+						form.classList.add('was-validated');
+					}, false);
+				});
+			}, false);
+		})();
+	</script>
 </body>
 
 </html>
