@@ -113,8 +113,7 @@
 				
 				
 				
-				<form name="test" th:action="@{/rest/controlvisita/registrarControl}" id="idRegistra" method="post"
-							>	
+				<form name="test" th:action="@{/rest/controlvisita/registrarControl}" id="idRegistra" method="post">	
 							
 					<input type="hidden" id="idUsuario" name="codigo" value="0">
 					<div class="container">
@@ -184,17 +183,20 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form name="test2" method="post" th:action="@{/rest/controlvisita/registrarvisitante}" onsubmit="return validarModalVisitante()">
+					<form name="test2" method="post" th:action="@{/rest/controlvisita/registrarvisitante}" onsubmit="return validarModalVisitante()" id="idRegistra2" class="validacion">
 						<input type="hidden" value="0" name="codigo" id="idCodigo">
 						<div class="form-row">
 							<div class="form-group col-md-6">
 								<label for="inputEmail4">Departamento</label><br>
 								<i class="fas fa-building form-control-feedback2"></i>
-								<select class="form-control" name="departamento" id="idDepartamento">
-									<option value="-1">[Seleccione un Tipo de Departamento]</option>
+								<select class="form-control combobox" name="departamento" id="idDepartamento" required="">
+									<option value="">[Seleccione un Tipo de Departamento]</option>
 									<option th:each="bean:${comboDepartamento}" th:value="${bean.idDepartamento}"
 										th:text="${bean.nroDepartamento}"></option>
 								</select>
+								<div class="invalid-feedback">
+										Seleccione un Departamento
+									</div>
 							</div>
 							<div class="form-group col-md-6">
 								<label for="inputPassword4">Nombre</label><br>
@@ -211,19 +213,24 @@
 							<div class="form-group col-md-6">
 								<label for="inputEmail4">Tipo de documento</label><br>
 								<i class="fas fa-id-card form-control-feedback2"></i>
-								<select class="form-control" name="idTipoDocumento" id="idTipoDocume">
-									<option value="-1">[Seleccione Tipo de Documento]</option>
+								<select class="form-control combobox" name="idTipoDocumento" id="idTipoDocume" required="">
+									<option value="">[Seleccione Tipo de Documento]</option>
 									<option th:each="bean:${comboTipoDocuemnto}" th:value="${bean.idTipoDocumento}"
 										th:text="${bean.descripcion}"></option>
 								</select>
+								<div class="invalid-feedback">
+										Seleccione un Documento
+									</div>
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-6">
 								<label for="">Documento</label><br>
-								<i class="fas fa-id-badge form-control-feedback2"></i>
-								<input type="number" class="form-control" name="Documento" id="idDocumento" placeholder="Ingrese un Documento">
+								<i class="fas fa-mobile-alt form-control-feedback2"></i>
+								<input type="text" class="form-control" name="Dni" id="idDni" placeholder="Ingrese un Documento">
 							</div>
+							
+							
 							<div class="form-group col-md-6">
 								<label for="inputPassword4">Celular</label><br>
 								<i class="fas fa-mobile-alt form-control-feedback2"></i>
@@ -239,11 +246,14 @@
 							<div class="form-group col-md-6">
 								<label for="">Cliente</label><br>
 								<i class="fas fa-users form-control-feedback2"></i>
-								<select class="form-control" name="clientes" id="idclie">
-									<option value="-1">[Seleccione un Cliente] </option>
+								<select class="form-control combobox" name="clientes" id="idclie" required="">
+									<option value="">[Seleccione un Cliente] </option>
 									<option th:each="bean:${comCliente}" th:value="${bean.idCliente}"
 										th:text="${bean.nombres + ' ' + bean.apellidos}"></option>
 								</select>
+								<div class="invalid-feedback">
+										Seleccione un Cliente
+									</div>
 							</div>
 						</div>
 
@@ -252,7 +262,7 @@
 						</p>
 
 						<div class="modal-footer">
-							<button type="submit" class="btn btn-primary">Registrar</button>
+							<button type="submit" id="Guardar" class="btn btn-primary">Registrar</button>
 						</div>
 					</form>
 				</div>
@@ -351,13 +361,115 @@
 	
 	<script type="text/javascript">    
 	    $(document).ready(function(){     
+	        $('#idRegistra2').bootstrapValidator({     
+	        	feedbackIcons: {
+	                valid: 'glyphicon glyphicon-ok',
+	                invalid: 'glyphicon glyphicon-remove',
+	                validating: 'glyphicon glyphicon-refresh'
+	            },
+	        	 fields:{      
+				departamento: {
+						selector: '#idDepartamento',
+						validators: {
+							notEmpty: {
+								message: 'Seleccione un Numero de Departamento'
+							}
+						}
+					},
+
+					dni: {
+	     	    		selector:'#idDni',   
+	                    validators: {    
+	                        notEmpty: {    
+	                            message: 'Ingrese DNI'    
+	                        },
+	                        regexp: {    
+								regexp: /[0-9]{8}/,     
+	                             message: 'Ingrese solo 8 digitos'     
+	                        }      
+	                    }    
+	                },
+					Nombres: {
+						selector: '#idNombre',
+						validators: {
+							notEmpty: {
+								message: 'Ingrese Nombres'
+							},
+							regexp: {
+								regexp: /^[A-Za-z����������\s]{3,20}$/,
+								message: 'Ingrese solo letras entre 3 y 20 caracteres'
+							}
+						}
+					},
+					Apellidos: {
+						selector: '#idApellido',
+						validators: {
+							notEmpty: {
+								message: 'Ingrese Apellidos'
+							},
+							regexp: {
+								regexp: /^[A-Za-z����������\s]{3,20}$/,
+								message: 'Ingrese solo letras entre 3 y 20 caracteres'
+							}
+						}
+					},
+					idTipoDocumento: {
+						selector: '#idTipoDocume',
+						validators: {
+							notEmpty: {
+								message: 'Seleccione un el tipo de documento'
+							}
+						}
+					},
+					
+					telefono: {
+						selector: '#idTelefono',
+						validators: {
+							notEmpty: {
+								message: 'Ingrese Teléfono'
+							},
+							regexp: {
+								regexp: /[0-9]{9}/,
+								message: 'Ingrese solo 9 digitos'
+							}
+						}
+					},
+					clientes: {
+						selector: '#idclie',
+						validators: {
+							notEmpty: {
+								message: 'Seleccione un Cliente'
+							}
+						}
+					},
+					correo: {
+						selector: '#idCorreo',
+						validators: {
+							notEmpty: {
+								message: 'Ingrese Cuenta'
+							},
+							regexp :{
+								regexp: /^\w.+@\w+\.+[a-z]{2,3}$/,
+								message: 'ejemplo holaxd@gmail.com'
+							}
+
+						}
+					},  		 	
+					
+	        	 }
+	        });   				
+	    });    
+	</script> 
+	<script type="text/javascript">    
+	    $(document).ready(function(){     
 	        $('#idRegistra').bootstrapValidator({     
 	        	feedbackIcons: {
 	                valid: 'glyphicon glyphicon-ok',
 	                invalid: 'glyphicon glyphicon-remove',
 	                validating: 'glyphicon glyphicon-refresh'
 	            },
-	        	 fields:{        		 	
+	        	 fields:{      
+				
 					DNI: {
 	     	    		selector:'#idDocumento',   
 	                    validators: {    
@@ -374,7 +486,26 @@
 	        });   				
 	    });    
 	</script> 
-	
+	<script>
+		// Example starter JavaScript for disabling form submissions if there are invalid fields
+		(function () {
+			'use strict';
+			window.addEventListener('load', function () {
+				// Fetch all the forms we want to apply custom Bootstrap validation styles to
+				var forms = document.getElementsByClassName('validacion combobox');
+				// Loop over them and prevent submission
+				var validation = Array.prototype.filter.call(forms, function (form) {
+					form.addEventListener('submit', function (event) {
+						if (form.checkValidity() === false) {
+							event.preventDefault();
+							event.stopPropagation();
+						}
+						form.classList.add('was-validated');
+					}, false);
+				});
+			}, false);
+		})();
+	</script>
 </body>
 
 </html>
