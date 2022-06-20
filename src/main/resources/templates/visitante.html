@@ -127,7 +127,7 @@
 											th:text="${bean.nroDepartamento}"></option>
 									</select>
 									<div class="invalid-feedback">
-										Please select a valid state.
+										Seleccione un Departamento
 									</div>
 								</div>
 
@@ -156,7 +156,7 @@
 										</option>
 									</select>
 									<div class="invalid-feedback">
-										Please select a valid state.
+										Seleccione un Documento
 									</div>
 								</div>
 								<div class="form-group has-feedback col-md-6">
@@ -372,6 +372,15 @@
 
 				fields: {
 
+						idDepartamento: {
+						selector: '#Departamento',
+						validators: {
+							notEmpty: {
+								message: 'Seleccione un Numero de Departamento'
+							}
+						}
+					},
+
 					Nombres: {
 						selector: '#idNombres',
 						validators: {
@@ -396,6 +405,14 @@
 							}
 						}
 					},
+					idTipoDocumento: {
+						selector: '#idtipodocum',
+						validators: {
+							notEmpty: {
+								message: 'Seleccione un el tipo de documento'
+							}
+						}
+					},
 					DNI: {
 						selector: '#idDocumento',
 						validators: {
@@ -417,6 +434,14 @@
 							regexp: {
 								regexp: /[0-9]{9}/,
 								message: 'Ingrese solo 9 digitos'
+							}
+						}
+					},
+					idCliente: {
+						selector: '#idCliente',
+						validators: {
+							notEmpty: {
+								message: 'Seleccione un Cliente'
 							}
 						}
 					},

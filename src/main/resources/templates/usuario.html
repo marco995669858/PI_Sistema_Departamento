@@ -171,11 +171,15 @@
 									<div class="form-group has-feedback col-md-6">
 										<label for="exampleInputEmail1"><b>Rol</b></label><br>
 										<i class="fas fa-address-book form-control-feedback2"></i>
-										<select class="form-control form-margin" name="rol" id="idCliente">
+										<select class="form-control combobox" name="rol" id="idCliente"
+										required="">
 											<option value=" ">[Seleccione un Rol]</option>
 											<option th:each="bean:${rol}" th:value="${bean.idRol}"
 												th:utext="${bean.descripcion}"></option>
 										</select>
+										<div class="invalid-feedback">
+											Seleccione un rol.
+										</div>
 									</div>
 
 								</div>
@@ -314,7 +318,8 @@
 
 
 	<!-- bootstrap validator  -->
-	<!--<script type="text/javascript">    
+
+<script type="text/javascript">    
 	$(document).ready(function(){     
 		var regexcorreo = /^\w.+@\w+\.+[a-z]{2,3}$/;
 		var regexnombre = /^[A-Za-zƒŠŒŽšœžñŸÀÁÂÃÄÅÆÈÉÊËÌÍÎÏÑÒÓÔÕÖØÙÚÛÜÝàáâãäåæçèé êëìíîïðñòóôõöùúûüýþÿ]*$/;
@@ -333,7 +338,7 @@
 							message: 'Ingrese Nombre de Usuario'    
 						},
 						regexp: {    
-							  
+							  regexp: /^[A-Za-z����������\s]{3,20}$/, 
 							message: 'Ingrese solo letras entre 3 y 20 caracteres'    
 						}      
 					}    
@@ -345,7 +350,7 @@
 							message: 'Ingrese nombres del visitante'    
 						},
 						regexp: {    
-							regexp: regexnombre,    
+							regexp: /^[A-Za-z����������\s]{3,20}$/,    
 							message: 'Ingrese solo letras entre 3 y 20 caracteres'    
 						}      
 					}    
@@ -357,7 +362,7 @@
 							message: 'Ingrese Apellido Paterno'    
 						},
 						regexp: {    
-							regexp: regexnombre,    
+							regexp: /^[A-Za-z����������\s]{3,20}$/,    
 							message: 'Ingrese solo letras entre 3 y 20 caracteres'    
 						}   
 					}    
@@ -369,7 +374,7 @@
 							message: 'Ingrese Apellido Materno'    
 						},
 						regexp: {    
-							regexp: regexnombre,    
+							regexp: /^[A-Za-z����������\s]{3,20}$/,    
 							message: 'Ingrese solo letras entre 3 y 20 caracteres'    
 						}   
 					}    
@@ -381,8 +386,8 @@
 							message: 'Ingrese Correo'    
 						},
 						regexp: {    
-							regexp: regexcorreo,
-							message: 'Ingrese solo letras entre 3 y 20 caracteres'    
+							regexp: /^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[Aa-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[Aa-z0-9](?:[a-z0-9-]*[Aa-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
+							message: '@example.com'    
 						}      
 					}    
 				},
@@ -391,11 +396,10 @@
 					validators: {    
 						notEmpty: {    
 							message: 'Ingrese Contraseña'    
-						},
-						
+						},						
 						regexp: {    
-							  
-							message: 'Ingrese solo Minimo 3 a 10 Caracteres'    
+							  regexp: /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/,
+							message: 'La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula.'    
 						}      
 					}    
 				},         
@@ -414,10 +418,28 @@
 			 }
 		});   				
 	});    
-</script>  -->
-
-
-
+</script>  
+  
+	<script>
+		// Example starter JavaScript for disabling form submissions if there are invalid fields
+		(function () {
+			'use strict';
+			window.addEventListener('load', function () {
+				// Fetch all the forms we want to apply custom Bootstrap validation styles to
+				var forms = document.getElementsByClassName('validacion combobox');
+				// Loop over them and prevent submission
+				var validation = Array.prototype.filter.call(forms, function (form) {
+					form.addEventListener('submit', function (event) {
+						if (form.checkValidity() === false) {
+							event.preventDefault();
+							event.stopPropagation();
+						}
+						form.classList.add('was-validated');
+					}, false);
+				});
+			}, false);
+		})();
+	</script>
 </body>
 
 </html>

@@ -116,8 +116,10 @@
 					</div>
 					<div class="modal-body">
 
-						<form name="test" th:action="@{/rest/departamento/registrar}" id="idRegistra" method="post"
-							onsubmit="return validarDepartamentos()">
+					
+						<form name="test" th:action="@{/rest/departamento/registrar}" id="idRegistra" method="post" 
+							onsubmit="return validarDepartamentos()" class="validacion">
+							
 
 							<div class="container">
 								<div class="row">
@@ -125,13 +127,16 @@
 									<div class="form-group has-feedback col-md-6">
 										<label for="tipoDepartamento1"><b>Tipo de Departamento</b></label><br>
 										<i class="fa-regular fa-building form-control-feedback2"></i>
-										<select class="form-control form-margin" name="tipoDepartamento"
+										<select class="form-control combobox" name="tipoDepartamento" required=""
 											id="idTipodepatamento"
 											onchange="fillData(this.options[selectedIndex].value);">
-											<option value="-1">[Seleccione un Tipo de Departamento]</option>
+											<option selected disabled value="">[Seleccione un Tipo de Departamento]</option>
 											<option th:each="bean:${tipodepartamento}" th:value="${bean.idTipo}"
 												th:text="${bean.descripcion}"></option>
 										</select>
+										<div class="invalid-feedback">
+											Seleccione un Tipo de departamento
+										</div>
 									</div>
 									<div class="form-group has-feedback col-md-6">
 										<label for="idnroDepartamento"><b>Piso</b></label><br>
@@ -184,6 +189,38 @@
 		<!-- FIN Modal Departamento-->
 
 
+	
+
+
+			<div class="modal fade" id="modalEditar" data-backdrop="static" data-keyboard="false" tabindex="-1"
+				aria-labelledby="staticBackdropLabel" aria-hidden="true">
+				<div class="modal-dialog modal-xl">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="staticBackdropLabel">Actualizar Departamento</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<form name="test2" method="post" th:action="@{/rest/departamento/actualizar}">
+								<input type="hidden" value="0" name="codigo" id="idCodigo">
+								<div class="form-row">
+									<div class="form-group col-md-6">
+										<label for="inputEmail4">Tipo departamento</label>
+										<select class="form-control combobox" name="tipoDepartamento" id="idTipodepatamento2"
+											onchange="fillData2(this.options[selectedIndex].value);">
+											<option value="-1">[Seleccione un Tipo de Departamento]</option>
+											<option th:each="bean:${tipodepartamento}" th:value="${bean.idTipo}"
+												th:text="${bean.descripcion}"></option>
+										</select>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="inputPassword4">Nro de Piso</label>
+										<input type="number" class="form-control" name="idpiso" id="idnroPiso2">
+									</div>
+
+
 
 
 		<div class="modal fade" id="modalEditar" data-backdrop="static" data-keyboard="false" tabindex="-1"
@@ -208,6 +245,7 @@
 										<option th:each="bean:${tipodepartamento}" th:value="${bean.idTipo}"
 											th:text="${bean.descripcion}"></option>
 									</select>
+
 								</div>
 								<div class="form-group col-md-6">
 									<label for="inputPassword4">Nro de Piso</label>
@@ -426,6 +464,78 @@
 				}).set('labels', {ok: 'Cancelar', cancel: 'Eliminar'});
 		})
 	</script>
+	<script>
+	$(document).on("click", "#btn-cerrar", function () {
+			$('#idRegistra').trigger("reset");
+			$('#idRegistra').data("bootstrapValidator").resetForm();
+			$("#idcodigo").val(0);
+		});
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#idRegistra').bootstrapValidator({
+				feedbackIcons: {
+					valid: 'glyphicon glyphicon-ok',
+					invalid: 'glyphicon glyphicon-remove',
+					validating: 'glyphicon glyphicon-refresh'
+				},
+
+
+				fields: {					
+					idpiso: {
+						selector: '#idpiso',
+						validators: {
+							notEmpty: {
+								message: 'Ingrese un Piso'
+							},
+							regexp: {
+								regexp: /[0-9]{1,2}/,
+								message: 'Seleccione correctamente el piso'
+							}
+						}
+					},
+					idnroDepartamento: {
+						selector: '#idnroDepartamento',
+						validators: {
+							notEmpty: {
+								message: 'Ingrese un numero de Departamento'
+							},
+							regexp: {
+								regexp: /[0-9]{1,2,3}/,
+								message: 'Ingrese el numero del Departamento'
+							}
+
+						}
+					}
+
+				}
+
+			});
+		});
+	</script>
+	<script>
+		// Example starter JavaScript for disabling form submissions if there are invalid fields
+		(function () {
+			'use strict';
+			window.addEventListener('load', function () {
+				// Fetch all the forms we want to apply custom Bootstrap validation styles to
+				var forms = document.getElementsByClassName('validacion combobox');
+				// Loop over them and prevent submission
+				var validation = Array.prototype.filter.call(forms, function (form) {
+					form.addEventListener('submit', function (event) {
+						if (form.checkValidity() === false) {
+							event.preventDefault();
+							event.stopPropagation();
+						}
+						form.classList.add('was-validated');
+					}, false);
+				});
+			}, false);
+		})();
+	</script>
+
+
+	
 
 	<script th:src="@{/resources/js/validarDepa.js}"></script>
 </body>
