@@ -5,11 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import project.departamento.com.entity.Cliente;
 import project.departamento.com.entity.Departamento;
 import project.departamento.com.entity.DocumentoTributario;
 import project.departamento.com.entity.PagodeServicios;
-import project.departamento.com.repository.ClienteRepository;
 import project.departamento.com.repository.DepartamentoRepository;
 import project.departamento.com.repository.DocumentoTributarioRepository;
 import project.departamento.com.repository.PagosdeServiciosRepository;
@@ -44,6 +42,16 @@ public class PagosdeServiciosImpl implements PagosServiciosService{
 	@Override
 	public List<DocumentoTributario> listarDocumentoTributario() {
 		return documentoTributarioRepository.findAll();
+	}
+
+	@Override
+	public DocumentoTributario actualizarDocumentoTributario(DocumentoTributario bean) {
+		return documentoTributarioRepository.save(bean);
+	}
+
+	@Override
+	public DocumentoTributario buscarPorCodigo(int codigo) {
+		return documentoTributarioRepository.findById(codigo).orElse(null);
 	}
 	
 	

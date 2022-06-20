@@ -5,7 +5,7 @@
 <head th:insert="menu.html :: head">
 	<meta charset="UTF-8">
 	<title>Mascotas</title>
-
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrardepartamento.css}">
 </head>
 
 
@@ -113,7 +113,8 @@
 						<h4 class="modal-title text-white">FORMULARIO: USUARIO</h4>
 					</div>
 					<div class="modal-body">
-						<form method="POST" onsubmit="return validarUsuario()" id="idRegistra" th:action="@{/rest/usuario/registrar}">
+						<form method="POST" onsubmit="return validarUsuario()" id="idRegistra"
+							th:action="@{/rest/usuario/registrar}">
 							<input type="hidden" id="idUsuario" name="codigo" value="0">
 							<div class="container">
 								<div class="row">
@@ -302,7 +303,7 @@
 		})
 
 
-$(document).on("click", "#btn-cerrar", function () {
+		$(document).on("click", "#btn-cerrar", function () {
 			$('#idRegistra').trigger("reset");
 			$('#idRegistra').data("bootstrapValidator").resetForm();
 			$("#idcodigo").val(0);
@@ -310,10 +311,10 @@ $(document).on("click", "#btn-cerrar", function () {
 	</script>
 	<script th:src="@{/resources/js/ValidarUsuario.js}"></script>
 
-	
-	
+
+
 	<!-- bootstrap validator  -->
-<!--<script type="text/javascript">    
+	<!--<script type="text/javascript">    
 	$(document).ready(function(){     
 		var regexcorreo = /^\w.+@\w+\.+[a-z]{2,3}$/;
 		var regexnombre = /^[A-Za-zƒŠŒŽšœžñŸÀÁÂÃÄÅÆÈÉÊËÌÍÎÏÑÒÓÔÕÖØÙÚÛÜÝàáâãäåæçèé êëìíîïðñòóôõöùúûüýþÿ]*$/;
@@ -414,8 +415,8 @@ $(document).on("click", "#btn-cerrar", function () {
 		});   				
 	});    
 </script>  -->
-	
-	
+
+
 
 </body>
 
