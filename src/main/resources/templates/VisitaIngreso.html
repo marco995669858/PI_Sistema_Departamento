@@ -108,6 +108,7 @@
 
 			<div class="formulario">
 
+
 				<h1 style="text-align: center; font-family: 'Times New Roman', Times, serif;">Registro de Ingreso de Visitas</h1>
 
 				
@@ -123,7 +124,7 @@
 								<label for="exampleInputEmail1"><b>Documento de Identidad</b></label><br>
 								<i class="fas fa-address-card form-control-feedback2"></i>
 								<input class="form-control" type="text" name="documento" id="idDocumento"
-							placeholder="Escribe tu DNI">
+									placeholder="Escribe tu DNI">
 							</div>
 
 							<div class="form-group has-feedback col-md-6">
@@ -140,24 +141,28 @@
 								<label for="exampleInputEmail1"><b>Visitante</b></label><br>
 								<i class="fas fa-lock form-control-feedback2"></i>
 								<input type="hidden" name="visitantes" id="codigVisitante" readonly>
-								<input type="text" class="form-control" id="nomVisitante" placeholder="Nombre de Visitante" readonly>
+								<input type="text" class="form-control" id="nomVisitante"
+									placeholder="Nombre de Visitante" readonly>
 							</div>
 
 							<div class="form-group has-feedback col-md-6">
 								<label for="exampleInputEmail1"><b>Fecha de Ingreso</b></label><br>
 								<i class="fas fa-calendar-alt form-control-feedback2"></i>
-								<input class="form-control" type="datetime-local" name="fechaIngreso" id="minor2" readonly>
+								<input class="form-control" type="datetime-local" name="fechaIngreso" id="minor2"
+									readonly>
 							</div>
 
 							<div class="form-group has-feedback col-md-6">
 								<label for="exampleInputEmail1"><b>Desea visitar a ...</b></label><br>
 								<i class="fas fa-lock form-control-feedback2"></i>
 								<input type="hidden" name="cliente" id="idclientevisi">
-								<input class="form-control" type="text" id="nomCliente" placeholder="Nombre de Cliente" readonly="disabled">
-								
+								<input class="form-control" type="text" id="nomCliente" placeholder="Nombre de Cliente"
+									readonly="disabled">
+
 							</div>
 							<div th:each="bean : ${session.usuario}">
-							<input type="hidden" name="usuario" th:value="${bean.idUsuario}" id="idusuario" readonly>
+								<input type="hidden" name="usuario" th:value="${bean.idUsuario}" id="idusuario"
+									readonly>
 							</div>
 						</div>
 
@@ -183,7 +188,9 @@
 					</button>
 				</div>
 				<div class="modal-body">
+
 					<form name="test2" method="post" th:action="@{/rest/controlvisita/registrarvisitante}" onsubmit="return validarModalVisitante()" id="idRegistra2" class="validacion">
+
 						<input type="hidden" value="0" name="codigo" id="idCodigo">
 						<div class="form-row">
 							<div class="form-group col-md-6">
@@ -200,15 +207,17 @@
 							</div>
 							<div class="form-group col-md-6">
 								<label for="inputPassword4">Nombre</label><br>
-								<i class="fas fa-file-signature form-control-feedback2"></i>	
-								<input type="text" class="form-control" name="Nombres" id="idNombre" placeholder="Ingrese un Nombre">
+								<i class="fas fa-file-signature form-control-feedback2"></i>
+								<input type="text" class="form-control" name="Nombres" id="idNombre"
+									placeholder="Ingrese un Nombre">
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-6">
 								<label for="inputEmail4">Apellido</label><br>
-								<i class="fas fa-file-signature form-control-feedback2"></i>	
-								<input type="text" class="form-control" name="Apellidos" id="idApellido" placeholder="Ingrese un Apellido">
+								<i class="fas fa-file-signature form-control-feedback2"></i>
+								<input type="text" class="form-control" name="Apellidos" id="idApellido"
+									placeholder="Ingrese un Apellido">
 							</div>
 							<div class="form-group col-md-6">
 								<label for="inputEmail4">Tipo de documento</label><br>
@@ -226,22 +235,26 @@
 						<div class="form-row">
 							<div class="form-group col-md-6">
 								<label for="">Documento</label><br>
+
 								<i class="fas fa-mobile-alt form-control-feedback2"></i>
 								<input type="text" class="form-control" name="Dni" id="idDni" placeholder="Ingrese un Documento">
+
 							</div>
 							
 							
 							<div class="form-group col-md-6">
 								<label for="inputPassword4">Celular</label><br>
 								<i class="fas fa-mobile-alt form-control-feedback2"></i>
-								<input type="number" class="form-control" name="telefono" id="idTelefono" placeholder="Ingrese un Celular">
+								<input type="number" class="form-control" name="telefono" id="idTelefono"
+									placeholder="Ingrese un Celular">
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-6">
 								<label for="">Correo</label><br>
 								<i class="fas fa-at form-control-feedback2"></i>
-								<input type="email" class="form-control" name="correo" id="idCorreo" placeholder="Ingrese un Correo">
+								<input type="email" class="form-control" name="correo" id="idCorreo"
+									placeholder="Ingrese un Correo">
 							</div>
 							<div class="form-group col-md-6">
 								<label for="">Cliente</label><br>
@@ -273,7 +286,7 @@
 
 	<th:block th:replace="menu.html :: footer">
 	</th:block>
-		<script th:src="@{/resources/js/validarModalVisitante.js}"></script>
+	<script th:src="@{/resources/js/validarModalVisitante.js}"></script>
 
 
 	<script th:inline="javascript" th:if="${MENSAJE!=null}">
@@ -358,6 +371,7 @@
 			});
 		});
 	</script>
+
 	
 	<script type="text/javascript">    
 	    $(document).ready(function(){     
@@ -506,6 +520,35 @@
 			}, false);
 		})();
 	</script>
+
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#idRegistra').bootstrapValidator({
+				feedbackIcons: {
+					valid: 'glyphicon glyphicon-ok',
+					invalid: 'glyphicon glyphicon-remove',
+					validating: 'glyphicon glyphicon-refresh'
+				},
+				fields: {
+					DNI: {
+						selector: '#idDocumento',
+						validators: {
+							notEmpty: {
+								message: 'Ingrese DNI'
+							},
+							regexp: {
+								regexp: /[0-9]{8}/,
+								message: 'Ingrese solo 8 digitos'
+							}
+						}
+					}
+				}
+			});
+		});    
+	</script>
+
+
 </body>
 
 </html>
