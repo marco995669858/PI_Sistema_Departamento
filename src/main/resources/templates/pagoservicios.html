@@ -184,103 +184,38 @@
 				</div>
 			</article>
 			<div class="container">
-			<table id="table" data-toggle="table" data-search="true" data-filter-control="true"
-					data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar" class="table">
+				<table id="table" data-toggle="table" data-search="true" data-filter-control="true"
+					data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar" class="table"
+					data-show-header="true" data-pagination="true" data-id-field="name"
+					data-page-list="[6]" data-page-size="6">
 					<thead>
 						<tr>
-							<th data-field="state" data-checkbox="true"></th>
-							<th data-field="prenom" data-filter-control="input" data-sortable="true">Prénom</th>
-							<th data-field="date" data-filter-control="select" data-sortable="true">Date</th>
-							<th data-field="examen" data-filter-control="select" data-sortable="true">Examen</th>
-							<th data-field="note" data-sortable="true">Note</th>
+							<th class="d-none"></th>
+							<th data-field="boleta" data-filter-control="select" data-sortable="true">Tipo de boleta</th>
+							<th data-field="departamento" data-filter-control="select" data-sortable="true">Departamento</th>
+							<th data-field="prenom" data-filter-control="input" data-sortable="true">Mes</th>
+							<th data-field="date" data-filter-control="select" data-sortable="true">Servicio</th>
+							<th data-field="examen" data-filter-control="input" data-sortable="true">Usuario</th>
+							<th data-field="note" data-filter-control="input" data-sortable="true">Monto</th>
+							<th data-field="fecha" data-filter-control="select" data-sortable="true">Fecha pago</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
-							<td>Valérie</td>
-							<td>01/09/2015</td>
-							<td>Français</td>
-							<td>12/20</td>
-						</tr>
-						<tr>
-							<td class="bs-checkbox "><input data-index="1" name="btSelectItem" type="checkbox"></td>
-							<td>Eric</td>
-							<td>05/09/2015</td>
-							<td>Philosophie</td>
-							<td>8/20</td>
-						</tr>
-						<tr>
-							<td class="bs-checkbox "><input data-index="2" name="btSelectItem" type="checkbox"></td>
-							<td>Valentin</td>
-							<td>05/09/2015</td>
-							<td>Philosophie</td>
-							<td>4/20</td>
-						</tr>
-						<tr>
-							<td class="bs-checkbox "><input data-index="3" name="btSelectItem" type="checkbox"></td>
-							<td>Valérie</td>
-							<td>05/09/2015</td>
-							<td>Philosophie</td>
-							<td>10/20</td>
-						</tr>
-						<tr>
-							<td class="bs-checkbox "><input data-index="4" name="btSelectItem" type="checkbox"></td>
-							<td>Eric</td>
-							<td>01/09/2015</td>
-							<td>Français</td>
-							<td>14/20</td>
-						</tr>
-						<tr>
-							<td class="bs-checkbox "><input data-index="5" name="btSelectItem" type="checkbox"></td>
-							<td>Valérie</td>
-							<td>07/09/2015</td>
-							<td>Mathématiques</td>
-							<td>19/20</td>
-						</tr>
-						<tr>
-							<td class="bs-checkbox "><input data-index="6" name="btSelectItem" type="checkbox"></td>
-							<td>Valentin</td>
-							<td>01/09/2015</td>
-							<td>Français</td>
-							<td>11/20</td>
-						</tr>
-						<tr>
-							<td class="bs-checkbox "><input data-index="7" name="btSelectItem" type="checkbox"></td>
-							<td>Eric</td>
-							<td>01/10/2015</td>
-							<td>Philosophie</td>
-							<td>8/20</td>
-						</tr>
-						<tr>
-							<td class="bs-checkbox "><input data-index="8" name="btSelectItem" type="checkbox"></td>
-							<td>Valentin</td>
-							<td>07/09/2015</td>
-							<td>Mathématiques</td>
-							<td>14/20</td>
-						</tr>
-						<tr>
-							<td class="bs-checkbox "><input data-index="9" name="btSelectItem" type="checkbox"></td>
-							<td>Valérie</td>
-							<td>01/10/2015</td>
-							<td>Philosophie</td>
-							<td>12/20</td>
-						</tr>
-						<tr>
-							<td class="bs-checkbox "><input data-index="10" name="btSelectItem" type="checkbox"></td>
-							<td>Eric</td>
-							<td>07/09/2015</td>
-							<td>Mathématiques</td>
-							<td>14/20</td>
-						</tr>
-						<tr>
-							<td class="bs-checkbox "><input data-index="11" name="btSelectItem" type="checkbox"></td>
-							<td>Valentin</td>
-							<td>01/10/2015</td>
-							<td>Philosophie</td>
-							<td>10/20</td>
+						<tr th:each="bean:${tablaDocuementoTributario}">
+							<td class="d-none" th:text="${bean.idDocTributario}"></td>
+							<td th:text="${bean.iniciales}"></td>
+							<td th:text="${bean.departamento.nroDepartamento}"></td>
+							<td th:text="${bean.mes}"></td>
+							<td th:text="${bean.servicios.tipodeServicio}"></td>
+							<td th:text="${bean.usuario.nomUsuario}"></td>
+							<td th:text="${bean.monto}"></td>
+							<td th:text="${bean.fechaPago}"></td>
+							<td data-toggle="modal" data-target="#modalCliente" class="column1"><a
+									class="btn btn-actualizar"><i class="fa-solid fa-pen-to-square"></i></a>
 						</tr>
 					</tbody>
+
 				</table>
 			</div>
 
