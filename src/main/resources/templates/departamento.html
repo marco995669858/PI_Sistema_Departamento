@@ -4,7 +4,6 @@
 <head th:insert="menu.html :: head">
 	<meta charset="UTF-8">
 	<title>Departamento</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrardepartamento.css}">
 </head>
 
 <style>
@@ -19,7 +18,7 @@
 
 	.help-block {
 		color: red;
-		/*display: none;*/
+		display: none;
 	}
 
 	.form-group.has-error .form-control-label {
@@ -40,7 +39,7 @@
 	.ajs-header {
 		background-color: #286090 !important;
 		color: white !important;
-		/*text-align: center;*/
+		text-align: center;
 		font-size: 18px;
 		font-weight: bold;
 	}
@@ -115,12 +114,10 @@
 						<h4 class="modal-title text-white">FORMULARIO: DEPARTAMENTO</h4>
 					</div>
 					<div class="modal-body">
-
 					
 						<form name="test" th:action="@{/rest/departamento/registrar}" id="idRegistra" method="post" 
 							onsubmit="return validarDepartamentos()" class="validacion">
 							
-
 							<div class="container">
 								<div class="row">
 									<input type="hidden" value="0" name="codigo" id="idcodigo">
@@ -188,7 +185,6 @@
 		</div>
 		<!-- FIN Modal Departamento-->
 
-
 	
 
 
@@ -219,141 +215,108 @@
 										<label for="inputPassword4">Nro de Piso</label>
 										<input type="number" class="form-control" name="idpiso" id="idnroPiso2">
 									</div>
+								</div>
+								<div class="form-row">
+									<div class="form-group col-md-6">
+										<label for="inputEmail4">Nro de departamento</label>
+										<input type="number" class="form-control" name="idnroDepartamento"
+											id="idnroDepartamento2">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="inputPassword4">Nro de habitaciones</label>
+										<input type="number" class="form-control" name="nroHabitaciones" readonly
+											id="idnro2">
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="form-group col-md-6">
+										<label for="inputEmail4">Baño</label>
+										<input type="number" class="form-control" name="banio" id="idBanio2" readonly>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="inputPassword4">Lavanderia</label>
+										<input type="text" class="form-control" name="lavanderia" readonly
+											id="idlavanderia2">
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="form-group col-md-6">
+										<label for="inputEmail4">Estado</label>
+										<select class="form-control" name="estado" id="idestado">
+											<option value="-1">[Seleccione un estado]</option>
+											<option th:each="bean:${estado}" th:value="${bean.idEstado}"
+												th:text="${bean.nomEstado}"></option>
+										</select>
+									</div>
+								</div>
+
+								<p th:each="bean : ${session.usuario}">
+									<input type="hidden" name="usuario" id="idusuario" th:value="${bean.idUsuario}"
+										readonly>
+								</p>
+
+								<div class="modal-footer">
+									<button type="submit" class="btn btn-primary">Actulizar</button>
+								</div>
+							</form>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="limiter">
+				<div class="container-table100">
+					<h1 style="text-align: center; font-family: 'Times New Roman', Times, serif;">Listado de Departamentos</h1>
 
 
+					<div class="wrap-table100">
 
 
-		<div class="modal fade" id="modalEditar" data-backdrop="static" data-keyboard="false" tabindex="-1"
-			aria-labelledby="staticBackdropLabel" aria-hidden="true">
-			<div class="modal-dialog modal-xl">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="staticBackdropLabel">Actualizar Departamento</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
+						<button type="button" class="btn btn-primary mt-4" data-toggle="modal"
+							data-target="#modalDepartamento" id="btn-nuevo">
+							<i class='bx bx-file-blank'></i> Nuevo Departamento
 						</button>
-					</div>
-					<div class="modal-body">
-						<form name="test2" method="post" th:action="@{/rest/departamento/actualizar}">
-							<input type="hidden" value="0" name="codigo" id="idCodigo">
-							<div class="form-row">
-								<div class="form-group col-md-6">
-									<label for="inputEmail4">Tipo departamento</label>
-									<select class="form-control" name="tipoDepartamento" id="idTipodepatamento2"
-										onchange="fillData2(this.options[selectedIndex].value);">
-										<option value="-1">[Seleccione un Tipo de Departamento]</option>
-										<option th:each="bean:${tipodepartamento}" th:value="${bean.idTipo}"
-											th:text="${bean.descripcion}"></option>
-									</select>
+						<br><br>
+						<div class="table100">
+							<table>
+								<thead>
+									<tr class="table100-head">
+										<th class="column1">Código</th>
+										<th class="column8">Tipo Departamento</th>
+										<th class="column1">Piso</th>
+										<th class="column8">Número de Departamento</th>
+										<th class="column8">Número de Habitaciones</th>
+										<th class="column1">Usuario</th>
+										<th class="column1">Estado</th>
+										<th class="column1"></th>
+										<th class="column1"></th>
+									</tr>
+								</thead>
+								<tbody>
 
-								</div>
-								<div class="form-group col-md-6">
-									<label for="inputPassword4">Nro de Piso</label>
-									<input type="number" class="form-control" name="idpiso" id="idnroPiso2">
-								</div>
-							</div>
-							<div class="form-row">
-								<div class="form-group col-md-6">
-									<label for="inputEmail4">Nro de departamento</label>
-									<input type="number" class="form-control" name="idnroDepartamento"
-										id="idnroDepartamento2">
-								</div>
-								<div class="form-group col-md-6">
-									<label for="inputPassword4">Nro de habitaciones</label>
-									<input type="number" class="form-control" name="nroHabitaciones" readonly
-										id="idnro2">
-								</div>
-							</div>
-							<div class="form-row">
-								<div class="form-group col-md-6">
-									<label for="inputEmail4">Baño</label>
-									<input type="number" class="form-control" name="banio" id="idBanio2" readonly>
-								</div>
-								<div class="form-group col-md-6">
-									<label for="inputPassword4">Lavanderia</label>
-									<input type="text" class="form-control" name="lavanderia" readonly
-										id="idlavanderia2">
-								</div>
-							</div>
-							<div class="form-row">
-								<div class="form-group col-md-6">
-									<label for="inputEmail4">Estado</label>
-									<select class="form-control" name="estado" id="idestado">
-										<option value="-1">[Seleccione un estado]</option>
-										<option th:each="bean:${estado}" th:value="${bean.idEstado}"
-											th:text="${bean.nomEstado}"></option>
-									</select>
-								</div>
-							</div>
+									<tr th:each="bean:${listaDepartamento}">
+										<td class="column1" th:text="${bean.idDepartamento}"></td>
+										<td class="column8" th:text="${bean.tipoDepartamento.descripcion}"></td>
+										<td class="column1" th:text="${bean.piso}"></td>
+										<td class="column8" th:text="${bean.nroDepartamento}"></td>
+										<td class="column8" th:text="${bean.nroHabitaciones}"></td>
+										<td class="column1" th:text="${bean.usuario.nomUsuario}"></td>
+										<td class="column1" th:text="${bean.estado.nomEstado}"></td>
+										
+										<td class="column1"><a id="idEditar" data-toggle="modal"
+												data-target="#modalEditar"><i class="fa-solid fa-pen-to-square"></i></a>
+										</td>
+										<td class="column1"><a class="btn-eliminar"><i
+													class="fa-solid fa-trash-can"></i></a></td>
+									</tr>
 
-							<p th:each="bean : ${session.usuario}">
-								<input type="hidden" name="usuario" id="idusuario" th:value="${bean.idUsuario}"
-									readonly>
-							</p>
-
-							<div class="modal-footer">
-								<button type="submit" class="btn btn-primary">Actulizar</button>
-							</div>
-						</form>
-					</div>
-
-				</div>
-			</div>
-		</div>
-
-		<div class="limiter">
-			<div class="container-table100">
-				<h1 style="text-align: center; font-family: 'Times New Roman', Times, serif;">Listado de Departamentos
-				</h1>
-
-
-				<div class="wrap-table100">
-
-
-					<button type="button" class="btn btn-primary mt-4" data-toggle="modal"
-						data-target="#modalDepartamento" id="btn-nuevo">
-						<i class='bx bx-file-blank'></i> Nuevo Departamento
-					</button>
-					<br><br>
-					<div class="table100">
-						<table>
-							<thead>
-								<tr class="table100-head">
-									<th class="column1">Código</th>
-									<th class="column8">Tipo Departamento</th>
-									<th class="column1">Piso</th>
-									<th class="column8">Número de Departamento</th>
-									<th class="column8">Número de Habitaciones</th>
-									<th class="column1">Usuario</th>
-									<th class="column1">Estado</th>
-									<th class="column1"></th>
-									<th class="column1"></th>
-								</tr>
-							</thead>
-							<tbody>
-
-								<tr th:each="bean:${listaDepartamento}">
-									<td class="column1" th:text="${bean.idDepartamento}"></td>
-									<td class="column8" th:text="${bean.tipoDepartamento.descripcion}"></td>
-									<td class="column1" th:text="${bean.piso}"></td>
-									<td class="column8" th:text="${bean.nroDepartamento}"></td>
-									<td class="column8" th:text="${bean.nroHabitaciones}"></td>
-									<td class="column1" th:text="${bean.usuario.nomUsuario}"></td>
-									<td class="column1" th:text="${bean.estado.nomEstado}"></td>
-
-									<td class="column1"><a id="idEditar" data-toggle="modal"
-											data-target="#modalEditar"><i class="fa-solid fa-pen-to-square"></i></a>
-									</td>
-									<td class="column1"><a class="btn-eliminar"><i
-												class="fa-solid fa-trash-can"></i></a></td>
-								</tr>
-
-							</tbody>
-						</table>
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 
 		<th:block th:replace="menu.html :: footer">
 		</th:block>
@@ -480,7 +443,6 @@
 					validating: 'glyphicon glyphicon-refresh'
 				},
 
-
 				fields: {					
 					idpiso: {
 						selector: '#idpiso',
@@ -536,7 +498,6 @@
 
 
 	
-
 	<script th:src="@{/resources/js/validarDepa.js}"></script>
 </body>
 
