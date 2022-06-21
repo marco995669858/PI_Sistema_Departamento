@@ -12,12 +12,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "tb_pagoservicios")
+@Table(name = "tb_servicios")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PagodeServicios {
+public class servicios {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +25,7 @@ public class PagodeServicios {
 	
 	private String tipodeServicio;
 	
-	public PagodeServicios(Integer idServicios) {
+	public servicios(Integer idServicios) {
 		this.idServicios = idServicios;
 	}
 	
