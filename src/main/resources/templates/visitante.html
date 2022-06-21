@@ -227,10 +227,10 @@
 				</button>
 				<br>
 				<br>
-				<div class="table100">
-					<table>
-						<thead>
-							<tr class="table100-head">
+				<div style="overflow-x:auto;" class="table100">
+						<table style="text-align: center;" class="table table-bordered">
+							<thead class="thead-dark">
+								<tr class="table100-head">
 								<th class="column1">Código</th>
 								<th class="column3">Departamento</th>
 								<th class="column8">Nombres y Apellidos</th>
@@ -242,9 +242,8 @@
 								<th class="column1"></th>
 								<th class="column1"></th>
 							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="bean:${tabla}">
+							<tbody>
+								<tr th:each="bean:${tabla}">
 								<td class="column1" th:text="${bean.idVisitante}"></td>
 								<td class="column3" th:text="${bean.departamento.nroDepartamento}"></td>
 								<td class="column8" th:text="${bean.nombres + ' ' + bean.apellidos}"></td>
@@ -258,10 +257,9 @@
 								<td class="column1"><a class="btn btn-eliminar"><i
 											class="fa-solid fa-trash-can"></i></a></td>
 							</tr>
-
-
-						</tbody>
-					</table>
+							</tbody>
+						</table >
+					</div>
 				</div>
 			</div>
 		</div>
