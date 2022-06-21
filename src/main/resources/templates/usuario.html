@@ -330,7 +330,15 @@
 				invalid: 'glyphicon glyphicon-remove',
 				validating: 'glyphicon glyphicon-refresh'
 			},
-			 fields:{	    
+			 fields:{	 
+				   rol: {
+						selector: '#idCliente',
+						validators: {
+							notEmpty: {
+								message: 'Seleccione un Rol'
+							}
+						}
+					},
 				NomUsuario: {
 					 selector:'#idNomusuario',   
 					validators: {    
