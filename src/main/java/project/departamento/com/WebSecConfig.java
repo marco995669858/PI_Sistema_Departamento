@@ -36,7 +36,7 @@ public class WebSecConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/rest/usuario/**", "/rest/cliente/**").authenticated()
 				.antMatchers("/rest/departamento/**", "/rest/controlvisita/**").authenticated()
 				.antMatchers("/rest/consulta/**", "/rest/mascotas/**").authenticated()
-				.antMatchers("/rest/pagosServicios/**").authenticated().and().formLogin()
+				.antMatchers("/rest/pagosServicios/**" ,"/rest/pagarboleta/**").authenticated().and().formLogin()
 				.loginPage("/login").permitAll().usernameParameter("username").passwordParameter("password")
 				.successHandler(securityhandler).and().headers().frameOptions().sameOrigin();
 	}

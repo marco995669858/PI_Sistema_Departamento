@@ -7,13 +7,13 @@ import org.springframework.stereotype.Service;
 
 import project.departamento.com.entity.Departamento;
 import project.departamento.com.entity.DocumentoTributario;
-import project.departamento.com.entity.PagodeServicios;
+import project.departamento.com.entity.servicios;
 import project.departamento.com.repository.DepartamentoRepository;
 import project.departamento.com.repository.DocumentoTributarioRepository;
 import project.departamento.com.repository.PagosdeServiciosRepository;
 
 @Service
-public class PagosdeServiciosImpl implements PagosServiciosService{
+public class GenerarBoletaServiceImpl implements GenerarboletaService{
 	
 	@Autowired
 	private DepartamentoRepository departamentoRepository;
@@ -30,7 +30,7 @@ public class PagosdeServiciosImpl implements PagosServiciosService{
 	}
 
 	@Override
-	public List<PagodeServicios> listarPagodeServicios() {
+	public List<servicios> listarPagodeServicios() {
 		return pagosdeServiciosRepository.findAll();
 	}
 
@@ -39,20 +39,7 @@ public class PagosdeServiciosImpl implements PagosServiciosService{
 		return documentoTributarioRepository.save(bean);
 	}
 
-	@Override
-	public List<DocumentoTributario> listarDocumentoTributario() {
-		return documentoTributarioRepository.findAll();
-	}
 
-	@Override
-	public DocumentoTributario actualizarDocumentoTributario(DocumentoTributario bean) {
-		return documentoTributarioRepository.save(bean);
-	}
-
-	@Override
-	public DocumentoTributario buscarPorCodigo(int codigo) {
-		return documentoTributarioRepository.findById(codigo).orElse(null);
-	}
 	
 	
 }

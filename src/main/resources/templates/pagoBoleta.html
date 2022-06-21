@@ -101,82 +101,8 @@
 	</th:block>
 	<div class="container">
 		<section class="grid">
-			<article>
-				<div style="min-width: 1070px;" class="contact_form">
-
-					<div class="formulario">
-
-						<h1 style="text-align: center; font-family: 'Times New Roman', Times, serif;">Generar Boleta
-						</h1>
-
-
-						<form th:action="@{/rest/pagosServicios/registrar}" onsubmit="return validarUsuario()">
-							<div class="form-row ">
-								<div class="form-group col-md-5">
-									<label for=""><b>Tipo de boleta</b></label><br>
-									<i class="fas fa-user-plus form-control-feedback2"></i>
-									<select class="form-control" name="tipoBoleta">
-										<option value="">[Seleccione un tipo de boleta]</option>
-										<option value="Bo">Boleta</option>
-										<option value="Fa">Factura</option>
-									</select>
-									<div class="invalid-feedback">
-										Seleccione Tipo de Cliente
-									</div>
-								</div>
-								<div class="form-group col-md-5">
-									<label for="nombre"><b>Servicio</b></label><br>
-									<i class="fas fa-file-signature form-control-feedback2"></i>
-									<select class="form-control combobox" name="servicio" id="idServicio" required="">
-										<option selected disabled value="">[Seleccione un tipo de servicio]
-										</option>
-										<option th:each="bean:${cboServicios}" th:value="${bean.idServicios}"
-											th:text="${bean.tipodeServicio}"></option>
-									</select>
-								</div>
-
-								<div class="form-group col-md-5">
-									<label for="departamento"><b>Departamento</b></label><br>
-									<i class="fa-regular fa-building form-control-feedback2"></i>
-									<select class="form-control combobox" name="departamento" id="idDepartamento" required="">
-										<option selected disabled value="">[Seleccione departamento]</option>
-										<option th:each="bean:${cboDepartamento}" th:value="${bean.idDepartamento}"
-											th:text="${bean.nroDepartamento}">
-										</option>
-									</select>
-									<div class="invalid-feedback">
-										Please select a valid state.
-									</div>
-
-								</div>
-								<div class="form-group has-feedback col-md-5">
-									<label for="exampleInputEmail1"><b>Fecha de Ingreso</b></label><br>
-									<i class="fas fa-calendar-alt form-control-feedback2"></i>
-									<input type="number" class="form-control" name="datepicker" id="datepicker" />
-								</div>
-								<div class="form-group has-feedback col-md-5">
-									<label for="exampleInputEmail1"><b>Monto</b></label><br>
-									<i class="fas fa-calendar-alt form-control-feedback2"></i>
-									<input type="number" class="form-control" name="monto" id="idMonto" />
-								</div>
-							</div>
-							<p th:each="bean : ${session.usuario}">
-								<input type="hidden" name="usuario" th:value="${bean.idUsuario}" readonly>
-							</p>
-							<div class="text-center">
-								<button type="submit" class="btn btn-primary consultar">Generar</button>
-							</div>
-
-
-						</form>
-					</div>
-				</div>
-			</article>
-			
-			
-
-			<div class="modal fade" id="modalActualizarControlVisitante" data-backdrop="static" data-keyboard="false"
-				tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal fade" id="modalPagoBoleta" data-backdrop="static" data-keyboard="false" tabindex="-1"
+				aria-labelledby="staticBackdropLabel" aria-hidden="true">
 				<div class="modal-dialog modal-lg">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -187,19 +113,35 @@
 							</button>
 						</div>
 						<div class="modal-body">
-							<form th:action="@{/rest/consulta/actualizarFechaSalida}">
+							<form th:action="@{/rest/pagarboleta/registrarboleta}" method="post">
 								<input type="hidden" name="codigo" id="idcodigo" readonly>
-								<div class="form-row">
-									<div class="form-group col-md-6">
-										<label>Fecha de salida</label>
-										<i class="fas fa-door-open form-control-feedback2"></i>
-										<input type="datetime-local" class="form-control" name="fechaSalida" id="minor2"
+								<div class="row">
+									<div class="col">
+										<label>Nro. Operación</label>
+										<input type="number" class="form-control" name="nroOperacion"
+											placeholder="10001">
+									</div>
+									<div class="col">
+										<label>Nombre completo</label>
+										<input type="text" class="form-control" name="nombres"
+											placeholder="Ingrese su nombre completo">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col">
+										<label>Fecha de pago</label>
+										<input class="form-control" type="datetime-local" name="fechapago" id="minor2"
 											readonly>
 									</div>
-									<div class="form-group col-md-6">
-										<label>Deje un Comentario Aquí ↓</label>
-										<textarea type="datetime-local" class=" form-control" name="comentario"
-											style="width: 400px; height: 250px;"></textarea>
+									<div class="col">
+										<label>Monto a pagar</label>
+										<input type="number" class="form-control" name="monto" id="idmontopagar">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-6">
+										<label>Cuanto va a pagar?</label>
+										<input type="number" class="form-control" name="pagar" id="idpagar">
 									</div>
 								</div>
 								<p th:each="bean : ${session.usuario}">
@@ -211,16 +153,53 @@
 									</div>
 								</div>
 							</form>
-
-
 						</div>
 
 
 					</div>
 				</div>
 			</div>
+			<div class="container">
+				<table id="table" data-toggle="table" data-search="true" data-filter-control="true"
+					 class="table"
+					data-show-header="true" data-pagination="true" data-id-field="name" data-page-list="[10]"
+					data-page-size="10">
+					<thead>
+						<tr class="text-center">
+							<th class="d-none"></th>
+							<th data-field="boleta" data-filter-control="select" data-sortable="true">Tipo de boleta
+							</th>
+							<th data-field="departamento" data-filter-control="select" data-sortable="true">Departamento
+							</th>
+							<th data-field="mes" data-filter-control="select" data-sortable="true"> Mes pago </th>
+							<th data-field="servicio" data-filter-control="select" data-sortable="true">Servicio
+							</th>
+							<th data-field="usuario" data-filter-control="select" data-sortable="true">Trabajador</th>
+							<th data-field="monto" data-filter-control="select" data-sortable="true">Monto</th>
+							<th data-field="fecha" data-filter-control="select" data-sortable="true">Fecha pago</th>
+							<th data-field="estado" data-filter-control="select" data-sortable="true">Estado</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="bean:${tablaDocuementoTributario}" class="text-center">
+							<td class="d-none" th:text="${bean.idDocTributario}"></td>
+							<td th:text="${bean.iniciales}"></td>
+							<td th:text="${bean.departamento.nroDepartamento}"></td>
+							<td th:text="${bean.mes}"></td>
+							<td th:text="${bean.servicios.tipodeServicio}"></td>
+							<td th:text="${bean.usuario.nomUsuario}"></td>
+							<td th:text="${bean.monto}"></td>
+							<td th:text="${bean.fechaPago}"></td>
+							<td th:text="${bean.estado}"></td>
+							<td data-toggle="modal" data-target="#modalPagoBoleta" class="column1"><a
+									class="btn btn-actualizar"><i class="fa-solid fa-comments-dollar"></i></a>
+						</tr>
+					</tbody>
 
-
+				</table>
+			</div>
 		</section>
 	</div>
 	<th:block th:replace="menu.html :: footer">
@@ -249,13 +228,21 @@
 
 	<script>
 		$(document).ready(function () {
-			$("#datepicker").datepicker({
-				format: "yyyy",
-				viewMode: "years",
-				minViewMode: "years",
-				autoclose: true
+			$('#example').DataTable();
+		});
+
+
+		$(document).on("click", ".btn-actualizar", function () {
+			let cod;
+			cod = $(this).parents("tr").find("td")[0].innerHTML;
+			$.get("buscar?codigo=" + cod, function (data) {
+				console.log(data);
+				$("#idcodigo").val(data.idDocTributario);
+				$("#idmontopagar").val(data.monto);
+
 			});
 		});
+
 
 		$(document).on("click", ".consultar", function () {
 			let visita, cliente, estado;
@@ -278,7 +265,7 @@
 			cod = $(this).parents("tr").find("td")[0].innerHTML;
 			$.get("buscar?codigo=" + cod, function (response) {
 				console.log(response);
-				$("#idcodigo").val(response.idVisita);
+
 			})
 		});
 

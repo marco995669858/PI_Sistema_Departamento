@@ -13,24 +13,24 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import project.departamento.com.entity.Departamento;
 import project.departamento.com.entity.DocumentoTributario;
-import project.departamento.com.entity.PagodeServicios;
 import project.departamento.com.entity.Usuario;
-import project.departamento.com.service.PagosServiciosService;
+import project.departamento.com.entity.servicios;
+import project.departamento.com.service.GenerarboletaService;
 
 @Controller
 @RequestMapping("/rest/pagosServicios")
-public class PagosServicioController {
+public class GenerarComprovanteController {
 
 	@Autowired
-	private PagosServiciosService service;
+	private GenerarboletaService service;
 
 	@RequestMapping("/")
 	public String index(Model model) {
 		model.addAttribute("cboDepartamento", service.listarDepartamentos());
 		model.addAttribute("cboServicios", service.listarPagodeServicios());
-		model.addAttribute("tablaDocuementoTributario", service.listarDocumentoTributario());
 
-		return "pagoservicios";
+
+		return "generarboleta";
 	}
 
 	@RequestMapping("/registrar")
@@ -53,9 +53,10 @@ public class PagosServicioController {
 				bean.setDepartamento(new Departamento(departamento));
 				bean.setMes(mes + i);
 				bean.setFechaPago(monthend.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-				bean.setServicios(new PagodeServicios(servicio));
+				bean.setServicios(new servicios(servicio));
 				bean.setUsuario(new Usuario(usuario));
 				bean.setMonto(monto);
+				bean.setEstado("No pagado");
 				service.registrarDocumentoTributario(bean);
 			}
 			redirect.addFlashAttribute("MENSAJE", "Se genero la boleta correctamente.");
@@ -67,39 +68,5 @@ public class PagosServicioController {
 		return "redirect:/rest/pagosServicios/";
 	}
 
-	@RequestMapping("/buscar")
-	@ResponseBody
-	public DocumentoTributario buscarMascota(@RequestParam("codigo") int codigo) {
-		DocumentoTributario bean = null;
-		try {
-			bean = service.buscarPorCodigo(codigo);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 
-		return bean;
-	}
-
-	@RequestMapping("/actualizar")
-	public String actualizarDocumentoTributario(@RequestParam("codigo") int codigo,
-			@RequestParam("tipoBoleta") String tipoboleta, @RequestParam("servicio") int servicio,
-			@RequestParam("departamento") int departamento, @RequestParam("usuario") int usuario,
-			@RequestParam("monto") double monto, RedirectAttributes redirect) {
-
-		try {
-			DocumentoTributario bean = new DocumentoTributario();
-//			bean.setIniciales(tipoboleta);
-//			bean.setDepartamento(new Departamento(departamento));
-//			bean.setMes();
-//			bean.setFechaPago();
-//			bean.setServicios(new PagodeServicios(servicio));
-//			bean.setUsuario(new Usuario(usuario));
-//			bean.setMonto(monto);
-//			service.registrarDocumentoTributario(bean);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return "redirect:/rest/pagosServicios/";
-	}
 }
