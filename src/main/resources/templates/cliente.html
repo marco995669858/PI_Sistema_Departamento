@@ -388,6 +388,14 @@
 
 				fields: {
 
+					tipoDocumento: {
+						selector: '#idtipoDocumento',
+						validators: {
+							notEmpty: {
+								message: 'Seleccione un Documento'
+							}
+						}
+					},
 					Nombres: {
 						selector: '#idnombres',
 						validators: {
@@ -433,6 +441,30 @@
 							regexp: {
 								regexp: /[0-9]{9}/,
 								message: 'Ingrese solo 9 digitos'
+							}
+						}
+					},
+					tipoCliente: {
+						selector: '#idTipocliente',
+						validators: {
+							notEmpty: {
+								message: 'Seleccione un Tipo de Cliente'
+							}
+						}
+					},
+					departamento: {
+						selector: '#idDepartamento',
+						validators: {
+							notEmpty: {
+								message: 'Seleccione un Departamento'
+							}
+						}
+					},
+					sexo: {
+						selector: '#idSexo',
+						validators: {
+							notEmpty: {
+								message: 'Seleccione su Sexo'
 							}
 						}
 					},
