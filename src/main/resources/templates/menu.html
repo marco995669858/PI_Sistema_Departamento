@@ -23,42 +23,55 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.20.2/bootstrap-table.min.css"
 		integrity="sha512-HIPiLbxNKmx+x+VFnDHICgl1nbRzW3tzBPvoeX0mq9dWP9H1ZGMRPXfYsHhcJS1na58bzUpbbfpQ/n4SIL7Tlw=="
 		crossorigin="anonymous" referrerpolicy="no-referrer">
+		
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body id="page-top">
 
 	<th:block th:fragment="header">
-
-		<header class="sidebar">
-			<nav>
-
-				<div id="perfil1"
-					style="background-color: #1D3557;color:#fff; text-align:center;box-shadow: 2px 2px 2px 1px rgb(166, 210, 255); padding-top:10px;"
-					class="admin-profile" th:each="bean : ${session.usuario}">
-					<i class="fas fa-user-circle"></i>
-
-					<span class="greeting" th:text="${bean.nomUsuario}"></span>
-					<br><br>
-				</div>
-				<ul class="admin-menu">
-					<li th:each="bean : ${session.menus}">
-						<span th:href="${bean.ruta}"></span>
-						<a th:href="${bean.ruta}">
-							<i th:class="${bean.icon}" style="max-height: 15px;"></i>
-							<span th:text="${bean.descripcion}"></span>
-						</a>
-					</li>
-					<a  style="margin-top: 25px; color:red" href="javascript: document.logoutForm.submit()"
-						role="menuitem"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
-
-					<form  name="logoutForm" method="post" th:action="@{/logout}" th:hidden="true">
-						<input class="cerrar" hidden type="submit" value="Sign Out" />
-					</form>
-
-
-				</ul>
-			</nav>
-		</header>
+	
+	
+		<div class="navigation">
+		<div class="perfil" th:each="bean : ${session.usuario}">
+            <div class="img_perfil">
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="perfil">
+            </div>
+            <h2 class="text_perfil"  th:text="${bean.nomUsuario}"></h2>
+        </div>
+        <ul>
+       		 
+            <li th:each="bean : ${session.menus}">
+                <a th:href="${bean.ruta}">
+                    <span class="icon"><i th:class="${bean.icon}" aria-hidden="true"></i></span>
+                    <span class="title" th:text="${bean.descripcion}"></span>
+                </a>
+            </li  >
+            <li>
+             <a href="javascript: document.logoutForm.submit()">
+              <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+              <span class="title">Cerrar Sesión</span>
+             </a >
+         	<form  name="logoutForm" method="post" th:action="@{/logout}" th:hidden="true">
+					<input class="cerrar" hidden type="submit" value="Sign Out" />
+			</form>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="toggle" onclick="toggleMenu()"></div>
+  
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		<section class="page-content">
 			<section class="search-and-user">
 				<form>
@@ -106,8 +119,17 @@
 			src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.20.2/extensions/export/bootstrap-table-export.js"></script>
 		<script
 			src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.20.2/extensions/filter-control/bootstrap-table-filter-control.js"></script>
+	  	<script>
+        function toggleMenu(){
+            let navigation = document.querySelector('.navigation')
+            let toggle = document.querySelector('.toggle')
+            toggle.classList.toggle('active')
+            navigation.classList.toggle('active')
+        }
+    </script>
 	</th:block>
 
+		
 
 
 </body>
