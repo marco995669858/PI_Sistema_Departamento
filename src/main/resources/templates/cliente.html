@@ -230,7 +230,6 @@
 			</div>
 		</div>
 		<!-- FIN Modal Departamento-->
-		<section class="grid">
 			<h1 style="text-align: center; font-family: 'Tiwes Roman';">Listado de Clientes</h1>
 			<br>
 
@@ -242,11 +241,11 @@
 					</button>
 					<br>
 					<br>
-					<div class="table100">
-						<table>
-							<thead>
+					<div style="overflow-x:auto;" class="table100">
+						<table style="text-align: left; font-size: 10pt; font-weight: bold; " class="table table-bordered">
+							<thead class="thead-dark">
 								<tr class="table100-head">
-									<th class="column1">Código</th>
+									<th width="3%" class="column1">Código</th>
 									<th class="column2">Nombres</th>
 									<th class="column3">Apellidos</th>
 									<th class="column4">Documento</th>
@@ -255,12 +254,9 @@
 									<th class="column8">Tipo de Cliente</th>
 									<th class="column9">Sexo</th>
 									<th class="column10">Departamento</th>
-									<th></th>
-									<th></th>
-
-
+									<th></th >
+									<th></th >
 								</tr>
-							</thead>
 							<tbody>
 								<tr th:each="bean:${tabla}">
 									<td class="column1" th:text="${bean.idCliente}"></td>
@@ -280,14 +276,12 @@
 									</td>
 
 								</tr>
-
 							</tbody>
-						</table>
+						</table >
 					</div>
 				</div>
 			</div>
 	</div>
-	</section>
 
 	</div>
 	<th:block th:replace="menu.html :: footer">
