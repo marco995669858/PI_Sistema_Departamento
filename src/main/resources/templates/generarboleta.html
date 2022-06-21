@@ -120,13 +120,26 @@
 						</h1>
 
 
-						<form th:action="@{/rest/pagosServicios/registrar}" onsubmit="return validarUsuario()">
+					
+						
+						
+						<form name="test" th:action="@{/rest/pagosServicios/registrar}" id="idRegistra" method="post"
+							 class="validacion">
+						
+						
 							<div class="form-row ">
+							
 								<div class="form-group col-md-5">
+								
 									<label for=""><b>Tipo de boleta</b></label><br>
+									
 									<i class="fas fa-user-plus form-control-feedback2"></i>
-									<select class="form-control" name="tipoBoleta">
-										<option value="">[Seleccione un tipo de boleta]</option>
+									
+									<select class="form-control combobox" name="tipoBoleta" id="idtipoBoleta"
+								required="" oninvalid="this.setCustomValidity('Please Enter valid email')"
+											oninput="setCustomValidity('')">
+
+										<option selected disabled value="">[Seleccione un tipo de boleta]</option>
 										<option value="Bo">Boleta</option>
 										<option value="Fa">Factura</option>
 									</select>
@@ -137,7 +150,10 @@
 								<div class="form-group col-md-5">
 									<label for="nombre"><b>Servicio</b></label><br>
 									<i class="fas fa-file-signature form-control-feedback2"></i>
-									<select class="form-control combobox" name="servicio" id="idservi" required="">
+									
+									<select class="form-control combobox" name="servicio" id="idservi"
+									onchange="fillData2(this.options[selectedIndex].value);"> >
+									
 										<option selected disabled value="">[Seleccione un tipo de servicio]
 										</option>
 										<option th:each="bean:${cboServicios}" th:value="${bean.idServicios}"
@@ -149,7 +165,7 @@
 									<label for="departamento"><b>Departamento</b></label><br>
 									<i class="fa-regular fa-building form-control-feedback2"></i>
 									<select class="form-control combobox" name="departamento" id="iddeparta"
-										required="">
+										onchange="fillData2(this.options[selectedIndex].value);">>
 										<option selected disabled value="">[Seleccione departamento]</option>
 										<option th:each="bean:${cboDepartamento}" th:value="${bean.idDepartamento}"
 											th:text="${bean.nroDepartamento}">
@@ -168,7 +184,7 @@
 								<div class="form-group has-feedback col-md-5">
 									<label for="exampleInputEmail1"><b>Monto</b></label><br>
 									<i class="fas fa-calendar-alt form-control-feedback2"></i>
-									<input type="number" class="form-control" name="monto" id="idMonto" />
+									<input type="text" class="form-control" name="monto" id="idMonto" />
 								</div>
 							</div>
 							<p th:each="bean : ${session.usuario}">
@@ -210,6 +226,62 @@
 			title: mensaje
 		})
 
+	</script>
+	
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#idRegistra').bootstrapValidator({
+				feedbackIcons: {
+					valid: 'glyphicon glyphicon-ok',
+					invalid: 'glyphicon glyphicon-remove',
+					validating: 'glyphicon glyphicon-refresh'
+				},
+
+				fields: {
+
+					tipoBoleta: {
+						selector: '#idtipoBoleta',
+						validators: {
+							notEmpty: {
+								message: 'Seleccione Tipo de Boleta'
+							}
+						}
+					},
+					tipoServicio: {
+						selector: '#idservi',
+						validators: {
+							notEmpty: {
+								message: 'Seleccione Tipo de Servicio'
+							}
+						}
+					},
+					departamento: {
+						selector: '#iddeparta',
+						validators: {
+							notEmpty: {
+								message: 'Seleccione Departamento'
+							}
+						}
+					},
+					
+					 monto: {
+	     	    		selector:'#idMonto',      
+	                    validators: {    
+	                        notEmpty: {    
+	                            message: 'Ingrese Monto'    
+	                        },
+	                        regexp: {    
+	                            regexp: /^(\d+|[0-9]+\.\d{1,2})$/,    
+	                            message: 'Solo numeros con dos decimales'    
+	                        }   
+	                    }    
+	                }   	
+					
+
+				}
+
+			});
+		});
 	</script>
 	<script>
 		$(document).ready(function () {
