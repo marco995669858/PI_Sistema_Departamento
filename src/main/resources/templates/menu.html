@@ -14,6 +14,7 @@
 		crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrardepartamento.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/registrarformulario.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/css/sidebar.css}">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 	<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.css}">
 	<link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.min.css}">
@@ -28,17 +29,17 @@
 
 	<th:block th:fragment="header">
 
-		<header class="page-header">
+		<header class="sidebar">
 			<nav>
-				<a href="#" class="logo">
-					<img src="https://uploads-ssl.webflow.com/5dc1853887ad3ecba18bb835/5f5a2d0c1534bf5513c3dd98_Corporation.png"
-						height="130" alt="">
-				</a>
-				<button class="toggle-mob-menu" aria-expanded="false" aria-label="open menu">
-					<svg width="20" height="20" aria-hidden="true">
-						<use xlink:href="#down"></use>
-					</svg>
-				</button>
+
+				<div id="perfil1"
+					style="background-color: #1D3557;color:#fff; text-align:center;box-shadow: 2px 2px 2px 1px rgb(166, 210, 255); padding-top:10px;"
+					class="admin-profile" th:each="bean : ${session.usuario}">
+					<i class="fas fa-user-circle"></i>
+
+					<span class="greeting" th:text="${bean.nomUsuario}"></span>
+					<br><br>
+				</div>
 				<ul class="admin-menu">
 					<li th:each="bean : ${session.menus}">
 						<span th:href="${bean.ruta}"></span>
@@ -47,20 +48,14 @@
 							<span th:text="${bean.descripcion}"></span>
 						</a>
 					</li>
+					<a  style="margin-top: 25px; color:red" href="javascript: document.logoutForm.submit()"
+						role="menuitem"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
 
-					<li>
-						<div class="switch">
-							<input type="checkbox" id="mode" checked>
-							<label for="mode">
-								<span></span>
-								<span>Oscuro</span>
-							</label>
-						</div>
-						<button class="collapse-btn" aria-expanded="true" aria-label="collapse menu">
-							<i class="fa-solid fa-angle-left"></i>
-							<span>Contraer</span>
-						</button>
-					</li>
+					<form  name="logoutForm" method="post" th:action="@{/logout}" th:hidden="true">
+						<input class="cerrar" hidden type="submit" value="Sign Out" />
+					</form>
+
+
 				</ul>
 			</nav>
 		</header>
@@ -74,24 +69,7 @@
 						</svg>
 					</button>
 				</form>
-				<div class="admin-profile" th:each="bean : ${session.usuario}">
-					<span class="greeting" th:text="${bean.nomUsuario}"></span>
-					<i class="fa-solid fa-circle-user"></i>
 
-
-
-
-					<div class="notifications">
-
-
-						<svg>
-							<use xlink:href="#users"></use>
-						</svg>
-					</div>
-					<form class="form-inline my-2 my-lg-0" method="post" th:action="@{/logout}">
-						<input type="submit" class="form-control mr-sm-2 btn-danger" value="Cerrar sesión">
-					</form>
-				</div>
 			</section>
 
 	</th:block>
