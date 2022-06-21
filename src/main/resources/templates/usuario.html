@@ -104,7 +104,7 @@
 	<th:block th:replace="menu.html :: header">
 	</th:block>
 
-	<div class="container">
+	<div>
 		<div class="modal fade" id="modalUsuario" data-backdrop="static" data-keyboard="false" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered modal-login modal-lg">
@@ -116,7 +116,7 @@
 						<form method="POST" onsubmit="return validarUsuario()" id="idRegistra"
 							th:action="@{/rest/usuario/registrar}">
 							<input type="hidden" id="idUsuario" name="codigo" value="0">
-							<div class="container">
+							<div>
 								<div class="row">
 
 									<div class="form-group has-feedback col-md-6">
@@ -200,7 +200,7 @@
 
 		<div class="limiter">
 			<div class="container">
-				<h1 style="text-align: center; font-family: 'Times New Roman', Times, serif;">Listado de Usuarios</h1>
+				<h1 class="titulolista" style="text-align: center; font-family: 'Times New Roman', Times, serif;">Usuarios</h1>
 
 				<div style="overflow-x:auto;" class="wrap-table100">
 					<button type="button" class="btn btn-primary mt-4" data-toggle="modal" data-target="#modalUsuario"
