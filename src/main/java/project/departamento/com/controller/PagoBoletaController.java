@@ -47,15 +47,21 @@ public class PagoBoletaController {
 			@RequestParam("fechapago") String fechapago, @RequestParam("monto") double monto,
 			@RequestParam("pagar") double pagar, @RequestParam("usuario") int usuario, RedirectAttributes redirect) {
 
-			double calcular = 0;
+		double calcular = 0;
 		try {
-			
+
 			calcular = monto - pagar;
 			DocumentoTributario bean = service.buscarPorCodigo(codigo);
-			bean.setEstado("Pagado");
-			bean.setMonto(calcular);
-			service.pagarDocumentoTributario(bean);
-			
+			if (calcular == 0) {
+				bean.setEstado("Pagado");
+				bean.setMonto(calcular);
+				service.pagarDocumentoTributario(bean);
+			} else if (calcular >= 1) {
+				bean.setEstado("Pendiente");
+				bean.setMonto(calcular);
+				service.pagarDocumentoTributario(bean);
+			}
+
 			BoletaPago boleta = new BoletaPago();
 			boleta.setIdboletapago(0);
 			boleta.setOperacion(nroOperacion);
@@ -64,7 +70,7 @@ public class PagoBoletaController {
 			boleta.setTributario(new DocumentoTributario(codigo));
 			boleta.setMontoPago(pagar);
 			boleta.setUsuario(new Usuario(usuario));
-			boleta.setFechaRegistro(new Date());	
+			boleta.setFechaRegistro(new Date());
 			service.registrarBoletapago(boleta);
 			redirect.addFlashAttribute("MENSAJE", "Se pago el departamento correctamente.");
 		} catch (Exception e) {

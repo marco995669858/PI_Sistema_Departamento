@@ -1,6 +1,7 @@
 package project.departamento.com.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,11 @@ public class GenerarBoletaServiceImpl implements GenerarboletaService{
 	@Override
 	public DocumentoTributario registrarDocumentoTributario(DocumentoTributario bean) {
 		return documentoTributarioRepository.save(bean);
+	}
+
+	@Override
+	public Optional<DocumentoTributario> buscarFechaPagoPresente(String fechaPago, int servicios) {
+		return documentoTributarioRepository.buscarFechaPagoPresente(fechaPago, servicios);
 	}
 
 
