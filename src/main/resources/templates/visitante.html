@@ -102,6 +102,7 @@
 <body>
 	<th:block th:replace="menu.html :: header">
 	</th:block>
+	<div class="container1">
 	<!-- begin #modal-dialog : MODAL-->
 	<div class="modal fade" id="modalVisitante" data-backdrop="static" data-keyboard="false" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -214,7 +215,7 @@
 	</div>
 	<!-- FIN Modal VISITANTE-->
 
-	<h1 class="titulolista">Listado de Visitantes</h1>
+	<h1 class="titulolista">Visitantes</h1>
 	<br>
 	<div class="limiter">
 		<div style="text-align: center;">
@@ -228,7 +229,7 @@
 				<br>
 				<br>
 				<div style="overflow-x:auto;" class="table100">
-						<table style="text-align: center;" class="table table-bordered">
+						<table style="text-align: center;" class="table encabezadot">
 							<thead class="thead-dark">
 								<tr class="table100-head">
 								<th class="column1">Código</th>
@@ -243,7 +244,7 @@
 								<th class="column1"></th>
 							</tr>
 							<tbody>
-								<tr th:each="bean:${tabla}">
+								<tr th:each="bean:${tabla}" class="celdas">
 								<td class="column1" th:text="${bean.idVisitante}"></td>
 								<td class="column3" th:text="${bean.departamento.nroDepartamento}"></td>
 								<td class="column8" th:text="${bean.nombres + ' ' + bean.apellidos}"></td>
@@ -269,6 +270,7 @@
 
 	</section>
 	</section>
+		</div>
 	<th:block th:replace="menu.html :: footer">
 	</th:block>
 	<script th:src="@{/resources/js/validarVisitante.js}"></script>

@@ -104,14 +104,14 @@
 <body>
 	<th:block th:replace="menu.html :: header">
 	</th:block>
-
+		<div class="container">
 	<article>
 		<div class="contact_form">
 
 			<div class="formulario">
 
 
-				<h1 class="titulolista">Registro de Ingreso de Visitas</h1>
+				<h1 class="titulolista">Ingreso de Visitas</h1>
 
 				
 				
@@ -119,7 +119,7 @@
 				<form name="test" th:action="@{/rest/controlvisita/registrarControl}" id="idRegistra" method="post">	
 							
 					<input type="hidden" id="idUsuario" name="codigo" value="0">
-					<div class="container">
+					<div>
 						<div class="row">
 
 							<div class="form-group has-feedback col-md-6">
@@ -173,7 +173,7 @@
 						<button type="submit" id="Guardar" class="btn btn-primary"><i class="fas fa-save"></i>
 							Registrar</button>
 					</div>
-				</form>
+				</form  >
 			</div>
 		</div>
 	</article>
@@ -282,7 +282,7 @@
 			</div>
 		</div>
 	</div>
-
+	</div >
 	<th:block th:replace="menu.html :: footer">
 	</th:block>
 

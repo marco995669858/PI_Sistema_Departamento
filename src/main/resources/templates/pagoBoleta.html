@@ -99,7 +99,7 @@
 
 	<th:block th:replace="menu.html :: header">
 	</th:block>
-	<div class="container">
+	<div class="container1">
 	<h1 class="titulolista">Pago de Servicios
 						</h1>
 		<section class="grid">
@@ -167,10 +167,10 @@
 		</section>
 		<div class="table-responsive">
 				<table id="table" data-toggle="table" data-search="true" data-filter-control="true"
-					 class="table"
+					 class="table encabezadot"
 					data-show-header="true" data-pagination="true" data-id-field="name" data-page-list="[10]"
 					data-page-size="10">
-					<thead>
+					<thead class="thead-dark">
 						<tr class="text-center">
 							<th class="d-none"></th>
 							<th data-field="boleta" data-filter-control="select" data-sortable="true">Tipo de boleta
@@ -187,7 +187,7 @@
 							<th></th>
 							<th></th>
 						</tr>
-					</thead>
+					</thead >
 					<tbody>
 						<tr th:each="bean:${tablaDocuementoTributario}" class="text-center">
 							<td class="d-none" th:text="${bean.idDocTributario}"></td>

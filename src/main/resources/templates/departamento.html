@@ -104,7 +104,7 @@
 	<th:block th:replace="menu.html :: header">
 	</th:block>
 
-	<div class="container">
+	<div class="container1">
 		<!-- begin #modal-dialog : MODAL DEPARTAMENTO-->
 		<div class="modal fade" id="modalDepartamento" data-backdrop="static" data-keyboard="false" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -269,7 +269,7 @@
 
 		<div class="limiter">
 			<div class="container-table100">
-				<h1 class="titulolista">Listado de Departamentos
+				<h1 class="titulolista">Departamentos
 				</h1>
 
 
@@ -282,7 +282,7 @@
 					</button>
 					<br><br>
 					<div style="overflow-x:auto;" class="wrap-table100">
-						<table  style="text-align: center;" class="table table-bordered">
+						<table  style="text-align: center;" class="table encabezadot">
 							<thead class="thead-dark">
 								<tr class="table100-head">
 									<th scope="col" class="column1">Código</th>
@@ -297,7 +297,7 @@
 								</tr >
 							</thead>
 							<tbody>
-								<tr th:each="bean:${listaDepartamento}">
+								<tr th:each="bean:${listaDepartamento}" class="text-center celdas">
 										<td class="column1" th:text="${bean.idDepartamento}"></td>
 										<td class="column8" th:text="${bean.tipoDepartamento.descripcion}"></td>
 										<td class="column1" th:text="${bean.piso}"></td>

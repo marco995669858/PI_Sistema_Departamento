@@ -100,11 +100,11 @@
 </style>
 
 <body>
-
+	
 	<th:block th:replace="menu.html :: header">
 	</th:block>
-
-	<div>
+	
+	<div class="container1">
 		<div class="modal fade" id="modalUsuario" data-backdrop="static" data-keyboard="false" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered modal-login modal-lg">
@@ -200,7 +200,7 @@
 
 		<div class="limiter">
 			<div class="container">
-				<h1 class="titulolista" style="text-align: center; font-family: 'Times New Roman', Times, serif;">Usuarios</h1>
+				<h1 class="titulolista">Usuarios</h1>
 
 				<div style="overflow-x:auto;" class="wrap-table100">
 					<button type="button" class="btn btn-primary mt-4" data-toggle="modal" data-target="#modalUsuario"
@@ -208,7 +208,7 @@
 						<i class='bx bx-file-blank'></i> Nuevo Usuario
 					</button>
 					<br><br>
-					<table id="table" class="table table-bordered">
+					<table id="table" class="table encabezadot">
 						<thead class="thead-dark">
 							<tr>
 								<th scope="col">Código</th>
@@ -221,9 +221,9 @@
 								<th scope="col">Fecha de Registro</th>
 								<th scope="col"></th>
 							</tr>
-						</thead>
+						</thead >
 						<tbody>
-							<tr th:each="bean:${listaUsuario}" class="text-center">
+							<tr th:each="bean:${listaUsuario}" class="text-center celdas">
 								<td class="column1" th:text="${bean.idUsuario}"></td>
 								<td class="column2" th:text="${bean.nombres}"></td>
 								<td class="column3" th:text="${bean.apePaterno}"></td>
@@ -242,7 +242,7 @@
 		</div>
 		<th:block th:replace="menu.html :: footer">
 		</th:block>
-	</div>
+	</div >
 
 	<script th:inline="javascript" th:if="${MENSAJE!=null}">
 		//obtener atributo MENSAJE
