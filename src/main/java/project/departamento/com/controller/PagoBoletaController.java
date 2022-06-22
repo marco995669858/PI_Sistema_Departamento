@@ -56,12 +56,15 @@ public class PagoBoletaController {
 				bean.setEstado("Pagado");
 				bean.setMonto(calcular);
 				service.pagarDocumentoTributario(bean);
+				redirect.addFlashAttribute("MENSAJE", "La boleta se pago correctamente.");
 			} else if (calcular >= 1) {
 				bean.setEstado("Pendiente");
 				bean.setMonto(calcular);
 				service.pagarDocumentoTributario(bean);
+				redirect.addFlashAttribute("MENSAJE", "La boleta se genero correctamente, pero falta pagar: " + calcular);
+			}else if(calcular <= 0) {
+				redirect.addFlashAttribute("existen", "El pago es mayor al monto." );
 			}
-
 			BoletaPago boleta = new BoletaPago();
 			boleta.setIdboletapago(0);
 			boleta.setOperacion(nroOperacion);
@@ -72,7 +75,6 @@ public class PagoBoletaController {
 			boleta.setUsuario(new Usuario(usuario));
 			boleta.setFechaRegistro(new Date());
 			service.registrarBoletapago(boleta);
-			redirect.addFlashAttribute("MENSAJE", "Se pago el departamento correctamente.");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

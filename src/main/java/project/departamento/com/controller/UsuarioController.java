@@ -84,6 +84,7 @@ public class UsuarioController {
 			redirect.addFlashAttribute("MENSAJE", "Usuario eliminado");
 		} catch (Exception e) {
 			e.printStackTrace();
+			redirect.addFlashAttribute("existen", "No se puede eliminar el usuario por que la tabla esta relacionada.");
 		}
 
 		return "redirect:/rest/usuario/";
