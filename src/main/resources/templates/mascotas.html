@@ -104,7 +104,7 @@
 	<th:block th:replace="menu.html :: header">
 	</th:block>
 
-	<div class="container">
+	<div class="container1">
 		<!-- begin #modal-dialog : MODAL MASCOTA-->
 		<div class="modal fade" id="modalMascota" data-backdrop="static" data-keyboard="false" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -178,7 +178,7 @@
 
 		<div class="limiter">
 			<div class="container-table100">
-				<h1 class="titulolista">Listado de Mascotas</h1> 
+				<h1 class="titulolista">Mascotas</h1> 
 
 				<div class="wrap-table100">
 					<button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#modalMascota"
@@ -189,7 +189,7 @@
 					<br>
 					<br>
 					<div style="overflow-x:auto;" class="wrap-table100">
-						<table  style="text-align: center;" class="table table-bordered">
+						<table  style="text-align: center;" class="table encabezadot">
 							<thead class="thead-dark">
 								<tr class="table100-head">
 									<th class="column1">Código</th>
@@ -202,7 +202,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr class="" th:each="bean:${mascotas}">
+								<tr th:each="bean:${mascotas}" class="text-center celdas">
 									<td class="column1" th:text="${bean.idMascotas}"></td>
 									<td class="column8" th:text="${bean.departamento.nroDepartamento}"></td>
 									<td class="column8" th:text="${bean.nombres}"></td>
@@ -214,7 +214,7 @@
 									<td class="column1"><a class="btn btn-eliminar"><i
 												class="fa-solid fa-trash-can"></i></a></td>
 
-								</tr>
+								</tr >
 							</tbody>
 						</table>
 					</div >

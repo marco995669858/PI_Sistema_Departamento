@@ -140,7 +140,7 @@ p{
 
 .titulolista{
 	margin-top:-2%;
-	background-color: #141B41;
+	background-color: #14213D;
 	color:#fff;
 	text-align: center;
 	border-radius: 15px;
@@ -148,12 +148,13 @@ p{
 	margin-left: 15px;
 	margin-right:15px;
 	box-shadow: 0 4px 20px 0px rgb(0 0 0 / 14%), 0 7px 10px -5px rgb(156 39 176 / 40%);
+	font-family: 'Times New Roman', Times, serif;
 }
 
-.container{
+.container1{
 	margin-top:2%;
 	border:solid rgb(255, 255, 255) 2px;
-	box-shadow: 0 4px 20px 0px rgb(0 0 0 / 14%), 0 7px 10px -5px rgb(156 39 176 / 40%);
+	box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
 	padding-left: 0 !important;
 	padding-right: 0 !important;
 }
@@ -162,5 +163,13 @@ p{
     .container{
         margin-top:20%;
     }
-   
 }
+
+.encabezadot{
+	background-color: #4895EF;
+	color:#fff;
+}	
+.celdas:hover{
+	background-color: #03045E;
+	color:#fff;
+}	

@@ -119,25 +119,21 @@
 						<h1 style="text-align: center; font-family: 'Times New Roman', Times, serif;">Generar Boleta
 						</h1>
 
-
-					
-						
-						
 						<form name="test" th:action="@{/rest/pagosServicios/registrar}" id="idRegistra" method="post"
-							 class="validacion">
-						
-						
+							class="validacion">
+
+
 							<div class="form-row ">
-							
+
 								<div class="form-group col-md-5">
-								
+
 									<label for=""><b>Tipo de boleta</b></label><br>
-									
+
 									<i class="fas fa-user-plus form-control-feedback2"></i>
-									
+
 									<select class="form-control combobox" name="tipoBoleta" id="idtipoBoleta"
-								required="" oninvalid="this.setCustomValidity('Please Enter valid email')"
-											oninput="setCustomValidity('')">
+										required="" oninvalid="this.setCustomValidity('Please Enter valid email')"
+										oninput="setCustomValidity('')">
 
 										<option selected disabled value="">[Seleccione un tipo de boleta]</option>
 										<option value="Bo">Boleta</option>
@@ -150,10 +146,10 @@
 								<div class="form-group col-md-5">
 									<label for="nombre"><b>Servicio</b></label><br>
 									<i class="fas fa-file-signature form-control-feedback2"></i>
-									
+
 									<select class="form-control combobox" name="servicio" id="idservi"
-									onchange="fillData2(this.options[selectedIndex].value);"> >
-									
+										onchange="fillData2(this.options[selectedIndex].value);"> >
+
 										<option selected disabled value="">[Seleccione un tipo de servicio]
 										</option>
 										<option th:each="bean:${cboServicios}" th:value="${bean.idServicios}"
@@ -227,6 +223,7 @@
 		})
 
 	</script>
+
 	
 		<script th:inline="javascript" th:if="${existen!=null}">
 		//obtener atributo MENSAJE
@@ -285,20 +282,20 @@
 							}
 						}
 					},
-					
-					 monto: {
-	     	    		selector:'#idMonto',      
-	                    validators: {    
-	                        notEmpty: {    
-	                            message: 'Ingrese Monto'    
-	                        },
-	                        regexp: {    
-	                            regexp: /^(\d+|[0-9]+\.\d{1,2})$/,    
-	                            message: 'Solo numeros con dos decimales'    
-	                        }   
-	                    }    
-	                }   	
-					
+
+					monto: {
+						selector: '#idMonto',
+						validators: {
+							notEmpty: {
+								message: 'Ingrese Monto'
+							},
+							regexp: {
+								regexp: /^(\d+|[0-9]+\.\d{1,2})$/,
+								message: 'Solo numeros con dos decimales'
+							}
+						}
+					}
+
 
 				}
 

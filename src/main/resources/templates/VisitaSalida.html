@@ -104,7 +104,7 @@
 
 	<th:block th:replace="menu.html :: header">
 	</th:block>
-	<div class="container">
+		<div class="container">
 		<section class="grid">
 			<article>
 				<div style="min-width: 1070px;" class="contact_form">
@@ -154,13 +154,13 @@
 					</div>
 				</div>
 			</article>
-
+				<div class="container">
 			<div class="limiter">
 				<div class="container-table100">
 					<h1 style="text-align: center; font-family: 'Times New Roman', Times, serif;">Listado de
 						Visitas|Salidas</h1>
-					<div style="overflow-x:auto;" class="table100">
-						<table id="tablaconsultVisita" style="text-align: left; font-size: 10pt; font-weight: bold; " class="table table-bordered">
+					<div class="table100">
+						<table id="tablaconsultVisita" style="text-align: left; font-size: 10pt; font-weight: bold; " class="table table-condensed table-responsive encabezadot">
 							<thead class="thead-dark text-nowrap">
 								<tr class="table100-head">
 									<th class="column1">Código</th>
@@ -173,14 +173,14 @@
 									<th class="column1"></th>
 
 								</tr>
-							<tbody class="text-nowrap">
+							<tbody class="text-nowrap text-center">
 
 							</tbody >
 						</table>
-					</div>
+					</div >
 				</div>
 			</div>
-
+				<div class="container">
 			<div class="modal fade" id="modalActualizarControlVisitante" data-backdrop="static" data-keyboard="false"
 				tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 				<div class="modal-dialog modal-lg">
@@ -228,7 +228,7 @@
 
 
 		</section>
-	</div>
+		<div>
 	<th:block th:replace="menu.html :: footer">
 	</th:block>
 	<!-- partial -->
