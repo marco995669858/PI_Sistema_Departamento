@@ -97,7 +97,7 @@ public class DepartamentoController {
 				if (codigo != 0) {
 					bean.setIdDepartamento(codigo);
 					service.registraActualizaDepartamento(bean);
-					redirect.addFlashAttribute("MENSAJE", "Se actualizo el departamento correctamente");
+					redirect.addFlashAttribute("MENSAJE", "Se actualizo el departamento correctamente.");
 				}
 
 			}
@@ -117,7 +117,8 @@ public class DepartamentoController {
 			service.eliminarDepartamento(codigo);
 			redirect.addFlashAttribute("MENSAJE", "Departamento eliminado");
 		} catch (Exception e) {
-
+			e.printStackTrace();
+			redirect.addFlashAttribute("existen", "No se puede eliminar el departamento por que la tabla esta relacionada.");
 		}
 		return "redirect:/rest/departamento/";
 	}

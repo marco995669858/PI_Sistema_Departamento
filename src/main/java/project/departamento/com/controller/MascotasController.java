@@ -68,7 +68,7 @@ public class MascotasController {
 
 		try {
 			service.eliminarMascotas(codigo);
-			redirect.addFlashAttribute("MENSAJE", "Se elimino la mascota");
+			redirect.addFlashAttribute("MENSAJE", "Se eliminó la mascota");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -99,9 +99,10 @@ public class ClienteController {
 
 		try {
 			service.eliminarCliente(codigo);
-			redirect.addFlashAttribute("MENSAJE", "Usuario eliminado");
+			redirect.addFlashAttribute("MENSAJE", "Cliente eliminado");
 		} catch (Exception e) {
 			e.printStackTrace();
+			redirect.addFlashAttribute("MENSAJE", "El cliente esta relacionado, no se puede eliminar.");
 		}
 		return "redirect:/rest/cliente/";
 	}
