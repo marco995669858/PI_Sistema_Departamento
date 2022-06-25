@@ -14,6 +14,7 @@ public class IncidenciasController {
 	@Autowired
 	private IncidenciasService service;
 	
+	@RequestMapping("/")
 	public String index(Model model) {
 		return "incidencias";
 	}
