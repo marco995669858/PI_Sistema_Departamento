@@ -24,5 +24,9 @@ public class TipoIncidencias {
 	private Integer idTipoIncidente;
 	
 	private String descripcion;
+	
+	public TipoIncidencias(Integer idTipoIncidente) {
+		this.idTipoIncidente = idTipoIncidente;
+	}
 
 }
