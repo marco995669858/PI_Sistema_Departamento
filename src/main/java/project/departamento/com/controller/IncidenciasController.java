@@ -16,6 +16,7 @@ public class IncidenciasController {
 	@Autowired
 	private IncidenciasService service;
 
+	@RequestMapping("/")
 	public String index(Model model) {
 		model.addAttribute("comTipIncidencias", service.listarTipoIncidencias());
 		return "incidencias";
