@@ -56,7 +56,7 @@ public class ConsultaVisitaServiceImpl implements ConsultaVisitaService{
 
 	@Override
 	public Visita buscarporCodigo(int codigo) {
-		return controlVisitaRepository.findById(codigo).orElse(null);
+		return controlVisitaRepository.buscarPorCodigo(codigo);
 	}
 
 }

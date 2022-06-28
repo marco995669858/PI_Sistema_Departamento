@@ -1,11 +1,12 @@
 package project.departamento.com.controller;
 
 import java.util.Date;
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -43,7 +44,7 @@ public class VisitanteController {
 			@RequestParam("correo") String correo, @RequestParam("idCliente") int idCliente,
 			@RequestParam("usuario") int usuario, RedirectAttributes redirect) {
 		try {
-			
+
 			Visitante bean = new Visitante();
 			bean.setDepartamento(new Departamento(idDepartamento));
 			bean.setNombres(nombres);
@@ -56,35 +57,33 @@ public class VisitanteController {
 			bean.setUsuario(new Usuario(usuario));
 			bean.setFechaRegistro(new Date());
 			if (codigo != 0) {
-				Optional<Visitante> buscarDniactualizar = service.buscarDocumentoactualizar(documento, codigo);
-				Optional<Visitante> buscarTelefonoactualizar = service.buscarTelefonoactualizar(telefono, codigo);
-				Optional<Visitante> buscarCorreoactualizar = service.buscarCorreoactualizar(correo, codigo);
-				if (buscarDniactualizar.isPresent()) {
-					redirect.addFlashAttribute("existen", "El documento que ingreso ya existe");
-				} else if (buscarTelefonoactualizar.isPresent()) {
-					redirect.addFlashAttribute("existen", "El telefono que ingreso ya existe");
-				} else if (buscarCorreoactualizar.isPresent()) {
-					redirect.addFlashAttribute("existen", "El correo que ingreso ya existe");
-				} else {
+				List<Visitante> buscarDniactualizar = service.buscarDocumentoactualizar(documento, codigo);
+				List<Visitante> buscarTelefonoactualizar = service.buscarTelefonoactualizar(telefono, codigo);
+				List<Visitante> buscarCorreoactualizar = service.buscarCorreoactualizar(correo, codigo);
+				if (CollectionUtils.isEmpty(buscarDniactualizar) || !CollectionUtils.isEmpty(buscarTelefonoactualizar)
+						|| CollectionUtils.isEmpty(buscarCorreoactualizar)) {
 					bean.setIdVisitante(codigo);
 					service.registraActualizaVisitante(bean);
 					redirect.addFlashAttribute("MENSAJE", "El visitante se actualizo correctamente");
+				} else {
+					redirect.addFlashAttribute("existen",
+							"Verifique si el dni, telefono y/o correo existieran, si existen ingrese otro.");
+
 				}
 
 			} else {
-				Optional<Visitante> buscarDni = service.buscarDocumento(documento);
-				Optional<Visitante> buscarTelefono = service.buscarDocumento(telefono);
-				Optional<Visitante> buscarCorreo = service.buscarDocumento(correo);
-				
-				if (buscarDni.isPresent()) {
-					redirect.addFlashAttribute("existen", "El documento que ingreso ya existe");
-				} else if (buscarTelefono.isPresent()) {
-					redirect.addFlashAttribute("existen", "El telefono que ingreso ya existe");
-				} else if (buscarCorreo.isPresent()) {
-					redirect.addFlashAttribute("existen", "El correo que ingreso ya existe");
-				} else {
+				List<Visitante> buscarDni = service.buscarDocumento(documento);
+				List<Visitante> buscarTelefono = service.buscarDocumento(telefono);
+				List<Visitante> buscarCorreo = service.buscarDocumento(correo);
+
+				if (CollectionUtils.isEmpty(buscarDni) || CollectionUtils.isEmpty(buscarTelefono)
+						|| CollectionUtils.isEmpty(buscarCorreo)) {
 					service.registraActualizaVisitante(bean);
 					redirect.addFlashAttribute("MENSAJE", "El visitante se registro correctamente");
+				} else {
+					redirect.addFlashAttribute("existen",
+							"Verifique si el dni, telefono y/o correo que va a actualizar ya existen, si existen ingrese otro.");
+
 				}
 			}
 
@@ -106,8 +105,7 @@ public class VisitanteController {
 
 		return bean;
 	}
-	
-	
+
 	@RequestMapping("/eliminar")
 	public String eliminarVisitante(@RequestParam("codigo") int codigo, RedirectAttributes redirect) {
 
@@ -120,5 +118,5 @@ public class VisitanteController {
 
 		return "redirect:/rest/visitante/";
 	}
-	
+
 }

@@ -1,11 +1,12 @@
 package project.departamento.com.controller;
 
 import java.util.Date;
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -81,22 +82,16 @@ public class ControlVisitaController {
 	public String registraActualizaVisitante(@RequestParam("codigo") int codigo,
 			@RequestParam("departamento") int idDepartamento, @RequestParam("Nombres") String nombres,
 			@RequestParam("Apellidos") String apellidos, @RequestParam("idTipoDocumento") int idTipoDocumento,
-			@RequestParam("Documento") String documento, @RequestParam("telefono") String telefono,
+			@RequestParam("Dni") String documento, @RequestParam("telefono") String telefono,
 			@RequestParam("correo") String correo, @RequestParam("clientes") int clientes,
 			@RequestParam("usuario") int usuario, RedirectAttributes redirect) {
 		try {
 
-			Optional<Visitante> buscarDni = visitanteService.buscarDocumento(documento);
-			Optional<Visitante> buscarTelefono = visitanteService.buscarDocumento(telefono);
-			Optional<Visitante> buscarCorreo = visitanteService.buscarDocumento(correo);
+			List<Visitante> buscarDni = visitanteService.buscarDocumento(documento);
+			List<Visitante> buscarTelefono = visitanteService.buscarDocumento(telefono);
+			List<Visitante> buscarCorreo = visitanteService.buscarDocumento(correo);
 
-			if (buscarDni.isPresent()) {
-				redirect.addFlashAttribute("existen", "El documento que ingreso ya existe");
-			} else if (buscarTelefono.isPresent()) {
-				redirect.addFlashAttribute("existen", "El telefono que ingreso ya existe");
-			} else if (buscarCorreo.isPresent()) {
-				redirect.addFlashAttribute("existen", "El correo que ingreso ya existe");
-			} else {
+			if (CollectionUtils.isEmpty(buscarDni) || CollectionUtils.isEmpty(buscarTelefono) || CollectionUtils.isEmpty(buscarCorreo)) {
 				Visitante bean = new Visitante();
 				bean.setDepartamento(new Departamento(idDepartamento));
 				bean.setNombres(nombres);
@@ -110,6 +105,9 @@ public class ControlVisitaController {
 				bean.setFechaRegistro(new Date());
 				visitanteService.registraActualizaVisitante(bean);
 				redirect.addFlashAttribute("MENSAJE", "El visitante se registro correctamente");
+				
+			} else {
+				redirect.addFlashAttribute("existen", "Verifique si el dni, telefono o correo ya exiten, ingrese otro porfavor.");
 			}
 
 		} catch (Exception e) {

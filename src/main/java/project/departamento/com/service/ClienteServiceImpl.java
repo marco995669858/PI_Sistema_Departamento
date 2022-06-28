@@ -1,7 +1,6 @@
 package project.departamento.com.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,22 +30,22 @@ public class ClienteServiceImpl implements ClienteService{
 	private DepartamentoRepository departamentoRepository;
 	
 	@Override
-	public Optional<Cliente> buscarDocumento(String documento, Integer IdCliente) {
+	public List<Cliente> buscarDocumento(String documento, Integer IdCliente) {
 		return repository.buscarDocumento(documento,IdCliente);
 	}
 
 	@Override
-	public Optional<Cliente> buscarCorreo(String correo, Integer IdCliente) {
+	public List<Cliente> buscarCorreo(String correo, Integer IdCliente) {
 		return repository.buscarCorreo(correo,IdCliente);
 	}
 
 	@Override
-	public Optional<Cliente> buscarClienteDepartamentoquenoExistan(Integer departamento, Integer idUsuario) {
+	public List<Cliente> buscarClienteDepartamentoquenoExistan(Integer departamento, Integer idUsuario) {
 		return repository.buscarClienteDepartamentoquenoExistan(departamento, idUsuario);
 	}
 
 	@Override
-	public Optional<Cliente> buscarTelefono(String telefono, Integer IdCliente) {
+	public List<Cliente> buscarTelefono(String telefono, Integer IdCliente) {
 		return repository.busacarTelefono(telefono,IdCliente);
 	}
 	
@@ -95,7 +94,7 @@ public class ClienteServiceImpl implements ClienteService{
 
 	@Override
 	public Cliente buscarClienteparaactualizar(int codigo) {
-		return repository.findById(codigo).orElse(null);
+		return repository.buscarPorCodigo(codigo);
 	}
 
 	

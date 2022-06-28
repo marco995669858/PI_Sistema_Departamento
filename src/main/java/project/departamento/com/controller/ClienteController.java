@@ -1,11 +1,12 @@
 package project.departamento.com.controller;
 
 import java.util.Date;
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,7 +23,6 @@ import project.departamento.com.service.ClienteService;
 @Controller
 @RequestMapping("/rest/cliente")
 public class ClienteController {
-	//eo
 	@Autowired
 	private ClienteService service;
 
@@ -32,36 +32,27 @@ public class ClienteController {
 		model.addAttribute("comboTipoDocumento", service.listarTipoDocumento());
 		model.addAttribute("comboTipoCliente", service.listarTipoClientes());
 		model.addAttribute("comboDepartamento", service.listarDepartamento());
-		
+
 		return "cliente";
 	}
 
-
 	@RequestMapping("/registrar")
-	public String registrarActualizaCliente(@RequestParam("codigo") int codigo,
-			@RequestParam("nombres") String nombre, @RequestParam("apePaterno") String apellidos,
-			@RequestParam("tipoDocumento") int tipoDocumento, @RequestParam("documento") String documento,
-			@RequestParam("telefono") String telefono,
+	public String registrarActualizaCliente(@RequestParam("codigo") int codigo, @RequestParam("nombres") String nombre,
+			@RequestParam("apePaterno") String apellidos, @RequestParam("tipoDocumento") int tipoDocumento,
+			@RequestParam("documento") String documento, @RequestParam("telefono") String telefono,
 			@RequestParam("correo") String correo, @RequestParam("tipoCliente") int tipoCliente,
 			@RequestParam("sexo") String sexo, @RequestParam("departamento") int departamento,
 			@RequestParam("usuario") int usuario, RedirectAttributes redirect) {
 
 		try {
-			Optional<Cliente> buscarDocuemento = service.buscarDocumento(documento, codigo);
-			Optional<Cliente> buscarCorreo = service.buscarCorreo(correo, codigo);
-			Optional<Cliente> buscarclientedepartamento = service.buscarClienteDepartamentoquenoExistan(departamento,
+			List<Cliente> buscarDocuemento = service.buscarDocumento(documento, codigo);
+			List<Cliente> buscarCorreo = service.buscarCorreo(correo, codigo);
+			List<Cliente> buscarclientedepartamento = service.buscarClienteDepartamentoquenoExistan(departamento,
 					codigo);
-			Optional<Cliente> buscarTelefono = service.buscarTelefono(telefono, codigo);
+			List<Cliente> buscarTelefono = service.buscarTelefono(telefono, codigo);
 
-			if (buscarDocuemento.isPresent()) {
-				redirect.addFlashAttribute("existen", "El documento que ingreso ya existe " + documento + " ingrese otro documento.");
-			} else if (buscarCorreo.isPresent()) {
-				redirect.addFlashAttribute("existen", "El correo que ingreso ya existe " + correo + " ingrese otro correo.");
-			} else if (buscarclientedepartamento.isPresent()) {
-				redirect.addFlashAttribute("existen", "El departamento que a seleccionado esta ocupado.");
-			} else if (buscarTelefono.isPresent()) {
-				redirect.addFlashAttribute("existen", "El telefono que ingreso ya existe " + telefono + " ingrese otro telefono.");
-			} else {
+			if (CollectionUtils.isEmpty(buscarDocuemento) || CollectionUtils.isEmpty(buscarCorreo)
+					|| CollectionUtils.isEmpty(buscarclientedepartamento) || CollectionUtils.isEmpty(buscarTelefono)) {
 				Cliente registro = new Cliente();
 				registro.setNombres(nombre);
 				registro.setApellidos(apellidos);
@@ -85,6 +76,10 @@ public class ClienteController {
 					redirect.addFlashAttribute("MENSAJE", "Se registro el cliente correctamente.");
 				}
 
+			} else {
+				redirect.addFlashAttribute("existen",
+						"Verifique si lod datos documento, correo, cliente por departamento o telefono ya existieran, no ingrese de nuevo esos datos");
+
 			}
 
 		} catch (Exception e) {
@@ -106,8 +101,7 @@ public class ClienteController {
 		}
 		return "redirect:/rest/cliente/";
 	}
-	
-	
+
 	@RequestMapping("/buscar")
 	@ResponseBody
 	public Cliente buscarCliente(@RequestParam("codigo") int codigo) {

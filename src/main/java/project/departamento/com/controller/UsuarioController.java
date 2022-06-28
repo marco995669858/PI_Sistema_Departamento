@@ -1,11 +1,12 @@
 package project.departamento.com.controller;
 
 import java.util.Date;
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -21,10 +22,10 @@ public class UsuarioController {
 
 	@Autowired
 	private UsuarioService service;
-	
+
 	@Autowired
 	private EncryptPassword encriptar;
-	
+
 	@RequestMapping("/user/")
 	public String usuario() {
 		return "usuario2";
@@ -46,15 +47,10 @@ public class UsuarioController {
 
 		try {
 
-			Optional<Usuario> buscarCorreo = service.buscarCorreo(correo);
-			Optional<Usuario> buscarTelefono = service.buscarTelefono(telefono);
+			List<Usuario> buscarCorreo = service.buscarCorreo(correo);
+			List<Usuario> buscarTelefono = service.buscarTelefono(telefono);
 
-			if (buscarCorreo.isPresent()) {
-				redirect.addFlashAttribute("existen", "El correo que ingreso ya exite " + correo + " ingrese otro.");
-			} else if (buscarTelefono.isPresent()) {
-				redirect.addFlashAttribute("existen",
-						"El tefelono que ingreso ya exites" + telefono + " ingrese otro.");
-			} else {
+			if (CollectionUtils.isEmpty(buscarCorreo) || CollectionUtils.isEmpty(buscarTelefono)) {
 				Usuario registro = new Usuario();
 				registro.setNomUsuario(nombreUsuario);
 				registro.setNombres(nombres);
@@ -68,6 +64,9 @@ public class UsuarioController {
 				registro.setEliminado(1);
 				service.registrarActualizaUsuario(registro);
 				redirect.addFlashAttribute("MENSAJE", "Se registro el usuario correctamente");
+			} else {
+				redirect.addFlashAttribute("existen", "El correo que ingreso ya exite " + correo
+						+ " o el telefono que ingreso ya existe " + telefono);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
