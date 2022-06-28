@@ -31,10 +31,7 @@ public class MascotasController {
 		return "mascotas";
 	}
 
-//	@RequestMapping("/registrar")
-//	public String registrarActualizarMascotas(@RequestParam("codigo") int codigo,@RequestParam("departamento") int departamento,
-//											  @RequestParam("nombre") String nombre,@RequestParam("usuario") int usuario,
-//											  @RequestParam("especie") int especie, RedirectAttributes redirect) {
+
 	@RequestMapping("/registrar")
 	public String registrarActualizarMascotas(@RequestParam("codigo") int codigo,
 			@RequestParam("nroDepartamento") int departamento, @RequestParam("nombres") String nombre,

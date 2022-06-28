@@ -1,11 +1,12 @@
 package project.departamento.com.controller;
 
 import java.util.Date;
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -41,10 +42,8 @@ public class DepartamentoController {
 			RedirectAttributes redirect) {
 		try {
 
-			Optional<Departamento> buscarNrodepartamento = service.buscarNroDepartamento(nroDepartamento);
-			if (buscarNrodepartamento.isPresent()) {
-				redirect.addFlashAttribute("existen", "El numero del departamento ya existe ingrese otro numero.");
-			} else {
+			List<Departamento> buscarNrodepartamento = service.buscarNroDepartamento(nroDepartamento);
+			if (CollectionUtils.isEmpty(buscarNrodepartamento)) {
 				Departamento bean = new Departamento();
 				bean.setTipoDepartamento(new TipoDepartamento(tipoDepartamento));
 				bean.setPiso(piso);
@@ -59,7 +58,8 @@ public class DepartamentoController {
 
 				service.registraActualizaDepartamento(bean);
 				redirect.addFlashAttribute("MENSAJE", "Se registro el departamento correctamente");
-
+			} else {
+				redirect.addFlashAttribute("existen", "El numero del departamento ya existe ingrese otro numero.");
 			}
 
 		} catch (
@@ -79,10 +79,8 @@ public class DepartamentoController {
 			@RequestParam("usuario") int usuario, RedirectAttributes redirect) {
 		try {
 
-			Optional<Departamento> buscarNrodepartamento = service.buscarDepartamentoExistente(nroDepartamento, codigo);
-			if (buscarNrodepartamento.isPresent()) {
-				redirect.addFlashAttribute("existen", "El numero del departamento ya existe ingrese otro numero.");
-			} else {
+			List<Departamento> buscarNrodepartamento = service.buscarDepartamentoExistente(nroDepartamento, codigo);
+			if (CollectionUtils.isEmpty(buscarNrodepartamento)) {
 				Departamento bean = new Departamento();
 				bean.setTipoDepartamento(new TipoDepartamento(tipoDepartamento));
 				bean.setPiso(piso);
@@ -100,6 +98,9 @@ public class DepartamentoController {
 					redirect.addFlashAttribute("MENSAJE", "Se actualizo el departamento correctamente.");
 				}
 
+			} else {
+				redirect.addFlashAttribute("existen", "El numero del departamento ya existe ingrese otro numero.");
+
 			}
 
 		} catch (
@@ -113,12 +114,13 @@ public class DepartamentoController {
 	@RequestMapping("/eliminar")
 	public String eliminar(@RequestParam("codigo") int codigo, RedirectAttributes redirect) {
 		try {
-			
+
 			service.eliminarDepartamento(codigo);
 			redirect.addFlashAttribute("MENSAJE", "Departamento eliminado");
 		} catch (Exception e) {
 			e.printStackTrace();
-			redirect.addFlashAttribute("existen", "No se puede eliminar el departamento por que la tabla esta relacionada.");
+			redirect.addFlashAttribute("existen",
+					"No se puede eliminar el departamento por que la tabla esta relacionada.");
 		}
 		return "redirect:/rest/departamento/";
 	}

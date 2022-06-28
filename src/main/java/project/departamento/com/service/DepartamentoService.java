@@ -1,7 +1,6 @@
 package project.departamento.com.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import project.departamento.com.entity.Departamento;
 import project.departamento.com.entity.Estado;
@@ -16,13 +15,13 @@ public interface DepartamentoService {
 	
 	public abstract List<Estado> listarEstados(int ocupado, int desocupado);
 	
-	public abstract Optional<Departamento> buscarDepartamentoExistente(String nroDepartamento, int idDepartamento);
+	public abstract List<Departamento> buscarDepartamentoExistente(String nroDepartamento, int idDepartamento);
 	
 	public abstract void eliminarDepartamento(int bean);
 	
 	public abstract List<Departamento> listarDepartamentos();
 	
-	public Optional<Departamento> buscarNroDepartamento(String nroDepartamento);
+	public List<Departamento> buscarNroDepartamento(String nroDepartamento);
 	 
 	public abstract Departamento buscarDepartamentoporcodigo(Integer codigo); 
 	

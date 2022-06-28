@@ -41,7 +41,7 @@ public class MascotasServiceImpl implements MascotaService {
 
 	@Override
 	public Mascotas buscarMascotasporID(Integer codigo) {
-		return repository.findById(codigo).orElse(null);
+		return repository.buscarPorcodigo(codigo);
 	}
 
 	@Override

@@ -1,7 +1,6 @@
 package project.departamento.com.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +25,7 @@ public class ControlVisitaImpl implements ControlVisitaService{
 	}
 
 	@Override
-	public Optional<Visitante> buscarVisitanteporDni(String documento) {
+	public List<Visitante> buscarVisitanteporDni(String documento) {
 		return visitanteRepository.findByDocumento(documento);
 	}
 

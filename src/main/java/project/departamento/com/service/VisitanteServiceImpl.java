@@ -1,7 +1,6 @@
 package project.departamento.com.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,17 +60,17 @@ public class VisitanteServiceImpl implements VisitanteService {
 	}
 
 	@Override
-	public Optional<Visitante> buscarDocumento(String documento) {
+	public List<Visitante> buscarDocumento(String documento) {
 		return repository.findByDocumento(documento);
 	}
 
 	@Override
-	public Optional<Visitante> buscarTelefono(String telefono) {
+	public List<Visitante> buscarTelefono(String telefono) {
 		return repository.findByTelefono(telefono);
 	}
 
 	@Override
-	public Optional<Visitante> buscarCorreo(String correo) {
+	public List<Visitante> buscarCorreo(String correo) {
 		return repository.findByCorreo(correo);
 	}
 
@@ -82,21 +81,21 @@ public class VisitanteServiceImpl implements VisitanteService {
 
 	@Override
 	public Visitante buscarVisitantePorCodigo(Integer codigo) {
-		return repository.findById(codigo).orElse(null);
+		return repository.buscarPorcodigo(codigo);
 	}
 
 	@Override
-	public Optional<Visitante> buscarDocumentoactualizar(String documento, int codigo) {
+	public List<Visitante> buscarDocumentoactualizar(String documento, int codigo) {
 		return repository.buscarDocumentoactualizar(documento, codigo);
 	}
 
 	@Override
-	public Optional<Visitante> buscarTelefonoactualizar(String telefono, int codigo) {
+	public List<Visitante> buscarTelefonoactualizar(String telefono, int codigo) {
 		return repository.buscarTelefonoactualizar(telefono, codigo);
 	}
 
 	@Override
-	public Optional<Visitante> buscarCorreoactualizar(String correo, int codigo) {
+	public List<Visitante> buscarCorreoactualizar(String correo, int codigo) {
 		return repository.buscarCorreoactualizar(correo, codigo);
 	}
 

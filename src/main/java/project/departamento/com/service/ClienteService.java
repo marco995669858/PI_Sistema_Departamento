@@ -1,7 +1,6 @@
 package project.departamento.com.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import project.departamento.com.entity.Cliente;
 import project.departamento.com.entity.Departamento;
@@ -16,13 +15,13 @@ public interface ClienteService {
 
 	public abstract List<Departamento> listarDepartamento();
 	
-	public abstract Optional<Cliente> buscarDocumento(String documento, Integer IdCliente);
+	public abstract List<Cliente> buscarDocumento(String documento, Integer IdCliente);
 
-	public abstract Optional<Cliente> buscarCorreo(String correo, Integer IdCliente);
+	public abstract List<Cliente> buscarCorreo(String correo, Integer IdCliente);
 
-	public abstract Optional<Cliente> buscarClienteDepartamentoquenoExistan(Integer departamento, Integer idUsuario);
+	public abstract List<Cliente> buscarClienteDepartamentoquenoExistan(Integer departamento, Integer idUsuario);
 
-	public abstract Optional<Cliente> buscarTelefono(String telefono, Integer IdCliente);
+	public abstract List<Cliente> buscarTelefono(String telefono, Integer IdCliente);
 
 	public abstract List<Cliente> listarTodoslosClientes();
 
